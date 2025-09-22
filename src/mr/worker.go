@@ -4,6 +4,10 @@ import "fmt"
 import "log"
 import "net/rpc"
 import "hash/fnv"
+import "sort"
+import "os"
+import "io/ioutil"
+import "encoding/json"
 
 
 //
@@ -48,30 +52,26 @@ func Worker(mapf func(string, string) []KeyValue,
 	// 获取Map需要执行的任务
 	for {
 		task, nReduce := getTask(workerId)
-		if (task == nil) {
-			// 通知master 没有任务了，结束了
-			notifyWorkerCompleted(workerId)
-			return
-		}
 		// 判断是Map任务还是Reduce任务
-		if (task.Type == mapTask) {
+		if (task.Type == MapTask) {
 			// 执行map任务
 			execMap(task, mapf, nReduce)
 			// 执行完成 ，通知master
 			notifyTaskCompleted(workerId, task.Number)
-		} else if (task.Type == reduceTask) {
+		} else if (task.Type == ReduceTask) {
 			// 执行	Reduce任务
 			execReduce(task, reducef)
 			// 执行完成 ，通知master
 			notifyTaskCompleted(workerId, task.Number)
+		} else {
+			// 通知master 没有任务了，结束了
+			notifyTaskCompleted(workerId, 0)
+			return
 		}
 	}
 }
 
 func execReduce(task Task, reducef func(string, []string) string) {
-	// shuff
-	// 按 Key 排序，方便后续把相同 key 的 value 聚集在一起供 Reduce 使用
-	sort.Sort(ByKey(mapRes))
 	// 读取中间数据
 	intermediateFile, err := os.Open(task.Filename)
 	defer intermediateFile.Close()
@@ -79,7 +79,7 @@ func execReduce(task Task, reducef func(string, []string) string) {
 		log.Fatalf("无法打开中间文件 %s: %v", task.Filename, err)
 	}
 	// 解码
-	intermediate := []mr.KeyValue{}
+	intermediate := []KeyValue{}
 	dec := json.NewDecoder(intermediateFile)
 	for {
 		var kv KeyValue
@@ -88,6 +88,10 @@ func execReduce(task Task, reducef func(string, []string) string) {
 		}
 		intermediate = append(intermediate, kv)
 	}
+
+	// shuff
+	// 按 Key 排序，方便后续把相同 key 的 value 聚集在一起供 Reduce 使用
+	sort.Sort(ByKey(intermediate))
 
 	// 输出文件名是固定的 mr-out-0（MIT 6.824 实验要求的输出格式）
 	oname := fmt.Sprintf("mr-out-%d", task.Number)
@@ -129,22 +133,34 @@ func execMap(task Task, mapf func(string, string) []KeyValue, nReduce int) {
 
 	// 调用用户实现的 Map 函数，返回一组 KeyValue
 	mapRes := mapf(task.Filename, content)
-	// 将 Map 输出按 Key 哈希分区，分配给不同的 Reduce 任务
-  	for _, kv := range mapRes {
-		// 获取hash值
-		index = ihash(kv.Key)
-		fmt.Printf("ihash 结果：%d\n", index)
-		// 输出文件名是固定的 mr-out-0（MIT 6.824 实验要求的输出格式）
-		// 其中 X 是 Map 任务编号，Y 是 reduce 任务编号。
-		// oname := "mr-"+task.taskNumber+"-"+"0"
-		filename := fmt.Sprintf("mr-%d-%d", task.Number, index % nReduce)
+	fmt.Printf("Map 任务 %d 处理文件 %s，生成 %d 个中间键值对\n", task.Number, task.Filename, len(mapRes))
+	// 先创建 nReduce 个中间文件
+	intermediateFiles := make([]*os.File, nReduce)
+	for i := 0; i < nReduce; i++ {
+		filename := fmt.Sprintf("mr-%d-%d", task.Number, i)
 		intermediateFile, err := os.Create(filename)
 		defer intermediateFile.Close()
 		if err != nil {
 			log.Fatalf("无法创建中间文件 %s: %v", filename, err)
 		}
+		intermediateFiles[i] = intermediateFile
+	}
+	// 将 Map 输出按 Key 哈希分区，分配给不同的 Reduce 任务
+  	for _, kv := range mapRes {
+		// 获取hash值
+		index := ihash(kv.Key)
+		// fmt.Printf("ihash 结果：%d\n", index)
+		// 输出文件名是固定的 mr-out-0（MIT 6.824 实验要求的输出格式）
+		// 其中 X 是 Map 任务编号，Y 是 reduce 任务编号。
+		// oname := "mr-"+task.taskNumber+"-"+"0"
+		// filename := fmt.Sprintf("mr-%d-%d", task.Number, index % nReduce)
+		// intermediateFile, err := os.Create(filename)
+		// defer intermediateFile.Close()
+		// if err != nil {
+		// 	log.Fatalf("无法创建中间文件 %s: %v", filename, err)
+		// }
 		// 写入中间文件，json格式
-		enc := json.NewEncoder(intermediateFile)  // 为每个文件创建 JSON 编码器
+		enc := json.NewEncoder(intermediateFiles[index % nReduce])  // 为每个文件创建 JSON 编码器
     	err := enc.Encode(&kv) // 写入中间文件
 		if err != nil {
 			log.Fatalf("写入中间文件失败: %v", err)
@@ -197,7 +213,7 @@ func register() string {
 	args := RegisterWorkerRequest{}
 
 	// fill in the argument(s).
-	args.Hostname = os.Hostname()
+	args.Hostname,_ = os.Hostname()
 	args.Port = 0
 
 	// declare a reply structure.
@@ -227,10 +243,10 @@ func getTask(wrokerId string) (Task, int) {
 
 	if (reply.HasTask) {
 		// reply.Y should be 100.
-		fmt.Printf("reply.Task.WorkderId %v\n", reply.Task.WorkderId)
-		return reply.Task, reply.NReduce
+		fmt.Printf("reply.TaskInfo.WorkerId %v\n", reply.TaskInfo.WorkerId)
+		return reply.TaskInfo, reply.NReduce
 	}
-	return nil, 0
+	return Task{}, 0
 }
 
 func notifyTaskCompleted(wrokerId string, taskNumber int) {

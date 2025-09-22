@@ -14,31 +14,31 @@ import (
 
 // WorkerStatus 定义 Worker 的状态结构
 type WorkerStatus struct {
-	code string // 状态代码
-	desc string // 状态描述
+	Code string // 状态代码
+	Desc string // 状态描述
 }
 
 // 定义 Worker 状态常量
 var (
 	// idle Worker 空闲状态
 	idle = WorkerStatus{
-		code: "idle",
-		desc: "空闲",
+		Code: "idle",
+		Desc: "空闲",
 	}
 	// inProgress Worker 任务进行中状态
 	inProgress = WorkerStatus{
-		code: "in-progress",
-		desc: "任务进行中",
+		Code: "in-progress",
+		Desc: "任务进行中",
 	}
 	// completed Worker 任务完成状态
 	completed = WorkerStatus{
-		code: "completed",
-		desc: "任务执行完成",
+		Code: "completed",
+		Desc: "任务执行完成",
 	}
 )
 
 // Worker 定义工作节点结构
-type Worker struct {
+type WorkerStruct struct {
 	Id       string       // Worker 唯一标识
 	Hostname string       // 主机名
 	Port     int          // 端口号
@@ -48,21 +48,21 @@ type Worker struct {
 
 // TaskType 定义任务类型结构
 type TaskType struct {
-	code string // 任务类型代码
-	desc string // 任务类型描述
+	Code string // 任务类型代码
+	Desc string // 任务类型描述
 }
 
 // 定义任务类型常量
 var (
-	// mapTask Map 任务类型
-	mapTask = TaskType{
-		code: "map",
-		desc: "map task",
+	// MapTask Map 任务类型
+	MapTask = TaskType{
+		Code: "map",
+		Desc: "map task",
 	}
-	// reduceTask Reduce 任务类型
-	reduceTask = TaskType{
-		code: "reduce",
-		desc: "reduce task",
+	// ReduceTask Reduce 任务类型
+	ReduceTask = TaskType{
+		Code: "reduce",
+		Desc: "reduce task",
 	}
 )
 
@@ -87,10 +87,11 @@ type Task struct {
 
 // Master 定义主节点结构
 type Master struct {
-	Workers []Worker // Worker 列表
+	Workers []WorkerStruct // Worker 列表
 	Tasks   []Task   // 任务列表
 	nReduce int      // Reduce 任务数量
-	// mu      sync.Mutex // 互斥锁，保证线程安全
+	MaxTaskNumber int 	// 最大任务编号
+	mu      sync.Mutex // 互斥锁，保证线程安全
 	// done    bool     // 标记所有任务是否完成
 }
 
@@ -129,7 +130,7 @@ func (m *Master) RegisterWorker(args *RegisterWorkerRequest, reply *RegisterWork
 	workerId := fmt.Sprintf("%s:%d-%d", args.Hostname, args.Port, time.Now().UnixNano())
 
 	// 创建新的 Worker 实例
-	worker := Worker{
+	worker := WorkerStruct{
 		Id:       workerId,
 		Hostname: args.Hostname,
 		Port:     args.Port,
@@ -184,7 +185,7 @@ func (m *Master) WorkerCompleted(args *WorkerCompletedRequest, reply *WorkerComp
 	// 查找对应 Worker 并更新状态
 	for i := range m.Workers {
 		worker := &m.Workers[i]
-		if (worker.WorkderId == args.WorkerId) {
+		if (worker.Id == args.WorkerId) {
 			// 修改worker的状态
 			worker.Status = idle
 		}
@@ -197,6 +198,21 @@ func (m *Master) WorkerCompleted(args *WorkerCompletedRequest, reply *WorkerComp
 			// 更新状态
 			task.Status = TaskStatusCompleted
 			task.EndTime = time.Now()
+			// 如果完成的是 map 任务，创建对应的 reduce 任务
+			if (task.Type == MapTask) {
+				for i := 0; i < m.nReduce; i++ {
+					filename := fmt.Sprintf("mr-%d-%d", task.Number, i)
+					task := Task{
+						Number: m.MaxTaskNumber,        // 分配任务编号
+						Status: TaskStatusPending, // 初始状态为待执行
+						Type:   ReduceTask,        // 设置为 Reduce 任务类型
+						Filename: filename, 			// Reduce 任务文件名
+					}
+					m.Tasks = append(m.Tasks, task) // 添加到任务列表
+					m.MaxTaskNumber++                    // 递增任务编号
+					log.Printf("创建 Reduce 任务 %d", task.Number)
+				}
+			}
 		}
 	}
 	reply.Success = true
@@ -215,26 +231,26 @@ func (m *Master) Done() bool {
 
 // TaskCompleted 标记任务完成
 // Worker 完成任务后调用此方法通知 Master
-func (m *Master) TaskCompleted(args *TaskCompletedRequest, reply *TaskCompletedResponse) error {
-	// m.mu.Lock()         // 加锁保证线程安全
-	// defer m.mu.Unlock() // 函数结束时解锁
+// func (m *Master) TaskCompleted(args *TaskCompletedRequest, reply *TaskCompletedResponse) error {
+// 	// m.mu.Lock()         // 加锁保证线程安全
+// 	// defer m.mu.Unlock() // 函数结束时解锁
 
-	// 查找对应的任务并更新状态
-	for i := range m.Tasks {
-		task := &m.Tasks[i]
-		if task.Number == args.TaskNumber && task.WorkerId == args.WorkerId {
-			task.Status = TaskStatusCompleted // 标记任务为已完成
-			log.Printf("任务 %d 已完成，Worker: %s", task.Number, args.WorkerId)
+// 	// 查找对应的任务并更新状态
+// 	for i := range m.Tasks {
+// 		task := &m.Tasks[i]
+// 		if task.Number == args.TaskNumber && task.WorkerId == args.WorkerId {
+// 			task.Status = TaskStatusCompleted // 标记任务为已完成
+// 			log.Printf("任务 %d 已完成，Worker: %s", task.Number, args.WorkerId)
 
-			// 检查是否所有任务都已完成
-			m.checkAllTasksCompleted()
-			return nil
-		}
-	}
+// 			// 检查是否所有任务都已完成
+// 			m.checkAllTasksCompleted()
+// 			return nil
+// 		}
+// 	}
 
-	log.Printf("未找到任务 %d，Worker: %s", args.TaskNumber, args.WorkerId)
-	return fmt.Errorf("task not found")
-}
+// 	log.Printf("未找到任务 %d，Worker: %s", args.TaskNumber, args.WorkerId)
+// 	return fmt.Errorf("task not found")
+// }
 
 //
 // create a Master.
@@ -246,40 +262,39 @@ func (m *Master) TaskCompleted(args *TaskCompletedRequest, reply *TaskCompletedR
 func MakeMaster(files []string, nReduce int) *Master {
 	// 创建 Master 实例
 	m := Master{
-		Workers: make([]Worker, 0), // 初始化空 Worker 列表
+		Workers: make([]WorkerStruct, 0), // 初始化空 Worker 列表
 		Tasks:   make([]Task, 0),   // 初始化空任务列表
 		nReduce: nReduce,           // 设置 Reduce 任务数量
-		done:    false,             // 初始状态为未完成
+		MaxTaskNumber: 0,			// 初始化最大任务编号
+		// done:    false,             // 初始状态为未完成
 	}
-
-	taskNumber := 0 // 任务编号计数器
 
 	// 为每个输入文件创建 Map 任务
 	for _, filename := range files {
 		task := Task{
-			Number:   taskNumber,        // 分配任务编号
+			Number:   m.MaxTaskNumber,        // 分配任务编号
 			Filename: filename,          // 设置文件名
 			Status:   TaskStatusPending, // 初始状态为待执行
-			Type:     mapTask,           // 设置为 Map 任务类型
+			Type:     MapTask,           // 设置为 Map 任务类型
 		}
 		m.Tasks = append(m.Tasks, task) // 添加到任务列表
-		taskNumber++                    // 递增任务编号
+		m.MaxTaskNumber++                    // 递增任务编号
 
 		log.Printf("创建 Map 任务 %d: %s", task.Number, filename)
 	}
 
 	// 创建 Reduce 任务
-	for i := 0; i < nReduce; i++ {
-		task := Task{
-			Number: taskNumber,        // 分配任务编号
-			Status: TaskStatusPending, // 初始状态为待执行
-			Type:   reduceTask,        // 设置为 Reduce 任务类型
-		}
-		m.Tasks = append(m.Tasks, task) // 添加到任务列表
-		taskNumber++                    // 递增任务编号
+	// for i := 0; i < nReduce; i++ {
+	// 	task := Task{
+	// 		Number: taskNumber,        // 分配任务编号
+	// 		Status: TaskStatusPending, // 初始状态为待执行
+	// 		Type:   ReduceTask,        // 设置为 Reduce 任务类型
+	// 	}
+	// 	m.Tasks = append(m.Tasks, task) // 添加到任务列表
+	// 	taskNumber++                    // 递增任务编号
 
-		log.Printf("创建 Reduce 任务 %d", task.Number)
-	}
+	// 	log.Printf("创建 Reduce 任务 %d", task.Number)
+	// }
 
 	// 启动 RPC 服务器
 	m.server()
