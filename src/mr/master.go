@@ -8,25 +8,63 @@ import "net/http"
 import "io"
 import "fmt"
 
+type WorkerStatus struct {
+	code	string
+	desc	string
+}
+
+const idle = WorkerStatus{
+	code: "idle",
+	desc: "空闲"
+}
+
+const inProgress = WorkerStatus{
+	code: "in-progress",
+	desc: "任务进行中"
+}
+
+const completed = WorkerStatus{
+	code: "completed",
+	desc: "任务执行完成"
+}
 
 type Worker struct {
 	Id 			string
 	Hostname 	string
 	Port 		int
 	[]Tasks  Task
+	Status		WorkerStatus
+}
+
+type TaskType struct {
+	code string
+	desc string
+}
+
+const mapTask = TaskType{
+	code: "map",
+	desc: "map task"
+}
+
+const reduceTask = TaskType{
+	code: "reduce",
+	desc: "reduce task"
 }
 
 type Task struct {
+	Number int
 	Filename string
 	WorkerId string
 	StartTime time.Time
 	Status int
+	Type TaskType
 }
 
 type Master struct {
 	// Your definitions here.
 	[]Workers Worker
 	[]Tasks Task
+	nReduce int
 }
 
 // Your code here -- RPC handlers for the worker to call.
@@ -40,7 +78,6 @@ func (m *Master) Example(args *ExampleArgs, reply *ExampleReply) error {
 	reply.Y = args.X + 1
 	return nil
 }
-
 
 //
 // start a thread that listens for RPCs from worker.go
@@ -59,22 +96,14 @@ func (m *Master) server() {
 }
 
 // 注册worker
-type RegisterWorkerRequest struct{
-	Hostname 	string
-	Port 		int
-}
-
-type RegisterWorkerResponse struct{
-	WorkerId string
-}
-
 func (m *Master) RegisterWorker(args *RegisterWorkerRequest, reply *RegisterWorkerResponse) error {
 	// 生成唯一 Worker ID
     workerId := fmt.Sprintf("%s:%d-%d", args.Hostname, args.Port, time.Now().UnixNano())
 	worker := Worker{
 		Id: workerId,
 		Hostname: args.Hostname,
-		Port: args.Port
+		Port: args.Port,
+		Status: idle
 	}
 	reply.WorkerId = workerId
 	m.Workers = append(m.Workers, worker)
@@ -82,14 +111,6 @@ func (m *Master) RegisterWorker(args *RegisterWorkerRequest, reply *RegisterWork
 }
 
 // worker获取任务
-type GetTaskRequest struct {
-	WrokerId string
-}
-
-type GetTaskResponse struct {
-	TaskInfo Task
-}
-
 func (m *Master) GetTask(args *GetTaskRequest, reply *GetTaskResponse) error {
 	// 找到这个worker能执行的任务
 	// todo by 文件 维度
@@ -132,10 +153,13 @@ func MakeMaster(files []string, nReduce int) *Master {
 	// 读取每个输入文件，调用 Map，将所有中间结果收集到一个切片中。
 	// intermediate := [][]string{}
 	taskList := []Task
+	taskNumber := 0
 	for _, filename := range files {
 		task := Task{
+			Number: taskNumber++,
 			Filename: filename,
-			Status: 0
+			Status: 0,
+			Type: mapTask
 		}
 		taskList = append(taskList, task)
 
@@ -145,9 +169,23 @@ func MakeMaster(files []string, nReduce int) *Master {
 		// // 合并到总体的 intermediate 列表
 		// intermediate = append(intermediate, kva...)
 	}
+
+	// 创建reduce任务
+	for (i := 0; i < nReduce; i++) {
+		task := Task{
+			Number: taskNumber++,
+			// todo 替换成content
+			// Filename: filename,
+			Status: 0,
+			Type: reduceTask
+		}
+		taskList = append(taskList, task)
+	}
 	m.Tasks = taskList
+	m.nReduce = nReduce
 
 	m.server()
+	fmt.Println("map reduce master server");
 	return &m
 }
 
@@ -160,7 +198,7 @@ func split(filename string) []string {
 		log.Fatalf("cannot open %v", filename)
 	}
 	// 定义块大小（16KB）
-	const chunkSize = 16 * 1024 // 16KB
+	const chunkSize = 64 * 1024 * 1024 // 64MB
 	// 创建缓冲区
 	buffer := make([]byte, chunkSize)
 	for {

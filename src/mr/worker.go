@@ -47,7 +47,10 @@ func Worker(mapf func(string, string) []KeyValue,
 
 	// 获取Map需要执行的任务
 	Task task = getTask(WrokerId)
-
+	// 判断是Map任务还是Reduce任务
+	if (task.Type == mapTask) {
+		
+	}
 	
 	// 读取文件的内容
 	// 调用用户实现的 Map 函数，返回一组 KeyValue
