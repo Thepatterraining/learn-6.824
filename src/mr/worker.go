@@ -43,40 +43,114 @@ func Worker(mapf func(string, string) []KeyValue,
 
 	// Your worker implementation here.
 	// 注册worker
-	string WorkerId := register()
+	workerId := register()
 
 	// 获取Map需要执行的任务
-	Task task = getTask(WrokerId)
-	// 判断是Map任务还是Reduce任务
-	if (task.Type == mapTask) {
-		
+	for {
+		task, nReduce := getTask(workerId)
+		if (task == nil) {
+			// 通知master 没有任务了，结束了
+			notifyWorkerCompleted(workerId)
+			return
+		}
+		// 判断是Map任务还是Reduce任务
+		if (task.Type == mapTask) {
+			// 执行map任务
+			execMap(task, mapf, nReduce)
+			// 执行完成 ，通知master
+			notifyTaskCompleted(workerId, task.Number)
+		} else if (task.Type == reduceTask) {
+			// 执行	Reduce任务
+			execReduce(task, reducef)
+			// 执行完成 ，通知master
+			notifyTaskCompleted(workerId, task.Number)
+		}
 	}
-	
-	// 读取文件的内容
-	// 调用用户实现的 Map 函数，返回一组 KeyValue
-	mapRes := mapf(task.Filename, readFile(task.Filename))
-	
+}
+
+func execReduce(task Task, reducef func(string, []string) string) {
+	// shuff
 	// 按 Key 排序，方便后续把相同 key 的 value 聚集在一起供 Reduce 使用
 	sort.Sort(ByKey(mapRes))
-
-	// 输出文件名是固定的 mr-out-0（MIT 6.824 实验要求的输出格式）
-	// 其中 X 是 Map 任务编号，Y 是 reduce 任务编号。
-	oname := "mr-X-Y"
-	intermediateFile, _ := os.Create(oname)
-	// 写入中间文件，json格式
-	enc := json.NewEncoder(intermediateFile)
-  	for _, kv := range mapRes {
-    	err := enc.Encode(&kv)
+	// 读取中间数据
+	intermediateFile, err := os.Open(task.Filename)
+	defer intermediateFile.Close()
+	if err != nil {
+		log.Fatalf("无法打开中间文件 %s: %v", task.Filename, err)
+	}
+	// 解码
+	intermediate := []mr.KeyValue{}
+	dec := json.NewDecoder(intermediateFile)
+	for {
+		var kv KeyValue
+		if err := dec.Decode(&kv); err != nil {
+		break
+		}
+		intermediate = append(intermediate, kv)
 	}
 
-	// reduce读取中间文件的内容
+	// 输出文件名是固定的 mr-out-0（MIT 6.824 实验要求的输出格式）
+	oname := fmt.Sprintf("mr-out-%d", task.Number)
+	ofile, _ := os.Create(oname)
+	//
+	// 对 intermediate 中每个不同的 key 调用 Reduce，然后把结果写入 mr-out-0
+	i := 0
+	for i < len(intermediate) {
+		// 找到从 i 开始的连续相同 key 的区间 [i, j)
+		j := i + 1
+		for j < len(intermediate) && intermediate[j].Key == intermediate[i].Key {
+			j++
+		}
+		// 收集该 key 对应的所有 values
+		values := []string{}
+		for k := i; k < j; k++ {
+			values = append(values, intermediate[k].Value)
+		}
+		// 调用用户实现的 Reduce 函数
+		output := reducef(intermediate[i].Key, values)
 
-	// 调用reduce函数
+		// this is the correct format for each line of Reduce output.
+		// 按每行 "key value\n" 的格式写入输出文件（与课程/测试要求一致）
+		fmt.Fprintf(ofile, "%v %v\n", intermediate[i].Key, output)
 
-	// 结果写入最终文件
-	
-	// uncomment to send the Example RPC to the master.
-	// CallExample()
+		// 继续下一个不同的 key
+		i = j
+	}
+	ofile.Close()
+}
+
+// execMap 执行 Map 任务
+// task: 要执行的 Map 任务
+// mapf: 用户提供的 Map 函数
+// nReduce: Reduce 任务数量，用于分区
+func execMap(task Task, mapf func(string, string) []KeyValue, nReduce int) {
+	// 读取输入文件内容
+	content := readFile(task.Filename)
+
+	// 调用用户实现的 Map 函数，返回一组 KeyValue
+	mapRes := mapf(task.Filename, content)
+	// 将 Map 输出按 Key 哈希分区，分配给不同的 Reduce 任务
+  	for _, kv := range mapRes {
+		// 获取hash值
+		index = ihash(kv.Key)
+		fmt.Printf("ihash 结果：%d\n", index)
+		// 输出文件名是固定的 mr-out-0（MIT 6.824 实验要求的输出格式）
+		// 其中 X 是 Map 任务编号，Y 是 reduce 任务编号。
+		// oname := "mr-"+task.taskNumber+"-"+"0"
+		filename := fmt.Sprintf("mr-%d-%d", task.Number, index % nReduce)
+		intermediateFile, err := os.Create(filename)
+		defer intermediateFile.Close()
+		if err != nil {
+			log.Fatalf("无法创建中间文件 %s: %v", filename, err)
+		}
+		// 写入中间文件，json格式
+		enc := json.NewEncoder(intermediateFile)  // 为每个文件创建 JSON 编码器
+    	err := enc.Encode(&kv) // 写入中间文件
+		if err != nil {
+			log.Fatalf("写入中间文件失败: %v", err)
+		}
+	}
+	log.Printf("Map 任务 %d 完成，生成了 %d 个中间文件\n", task.Number, nReduce)
 
 }
 
@@ -137,7 +211,7 @@ func register() string {
 	return reply.WorkerId
 }
 
-func getTask(wrokerId string) Task {
+func getTask(wrokerId string) (Task, int) {
 
 	// declare an argument structure.
 	args := GetTaskRequest{}
@@ -149,11 +223,34 @@ func getTask(wrokerId string) Task {
 	reply := GetTaskResponse{}
 
 	// send the RPC request, wait for the reply.
-	call("Master.getTask", &args, &reply)
+	call("Master.GetTask", &args, &reply)
 
-	// reply.Y should be 100.
-	fmt.Printf("reply.Task.WorkderId %v\n", reply.Task.WorkderId)
-	return reply.Task
+	if (reply.HasTask) {
+		// reply.Y should be 100.
+		fmt.Printf("reply.Task.WorkderId %v\n", reply.Task.WorkderId)
+		return reply.Task, reply.NReduce
+	}
+	return nil, 0
+}
+
+func notifyTaskCompleted(wrokerId string, taskNumber int) {
+	// declare an argument structure.
+	args := WorkerCompletedRequest{}
+
+	// fill in the argument(s).
+	args.WorkerId = wrokerId
+	args.TaskNumber = taskNumber
+
+	// declare a reply structure.
+	reply := WorkerCompletedResponse{}
+
+	// send the RPC request, wait for the reply.
+	call("Master.WorkerCompleted", &args, &reply)
+
+	if (reply.Success) {
+		// reply.Y should be 100.
+		fmt.Printf("reply.Success %v\n", reply.Success)
+	}
 }
 
 //

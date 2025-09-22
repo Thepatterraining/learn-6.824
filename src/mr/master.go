@@ -1,131 +1,206 @@
 package mr
 
-import "log"
-import "net"
-import "os"
-import "net/rpc"
-import "net/http"
-import "io"
-import "fmt"
+import (
+	"fmt"      // 格式化输出
+	"io"       // IO 操作
+	"log"      // 日志记录
+	"net"      // 网络操作
+	"net/http" // HTTP 服务
+	"net/rpc"  // RPC 服务
+	"os"       // 操作系统接口
+	"sync"     // 同步原语
+	"time"     // 时间操作
+)
 
+// WorkerStatus 定义 Worker 的状态结构
 type WorkerStatus struct {
-	code	string
-	desc	string
+	code string // 状态代码
+	desc string // 状态描述
 }
 
-const idle = WorkerStatus{
-	code: "idle",
-	desc: "空闲"
-}
+// 定义 Worker 状态常量
+var (
+	// idle Worker 空闲状态
+	idle = WorkerStatus{
+		code: "idle",
+		desc: "空闲",
+	}
+	// inProgress Worker 任务进行中状态
+	inProgress = WorkerStatus{
+		code: "in-progress",
+		desc: "任务进行中",
+	}
+	// completed Worker 任务完成状态
+	completed = WorkerStatus{
+		code: "completed",
+		desc: "任务执行完成",
+	}
+)
 
-const inProgress = WorkerStatus{
-	code: "in-progress",
-	desc: "任务进行中"
-}
-
-const completed = WorkerStatus{
-	code: "completed",
-	desc: "任务执行完成"
-}
-
+// Worker 定义工作节点结构
 type Worker struct {
-	Id 			string
-	Hostname 	string
-	Port 		int
-	[]Tasks  Task
-	Status		WorkerStatus
+	Id       string       // Worker 唯一标识
+	Hostname string       // 主机名
+	Port     int          // 端口号
+	Tasks    []Task       // 分配给该 Worker 的任务列表
+	Status   WorkerStatus // Worker 当前状态
 }
 
+// TaskType 定义任务类型结构
 type TaskType struct {
-	code string
-	desc string
+	code string // 任务类型代码
+	desc string // 任务类型描述
 }
 
-const mapTask = TaskType{
-	code: "map",
-	desc: "map task"
-}
+// 定义任务类型常量
+var (
+	// mapTask Map 任务类型
+	mapTask = TaskType{
+		code: "map",
+		desc: "map task",
+	}
+	// reduceTask Reduce 任务类型
+	reduceTask = TaskType{
+		code: "reduce",
+		desc: "reduce task",
+	}
+)
 
-const reduceTask = TaskType{
-	code: "reduce",
-	desc: "reduce task"
-}
+// TaskStatus 定义任务状态常量
+const (
+	TaskStatusPending    = 0 // 任务待执行
+	TaskStatusInProgress = 1 // 任务执行中
+	TaskStatusCompleted  = 2 // 任务已完成
+	TaskStatusFailed     = 3 // 任务执行失败
+)
 
+// Task 定义任务结构
 type Task struct {
-	Number int
-	Filename string
-	WorkerId string
-	StartTime time.Time
-	Status int
-	Type TaskType
+	Number    int       // 任务编号
+	Filename  string    // 文件名（对于 Map 任务）
+	WorkerId  string    // 分配给的 Worker ID
+	StartTime time.Time // 任务开始时间
+	EndTime   time.Time // 任务结束时间
+	Status    int       // 任务状态
+	Type      TaskType  // 任务类型
 }
 
+// Master 定义主节点结构
 type Master struct {
-	// Your definitions here.
-	[]Workers Worker
-	[]Tasks Task
-	nReduce int
+	Workers []Worker // Worker 列表
+	Tasks   []Task   // 任务列表
+	nReduce int      // Reduce 任务数量
+	// mu      sync.Mutex // 互斥锁，保证线程安全
+	// done    bool     // 标记所有任务是否完成
 }
 
-// Your code here -- RPC handlers for the worker to call.
-
-//
-// an example RPC handler.
-//
-// the RPC argument and reply types are defined in rpc.go.
-//
+// Example RPC 处理器示例
+// 这是一个示例 RPC 处理器，展示如何定义 RPC 方法
 func (m *Master) Example(args *ExampleArgs, reply *ExampleReply) error {
-	reply.Y = args.X + 1
+	reply.Y = args.X + 1 // 简单的加1操作
 	return nil
 }
 
-//
-// start a thread that listens for RPCs from worker.go
-//
+// server 启动 RPC 服务器
+// 启动一个监听 Worker RPC 调用的线程
 func (m *Master) server() {
-	rpc.Register(m)
-	rpc.HandleHTTP()
-	//l, e := net.Listen("tcp", ":1234")
-	sockname := masterSock()
-	os.Remove(sockname)
+	rpc.Register(m)       // 注册 Master 为 RPC 服务
+	rpc.HandleHTTP()      // 设置 HTTP 处理器
+	sockname := masterSock() // 获取 socket 名称
+	os.Remove(sockname)   // 删除可能存在的旧 socket 文件
+
+	// 创建 Unix domain socket 监听器
 	l, e := net.Listen("unix", sockname)
 	if e != nil {
-		log.Fatal("listen error:", e)
+		log.Fatal("listen error:", e) // 监听失败则退出程序
 	}
+
+	// 在新的 goroutine 中启动 HTTP 服务
 	go http.Serve(l, nil)
 }
 
-// 注册worker
+// RegisterWorker 注册新的 Worker
+// 当 Worker 启动时调用此方法向 Master 注册
 func (m *Master) RegisterWorker(args *RegisterWorkerRequest, reply *RegisterWorkerResponse) error {
-	// 生成唯一 Worker ID
-    workerId := fmt.Sprintf("%s:%d-%d", args.Hostname, args.Port, time.Now().UnixNano())
+	// m.mu.Lock()         // 加锁保证线程安全
+	// defer m.mu.Unlock() // 函数结束时解锁
+
+	// 生成唯一的 Worker ID，包含主机名、端口和时间戳
+	workerId := fmt.Sprintf("%s:%d-%d", args.Hostname, args.Port, time.Now().UnixNano())
+
+	// 创建新的 Worker 实例
 	worker := Worker{
-		Id: workerId,
+		Id:       workerId,
 		Hostname: args.Hostname,
-		Port: args.Port,
-		Status: idle
+		Port:     args.Port,
+		Tasks:    make([]Task, 0), // 初始化空任务列表
+		Status:   idle,            // 初始状态为空闲
 	}
-	reply.WorkerId = workerId
-	m.Workers = append(m.Workers, worker)
-	return nil;
+
+	reply.WorkerId = workerId                        // 返回生成的 Worker ID
+	m.Workers = append(m.Workers, worker)            // 将新 Worker 添加到列表
+	log.Printf("注册新 Worker: %s", workerId)        // 记录日志
+	return nil
 }
 
-// worker获取任务
+// GetTask Worker 获取任务
+// Worker 调用此方法从 Master 获取待执行的任务
 func (m *Master) GetTask(args *GetTaskRequest, reply *GetTaskResponse) error {
-	// 找到这个worker能执行的任务
-	// todo by 文件 维度
-	// 循环找到状态为0的Task
-	for _, task range m.tasks {
-		if (task.Status == 0) {
-			// 修改这个任务的状态
-			task.Status = 1
-			task.WorkerId = args.WrokerId
-			task.StartTime = Time.Now()
-			// 将这个任务返回给Worker
-			reply.TaskInfo = task
+	// m.mu.Lock()         // 加锁保证线程安全
+	// defer m.mu.Unlock() // 函数结束时解锁
+
+	// 遍历任务列表，查找待执行的任务
+	for i := range m.Tasks {
+		task := &m.Tasks[i] // 获取任务指针以便修改
+
+		// 检查任务是否为待执行状态
+		if task.Status == TaskStatusPending {
+			// 更新任务状态为执行中
+			task.Status = TaskStatusInProgress
+			task.WorkerId = args.WorkerId // 分配给请求的 Worker
+			task.StartTime = time.Now()   // 记录开始时间
+
+			// 将任务信息返回给 Worker
+			reply.TaskInfo = *task
+			reply.HasTask = true // 标记有可用任务
+			reply.NReduce = m.nReduce
+
+			log.Printf("分配任务 %d 给 Worker %s", task.Number, args.WorkerId)
 			return nil
 		}
 	}
+
+	// 没有找到可用任务
+	reply.HasTask = false
+	log.Printf("没有可用任务分配给 Worker %s", args.WorkerId)
+	return nil
+}
+
+// 通知 Master， Worker 任务完成
+func (m *Master) WorkerCompleted(args *WorkerCompletedRequest, reply *WorkerCompletedResponse) error {
+	// m.mu.Lock()         // 加锁保证线程安全
+	// defer m.mu.Unlock() // 函数结束时解锁
+
+	// 查找对应 Worker 并更新状态
+	for i := range m.Workers {
+		worker := &m.Workers[i]
+		if (worker.WorkderId == args.WorkerId) {
+			// 修改worker的状态
+			worker.Status = idle
+		}
+	}
+
+	// 查找对应的task 并更新状态
+	for i := range m.Tasks {
+		task := &m.Tasks[i]
+		if (task.Number == args.TaskNumber) {
+			// 更新状态
+			task.Status = TaskStatusCompleted
+			task.EndTime = time.Now()
+		}
+	}
+	reply.Success = true
+	return nil
 }
 
 //
@@ -134,11 +209,31 @@ func (m *Master) GetTask(args *GetTaskRequest, reply *GetTaskResponse) error {
 //
 func (m *Master) Done() bool {
 	ret := false
-
 	// Your code here.
+	return ret;
+}
 
+// TaskCompleted 标记任务完成
+// Worker 完成任务后调用此方法通知 Master
+func (m *Master) TaskCompleted(args *TaskCompletedRequest, reply *TaskCompletedResponse) error {
+	// m.mu.Lock()         // 加锁保证线程安全
+	// defer m.mu.Unlock() // 函数结束时解锁
 
-	return ret
+	// 查找对应的任务并更新状态
+	for i := range m.Tasks {
+		task := &m.Tasks[i]
+		if task.Number == args.TaskNumber && task.WorkerId == args.WorkerId {
+			task.Status = TaskStatusCompleted // 标记任务为已完成
+			log.Printf("任务 %d 已完成，Worker: %s", task.Number, args.WorkerId)
+
+			// 检查是否所有任务都已完成
+			m.checkAllTasksCompleted()
+			return nil
+		}
+	}
+
+	log.Printf("未找到任务 %d，Worker: %s", args.TaskNumber, args.WorkerId)
+	return fmt.Errorf("task not found")
 }
 
 //
@@ -146,91 +241,101 @@ func (m *Master) Done() bool {
 // main/mrmaster.go calls this function.
 // nReduce is the number of reduce tasks to use.
 //
+// files: 输入文件列表
+// nReduce: Reduce 任务数量
 func MakeMaster(files []string, nReduce int) *Master {
-	m := Master{}
+	// 创建 Master 实例
+	m := Master{
+		Workers: make([]Worker, 0), // 初始化空 Worker 列表
+		Tasks:   make([]Task, 0),   // 初始化空任务列表
+		nReduce: nReduce,           // 设置 Reduce 任务数量
+		done:    false,             // 初始状态为未完成
+	}
 
-	// Your code here.
-	// 读取每个输入文件，调用 Map，将所有中间结果收集到一个切片中。
-	// intermediate := [][]string{}
-	taskList := []Task
-	taskNumber := 0
+	taskNumber := 0 // 任务编号计数器
+
+	// 为每个输入文件创建 Map 任务
 	for _, filename := range files {
 		task := Task{
-			Number: taskNumber++,
-			Filename: filename,
-			Status: 0,
-			Type: mapTask
+			Number:   taskNumber,        // 分配任务编号
+			Filename: filename,          // 设置文件名
+			Status:   TaskStatusPending, // 初始状态为待执行
+			Type:     mapTask,           // 设置为 Map 任务类型
 		}
-		taskList = append(taskList, task)
+		m.Tasks = append(m.Tasks, task) // 添加到任务列表
+		taskNumber++                    // 递增任务编号
 
-		// intermediate = append(intermediate, split(filename))
-		// 将数据分片 分成多个chunk，等待worker线程获取
-		// kva := mapf(filename, string(content))
-		// // 合并到总体的 intermediate 列表
-		// intermediate = append(intermediate, kva...)
+		log.Printf("创建 Map 任务 %d: %s", task.Number, filename)
 	}
 
-	// 创建reduce任务
-	for (i := 0; i < nReduce; i++) {
+	// 创建 Reduce 任务
+	for i := 0; i < nReduce; i++ {
 		task := Task{
-			Number: taskNumber++,
-			// todo 替换成content
-			// Filename: filename,
-			Status: 0,
-			Type: reduceTask
+			Number: taskNumber,        // 分配任务编号
+			Status: TaskStatusPending, // 初始状态为待执行
+			Type:   reduceTask,        // 设置为 Reduce 任务类型
 		}
-		taskList = append(taskList, task)
-	}
-	m.Tasks = taskList
-	m.nReduce = nReduce
+		m.Tasks = append(m.Tasks, task) // 添加到任务列表
+		taskNumber++                    // 递增任务编号
 
+		log.Printf("创建 Reduce 任务 %d", task.Number)
+	}
+
+	// 启动 RPC 服务器
 	m.server()
-	fmt.Println("map reduce master server");
-	return &m
+	log.Printf("MapReduce Master 服务器启动，共 %d 个任务", len(m.Tasks))
+
+	return &m // 返回 Master 实例指针
 }
 
+// split 将文件分割成多个块
+// 此函数用于将大文件分割成适合处理的小块
+// filename: 要分割的文件名
+// 返回: 文件内容块的字符串切片
 func split(filename string) []string {
-	res := []string{}
-	// 读取文件
+	res := []string{} // 结果切片
+
+	// 打开文件
 	file, err := os.Open(filename)
-	defer file.Close()
 	if err != nil {
-		log.Fatalf("cannot open %v", filename)
+		log.Fatalf("无法打开文件 %v: %v", filename, err)
 	}
-	// 定义块大小（16KB）
-	const chunkSize = 64 * 1024 * 1024 // 64MB
-	// 创建缓冲区
-	buffer := make([]byte, chunkSize)
+	defer file.Close() // 确保文件在函数结束时关闭
+
+	// 定义块大小为 64MB
+	const chunkSize = 64 * 1024 * 1024
+	buffer := make([]byte, chunkSize) // 创建缓冲区
+
+	// 循环读取文件内容
 	for {
 		// 读取数据到缓冲区
 		bytesRead, err := file.Read(buffer)
 		if err != nil {
 			if err == io.EOF {
+				// 到达文件末尾，正常退出
 				break
 			}
-			log.Fatalf("cannot read bytes for file %v", filename)
+			log.Fatalf("读取文件 %v 时出错: %v", filename, err)
 		}
 
-		// 创建块副本并添加到列表
-		chunk := make([]byte, bytesRead)
-		// 将字节转换为字符串并添加到结果切片
-		res = append(res, string(chunk[:bytesRead]))
-		// 如果已到达文件末尾，退出循环
-		if err == io.EOF {
+		// 如果读取到数据，添加到结果中
+		if bytesRead > 0 {
+			// 创建块副本并转换为字符串
+			chunk := string(buffer[:bytesRead])
+			res = append(res, chunk)
+		}
+
+		// 如果读取的字节数小于缓冲区大小，说明已到文件末尾
+		if bytesRead < chunkSize {
 			break
 		}
 	}
-	// 输出结果
-	fmt.Printf("共读取 %d 个块\n", len(res))
+
+	// 输出分割结果统计
+	log.Printf("文件 %s 共分割为 %d 个块", filename, len(res))
 	for i, chunk := range res {
-		fmt.Printf("块 #%d: %d 字符\n", i+1, len(chunk))
-		// 如果需要查看内容，可以取消下面的注释
-		// fmt.Printf("内容: %s\n", chunk)
+		log.Printf("块 #%d: %d 字符", i+1, len(chunk))
 	}
+
 	return res
-	// 读取16KB的内容到内存中
-	// content, err := ioutil.ReadAll(file)
-	// if err != nil {
-	// 	log.Fatalf("cannot read %v", filename)
-	// }
 }
