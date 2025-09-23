@@ -71,23 +71,31 @@ func Worker(mapf func(string, string) []KeyValue,
 	}
 }
 
+func readInterMediateData(filenames []string) []KeyValue {
+	intermediate := []KeyValue{}
+	for _, filename := range task.Filename {
+		intermediateFile, err := os.Open(filename)
+		if err != nil {
+			log.Fatalf("无法打开中间文件 %s: %v", filename, err)
+		}
+		defer intermediateFile.Close()
+		// 解码
+		dec := json.NewDecoder(intermediateFile)
+		for {
+			var kv KeyValue
+			if err := dec.Decode(&kv); err != nil {
+			break
+			}
+			intermediate = append(intermediate, kv)
+		}
+	}
+	return intermediate
+}
+
 func execReduce(task Task, reducef func(string, []string) string) {
 	// 读取中间数据
-	intermediateFile, err := os.Open(task.Filename)
-	defer intermediateFile.Close()
-	if err != nil {
-		log.Fatalf("无法打开中间文件 %s: %v", task.Filename, err)
-	}
-	// 解码
-	intermediate := []KeyValue{}
-	dec := json.NewDecoder(intermediateFile)
-	for {
-		var kv KeyValue
-		if err := dec.Decode(&kv); err != nil {
-		break
-		}
-		intermediate = append(intermediate, kv)
-	}
+	intermediate := readInterMediateData(task.Filename)
+	fmt.Printf("Reduce 任务 %d 读取 %d 个中间键值对\n", task.Number, len(intermediate))
 
 	// shuff
 	// 按 Key 排序，方便后续把相同 key 的 value 聚集在一起供 Reduce 使用
@@ -129,11 +137,11 @@ func execReduce(task Task, reducef func(string, []string) string) {
 // nReduce: Reduce 任务数量，用于分区
 func execMap(task Task, mapf func(string, string) []KeyValue, nReduce int) {
 	// 读取输入文件内容
-	content := readFile(task.Filename)
+	content := readFile(task.Filename[0])
 
 	// 调用用户实现的 Map 函数，返回一组 KeyValue
-	mapRes := mapf(task.Filename, content)
-	fmt.Printf("Map 任务 %d 处理文件 %s，生成 %d 个中间键值对\n", task.Number, task.Filename, len(mapRes))
+	mapRes := mapf(task.Filename[0], content)
+	fmt.Printf("Map 任务 %d 处理文件 %s，生成 %d 个中间键值对\n", task.Number, task.Filename[0], len(mapRes))
 	// 先创建 nReduce 个中间文件
 	intermediateFiles := make([]*os.File, nReduce)
 	for i := 0; i < nReduce; i++ {
@@ -149,16 +157,6 @@ func execMap(task Task, mapf func(string, string) []KeyValue, nReduce int) {
   	for _, kv := range mapRes {
 		// 获取hash值
 		index := ihash(kv.Key)
-		// fmt.Printf("ihash 结果：%d\n", index)
-		// 输出文件名是固定的 mr-out-0（MIT 6.824 实验要求的输出格式）
-		// 其中 X 是 Map 任务编号，Y 是 reduce 任务编号。
-		// oname := "mr-"+task.taskNumber+"-"+"0"
-		// filename := fmt.Sprintf("mr-%d-%d", task.Number, index % nReduce)
-		// intermediateFile, err := os.Create(filename)
-		// defer intermediateFile.Close()
-		// if err != nil {
-		// 	log.Fatalf("无法创建中间文件 %s: %v", filename, err)
-		// }
 		// 写入中间文件，json格式
 		enc := json.NewEncoder(intermediateFiles[index % nReduce])  // 为每个文件创建 JSON 编码器
     	err := enc.Encode(&kv) // 写入中间文件

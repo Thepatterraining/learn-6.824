@@ -77,7 +77,7 @@ const (
 // Task 定义任务结构
 type Task struct {
 	Number    int       // 任务编号
-	Filename  string    // 文件名（对于 Map 任务）
+	Filename  []string    // 文件名（对于 Map 任务）
 	WorkerId  string    // 分配给的 Worker ID
 	StartTime time.Time // 任务开始时间
 	EndTime   time.Time // 任务结束时间
@@ -198,19 +198,18 @@ func (m *Master) WorkerCompleted(args *WorkerCompletedRequest, reply *WorkerComp
 			// 更新状态
 			task.Status = TaskStatusCompleted
 			task.EndTime = time.Now()
-			// 如果完成的是 map 任务，创建对应的 reduce 任务
+			// 如果完成的是 map 任务，更新对应的 reduce 任务
 			if (task.Type == MapTask) {
-				for i := 0; i < m.nReduce; i++ {
-					filename := fmt.Sprintf("mr-%d-%d", task.Number, i)
-					task := Task{
-						Number: m.MaxTaskNumber,        // 分配任务编号
-						Status: TaskStatusPending, // 初始状态为待执行
-						Type:   ReduceTask,        // 设置为 Reduce 任务类型
-						Filename: filename, 			// Reduce 任务文件名
+				reduceIndex := 0
+				for j := range m.Tasks {
+					reduceTask := &m.Tasks[j]
+					if (reduceTask.Type == ReduceTask) {
+						// 生成对应的文件名
+						filename := fmt.Sprintf("mr-%d-%d", task.Number, reduceIndex)
+						// 更新
+						reduceTask.Filename = append(reduceTask.Filename, task.Filename[reduceIndex]);
+						reduceIndex++;
 					}
-					m.Tasks = append(m.Tasks, task) // 添加到任务列表
-					m.MaxTaskNumber++                    // 递增任务编号
-					log.Printf("创建 Reduce 任务 %d", task.Number)
 				}
 			}
 		}
@@ -273,7 +272,7 @@ func MakeMaster(files []string, nReduce int) *Master {
 	for _, filename := range files {
 		task := Task{
 			Number:   m.MaxTaskNumber,        // 分配任务编号
-			Filename: filename,          // 设置文件名
+			Filename: []string{filename},          // 设置文件名
 			Status:   TaskStatusPending, // 初始状态为待执行
 			Type:     MapTask,           // 设置为 Map 任务类型
 		}
@@ -284,17 +283,18 @@ func MakeMaster(files []string, nReduce int) *Master {
 	}
 
 	// 创建 Reduce 任务
-	// for i := 0; i < nReduce; i++ {
-	// 	task := Task{
-	// 		Number: taskNumber,        // 分配任务编号
-	// 		Status: TaskStatusPending, // 初始状态为待执行
-	// 		Type:   ReduceTask,        // 设置为 Reduce 任务类型
-	// 	}
-	// 	m.Tasks = append(m.Tasks, task) // 添加到任务列表
-	// 	taskNumber++                    // 递增任务编号
+	for i := 0; i < nReduce; i++ {
+		task := Task{
+			Filename: make([]string, 0),
+			Number: taskNumber,        // 分配任务编号
+			Status: TaskStatusPending, // 初始状态为待执行
+			Type:   ReduceTask,        // 设置为 Reduce 任务类型
+		}
+		m.Tasks = append(m.Tasks, task) // 添加到任务列表
+		taskNumber++                    // 递增任务编号
 
-	// 	log.Printf("创建 Reduce 任务 %d", task.Number)
-	// }
+		log.Printf("创建 Reduce 任务 %d", task.Number)
+	}
 
 	// 启动 RPC 服务器
 	m.server()
