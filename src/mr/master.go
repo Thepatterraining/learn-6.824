@@ -20,8 +20,8 @@ type WorkerStatus struct {
 
 // 定义 Worker 状态常量
 var (
-	// idle Worker 空闲状态
-	idle = WorkerStatus{
+	// Idle Worker 空闲状态
+	Idle = WorkerStatus{
 		Code: "idle",
 		Desc: "空闲",
 	}
@@ -31,7 +31,7 @@ var (
 		Desc: "任务进行中",
 	}
 	// completed Worker 任务完成状态
-	completed = WorkerStatus{
+	Completed = WorkerStatus{
 		Code: "completed",
 		Desc: "任务执行完成",
 	}
@@ -44,6 +44,7 @@ type WorkerStruct struct {
 	Port     int          // 端口号
 	Tasks    []Task       // 分配给该 Worker 的任务列表
 	Status   WorkerStatus // Worker 当前状态
+	RpcClient *rpc.Client
 }
 
 // TaskType 定义任务类型结构
@@ -63,6 +64,11 @@ var (
 	ReduceTask = TaskType{
 		Code: "reduce",
 		Desc: "reduce task",
+	}
+	// ExitTask 退出任务类型
+	ExitTask = TaskType{
+		Code: "exit",
+		Desc: "exit task",
 	}
 )
 
@@ -87,19 +93,15 @@ type Task struct {
 
 // Master 定义主节点结构
 type Master struct {
-	Workers []WorkerStruct // Worker 列表
-	Tasks   []Task   // 任务列表
+	IdleWorkers chan WorkerStruct
+	PenddingTasks chan Task // 待执行的task
 	nReduce int      // Reduce 任务数量
-	MaxTaskNumber int 	// 最大任务编号
 	mu      sync.Mutex // 互斥锁，保证线程安全
-	// done    bool     // 标记所有任务是否完成
-}
-
-// Example RPC 处理器示例
-// 这是一个示例 RPC 处理器，展示如何定义 RPC 方法
-func (m *Master) Example(args *ExampleArgs, reply *ExampleReply) error {
-	reply.Y = args.X + 1 // 简单的加1操作
-	return nil
+	completedTaskCount int // 完成任务数量
+	reduceTasks []Task // reduce 任务
+	WorkerMap map[string]WorkerStruct
+	TaskMap map[int]Task
+	isDone chan bool
 }
 
 // server 启动 RPC 服务器
@@ -120,101 +122,76 @@ func (m *Master) server() {
 	go http.Serve(l, nil)
 }
 
+func makeWorkerClient(workerId string) *rpc.Client {
+	sockname := workerSock(workerId)
+	c, err := rpc.DialHTTP("unix", sockname)
+	if err != nil {
+		log.Fatal("dialing:", err)
+	}
+	return c
+}
+
 // RegisterWorker 注册新的 Worker
 // 当 Worker 启动时调用此方法向 Master 注册
 func (m *Master) RegisterWorker(args *RegisterWorkerRequest, reply *RegisterWorkerResponse) error {
-	// m.mu.Lock()         // 加锁保证线程安全
-	// defer m.mu.Unlock() // 函数结束时解锁
-
-	// 生成唯一的 Worker ID，包含主机名、端口和时间戳
-	workerId := fmt.Sprintf("%s:%d-%d", args.Hostname, args.Port, time.Now().UnixNano())
-
 	// 创建新的 Worker 实例
 	worker := WorkerStruct{
-		Id:       workerId,
+		Id:       args.WorkerId,
 		Hostname: args.Hostname,
 		Port:     args.Port,
 		Tasks:    make([]Task, 0), // 初始化空任务列表
-		Status:   idle,            // 初始状态为空闲
+		Status:   Idle,            // 初始状态为空闲
+		RpcClient: makeWorkerClient(args.WorkerId), // 客户端
 	}
 
-	reply.WorkerId = workerId                        // 返回生成的 Worker ID
-	m.Workers = append(m.Workers, worker)            // 将新 Worker 添加到列表
-	log.Printf("注册新 Worker: %s", workerId)        // 记录日志
-	return nil
-}
-
-// GetTask Worker 获取任务
-// Worker 调用此方法从 Master 获取待执行的任务
-func (m *Master) GetTask(args *GetTaskRequest, reply *GetTaskResponse) error {
-	// m.mu.Lock()         // 加锁保证线程安全
-	// defer m.mu.Unlock() // 函数结束时解锁
-
-	// 遍历任务列表，查找待执行的任务
-	for i := range m.Tasks {
-		task := &m.Tasks[i] // 获取任务指针以便修改
-
-		// 检查任务是否为待执行状态
-		if task.Status == TaskStatusPending {
-			// 更新任务状态为执行中
-			task.Status = TaskStatusInProgress
-			task.WorkerId = args.WorkerId // 分配给请求的 Worker
-			task.StartTime = time.Now()   // 记录开始时间
-
-			// 将任务信息返回给 Worker
-			reply.TaskInfo = *task
-			reply.HasTask = true // 标记有可用任务
-			reply.NReduce = m.nReduce
-
-			log.Printf("分配任务 %d 给 Worker %s", task.Number, args.WorkerId)
-			return nil
-		}
-	}
-
-	// 没有找到可用任务
-	reply.HasTask = false
-	log.Printf("没有可用任务分配给 Worker %s", args.WorkerId)
+	// reply.WorkerId = workerId                        // 返回生成的 Worker ID
+	m.mu.Lock()         // 加锁保证线程安全
+	defer m.mu.Unlock() // 函数结束时解锁
+	// m.Workers = append(m.Workers, worker)            // 将新 Worker 添加到列表
+	m.IdleWorkers <- worker // 空闲worker
+	m.WorkerMap[args.WorkerId] = worker
+	log.Printf("注册新 Worker: %s", args.WorkerId)        // 记录日志
 	return nil
 }
 
 // 通知 Master， Worker 任务完成
 func (m *Master) WorkerCompleted(args *WorkerCompletedRequest, reply *WorkerCompletedResponse) error {
-	// m.mu.Lock()         // 加锁保证线程安全
-	// defer m.mu.Unlock() // 函数结束时解锁
+	m.mu.Lock()         // 加锁保证线程安全
+	defer m.mu.Unlock() // 函数结束时解锁
 
-	// 查找对应 Worker 并更新状态
-	for i := range m.Workers {
-		worker := &m.Workers[i]
-		if (worker.Id == args.WorkerId) {
-			// 修改worker的状态
-			worker.Status = idle
+	// 更新完成任务数量
+	m.completedTaskCount++
+
+	// 更新任务状态
+	task := m.TaskMap[args.TaskNumber]
+	task.Status = TaskStatusCompleted
+	task.EndTime = time.Now()
+
+	// 更新worker状态
+	worker := m.WorkerMap[args.WorkerId]
+	worker.Status = Idle
+	m.IdleWorkers <- worker
+
+	// 如果完成的是 map 任务，更新对应的 reduce 任务
+	if (task.Type == MapTask) {
+		for i,_ := range m.reduceTasks {
+			reduceTask := &m.reduceTasks[i]
+			// 生成对应的文件名并更新
+			filename := fmt.Sprintf("mr-%d-%d", args.TaskNumber, i)
+			log.Printf("生成文件名:%s", filename)
+			reduceTask.Filename = append(reduceTask.Filename, filename)
 		}
 	}
-
-	// 查找对应的task 并更新状态
-	for i := range m.Tasks {
-		task := &m.Tasks[i]
-		if (task.Number == args.TaskNumber) {
-			// 更新状态
-			task.Status = TaskStatusCompleted
-			task.EndTime = time.Now()
-			// 如果完成的是 map 任务，更新对应的 reduce 任务
-			if (task.Type == MapTask) {
-				reduceIndex := 0
-				for j := range m.Tasks {
-					reduceTask := &m.Tasks[j]
-					if (reduceTask.Type == ReduceTask) {
-						// 生成对应的文件名
-						filename := fmt.Sprintf("mr-%d-%d", task.Number, reduceIndex)
-						// 更新
-						reduceTask.Filename = append(reduceTask.Filename, task.Filename[reduceIndex]);
-						reduceIndex++;
-					}
-				}
-			}
+	mapTaskCount := len(m.TaskMap) - m.nReduce
+	if (mapTaskCount == m.completedTaskCount) {
+		// 可以分配reduce任务
+		for _, reduceTask:= range m.reduceTasks {
+			log.Printf("reduce task:%v", reduceTask)
+			m.PenddingTasks <- reduceTask
 		}
 	}
 	reply.Success = true
+	m.checkCompleted()
 	return nil
 }
 
@@ -223,33 +200,15 @@ func (m *Master) WorkerCompleted(args *WorkerCompletedRequest, reply *WorkerComp
 // if the entire job has finished.
 //
 func (m *Master) Done() bool {
-	ret := false
 	// Your code here.
-	return ret;
+	return m.completedTaskCount == len(m.TaskMap);
 }
 
-// TaskCompleted 标记任务完成
-// Worker 完成任务后调用此方法通知 Master
-// func (m *Master) TaskCompleted(args *TaskCompletedRequest, reply *TaskCompletedResponse) error {
-// 	// m.mu.Lock()         // 加锁保证线程安全
-// 	// defer m.mu.Unlock() // 函数结束时解锁
-
-// 	// 查找对应的任务并更新状态
-// 	for i := range m.Tasks {
-// 		task := &m.Tasks[i]
-// 		if task.Number == args.TaskNumber && task.WorkerId == args.WorkerId {
-// 			task.Status = TaskStatusCompleted // 标记任务为已完成
-// 			log.Printf("任务 %d 已完成，Worker: %s", task.Number, args.WorkerId)
-
-// 			// 检查是否所有任务都已完成
-// 			m.checkAllTasksCompleted()
-// 			return nil
-// 		}
-// 	}
-
-// 	log.Printf("未找到任务 %d，Worker: %s", args.TaskNumber, args.WorkerId)
-// 	return fmt.Errorf("task not found")
-// }
+func (m *Master) checkCompleted() {
+	if m.completedTaskCount == len(m.TaskMap) {
+		m.isDone <- true
+	}
+}
 
 //
 // create a Master.
@@ -261,46 +220,108 @@ func (m *Master) Done() bool {
 func MakeMaster(files []string, nReduce int) *Master {
 	// 创建 Master 实例
 	m := Master{
-		Workers: make([]WorkerStruct, 0), // 初始化空 Worker 列表
-		Tasks:   make([]Task, 0),   // 初始化空任务列表
 		nReduce: nReduce,           // 设置 Reduce 任务数量
-		MaxTaskNumber: 0,			// 初始化最大任务编号
-		// done:    false,             // 初始状态为未完成
+		IdleWorkers: make(chan WorkerStruct, 100), // 空闲Worker
+		PenddingTasks: make(chan Task, 100), //待执行的任务
+		reduceTasks: make([]Task, nReduce), //reduce task
+		completedTaskCount: 0,
+		WorkerMap: make(map[string]WorkerStruct, 100),
+		TaskMap: make(map[int]Task, 100),
+		isDone: make(chan bool, 0),
 	}
 
 	// 为每个输入文件创建 Map 任务
+	maxTaskNumber := 0
 	for _, filename := range files {
 		task := Task{
-			Number:   m.MaxTaskNumber,        // 分配任务编号
+			Number:   maxTaskNumber,        // 分配任务编号
 			Filename: []string{filename},          // 设置文件名
 			Status:   TaskStatusPending, // 初始状态为待执行
 			Type:     MapTask,           // 设置为 Map 任务类型
 		}
-		m.Tasks = append(m.Tasks, task) // 添加到任务列表
-		m.MaxTaskNumber++                    // 递增任务编号
-
-		log.Printf("创建 Map 任务 %d: %s", task.Number, filename)
+		m.PenddingTasks <- task // 添加到任务列表
+		m.TaskMap[maxTaskNumber] = task
+		maxTaskNumber++                    // 递增任务编号
+		// log.Printf("创建 Map 任务 %d: %s", task.Number, filename)
 	}
 
 	// 创建 Reduce 任务
 	for i := 0; i < nReduce; i++ {
 		task := Task{
 			Filename: make([]string, 0),
-			Number: taskNumber,        // 分配任务编号
+			Number: maxTaskNumber,        // 分配任务编号
 			Status: TaskStatusPending, // 初始状态为待执行
 			Type:   ReduceTask,        // 设置为 Reduce 任务类型
 		}
-		m.Tasks = append(m.Tasks, task) // 添加到任务列表
-		taskNumber++                    // 递增任务编号
-
-		log.Printf("创建 Reduce 任务 %d", task.Number)
+		m.reduceTasks[i] = task // 添加到任务列表
+		m.TaskMap[maxTaskNumber] = task
+		maxTaskNumber++                    // 递增任务编号
+		log.Printf("创建 Reduce 任务 %v", task)
 	}
 
 	// 启动 RPC 服务器
 	m.server()
-	log.Printf("MapReduce Master 服务器启动，共 %d 个任务", len(m.Tasks))
+
+	// 分配任务
+	go m.taskSchdule()
+	// log.Printf("MapReduce Master 服务器启动，共 %d 个任务", len(m.Tasks))
 
 	return &m // 返回 Master 实例指针
+}
+
+
+/**
+* 分配任务
+*/
+func (m *Master) taskSchdule() {
+	// 找到空闲的worker
+	for {
+		log.Printf("调度器开始调度")
+		select {
+		case task := <- m.PenddingTasks:
+			log.Printf("空闲任务:%v", task)
+			worker := <- m.IdleWorkers
+			log.Printf("空闲worker: %v", worker)
+			// 更新任务状态
+			temptask := m.TaskMap[task.Number]
+			temptask.Status = TaskStatusInProgress
+			temptask.StartTime = time.Now()
+			temptask.WorkerId = worker.Id
+			// 任务分配给worker
+			go m.assignTask(task, worker)
+		case <- m.isDone:
+			// 退出
+			log.Printf("所有任务已完成")
+			// 通知所有worker退出
+			m.notifyWorkerExit()
+			return
+		}
+	}
+}
+
+func (m *Master) assignTask(task Task, worker WorkerStruct) {
+	// declare an argument structure.
+	args := AssignTaskRequest{}
+
+	// fill in the argument(s).
+	args.TaskInfo = task
+	args.NReduce = m.nReduce
+
+	// declare a reply structure.
+	reply := AssignTaskResponse{}
+	worker.call("WorkerNode.ReceiveTask", &args, &reply)
+}
+
+func (m *Master) notifyWorkerExit() {
+	for _, worker := range m.WorkerMap {
+		log.Printf("通知worker退出： %v", worker)
+		// declare an argument structure.
+		args := WorkerExitRequest{}
+
+		// declare a reply structure.
+		reply := WorkerExitResponse{}
+		worker.call("WorkerNode.Exit", &args, &reply)
+	}
 }
 
 // split 将文件分割成多个块
@@ -353,4 +374,20 @@ func split(filename string) []string {
 	}
 
 	return res
+}
+
+
+//
+// send an RPC request to the master, wait for the response.
+// usually returns true.
+// returns false if something goes wrong.
+//
+func (workerStruct WorkerStruct) call(rpcname string, args interface{}, reply interface{}) bool {
+	err := workerStruct.RpcClient.Call(rpcname, args, reply)
+	if err == nil {
+		return true
+	}
+
+	fmt.Println(err)
+	return false
 }

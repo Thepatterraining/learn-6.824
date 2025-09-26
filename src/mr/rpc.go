@@ -26,11 +26,13 @@ type ExampleReply struct {
 type RegisterWorkerRequest struct {
 	Hostname string // Worker 主机名
 	Port     int    // Worker 端口号
+	WorkerId string // 分配给 Worker 的唯一 ID
 }
 
 // RegisterWorkerResponse 注册 Worker 响应结构
 type RegisterWorkerResponse struct {
 	WorkerId string // 分配给 Worker 的唯一 ID
+	Success bool // 是否注册成功
 }
 
 // GetTaskRequest Worker 获取任务请求结构
@@ -43,6 +45,7 @@ type GetTaskResponse struct {
 	HasTask  bool // 是否有可用任务
 	TaskInfo Task // 任务详细信息
 	NReduce  int  // 任务对应的 Reduce 任务数量
+	Status   int // 1 等待 2 退出
 }
 
 // TaskCompletedRequest 任务完成通知请求结构
@@ -59,9 +62,28 @@ type TaskCompletedResponse struct {
 type WorkerCompletedRequest struct {
 	WorkerId string
 	TaskNumber int
+	Status	 WorkerStatus // 任务完成状态
+	TaskType TaskType
 }
 
 type WorkerCompletedResponse struct {
+	Success bool
+}
+
+type AssignTaskRequest struct {
+	TaskInfo Task // 任务详细信息
+	NReduce  int  // 任务对应的 Reduce 任务数量
+}
+
+type AssignTaskResponse struct {
+	Success bool
+}
+
+type WorkerExitRequest struct {
+
+}
+
+type WorkerExitResponse struct {
 	Success bool
 }
 
@@ -74,5 +96,11 @@ type WorkerCompletedResponse struct {
 func masterSock() string {
 	s := "/var/tmp/824-mr-"
 	s += strconv.Itoa(os.Getuid())
+	return s
+}
+
+func workerSock(workerId string) string {
+	s := "/var/tmp/824-mr-"
+	s += workerId
 	return s
 }

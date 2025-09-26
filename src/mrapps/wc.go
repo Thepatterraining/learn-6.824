@@ -6,10 +6,12 @@ package main
 // go build -buildmode=plugin wc.go
 //
 
-import "../mr"
-import "unicode"
-import "strings"
-import "strconv"
+import (
+	"learn-6.824/src/mr" // 使用模块路径
+	"strconv"            // 字符串转换
+	"strings"            // 字符串处理
+	"unicode"            // Unicode 字符处理
+)
 
 //
 // The map function is called once for each file of input. The first

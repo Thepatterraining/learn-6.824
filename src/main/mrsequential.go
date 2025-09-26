@@ -7,7 +7,7 @@ package main
 //
 
 import "fmt"
-import "../mr"        // 引用了上层目录下的 mr 包，通常含有 KeyValue 定义等
+import "learn-6.824/src/mr" // 引用了上层目录下的 mr 包，通常含有 KeyValue 定义等
 import "plugin"       // 动态加载 .so 插件
 import "os"
 import "log"
