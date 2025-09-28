@@ -98,10 +98,14 @@ type Master struct {
 	nReduce int      // Reduce 任务数量
 	mu      sync.Mutex // 互斥锁，保证线程安全
 	completedTaskCount int // 完成任务数量
-	reduceTasks []Task // reduce 任务
-	WorkerMap map[string]WorkerStruct
-	TaskMap map[int]Task
+	mapTaskCount int // Map任务总数
+	completedMapTaskCount int // 完成的Map任务数量
+	reduceTasks []*Task // reduce 任务
+	WorkerMap map[string]*WorkerStruct
+	TaskMap map[int]*Task
 	isDone chan bool
+	healthDone chan bool
+	listener net.Listener
 }
 
 // server 启动 RPC 服务器
@@ -118,6 +122,7 @@ func (m *Master) server() {
 		log.Fatal("listen error:", e) // 监听失败则退出程序
 	}
 
+	m.listener = l
 	// 在新的 goroutine 中启动 HTTP 服务
 	go http.Serve(l, nil)
 }
@@ -149,7 +154,7 @@ func (m *Master) RegisterWorker(args *RegisterWorkerRequest, reply *RegisterWork
 	defer m.mu.Unlock() // 函数结束时解锁
 	// m.Workers = append(m.Workers, worker)            // 将新 Worker 添加到列表
 	m.IdleWorkers <- worker // 空闲worker
-	m.WorkerMap[args.WorkerId] = worker
+	m.WorkerMap[args.WorkerId] = &worker
 	log.Printf("注册新 Worker: %s", args.WorkerId)        // 记录日志
 	return nil
 }
@@ -170,24 +175,29 @@ func (m *Master) WorkerCompleted(args *WorkerCompletedRequest, reply *WorkerComp
 	// 更新worker状态
 	worker := m.WorkerMap[args.WorkerId]
 	worker.Status = Idle
-	m.IdleWorkers <- worker
-
+	worker.Tasks = make([]Task, 0)
+	m.IdleWorkers <- *worker
+	log.Printf("worker:%v 完成了任务:%v", *worker, *task)
 	// 如果完成的是 map 任务，更新对应的 reduce 任务
 	if (task.Type == MapTask) {
-		for i,_ := range m.reduceTasks {
-			reduceTask := &m.reduceTasks[i]
+		m.completedMapTaskCount++
+		for i := range m.reduceTasks {
+			reduceTask := m.reduceTasks[i]
 			// 生成对应的文件名并更新
 			filename := fmt.Sprintf("mr-%d-%d", args.TaskNumber, i)
-			log.Printf("生成文件名:%s", filename)
+			// log.Printf("生成文件名:%s", filename)
 			reduceTask.Filename = append(reduceTask.Filename, filename)
+			m.reduceTasks[i] = reduceTask // 重要：更新slice中的任务
 		}
-	}
-	mapTaskCount := len(m.TaskMap) - m.nReduce
-	if (mapTaskCount == m.completedTaskCount) {
-		// 可以分配reduce任务
-		for _, reduceTask:= range m.reduceTasks {
-			log.Printf("reduce task:%v", reduceTask)
-			m.PenddingTasks <- reduceTask
+
+		// 检查所有Map任务是否完成
+		if (m.completedMapTaskCount == m.mapTaskCount) {
+			log.Printf("所有Map任务完成，开始分配Reduce任务")
+			// 可以分配reduce任务
+			for _, reduceTask:= range m.reduceTasks {
+				log.Printf("reduce task:%v", reduceTask)
+				m.PenddingTasks <- *reduceTask
+			}
 		}
 	}
 	reply.Success = true
@@ -223,11 +233,14 @@ func MakeMaster(files []string, nReduce int) *Master {
 		nReduce: nReduce,           // 设置 Reduce 任务数量
 		IdleWorkers: make(chan WorkerStruct, 100), // 空闲Worker
 		PenddingTasks: make(chan Task, 100), //待执行的任务
-		reduceTasks: make([]Task, nReduce), //reduce task
+		reduceTasks: make([]*Task, nReduce), //reduce task
 		completedTaskCount: 0,
-		WorkerMap: make(map[string]WorkerStruct, 100),
-		TaskMap: make(map[int]Task, 100),
+		mapTaskCount: len(files), // Map任务总数等于输入文件数
+		completedMapTaskCount: 0,
+		WorkerMap: make(map[string]*WorkerStruct, 100),
+		TaskMap: make(map[int]*Task, 100),
 		isDone: make(chan bool, 0),
+		healthDone: make(chan bool, 0),
 	}
 
 	// 为每个输入文件创建 Map 任务
@@ -240,7 +253,7 @@ func MakeMaster(files []string, nReduce int) *Master {
 			Type:     MapTask,           // 设置为 Map 任务类型
 		}
 		m.PenddingTasks <- task // 添加到任务列表
-		m.TaskMap[maxTaskNumber] = task
+		m.TaskMap[maxTaskNumber] = &task
 		maxTaskNumber++                    // 递增任务编号
 		// log.Printf("创建 Map 任务 %d: %s", task.Number, filename)
 	}
@@ -253,10 +266,10 @@ func MakeMaster(files []string, nReduce int) *Master {
 			Status: TaskStatusPending, // 初始状态为待执行
 			Type:   ReduceTask,        // 设置为 Reduce 任务类型
 		}
-		m.reduceTasks[i] = task // 添加到任务列表
-		m.TaskMap[maxTaskNumber] = task
+		m.reduceTasks[i] = &task // 添加到任务列表
+		m.TaskMap[maxTaskNumber] = &task
 		maxTaskNumber++                    // 递增任务编号
-		log.Printf("创建 Reduce 任务 %v", task)
+		// log.Printf("创建 Reduce 任务 %v", task)
 	}
 
 	// 启动 RPC 服务器
@@ -266,7 +279,57 @@ func MakeMaster(files []string, nReduce int) *Master {
 	go m.taskSchdule()
 	// log.Printf("MapReduce Master 服务器启动，共 %d 个任务", len(m.Tasks))
 
+	// 健康检查
+	go m.health()
+
 	return &m // 返回 Master 实例指针
+}
+
+func (m *Master) health() {
+	// 每10s ping一次 worker
+	ticker := time.NewTicker(10 * time.Second)
+	defer ticker.Stop()
+
+	for {
+		select {
+		case <-ticker.C:
+			m.mu.Lock()
+			for i, worker := range m.WorkerMap {
+				log.Printf("worker健康检查： %v", worker)
+				// declare an argument structure.
+				args := WorkerHealthRequest{}
+
+				// declare a reply structure.
+				reply := WorkerHealthResponse{}
+				if (!worker.call("WorkerNode.Health", &args, &reply)) {
+					// 将worker执行的任务重新放入待执行队列
+					for _, task := range worker.Tasks {
+						// 重置任务状态
+						taskInMap, exists := m.TaskMap[task.Number]
+						if exists {
+							taskInMap.Status = TaskStatusPending
+							taskInMap.WorkerId = ""
+							// m.TaskMap[task.Number] = taskInMap
+						}
+						// 重新加入待执行队列
+						m.PenddingTasks <- task
+					}
+
+					// 清空worker的任务列表
+					worker.Tasks = make([]Task, 0)
+					// 关闭worker链接
+					worker.RpcClient.Close()
+					delete(m.WorkerMap, i)
+					// m.WorkerMap[workerId] = worker // 更新map中的worker
+				}
+			}
+			m.mu.Unlock()
+		case <-m.healthDone:
+			// 收到完成信号，退出健康检查
+			log.Printf("健康检查器退出")
+			return
+		}
+	}
 }
 
 
@@ -287,16 +350,47 @@ func (m *Master) taskSchdule() {
 			temptask.Status = TaskStatusInProgress
 			temptask.StartTime = time.Now()
 			temptask.WorkerId = worker.Id
+			// 更新worker
+			tempWorker := m.WorkerMap[worker.Id]
+			tempWorker.Tasks = append(worker.Tasks, *temptask)
+			tempWorker.Status = inProgress
 			// 任务分配给worker
 			go m.assignTask(task, worker)
 		case <- m.isDone:
 			// 退出
 			log.Printf("所有任务已完成")
-			// 通知所有worker退出
-			m.notifyWorkerExit()
+			m.Exit()
 			return
 		}
 	}
+}
+
+func(m *Master) Exit() {
+	log.Printf("退出master")
+	// 通知所有worker退出
+	m.notifyWorkerExit()
+	// 2. 停止健康检查协程
+    m.healthDone <- true
+
+	// 3. 关闭RPC服务器
+	if m.listener != nil {
+		m.listener.Close()
+		// log.Printf("RPC服务器已关闭")
+	}
+
+	// 4. 清理socket文件
+	sockname := masterSock()
+	os.Remove(sockname)
+	// log.Printf("Socket文件已清理")
+
+	// 5. 关闭所有worker RPC连接
+	for _, worker := range m.WorkerMap {
+		if worker.RpcClient != nil {
+			worker.RpcClient.Close()
+		}
+	}
+
+	// log.Printf("所有清理操作完成")
 }
 
 func (m *Master) assignTask(task Task, worker WorkerStruct) {

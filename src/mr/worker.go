@@ -46,6 +46,7 @@ type WorkerNode struct {
 	workerId string //
 	task chan Task // 等待执行的任务
 	NReduce int
+	listener net.Listener
 }
 
 // server 启动 RPC 服务器
@@ -62,6 +63,7 @@ func (worker *WorkerNode) server() {
 		log.Fatal("listen error:", e) // 监听失败则退出程序
 	}
 
+	worker.listener = l
 	// 在新的 goroutine 中启动 HTTP 服务
 	go http.Serve(l, nil)
 }
@@ -70,6 +72,11 @@ func (worker *WorkerNode) ReceiveTask(args *AssignTaskRequest, reply *AssignTask
 	log.Printf("接受到任务:%v",args.TaskInfo)
 	worker.task <- args.TaskInfo
 	worker.NReduce = args.NReduce
+	reply.Success = true
+	return nil
+}
+
+func(worker *WorkerNode) Health(args *WorkerHealthRequest, reply *WorkerHealthResponse) error {
 	reply.Success = true
 	return nil
 }
@@ -85,6 +92,23 @@ func (worker *WorkerNode) Exit(args *WorkerExitRequest, reply *WorkerExitRespons
 	log.Printf("退出任务已发送")
 	reply.Success = true
 	return nil
+}
+
+func (worker *WorkerNode) Clean() {
+	// 3. 关闭RPC服务器
+	if worker.listener != nil {
+		worker.listener.Close()
+		// log.Printf("RPC服务器已关闭")
+	}
+
+	// 4. 清理socket文件
+	sockname := workerSock(worker.workerId)
+	os.Remove(sockname)
+	// log.Printf("Socket文件已清理")
+
+	// 5. 关闭所有worker RPC连接
+	worker.masterClient.Close()
+	// log.Printf("所有清理操作完成")
 }
 
 //
@@ -118,6 +142,7 @@ func Worker(mapf func(string, string) []KeyValue,
 		// 检查是否为退出任务
 		if task.Type == ExitTask {
 			log.Printf("收到退出任务，worker准备退出")
+			worker.Clean()
 			return
 		}
 
@@ -212,11 +237,11 @@ func execMap(task Task, mapf func(string, string) []KeyValue, nReduce int) {
 	// 先创建 nReduce 个中间文件
 	intermediateFiles := make([]*os.File, nReduce)
 	for i := 0; i < nReduce; i++ {
-		filename := fmt.Sprintf("mr-%d-%d", task.Number, i)
-		intermediateFile, err := os.Create(filename)
+		intermediateFile, err := ioutil.TempFile("", "prefix-")
+		// intermediateFile, err := os.Create(filename)
 		defer intermediateFile.Close()
 		if err != nil {
-			log.Fatalf("无法创建中间文件 %s: %v", filename, err)
+			log.Fatalf("无法创建中间文件: %v", err)
 		}
 		intermediateFiles[i] = intermediateFile
 	}
@@ -231,8 +256,13 @@ func execMap(task Task, mapf func(string, string) []KeyValue, nReduce int) {
 			log.Fatalf("写入中间文件失败: %v", err)
 		}
 	}
+	
+	// 重命名临时文件
+	for i, tempFile := range intermediateFiles {
+		filename := fmt.Sprintf("mr-%d-%d", task.Number, i)
+		os.Rename(tempFile.Name(), filename)
+	}
 	log.Printf("Map 任务 %d 完成，生成了 %d 个中间文件\n", task.Number, nReduce)
-
 }
 
 func readFile(filename string) string {
@@ -248,29 +278,6 @@ func readFile(filename string) string {
 	}
 	return string(content)
 }
-
-//
-// example function to show how to make an RPC call to the master.
-//
-// the RPC argument and reply types are defined in rpc.go.
-//
-// func CallExample() {
-
-// 	// declare an argument structure.
-// 	args := ExampleArgs{}
-
-// 	// fill in the argument(s).
-// 	args.X = 99
-
-// 	// declare a reply structure.
-// 	reply := ExampleReply{}
-
-// 	// send the RPC request, wait for the reply.
-// 	call("Master.Example", &args, &reply)
-
-// 	// reply.Y should be 100.
-// 	fmt.Printf("reply.Y %v\n", reply.Y)
-// }
 
 func (worker WorkerNode) register() {
 
@@ -291,28 +298,6 @@ func (worker WorkerNode) register() {
 	// reply.Y should be 100.
 	// fmt.Printf("reply.WorkerId %v\n", reply.WorkerId)
 }
-
-// func getTask(workerId string) (Task, int, int) {
-
-// 	// declare an argument structure.
-// 	args := GetTaskRequest{}
-
-// 	// fill in the argument(s).
-// 	args.WorkerId = workerId
-
-// 	// declare a reply structure.
-// 	reply := GetTaskResponse{}
-
-// 	// send the RPC request, wait for the reply.
-// 	call("Master.GetTask", &args, &reply)
-
-// 	if (reply.HasTask) {
-// 		// reply.Y should be 100.
-// 		// fmt.Printf("reply.TaskInfo.WorkerId %v\n", reply.TaskInfo.WorkerId)
-// 		return reply.TaskInfo, reply.NReduce, reply.Status
-// 	}
-// 	return Task{}, reply.NReduce, reply.Status
-// }
 
 func (worker WorkerNode) notifyTaskCompleted(workerId string, taskNumber int, status WorkerStatus, taskType TaskType) {
 	// declare an argument structure.
@@ -351,15 +336,6 @@ func makeMasterClient() *rpc.Client {
 // returns false if something goes wrong.
 //
 func (worker WorkerNode) call(rpcname string, args interface{}, reply interface{}) bool {
-	// c, err := rpc.DialHTTP("tcp", "127.0.0.1"+":1234")
-	// sockname := masterSock()
-	// c, err := rpc.DialHTTP("unix", sockname)
-	// if err != nil {
-	// 	log.Fatal("dialing:", err)
-	// }
-	// defer c.Close()
-
-
 	err := worker.masterClient.Call(rpcname, args, reply)
 	if err == nil {
 		return true

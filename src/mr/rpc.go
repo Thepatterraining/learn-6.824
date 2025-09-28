@@ -87,6 +87,14 @@ type WorkerExitResponse struct {
 	Success bool
 }
 
+type WorkerHealthRequest struct {
+
+}
+
+type WorkerHealthResponse struct {
+	Success bool
+}
+
 // Add your RPC definitions here.
 
 // Cook up a unique-ish UNIX-domain socket name

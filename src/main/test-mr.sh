@@ -15,7 +15,7 @@ mkdir mr-tmp || exit 1
 cd mr-tmp || exit 1
 rm -f mr-*
 
-# make sure software is freshly built.
+# # make sure software is freshly built.
 (cd ../../mrapps && go build $RACE -buildmode=plugin wc.go) || exit 1
 (cd ../../mrapps && go build $RACE -buildmode=plugin indexer.go) || exit 1
 (cd ../../mrapps && go build $RACE -buildmode=plugin mtiming.go) || exit 1
@@ -202,9 +202,9 @@ else
   failed_any=1
 fi
 
-# if [ $failed_any -eq 0 ]; then
-#     echo '***' PASSED ALL TESTS
-# else
-#     echo '***' FAILED SOME TESTS
-#     exit 1
-# fi
+if [ $failed_any -eq 0 ]; then
+    echo '***' PASSED ALL TESTS
+else
+    echo '***' FAILED SOME TESTS
+    exit 1
+fi
