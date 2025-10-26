@@ -1,454 +1,307 @@
-2025/10/26 20:00:09 raft 0 started
-2025/10/26 20:00:09 raft 0 since 171.386µs  Sleeping for timeout 390.002534ms
-2025/10/26 20:00:09 raft 1 started
-2025/10/26 20:00:09 raft 2 started
-2025/10/26 20:00:09 raft 1 since 40.985µs  Sleeping for timeout 299.148709ms
-Test (2A): initial election ...
-2025/10/26 20:00:09 raft 2 since 57.872µs  Sleeping for timeout 221.930542ms
-2025/10/26 20:00:10 raft 2 since 222.492151ms  Sleeping for timeout 221.930542ms
-2025/10/26 20:00:10 raft 2 超时选举
-2025/10/26 20:00:10 raft 2 变成候选人开始选举 for term 1
-2025/10/26 20:00:10 raft 2 票数 1 多数节点 2
-2025/10/26 20:00:10 raft 1 received RequestVote from 2 for term 1, args:&{1 2 0 0},
-2025/10/26 20:00:10 raft 1 检查日志新旧 for 2 for term 1
-2025/10/26 20:00:10 raft 1 投票给 2 for term 1
-2025/10/26 20:00:10 raft 0 received RequestVote from 2 for term 1, args:&{1 2 0 0},
-2025/10/26 20:00:10 raft 0 检查日志新旧 for 2 for term 1
-2025/10/26 20:00:10 raft 0 投票给 2 for term 1
-2025/10/26 20:00:10 raft 2 处理投票返回 for term 1 reply:{1 true}
-2025/10/26 20:00:10 raft 2 received vote for term 1
-2025/10/26 20:00:10 raft 2 当前票数 2
-2025/10/26 20:00:10 raft 2 处理投票返回 for term 1 reply:{1 true}
-2025/10/26 20:00:10 raft 2 开始发送心跳
-2025/10/26 20:00:10 raft 0 收到心跳 from 2 for term 1, args:&{1 2 0 0 [] 0}
-2025/10/26 20:00:10 raft 1 收到心跳 from 2 for term 1, args:&{1 2 0 0 [] 0}
-2025/10/26 20:00:10 raft 2 心跳返回 for raft 1 term 1 reply:{1 true}
-2025/10/26 20:00:10 raft 2 心跳返回 for raft 0 term 1 reply:{1 true}
-2025/10/26 20:00:10 raft 1 since 74.551652ms  Sleeping for timeout 299.148709ms
-2025/10/26 20:00:10 raft 2 开始发送心跳
-2025/10/26 20:00:10 raft 0 收到心跳 from 2 for term 1, args:&{1 2 0 0 [] 0}
-2025/10/26 20:00:10 raft 1 收到心跳 from 2 for term 1, args:&{1 2 0 0 [] 0}
-2025/10/26 20:00:10 raft 2 心跳返回 for raft 0 term 1 reply:{1 true}
-2025/10/26 20:00:10 raft 2 心跳返回 for raft 1 term 1 reply:{1 true}
-2025/10/26 20:00:10 raft 0 since 63.9129ms  Sleeping for timeout 390.002534ms
-2025/10/26 20:00:10 raft 2 开始发送心跳
-2025/10/26 20:00:10 raft 0 收到心跳 from 2 for term 1, args:&{1 2 0 0 [] 0}
-2025/10/26 20:00:10 raft 1 收到心跳 from 2 for term 1, args:&{1 2 0 0 [] 0}
-2025/10/26 20:00:10 raft 2 心跳返回 for raft 0 term 1 reply:{1 true}
-2025/10/26 20:00:10 raft 2 心跳返回 for raft 1 term 1 reply:{1 true}
-2025/10/26 20:00:10 raft 2 since 222.678772ms  Sleeping for timeout 221.930542ms
-2025/10/26 20:00:10 raft 2 超时选举
-2025/10/26 20:00:10 raft 2 开始发送心跳
-2025/10/26 20:00:10 raft 0 收到心跳 from 2 for term 1, args:&{1 2 0 0 [] 0}
-2025/10/26 20:00:10 raft 1 收到心跳 from 2 for term 1, args:&{1 2 0 0 [] 0}
-2025/10/26 20:00:10 raft 2 心跳返回 for raft 0 term 1 reply:{1 true}
-2025/10/26 20:00:10 raft 2 心跳返回 for raft 1 term 1 reply:{1 true}
-2025/10/26 20:00:10 raft 0 current term 1
-2025/10/26 20:00:10 raft 1 current term 1
-2025/10/26 20:00:10 raft 2 current term 1
-2025/10/26 20:00:10 raft 1 since 71.004197ms  Sleeping for timeout 299.148709ms
-2025/10/26 20:00:10 raft 2 开始发送心跳
-2025/10/26 20:00:10 raft 1 收到心跳 from 2 for term 1, args:&{1 2 0 0 [] 0}
-2025/10/26 20:00:10 raft 0 收到心跳 from 2 for term 1, args:&{1 2 0 0 [] 0}
-2025/10/26 20:00:10 raft 2 心跳返回 for raft 1 term 1 reply:{1 true}
-2025/10/26 20:00:10 raft 2 心跳返回 for raft 0 term 1 reply:{1 true}
-2025/10/26 20:00:10 raft 2 since 445.109247ms  Sleeping for timeout 221.930542ms
-2025/10/26 20:00:10 raft 2 超时选举
-2025/10/26 20:00:10 raft 2 开始发送心跳
-2025/10/26 20:00:10 raft 1 收到心跳 from 2 for term 1, args:&{1 2 0 0 [] 0}
-2025/10/26 20:00:10 raft 0 收到心跳 from 2 for term 1, args:&{1 2 0 0 [] 0}
-2025/10/26 20:00:10 raft 2 心跳返回 for raft 1 term 1 reply:{1 true}
-2025/10/26 20:00:10 raft 2 心跳返回 for raft 0 term 1 reply:{1 true}
-2025/10/26 20:00:10 raft 0 since 52.467474ms  Sleeping for timeout 390.002534ms
-2025/10/26 20:00:10 raft 2 开始发送心跳
-2025/10/26 20:00:10 raft 1 收到心跳 from 2 for term 1, args:&{1 2 0 0 [] 0}
-2025/10/26 20:00:10 raft 0 收到心跳 from 2 for term 1, args:&{1 2 0 0 [] 0}
-2025/10/26 20:00:10 raft 2 心跳返回 for raft 1 term 1 reply:{1 true}
-2025/10/26 20:00:10 raft 2 心跳返回 for raft 0 term 1 reply:{1 true}
-2025/10/26 20:00:10 raft 2 since 668.240973ms  Sleeping for timeout 221.930542ms
-2025/10/26 20:00:10 raft 2 超时选举
-2025/10/26 20:00:10 raft 1 since 70.406961ms  Sleeping for timeout 299.148709ms
-2025/10/26 20:00:10 raft 2 开始发送心跳
-2025/10/26 20:00:10 raft 1 收到心跳 from 2 for term 1, args:&{1 2 0 0 [] 0}
-2025/10/26 20:00:10 raft 2 心跳返回 for raft 1 term 1 reply:{1 true}
-2025/10/26 20:00:10 raft 0 收到心跳 from 2 for term 1, args:&{1 2 0 0 [] 0}
-2025/10/26 20:00:10 raft 2 心跳返回 for raft 0 term 1 reply:{1 true}
-2025/10/26 20:00:10 raft 2 开始发送心跳
-2025/10/26 20:00:10 raft 0 收到心跳 from 2 for term 1, args:&{1 2 0 0 [] 0}
-2025/10/26 20:00:10 raft 1 收到心跳 from 2 for term 1, args:&{1 2 0 0 [] 0}
-2025/10/26 20:00:10 raft 2 心跳返回 for raft 0 term 1 reply:{1 true}
-2025/10/26 20:00:10 raft 2 心跳返回 for raft 1 term 1 reply:{1 true}
-2025/10/26 20:00:10 raft 2 since 891.494136ms  Sleeping for timeout 221.930542ms
-2025/10/26 20:00:10 raft 2 超时选举
-2025/10/26 20:00:10 raft 2 开始发送心跳
-2025/10/26 20:00:10 raft 1 收到心跳 from 2 for term 1, args:&{1 2 0 0 [] 0}
-2025/10/26 20:00:10 raft 0 收到心跳 from 2 for term 1, args:&{1 2 0 0 [] 0}
-2025/10/26 20:00:10 raft 2 心跳返回 for raft 1 term 1 reply:{1 true}
-2025/10/26 20:00:10 raft 2 心跳返回 for raft 0 term 1 reply:{1 true}
-2025/10/26 20:00:10 raft 0 since 38.469886ms  Sleeping for timeout 390.002534ms
-2025/10/26 20:00:11 raft 1 since 66.216054ms  Sleeping for timeout 299.148709ms
-2025/10/26 20:00:11 raft 2 开始发送心跳
-2025/10/26 20:00:11 raft 0 收到心跳 from 2 for term 1, args:&{1 2 0 0 [] 0}
-2025/10/26 20:00:11 raft 1 收到心跳 from 2 for term 1, args:&{1 2 0 0 [] 0}
-2025/10/26 20:00:11 raft 2 心跳返回 for raft 1 term 1 reply:{1 true}
-2025/10/26 20:00:11 raft 2 心跳返回 for raft 0 term 1 reply:{1 true}
-2025/10/26 20:00:11 raft 2 开始发送心跳
-2025/10/26 20:00:11 raft 1 收到心跳 from 2 for term 1, args:&{1 2 0 0 [] 0}
-2025/10/26 20:00:11 raft 0 收到心跳 from 2 for term 1, args:&{1 2 0 0 [] 0}
-2025/10/26 20:00:11 raft 2 心跳返回 for raft 1 term 1 reply:{1 true}
-2025/10/26 20:00:11 raft 2 心跳返回 for raft 0 term 1 reply:{1 true}
-2025/10/26 20:00:11 raft 2 since 1.11406063s  Sleeping for timeout 221.930542ms
-2025/10/26 20:00:11 raft 2 超时选举
-2025/10/26 20:00:11 raft 2 开始发送心跳
-2025/10/26 20:00:11 raft 0 收到心跳 from 2 for term 1, args:&{1 2 0 0 [] 0}
-2025/10/26 20:00:11 raft 1 收到心跳 from 2 for term 1, args:&{1 2 0 0 [] 0}
-2025/10/26 20:00:11 raft 2 心跳返回 for raft 1 term 1 reply:{1 true}
-2025/10/26 20:00:11 raft 2 心跳返回 for raft 0 term 1 reply:{1 true}
-2025/10/26 20:00:11 raft 1 since 63.800676ms  Sleeping for timeout 299.148709ms
-2025/10/26 20:00:11 raft 2 开始发送心跳
-2025/10/26 20:00:11 raft 1 收到心跳 from 2 for term 1, args:&{1 2 0 0 [] 0}
-2025/10/26 20:00:11 raft 0 收到心跳 from 2 for term 1, args:&{1 2 0 0 [] 0}
-2025/10/26 20:00:11 raft 2 心跳返回 for raft 1 term 1 reply:{1 true}
-2025/10/26 20:00:11 raft 2 心跳返回 for raft 0 term 1 reply:{1 true}
-2025/10/26 20:00:11 raft 2 since 1.336963219s  Sleeping for timeout 221.930542ms
-2025/10/26 20:00:11 raft 2 超时选举
-2025/10/26 20:00:11 raft 0 since 28.932109ms  Sleeping for timeout 390.002534ms
-2025/10/26 20:00:11 raft 2 开始发送心跳
-2025/10/26 20:00:11 raft 1 收到心跳 from 2 for term 1, args:&{1 2 0 0 [] 0}
-2025/10/26 20:00:11 raft 0 收到心跳 from 2 for term 1, args:&{1 2 0 0 [] 0}
-2025/10/26 20:00:11 raft 2 心跳返回 for raft 1 term 1 reply:{1 true}
-2025/10/26 20:00:11 raft 2 心跳返回 for raft 0 term 1 reply:{1 true}
-2025/10/26 20:00:11 raft 2 开始发送心跳
-2025/10/26 20:00:11 raft 0 收到心跳 from 2 for term 1, args:&{1 2 0 0 [] 0}
-2025/10/26 20:00:11 raft 1 收到心跳 from 2 for term 1, args:&{1 2 0 0 [] 0}
-2025/10/26 20:00:11 raft 2 心跳返回 for raft 0 term 1 reply:{1 true}
-2025/10/26 20:00:11 raft 2 心跳返回 for raft 1 term 1 reply:{1 true}
-2025/10/26 20:00:11 raft 2 since 1.559479153s  Sleeping for timeout 221.930542ms
-2025/10/26 20:00:11 raft 2 超时选举
-2025/10/26 20:00:11 raft 1 since 63.094154ms  Sleeping for timeout 299.148709ms
-2025/10/26 20:00:11 raft 2 开始发送心跳
-2025/10/26 20:00:11 raft 0 收到心跳 from 2 for term 1, args:&{1 2 0 0 [] 0}
-2025/10/26 20:00:11 raft 1 收到心跳 from 2 for term 1, args:&{1 2 0 0 [] 0}
-2025/10/26 20:00:11 raft 2 心跳返回 for raft 0 term 1 reply:{1 true}
-2025/10/26 20:00:11 raft 2 心跳返回 for raft 1 term 1 reply:{1 true}
-2025/10/26 20:00:11 raft 2 开始发送心跳
-2025/10/26 20:00:11 raft 0 收到心跳 from 2 for term 1, args:&{1 2 0 0 [] 0}
-2025/10/26 20:00:11 raft 1 收到心跳 from 2 for term 1, args:&{1 2 0 0 [] 0}
-2025/10/26 20:00:11 raft 2 心跳返回 for raft 1 term 1 reply:{1 true}
-2025/10/26 20:00:11 raft 2 心跳返回 for raft 0 term 1 reply:{1 true}
-2025/10/26 20:00:11 raft 0 since 16.836529ms  Sleeping for timeout 390.002534ms
-2025/10/26 20:00:11 raft 2 since 1.78230847s  Sleeping for timeout 221.930542ms
-2025/10/26 20:00:11 raft 2 超时选举
-2025/10/26 20:00:11 raft 2 开始发送心跳
-2025/10/26 20:00:11 raft 0 收到心跳 from 2 for term 1, args:&{1 2 0 0 [] 0}
-2025/10/26 20:00:11 raft 1 收到心跳 from 2 for term 1, args:&{1 2 0 0 [] 0}
-2025/10/26 20:00:11 raft 2 心跳返回 for raft 0 term 1 reply:{1 true}
-2025/10/26 20:00:11 raft 2 心跳返回 for raft 1 term 1 reply:{1 true}
-2025/10/26 20:00:11 raft 1 since 60.10984ms  Sleeping for timeout 299.148709ms
-2025/10/26 20:00:11 raft 2 开始发送心跳
-2025/10/26 20:00:11 raft 0 收到心跳 from 2 for term 1, args:&{1 2 0 0 [] 0}
-2025/10/26 20:00:11 raft 1 收到心跳 from 2 for term 1, args:&{1 2 0 0 [] 0}
-2025/10/26 20:00:11 raft 2 心跳返回 for raft 1 term 1 reply:{1 true}
-2025/10/26 20:00:11 raft 2 心跳返回 for raft 0 term 1 reply:{1 true}
-2025/10/26 20:00:12 raft 2 since 2.004655047s  Sleeping for timeout 221.930542ms
-2025/10/26 20:00:12 raft 2 超时选举
-2025/10/26 20:00:12 raft 2 开始发送心跳
-2025/10/26 20:00:12 raft 1 收到心跳 from 2 for term 1, args:&{1 2 0 0 [] 0}
-2025/10/26 20:00:12 raft 0 收到心跳 from 2 for term 1, args:&{1 2 0 0 [] 0}
-2025/10/26 20:00:12 raft 2 心跳返回 for raft 1 term 1 reply:{1 true}
-2025/10/26 20:00:12 raft 2 心跳返回 for raft 0 term 1 reply:{1 true}
-2025/10/26 20:00:12 raft 2 开始发送心跳
-2025/10/26 20:00:12 raft 1 收到心跳 from 2 for term 1, args:&{1 2 0 0 [] 0}
-2025/10/26 20:00:12 raft 0 收到心跳 from 2 for term 1, args:&{1 2 0 0 [] 0}
-2025/10/26 20:00:12 raft 2 心跳返回 for raft 1 term 1 reply:{1 true}
-2025/10/26 20:00:12 raft 2 心跳返回 for raft 0 term 1 reply:{1 true}
-2025/10/26 20:00:12 raft 0 since 3.73311ms  Sleeping for timeout 390.002534ms
-2025/10/26 20:00:12 raft 1 since 58.335459ms  Sleeping for timeout 299.148709ms
-2025/10/26 20:00:12 raft 2 开始发送心跳
-2025/10/26 20:00:12 raft 0 收到心跳 from 2 for term 1, args:&{1 2 0 0 [] 0}
-2025/10/26 20:00:12 raft 1 收到心跳 from 2 for term 1, args:&{1 2 0 0 [] 0}
-2025/10/26 20:00:12 raft 2 心跳返回 for raft 0 term 1 reply:{1 true}
-2025/10/26 20:00:12 raft 2 心跳返回 for raft 1 term 1 reply:{1 true}
-2025/10/26 20:00:12 raft 2 since 2.227333022s  Sleeping for timeout 221.930542ms
-2025/10/26 20:00:12 raft 2 超时选举
-2025/10/26 20:00:12 raft 0 current term 1
-2025/10/26 20:00:12 raft 1 current term 1
-2025/10/26 20:00:12 raft 2 current term 1
-term2:12025/10/26 20:00:12 raft 2 开始发送心跳
-2025/10/26 20:00:12 raft 0 收到心跳 from 2 for term 1, args:&{1 2 0 0 [] 0}
-2025/10/26 20:00:12 raft 1 收到心跳 from 2 for term 1, args:&{1 2 0 0 [] 0}
-2025/10/26 20:00:12 raft 2 心跳返回 for raft 0 term 1 reply:{1 true}
-2025/10/26 20:00:12 raft 2 心跳返回 for raft 1 term 1 reply:{1 true}
-2025/10/26 20:00:12 raft 2 开始发送心跳
-2025/10/26 20:00:12 raft 1 收到心跳 from 2 for term 1, args:&{1 2 0 0 [] 0}
-2025/10/26 20:00:12 raft 0 收到心跳 from 2 for term 1, args:&{1 2 0 0 [] 0}
-2025/10/26 20:00:12 raft 2 心跳返回 for raft 1 term 1 reply:{1 true}
-2025/10/26 20:00:12 raft 2 心跳返回 for raft 0 term 1 reply:{1 true}
-2025/10/26 20:00:12 raft 2 since 2.450384472s  Sleeping for timeout 221.930542ms
-2025/10/26 20:00:12 raft 2 超时选举
-2025/10/26 20:00:12 raft 1 since 56.115703ms  Sleeping for timeout 299.148709ms
-2025/10/26 20:00:12 raft 0 since 93.361801ms  Sleeping for timeout 390.002534ms
-2025/10/26 20:00:12 raft 2 开始发送心跳
-2025/10/26 20:00:12 raft 0 收到心跳 from 2 for term 1, args:&{1 2 0 0 [] 0}
-2025/10/26 20:00:12 raft 1 收到心跳 from 2 for term 1, args:&{1 2 0 0 [] 0}
-2025/10/26 20:00:12 raft 2 心跳返回 for raft 0 term 1 reply:{1 true}
-2025/10/26 20:00:12 raft 2 心跳返回 for raft 1 term 1 reply:{1 true}
-2025/10/26 20:00:12 raft 2 开始发送心跳
-2025/10/26 20:00:12 raft 0 收到心跳 from 2 for term 1, args:&{1 2 0 0 [] 0}
-2025/10/26 20:00:12 raft 1 收到心跳 from 2 for term 1, args:&{1 2 0 0 [] 0}
-2025/10/26 20:00:12 raft 2 心跳返回 for raft 0 term 1 reply:{1 true}
-2025/10/26 20:00:12 raft 2 心跳返回 for raft 1 term 1 reply:{1 true}
-2025/10/26 20:00:12 raft 2 since 2.673067885s  Sleeping for timeout 221.930542ms
-2025/10/26 20:00:12 raft 2 超时选举
-2025/10/26 20:00:12 raft 2 开始发送心跳
-2025/10/26 20:00:12 raft 0 收到心跳 from 2 for term 1, args:&{1 2 0 0 [] 0}
-2025/10/26 20:00:12 raft 1 收到心跳 from 2 for term 1, args:&{1 2 0 0 [] 0}
-2025/10/26 20:00:12 raft 2 心跳返回 for raft 1 term 1 reply:{1 true}
-2025/10/26 20:00:12 raft 2 心跳返回 for raft 0 term 1 reply:{1 true}
-  ... Passed --   3.0  3   58   12078    0
-2025/10/26 20:00:12 raft 0 started
-2025/10/26 20:00:12 raft 1 started
-2025/10/26 20:00:12 raft 0 since 207.853µs  Sleeping for timeout 387.796431ms
-2025/10/26 20:00:12 raft 1 since 96.572µs  Sleeping for timeout 260.284772ms
-2025/10/26 20:00:12 raft 2 started
+2025/10/26 22:05:03 raft 0 started
+2025/10/26 22:05:03 raft 0 since 167.141µs  Sleeping for timeout 318.730805ms
+2025/10/26 22:05:03 raft 1 started
+2025/10/26 22:05:03 raft 1 since 24.091µs  Sleeping for timeout 381.031424ms
+2025/10/26 22:05:03 raft 2 started
 Test (2A): election after network failure ...
-2025/10/26 20:00:12 raft 2 since 206.758µs  Sleeping for timeout 287.367187ms
-2025/10/26 20:00:13 raft 1 since 261.318705ms  Sleeping for timeout 260.284772ms
-2025/10/26 20:00:13 raft 1 超时选举
-2025/10/26 20:00:13 raft 1 变成候选人开始选举 for term 1
-2025/10/26 20:00:13 raft 1 票数 1 多数节点 2
-2025/10/26 20:00:13 raft 0 received RequestVote from 1 for term 1, args:&{1 1 0 0},
-2025/10/26 20:00:13 raft 0 检查日志新旧 for 1 for term 1
-2025/10/26 20:00:13 raft 0 投票给 1 for term 1
-2025/10/26 20:00:13 raft 2 received RequestVote from 1 for term 1, args:&{1 1 0 0},
-2025/10/26 20:00:13 raft 2 检查日志新旧 for 1 for term 1
-2025/10/26 20:00:13 raft 2 投票给 1 for term 1
-2025/10/26 20:00:13 raft 1 处理投票返回 for term 1 reply:{1 true}
-2025/10/26 20:00:13 raft 1 received vote for term 1
-2025/10/26 20:00:13 raft 1 当前票数 2
-2025/10/26 20:00:13 raft 1 开始发送心跳
-2025/10/26 20:00:13 raft 1 处理投票返回 for term 1 reply:{1 true}
-2025/10/26 20:00:13 raft 0 收到心跳 from 1 for term 1, args:&{1 1 0 0 [] 0}
-2025/10/26 20:00:13 raft 2 收到心跳 from 1 for term 1, args:&{1 1 0 0 [] 0}
-2025/10/26 20:00:13 raft 1 心跳返回 for raft 0 term 1 reply:{1 true}
-2025/10/26 20:00:13 raft 1 心跳返回 for raft 2 term 1 reply:{1 true}
-2025/10/26 20:00:13 raft 2 since 25.576413ms  Sleeping for timeout 287.367187ms
-2025/10/26 20:00:13 raft 1 开始发送心跳
-2025/10/26 20:00:13 raft 0 收到心跳 from 1 for term 1, args:&{1 1 0 0 [] 0}
-2025/10/26 20:00:13 raft 1 心跳返回 for raft 0 term 1 reply:{1 true}
-2025/10/26 20:00:13 raft 2 收到心跳 from 1 for term 1, args:&{1 1 0 0 [] 0}
-2025/10/26 20:00:13 raft 1 心跳返回 for raft 2 term 1 reply:{1 true}
-2025/10/26 20:00:13 raft 0 since 24.94687ms  Sleeping for timeout 387.796431ms
-2025/10/26 20:00:13 raft 1 开始发送心跳
-2025/10/26 20:00:13 raft 2 收到心跳 from 1 for term 1, args:&{1 1 0 0 [] 0}
-2025/10/26 20:00:13 raft 0 收到心跳 from 1 for term 1, args:&{1 1 0 0 [] 0}
-2025/10/26 20:00:13 raft 1 心跳返回 for raft 0 term 1 reply:{1 true}
-2025/10/26 20:00:13 raft 1 心跳返回 for raft 2 term 1 reply:{1 true}
-2025/10/26 20:00:13 raft 1 since 261.083641ms  Sleeping for timeout 260.284772ms
-2025/10/26 20:00:13 raft 1 超时选举
-2025/10/26 20:00:13 raft 1 开始发送心跳
-2025/10/26 20:00:13 raft 2 since 112.705317ms  Sleeping for timeout 287.367187ms
-2025/10/26 20:00:13 raft 1 开始发送心跳
-2025/10/26 20:00:13 raft 1 开始发送心跳
-2025/10/26 20:00:13 raft 0 since 312.700684ms  Sleeping for timeout 387.796431ms
-2025/10/26 20:00:13 raft 1 since 521.997368ms  Sleeping for timeout 260.284772ms
-2025/10/26 20:00:13 raft 1 超时选举
-2025/10/26 20:00:13 raft 2 since 401.307231ms  Sleeping for timeout 287.367187ms
-2025/10/26 20:00:13 raft 2 超时选举
-2025/10/26 20:00:13 raft 2 变成候选人开始选举 for term 2
-2025/10/26 20:00:13 raft 2 票数 1 多数节点 2
-2025/10/26 20:00:13 raft 1 开始发送心跳
-2025/10/26 20:00:13 raft 0 received RequestVote from 2 for term 2, args:&{2 2 0 0},
-2025/10/26 20:00:13 raft 0 检查日志新旧 for 2 for term 2
-2025/10/26 20:00:13 raft 0 投票给 2 for term 2
-2025/10/26 20:00:13 raft 2 处理投票返回 for term 2 reply:{2 true}
-2025/10/26 20:00:13 raft 2 received vote for term 2
-2025/10/26 20:00:13 raft 2 当前票数 2
-2025/10/26 20:00:13 raft 2 开始发送心跳
-2025/10/26 20:00:13 raft 0 收到心跳 from 2 for term 2, args:&{2 2 0 0 [] 0}
-2025/10/26 20:00:13 raft 2 心跳返回 for raft 0 term 2 reply:{2 true}
-2025/10/26 20:00:13 raft 1 开始发送心跳
-2025/10/26 20:00:13 raft 2 开始发送心跳
-2025/10/26 20:00:13 raft 0 收到心跳 from 2 for term 2, args:&{2 2 0 0 [] 0}
-2025/10/26 20:00:13 raft 2 心跳返回 for raft 0 term 2 reply:{2 true}
-2025/10/26 20:00:13 raft 1 since 783.480989ms  Sleeping for timeout 260.284772ms
-2025/10/26 20:00:13 raft 1 超时选举
-2025/10/26 20:00:13 raft 1 开始发送心跳
-2025/10/26 20:00:13 raft 0 收到心跳 from 1 for term 1, args:&{1 1 0 0 [] 0}
-2025/10/26 20:00:13 raft 2 收到心跳 from 1 for term 1, args:&{1 1 0 0 [] 0}
-2025/10/26 20:00:13 raft 2 收到心跳，但是term小于当前term
-2025/10/26 20:00:13 raft 0 收到心跳，但是term小于当前term
-2025/10/26 20:00:13 raft 2 开始发送心跳
-2025/10/26 20:00:13 raft 0 收到心跳 from 2 for term 2, args:&{2 2 0 0 [] 0}
-2025/10/26 20:00:13 raft 2 心跳返回 for raft 0 term 2 reply:{2 true}
-2025/10/26 20:00:13 raft 1 收到心跳 from 2 for term 2, args:&{2 2 0 0 [] 0}
-2025/10/26 20:00:13 raft 2 心跳返回 for raft 1 term 2 reply:{2 true}
-2025/10/26 20:00:13 raft 2 since 85.872603ms  Sleeping for timeout 287.367187ms
-2025/10/26 20:00:13 raft 0 since 95.259386ms  Sleeping for timeout 387.796431ms
-2025/10/26 20:00:13 raft 1 开始发送心跳
-2025/10/26 20:00:13 raft 2 开始发送心跳
-2025/10/26 20:00:13 raft 0 收到心跳 from 2 for term 2, args:&{2 2 0 0 [] 0}
-2025/10/26 20:00:13 raft 2 心跳返回 for raft 0 term 2 reply:{2 true}
-2025/10/26 20:00:14 raft 2 开始发送心跳
-2025/10/26 20:00:14 raft 0 收到心跳 from 2 for term 2, args:&{2 2 0 0 [] 0}
-2025/10/26 20:00:14 raft 2 心跳返回 for raft 0 term 2 reply:{2 true}
-2025/10/26 20:00:14 raft 1 since 236.357519ms  Sleeping for timeout 260.284772ms
-2025/10/26 20:00:14 raft 2 开始发送心跳
-2025/10/26 20:00:14 raft 0 收到心跳 from 2 for term 2, args:&{2 2 0 0 [] 0}
-2025/10/26 20:00:14 raft 2 心跳返回 for raft 0 term 2 reply:{2 true}
-2025/10/26 20:00:14 raft 2 since 373.610037ms  Sleeping for timeout 287.367187ms
-2025/10/26 20:00:14 raft 2 超时选举
-2025/10/26 20:00:14 raft 2 开始发送心跳
-2025/10/26 20:00:14 raft 0 收到心跳 from 2 for term 2, args:&{2 2 0 0 [] 0}
-2025/10/26 20:00:14 raft 2 心跳返回 for raft 0 term 2 reply:{2 true}
-2025/10/26 20:00:14 raft 0 since 78.966384ms  Sleeping for timeout 387.796431ms
-2025/10/26 20:00:14 raft 1 since 497.149295ms  Sleeping for timeout 260.284772ms
-2025/10/26 20:00:14 raft 1 超时选举
-2025/10/26 20:00:14 raft 2 开始发送心跳
-2025/10/26 20:00:14 raft 0 收到心跳 from 2 for term 2, args:&{2 2 0 0 [] 0}
-2025/10/26 20:00:14 raft 2 心跳返回 for raft 0 term 2 reply:{2 true}
-2025/10/26 20:00:14 raft 2 开始发送心跳
-2025/10/26 20:00:14 raft 0 收到心跳 from 2 for term 2, args:&{2 2 0 0 [] 0}
-2025/10/26 20:00:14 raft 2 心跳返回 for raft 0 term 2 reply:{2 true}
-2025/10/26 20:00:14 raft 2 since 661.097832ms  Sleeping for timeout 287.367187ms
-2025/10/26 20:00:14 raft 2 超时选举
-2025/10/26 20:00:14 raft 2 开始发送心跳
-2025/10/26 20:00:14 raft 0 收到心跳 from 2 for term 2, args:&{2 2 0 0 [] 0}
-2025/10/26 20:00:14 raft 2 心跳返回 for raft 0 term 2 reply:{2 true}
-2025/10/26 20:00:14 raft 2 开始发送心跳
-2025/10/26 20:00:14 raft 0 收到心跳 from 2 for term 2, args:&{2 2 0 0 [] 0}
-2025/10/26 20:00:14 raft 2 心跳返回 for raft 0 term 2 reply:{2 true}
-2025/10/26 20:00:14 raft 0 since 64.424743ms  Sleeping for timeout 387.796431ms
-2025/10/26 20:00:14 raft 2 开始发送心跳
-2025/10/26 20:00:14 raft 0 收到心跳 from 2 for term 2, args:&{2 2 0 0 [] 0}
-2025/10/26 20:00:14 raft 2 心跳返回 for raft 0 term 2 reply:{2 true}
-2025/10/26 20:00:14 raft 2 since 948.644386ms  Sleeping for timeout 287.367187ms
-2025/10/26 20:00:14 raft 2 超时选举
-2025/10/26 20:00:14 raft 2 开始发送心跳
-2025/10/26 20:00:14 raft 0 收到心跳 from 2 for term 2, args:&{2 2 0 0 [] 0}
-2025/10/26 20:00:14 raft 2 心跳返回 for raft 0 term 2 reply:{2 true}
-2025/10/26 20:00:14 raft 2 开始发送心跳
-2025/10/26 20:00:14 raft 0 收到心跳 from 2 for term 2, args:&{2 2 0 0 [] 0}
-2025/10/26 20:00:14 raft 2 心跳返回 for raft 0 term 2 reply:{2 true}
-2025/10/26 20:00:15 raft 2 开始发送心跳
-2025/10/26 20:00:15 raft 0 收到心跳 from 2 for term 2, args:&{2 2 0 0 [] 0}
-2025/10/26 20:00:15 raft 2 心跳返回 for raft 0 term 2 reply:{2 true}
-2025/10/26 20:00:15 raft 2 since 1.237017645s  Sleeping for timeout 287.367187ms
-2025/10/26 20:00:15 raft 2 超时选举
-2025/10/26 20:00:15 raft 0 since 49.715075ms  Sleeping for timeout 387.796431ms
-2025/10/26 20:00:15 raft 2 开始发送心跳
-2025/10/26 20:00:15 raft 0 收到心跳 from 2 for term 2, args:&{2 2 0 0 [] 0}
-2025/10/26 20:00:15 raft 2 心跳返回 for raft 0 term 2 reply:{2 true}
-2025/10/26 20:00:15 raft 2 开始发送心跳
-2025/10/26 20:00:15 raft 0 收到心跳 from 2 for term 2, args:&{2 2 0 0 [] 0}
-2025/10/26 20:00:15 raft 2 心跳返回 for raft 0 term 2 reply:{2 true}
-2025/10/26 20:00:15 raft 2 开始发送心跳
-2025/10/26 20:00:15 raft 0 收到心跳 from 2 for term 2, args:&{2 2 0 0 [] 0}
-2025/10/26 20:00:15 raft 2 心跳返回 for raft 0 term 2 reply:{2 true}
-2025/10/26 20:00:15 raft 2 since 1.525563385s  Sleeping for timeout 287.367187ms
-2025/10/26 20:00:15 raft 2 超时选举
-2025/10/26 20:00:15 raft 2 开始发送心跳
-2025/10/26 20:00:15 raft 0 收到心跳 from 2 for term 2, args:&{2 2 0 0 [] 0}
-2025/10/26 20:00:15 raft 2 心跳返回 for raft 0 term 2 reply:{2 true}
-2025/10/26 20:00:15 raft 0 since 35.854211ms  Sleeping for timeout 387.796431ms
-2025/10/26 20:00:15 raft 2 开始发送心跳
-2025/10/26 20:00:15 raft 0 收到心跳 from 2 for term 2, args:&{2 2 0 0 [] 0}
-2025/10/26 20:00:15 raft 2 心跳返回 for raft 0 term 2 reply:{2 true}
-2025/10/26 20:00:15 raft 2 since 1.813792605s  Sleeping for timeout 287.367187ms
-2025/10/26 20:00:15 raft 2 超时选举
-2025/10/26 20:00:15 raft 2 开始发送心跳
-2025/10/26 20:00:15 raft 0 收到心跳 from 2 for term 2, args:&{2 2 0 0 [] 0}
-2025/10/26 20:00:15 raft 2 心跳返回 for raft 0 term 2 reply:{2 true}
-2025/10/26 20:00:15 raft 2 开始发送心跳
-2025/10/26 20:00:15 raft 0 收到心跳 from 2 for term 2, args:&{2 2 0 0 [] 0}
-2025/10/26 20:00:15 raft 2 心跳返回 for raft 0 term 2 reply:{2 true}
-2025/10/26 20:00:15 raft 2 开始发送心跳
-2025/10/26 20:00:15 raft 0 收到心跳 from 2 for term 2, args:&{2 2 0 0 [] 0}
-2025/10/26 20:00:15 raft 2 心跳返回 for raft 0 term 2 reply:{2 true}
-2025/10/26 20:00:15 raft 0 since 22.072446ms  Sleeping for timeout 387.796431ms
-2025/10/26 20:00:15 raft 2 since 2.10220289s  Sleeping for timeout 287.367187ms
-2025/10/26 20:00:15 raft 2 超时选举
-2025/10/26 20:00:15 raft 2 开始发送心跳
-2025/10/26 20:00:15 raft 0 收到心跳 from 2 for term 2, args:&{2 2 0 0 [] 0}
-2025/10/26 20:00:15 raft 2 心跳返回 for raft 0 term 2 reply:{2 true}
-2025/10/26 20:00:16 raft 2 开始发送心跳
-2025/10/26 20:00:16 raft 0 收到心跳 from 2 for term 2, args:&{2 2 0 0 [] 0}
-2025/10/26 20:00:16 raft 2 心跳返回 for raft 0 term 2 reply:{2 true}
-2025/10/26 20:00:16 raft 2 开始发送心跳
-2025/10/26 20:00:16 raft 0 收到心跳 from 2 for term 2, args:&{2 2 0 0 [] 0}
-2025/10/26 20:00:16 raft 2 心跳返回 for raft 0 term 2 reply:{2 true}
-2025/10/26 20:00:16 raft 2 since 2.39022921s  Sleeping for timeout 287.367187ms
-2025/10/26 20:00:16 raft 2 超时选举
-2025/10/26 20:00:16 raft 2 开始发送心跳
-2025/10/26 20:00:16 raft 0 收到心跳 from 2 for term 2, args:&{2 2 0 0 [] 0}
-2025/10/26 20:00:16 raft 2 心跳返回 for raft 0 term 2 reply:{2 true}
-2025/10/26 20:00:16 raft 0 since 7.194196ms  Sleeping for timeout 387.796431ms
-2025/10/26 20:00:16 raft 2 开始发送心跳
-2025/10/26 20:00:16 raft 0 收到心跳 from 2 for term 2, args:&{2 2 0 0 [] 0}
-2025/10/26 20:00:16 raft 2 心跳返回 for raft 0 term 2 reply:{2 true}
-2025/10/26 20:00:16 raft 2 开始发送心跳
-2025/10/26 20:00:16 raft 0 收到心跳 from 2 for term 2, args:&{2 2 0 0 [] 0}
-2025/10/26 20:00:16 raft 2 心跳返回 for raft 0 term 2 reply:{2 true}
-2025/10/26 20:00:16 raft 2 since 2.678373115s  Sleeping for timeout 287.367187ms
-2025/10/26 20:00:16 raft 2 超时选举
-2025/10/26 20:00:16 raft 2 开始发送心跳
-2025/10/26 20:00:16 raft 0 收到心跳 from 2 for term 2, args:&{2 2 0 0 [] 0}
-2025/10/26 20:00:16 raft 2 心跳返回 for raft 0 term 2 reply:{2 true}
-2025/10/26 20:00:16 raft 0 since 95.690697ms  Sleeping for timeout 387.796431ms
-2025/10/26 20:00:16 raft 2 开始发送心跳
-2025/10/26 20:00:16 raft 0 收到心跳 from 2 for term 2, args:&{2 2 0 0 [] 0}
-2025/10/26 20:00:16 raft 2 心跳返回 for raft 0 term 2 reply:{2 true}
-2025/10/26 20:00:16 raft 2 开始发送心跳
-2025/10/26 20:00:16 raft 0 收到心跳 from 2 for term 2, args:&{2 2 0 0 [] 0}
-2025/10/26 20:00:16 raft 2 心跳返回 for raft 0 term 2 reply:{2 true}
-2025/10/26 20:00:16 raft 2 since 2.965938958s  Sleeping for timeout 287.367187ms
-2025/10/26 20:00:16 raft 2 超时选举
-2025/10/26 20:00:16 raft 2 开始发送心跳
-2025/10/26 20:00:16 raft 0 收到心跳 from 2 for term 2, args:&{2 2 0 0 [] 0}
-2025/10/26 20:00:16 raft 2 心跳返回 for raft 0 term 2 reply:{2 true}
-2025/10/26 20:00:16 raft 2 开始发送心跳
-2025/10/26 20:00:16 raft 0 收到心跳 from 2 for term 2, args:&{2 2 0 0 [] 0}
-2025/10/26 20:00:16 raft 2 心跳返回 for raft 0 term 2 reply:{2 true}
-2025/10/26 20:00:17 raft 0 since 82.174246ms  Sleeping for timeout 387.796431ms
-2025/10/26 20:00:17 raft 2 开始发送心跳
-2025/10/26 20:00:17 raft 0 收到心跳 from 2 for term 2, args:&{2 2 0 0 [] 0}
-2025/10/26 20:00:17 raft 2 心跳返回 for raft 0 term 2 reply:{2 true}
-2025/10/26 20:00:17 raft 2 since 3.25361813s  Sleeping for timeout 287.367187ms
-2025/10/26 20:00:17 raft 2 超时选举
-2025/10/26 20:00:17 raft 2 开始发送心跳
-2025/10/26 20:00:17 raft 0 收到心跳 from 2 for term 2, args:&{2 2 0 0 [] 0}
-2025/10/26 20:00:17 raft 2 心跳返回 for raft 0 term 2 reply:{2 true}
-2025/10/26 20:00:17 raft 2 开始发送心跳
-2025/10/26 20:00:17 raft 0 收到心跳 from 2 for term 2, args:&{2 2 0 0 [] 0}
-2025/10/26 20:00:17 raft 2 心跳返回 for raft 0 term 2 reply:{2 true}
-2025/10/26 20:00:17 raft 2 开始发送心跳
-2025/10/26 20:00:17 raft 0 收到心跳 from 2 for term 2, args:&{2 2 0 0 [] 0}
-2025/10/26 20:00:17 raft 2 心跳返回 for raft 0 term 2 reply:{2 true}
-2025/10/26 20:00:17 raft 2 since 3.541837211s  Sleeping for timeout 287.367187ms
-2025/10/26 20:00:17 raft 2 超时选举
-2025/10/26 20:00:17 raft 0 since 64.007922ms  Sleeping for timeout 387.796431ms
-2025/10/26 20:00:17 raft 2 开始发送心跳
-2025/10/26 20:00:17 raft 0 收到心跳 from 2 for term 2, args:&{2 2 0 0 [] 0}
-2025/10/26 20:00:17 raft 2 心跳返回 for raft 0 term 2 reply:{2 true}
-2025/10/26 20:00:17 raft 2 开始发送心跳
-2025/10/26 20:00:17 raft 0 收到心跳 from 2 for term 2, args:&{2 2 0 0 [] 0}
-2025/10/26 20:00:17 raft 2 心跳返回 for raft 0 term 2 reply:{2 true}
-2025/10/26 20:00:17 raft 2 开始发送心跳
-2025/10/26 20:00:17 raft 2 since 3.829488522s  Sleeping for timeout 287.367187ms
-2025/10/26 20:00:17 raft 2 超时选举
-2025/10/26 20:00:17 raft 0 收到心跳 from 2 for term 2, args:&{2 2 0 0 [] 0}
-2025/10/26 20:00:17 raft 2 心跳返回 for raft 0 term 2 reply:{2 true}
-2025/10/26 20:00:17 raft 2 开始发送心跳
-2025/10/26 20:00:17 raft 0 收到心跳 from 2 for term 2, args:&{2 2 0 0 [] 0}
-2025/10/26 20:00:17 raft 2 心跳返回 for raft 0 term 2 reply:{2 true}
-2025/10/26 20:00:17 raft 0 since 50.312535ms  Sleeping for timeout 387.796431ms
-2025/10/26 20:00:17 raft 2 开始发送心跳
-2025/10/26 20:00:17 raft 0 收到心跳 from 2 for term 2, args:&{2 2 0 0 [] 0}
-2025/10/26 20:00:17 raft 2 心跳返回 for raft 0 term 2 reply:{2 true}
-2025/10/26 20:00:17 raft 2 since 4.117985695s  Sleeping for timeout 287.367187ms
-2025/10/26 20:00:17 raft 2 超时选举
-2025/10/26 20:00:17 raft 2 开始发送心跳
-2025/10/26 20:00:17 raft 0 收到心跳 from 2 for term 2, args:&{2 2 0 0 [] 0}
-2025/10/26 20:00:17 raft 2 心跳返回 for raft 0 term 2 reply:{2 true}
+2025/10/26 22:05:03 raft 2 since 67.646µs  Sleeping for timeout 229.481977ms
+2025/10/26 22:05:04 raft 2 since 230.642004ms  Sleeping for timeout 229.481977ms
+2025/10/26 22:05:04 raft 2 超时选举
+2025/10/26 22:05:04 raft 2 变成候选人开始选举 for term 1
+2025/10/26 22:05:04 raft 2 票数 1 多数节点 2
+2025/10/26 22:05:04 raft 1 received RequestVote from 2 for term 1, args:&{1 2 0 0},
+2025/10/26 22:05:04 raft 1 检查日志新旧 for 2 for term 1
+2025/10/26 22:05:04 raft 0 received RequestVote from 2 for term 1, args:&{1 2 0 0},
+2025/10/26 22:05:04 raft 0 检查日志新旧 for 2 for term 1
+2025/10/26 22:05:04 raft 0 投票给 2 for term 1
+2025/10/26 22:05:04 raft 1 投票给 2 for term 1
+2025/10/26 22:05:04 raft 2 处理投票返回 for term 1 reply:{1 true}
+2025/10/26 22:05:04 raft 2 received vote for term 1
+2025/10/26 22:05:04 raft 2 当前票数 2
+2025/10/26 22:05:04 raft 2 处理投票返回 for term 1 reply:{1 true}
+2025/10/26 22:05:04 raft 2 开始发送心跳 term 1
+2025/10/26 22:05:04 sendAppendEntries server 0 args &{1 2 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:04 sendAppendEntries server 1 args &{1 2 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:04 raft 0 收到心跳 from raft 2 for term 1, 当前term: 1 args:&{1 2 0 0 [] 0}
+2025/10/26 22:05:04 raft 1 收到心跳 from raft 2 for term 1, 当前term: 1 args:&{1 2 0 0 [] 0}
+2025/10/26 22:05:04 raft 2 心跳返回 for raft 0 term 1 reply:{1 true}
+2025/10/26 22:05:04 raft 2 心跳返回 for raft 1 term 1 reply:{1 true}
+2025/10/26 22:05:04 raft 0 since 84.793544ms  Sleeping for timeout 318.730805ms
+2025/10/26 22:05:04 raft 2 开始发送心跳 term 1
+2025/10/26 22:05:04 sendAppendEntries server 0 args &{1 2 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:04 sendAppendEntries server 1 args &{1 2 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:04 raft 0 收到心跳 from raft 2 for term 1, 当前term: 1 args:&{1 2 0 0 [] 0}
+2025/10/26 22:05:04 raft 1 收到心跳 from raft 2 for term 1, 当前term: 1 args:&{1 2 0 0 [] 0}
+2025/10/26 22:05:04 raft 2 心跳返回 for raft 0 term 1 reply:{1 true}
+2025/10/26 22:05:04 raft 2 心跳返回 for raft 1 term 1 reply:{1 true}
+2025/10/26 22:05:04 raft 1 since 45.613859ms  Sleeping for timeout 381.031424ms
+2025/10/26 22:05:04 raft 2 开始发送心跳 term 1
+2025/10/26 22:05:04 sendAppendEntries server 1 args &{1 2 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:04 sendAppendEntries server 0 args &{1 2 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:04 raft 0 收到心跳 from raft 2 for term 1, 当前term: 1 args:&{1 2 0 0 [] 0}
+2025/10/26 22:05:04 raft 1 收到心跳 from raft 2 for term 1, 当前term: 1 args:&{1 2 0 0 [] 0}
+2025/10/26 22:05:04 raft 2 心跳返回 for raft 0 term 1 reply:{1 true}
+2025/10/26 22:05:04 raft 2 心跳返回 for raft 1 term 1 reply:{1 true}
+2025/10/26 22:05:04 raft 2 since 230.297096ms  Sleeping for timeout 229.481977ms
+2025/10/26 22:05:04 raft 2 超时选举
+2025/10/26 22:05:04 断开连接第一次 start
+2025/10/26 22:05:04 断开连接第一次 end
+2025/10/26 22:05:04 raft 2 开始发送心跳 term 1
+2025/10/26 22:05:04 sendAppendEntries server 0 args &{1 2 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:04 sendAppendEntries server 1 args &{1 2 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:04 raft 2 开始发送心跳 term 1
+2025/10/26 22:05:04 sendAppendEntries server 1 args &{1 2 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:04 sendAppendEntries server 0 args &{1 2 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:04 raft 0 since 203.618477ms  Sleeping for timeout 318.730805ms
+2025/10/26 22:05:04 raft 2 since 460.302133ms  Sleeping for timeout 229.481977ms
+2025/10/26 22:05:04 raft 2 超时选举
+2025/10/26 22:05:04 raft 2 开始发送心跳 term 1
+2025/10/26 22:05:04 sendAppendEntries server 0 args &{1 2 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:04 sendAppendEntries server 1 args &{1 2 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:04 raft 1 since 328.088661ms  Sleeping for timeout 381.031424ms
+2025/10/26 22:05:04 raft 2 开始发送心跳 term 1
+2025/10/26 22:05:04 sendAppendEntries server 1 args &{1 2 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:04 sendAppendEntries server 0 args &{1 2 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:04 raft 2 since 689.987796ms  Sleeping for timeout 229.481977ms
+2025/10/26 22:05:04 raft 2 超时选举
+2025/10/26 22:05:04 raft 2 开始发送心跳 term 1
+2025/10/26 22:05:04 sendAppendEntries server 0 args &{1 2 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:04 sendAppendEntries server 1 args &{1 2 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:04 raft 0 since 523.036977ms  Sleeping for timeout 318.730805ms
+2025/10/26 22:05:04 raft 0 超时选举
+2025/10/26 22:05:04 raft 0 变成候选人开始选举 for term 2
+2025/10/26 22:05:04 raft 0 票数 1 多数节点 2
+2025/10/26 22:05:04 raft 1 received RequestVote from 0 for term 2, args:&{2 0 0 0},
+2025/10/26 22:05:04 raft 1 检查日志新旧 for 0 for term 2
+2025/10/26 22:05:04 raft 1 投票给 0 for term 2
+2025/10/26 22:05:04 raft 0 处理投票返回 for term 2 reply:{2 true}
+2025/10/26 22:05:04 raft 0 received vote for term 2
+2025/10/26 22:05:04 raft 0 当前票数 2
+2025/10/26 22:05:04 raft 0 开始发送心跳 term 2
+2025/10/26 22:05:04 sendAppendEntries server 2 args &{2 0 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:04 sendAppendEntries server 1 args &{2 0 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:04 raft 1 收到心跳 from raft 0 for term 2, 当前term: 2 args:&{2 0 0 0 [] 0}
+2025/10/26 22:05:04 raft 0 心跳返回 for raft 1 term 2 reply:{2 true}
+2025/10/26 22:05:04 checkOneLeader 1 start
+2025/10/26 22:05:04 恢复链接 start
+2025/10/26 22:05:04 恢复链接 end
+2025/10/26 22:05:04 raft 2 开始发送心跳 term 1
+2025/10/26 22:05:04 sendAppendEntries server 0 args &{1 2 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:04 sendAppendEntries server 1 args &{1 2 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:04 raft 1 收到心跳 from raft 2 for term 1, 当前term: 2 args:&{1 2 0 0 [] 0}
+2025/10/26 22:05:04 raft 1 收到心跳，但是term小于当前term
+2025/10/26 22:05:04 raft 2 降级成为follower
+2025/10/26 22:05:04 raft 0 收到心跳 from raft 2 for term 1, 当前term: 2 args:&{1 2 0 0 [] 0}
+2025/10/26 22:05:04 raft 0 收到心跳，但是term小于当前term
+2025/10/26 22:05:04 raft 0 开始发送心跳 term 2
+2025/10/26 22:05:04 sendAppendEntries server 1 args &{2 0 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:04 sendAppendEntries server 2 args &{2 0 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:04 raft 2 收到心跳 from raft 0 for term 2, 当前term: 2 args:&{2 0 0 0 [] 0}
+2025/10/26 22:05:04 raft 1 收到心跳 from raft 0 for term 2, 当前term: 2 args:&{2 0 0 0 [] 0}
+2025/10/26 22:05:04 raft 0 心跳返回 for raft 1 term 2 reply:{2 true}
+2025/10/26 22:05:04 raft 0 心跳返回 for raft 2 term 2 reply:{2 true}
+2025/10/26 22:05:05 raft 1 since 83.750226ms  Sleeping for timeout 381.031424ms
+2025/10/26 22:05:05 raft 2 since 90.053364ms  Sleeping for timeout 229.481977ms
+2025/10/26 22:05:05 raft 0 开始发送心跳 term 2
+2025/10/26 22:05:05 sendAppendEntries server 2 args &{2 0 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:05 sendAppendEntries server 1 args &{2 0 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:05 raft 1 收到心跳 from raft 0 for term 2, 当前term: 2 args:&{2 0 0 0 [] 0}
+2025/10/26 22:05:05 raft 0 心跳返回 for raft 1 term 2 reply:{2 true}
+2025/10/26 22:05:05 raft 0 开始发送心跳 term 2
+2025/10/26 22:05:05 sendAppendEntries server 1 args &{2 0 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:05 sendAppendEntries server 2 args &{2 0 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:05 raft 1 收到心跳 from raft 0 for term 2, 当前term: 2 args:&{2 0 0 0 [] 0}
+2025/10/26 22:05:05 raft 0 心跳返回 for raft 1 term 2 reply:{2 true}
+2025/10/26 22:05:05 raft 0 since 237.877857ms  Sleeping for timeout 318.730805ms
+2025/10/26 22:05:05 raft 0 开始发送心跳 term 2
+2025/10/26 22:05:05 sendAppendEntries server 2 args &{2 0 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:05 sendAppendEntries server 1 args &{2 0 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:05 raft 1 收到心跳 from raft 0 for term 2, 当前term: 2 args:&{2 0 0 0 [] 0}
+2025/10/26 22:05:05 raft 0 心跳返回 for raft 1 term 2 reply:{2 true}
+2025/10/26 22:05:05 raft 2 since 320.342124ms  Sleeping for timeout 229.481977ms
+2025/10/26 22:05:05 raft 2 超时选举
+2025/10/26 22:05:05 raft 0 开始发送心跳 term 2
+2025/10/26 22:05:05 sendAppendEntries server 2 args &{2 0 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:05 sendAppendEntries server 1 args &{2 0 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:05 raft 1 收到心跳 from raft 0 for term 2, 当前term: 2 args:&{2 0 0 0 [] 0}
+2025/10/26 22:05:05 raft 0 心跳返回 for raft 1 term 2 reply:{2 true}
+2025/10/26 22:05:05 raft 1 since 62.920028ms  Sleeping for timeout 381.031424ms
+2025/10/26 22:05:05 raft 0 开始发送心跳 term 2
+2025/10/26 22:05:05 sendAppendEntries server 1 args &{2 0 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:05 sendAppendEntries server 2 args &{2 0 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:05 raft 1 收到心跳 from raft 0 for term 2, 当前term: 2 args:&{2 0 0 0 [] 0}
+2025/10/26 22:05:05 raft 0 心跳返回 for raft 1 term 2 reply:{2 true}
+2025/10/26 22:05:05 raft 0 since 557.417628ms  Sleeping for timeout 318.730805ms
+2025/10/26 22:05:05 raft 0 超时选举
+2025/10/26 22:05:05 raft 0 开始发送心跳 term 2
+2025/10/26 22:05:05 sendAppendEntries server 1 args &{2 0 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:05 sendAppendEntries server 2 args &{2 0 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:05 raft 1 收到心跳 from raft 0 for term 2, 当前term: 2 args:&{2 0 0 0 [] 0}
+2025/10/26 22:05:05 raft 0 心跳返回 for raft 1 term 2 reply:{2 true}
+2025/10/26 22:05:05 raft 0 开始发送心跳 term 2
+2025/10/26 22:05:05 sendAppendEntries server 1 args &{2 0 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:05 sendAppendEntries server 2 args &{2 0 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:05 raft 1 收到心跳 from raft 0 for term 2, 当前term: 2 args:&{2 0 0 0 [] 0}
+2025/10/26 22:05:05 raft 0 心跳返回 for raft 1 term 2 reply:{2 true}
+2025/10/26 22:05:05 raft 0 开始发送心跳 term 2
+2025/10/26 22:05:05 sendAppendEntries server 2 args &{2 0 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:05 sendAppendEntries server 1 args &{2 0 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:05 raft 1 收到心跳 from raft 0 for term 2, 当前term: 2 args:&{2 0 0 0 [] 0}
+2025/10/26 22:05:05 raft 0 心跳返回 for raft 1 term 2 reply:{2 true}
+2025/10/26 22:05:05 raft 1 since 42.81627ms  Sleeping for timeout 381.031424ms
+2025/10/26 22:05:05 raft 0 since 876.973306ms  Sleeping for timeout 318.730805ms
+2025/10/26 22:05:05 raft 0 超时选举
+2025/10/26 22:05:05 raft 0 开始发送心跳 term 2
+2025/10/26 22:05:05 sendAppendEntries server 2 args &{2 0 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:05 sendAppendEntries server 1 args &{2 0 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:05 raft 1 收到心跳 from raft 0 for term 2, 当前term: 2 args:&{2 0 0 0 [] 0}
+2025/10/26 22:05:05 raft 0 心跳返回 for raft 1 term 2 reply:{2 true}
+2025/10/26 22:05:06 raft 0 开始发送心跳 term 2
+2025/10/26 22:05:06 sendAppendEntries server 2 args &{2 0 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:06 sendAppendEntries server 1 args &{2 0 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:06 raft 1 收到心跳 from raft 0 for term 2, 当前term: 2 args:&{2 0 0 0 [] 0}
+2025/10/26 22:05:06 raft 0 心跳返回 for raft 1 term 2 reply:{2 true}
+2025/10/26 22:05:06 raft 0 开始发送心跳 term 2
+2025/10/26 22:05:06 sendAppendEntries server 1 args &{2 0 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:06 sendAppendEntries server 2 args &{2 0 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:06 raft 1 收到心跳 from raft 0 for term 2, 当前term: 2 args:&{2 0 0 0 [] 0}
+2025/10/26 22:05:06 raft 0 心跳返回 for raft 1 term 2 reply:{2 true}
+2025/10/26 22:05:06 raft 0 since 1.195855863s  Sleeping for timeout 318.730805ms
+2025/10/26 22:05:06 raft 0 超时选举
+2025/10/26 22:05:06 raft 0 开始发送心跳 term 2
+2025/10/26 22:05:06 sendAppendEntries server 1 args &{2 0 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:06 sendAppendEntries server 2 args &{2 0 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:06 raft 1 收到心跳 from raft 0 for term 2, 当前term: 2 args:&{2 0 0 0 [] 0}
+2025/10/26 22:05:06 raft 0 心跳返回 for raft 1 term 2 reply:{2 true}
+2025/10/26 22:05:06 raft 1 since 21.847922ms  Sleeping for timeout 381.031424ms
+2025/10/26 22:05:06 raft 0 开始发送心跳 term 2
+2025/10/26 22:05:06 sendAppendEntries server 1 args &{2 0 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:06 sendAppendEntries server 2 args &{2 0 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:06 raft 1 收到心跳 from raft 0 for term 2, 当前term: 2 args:&{2 0 0 0 [] 0}
+2025/10/26 22:05:06 raft 0 心跳返回 for raft 1 term 2 reply:{2 true}
+2025/10/26 22:05:06 raft 0 开始发送心跳 term 2
+2025/10/26 22:05:06 sendAppendEntries server 2 args &{2 0 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:06 sendAppendEntries server 1 args &{2 0 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:06 raft 1 收到心跳 from raft 0 for term 2, 当前term: 2 args:&{2 0 0 0 [] 0}
+2025/10/26 22:05:06 raft 0 心跳返回 for raft 1 term 2 reply:{2 true}
+2025/10/26 22:05:06 raft 0 since 1.515396363s  Sleeping for timeout 318.730805ms
+2025/10/26 22:05:06 raft 0 超时选举
+2025/10/26 22:05:06 raft 0 开始发送心跳 term 2
+2025/10/26 22:05:06 sendAppendEntries server 1 args &{2 0 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:06 sendAppendEntries server 2 args &{2 0 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:06 raft 1 收到心跳 from raft 0 for term 2, 当前term: 2 args:&{2 0 0 0 [] 0}
+2025/10/26 22:05:06 raft 0 心跳返回 for raft 1 term 2 reply:{2 true}
+2025/10/26 22:05:06 raft 0 开始发送心跳 term 2
+2025/10/26 22:05:06 sendAppendEntries server 2 args &{2 0 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:06 sendAppendEntries server 1 args &{2 0 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:06 raft 1 收到心跳 from raft 0 for term 2, 当前term: 2 args:&{2 0 0 0 [] 0}
+2025/10/26 22:05:06 raft 0 心跳返回 for raft 1 term 2 reply:{2 true}
+2025/10/26 22:05:06 raft 1 since 1.760038ms  Sleeping for timeout 381.031424ms
+2025/10/26 22:05:06 raft 0 开始发送心跳 term 2
+2025/10/26 22:05:06 sendAppendEntries server 1 args &{2 0 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:06 sendAppendEntries server 2 args &{2 0 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:06 raft 1 收到心跳 from raft 0 for term 2, 当前term: 2 args:&{2 0 0 0 [] 0}
+2025/10/26 22:05:06 raft 0 心跳返回 for raft 1 term 2 reply:{2 true}
+2025/10/26 22:05:06 raft 0 开始发送心跳 term 2
+2025/10/26 22:05:06 sendAppendEntries server 2 args &{2 0 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:06 sendAppendEntries server 1 args &{2 0 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:06 raft 1 收到心跳 from raft 0 for term 2, 当前term: 2 args:&{2 0 0 0 [] 0}
+2025/10/26 22:05:06 raft 0 心跳返回 for raft 1 term 2 reply:{2 true}
+2025/10/26 22:05:06 raft 0 since 1.835038036s  Sleeping for timeout 318.730805ms
+2025/10/26 22:05:06 raft 0 超时选举
+2025/10/26 22:05:06 raft 0 开始发送心跳 term 2
+2025/10/26 22:05:06 sendAppendEntries server 1 args &{2 0 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:06 sendAppendEntries server 2 args &{2 0 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:06 raft 1 收到心跳 from raft 0 for term 2, 当前term: 2 args:&{2 0 0 0 [] 0}
+2025/10/26 22:05:06 raft 0 心跳返回 for raft 1 term 2 reply:{2 true}
+2025/10/26 22:05:06 raft 1 since 81.962884ms  Sleeping for timeout 381.031424ms
+2025/10/26 22:05:07 raft 0 开始发送心跳 term 2
+2025/10/26 22:05:07 sendAppendEntries server 2 args &{2 0 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:07 sendAppendEntries server 1 args &{2 0 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:07 raft 1 收到心跳 from raft 0 for term 2, 当前term: 2 args:&{2 0 0 0 [] 0}
+2025/10/26 22:05:07 raft 0 心跳返回 for raft 1 term 2 reply:{2 true}
+2025/10/26 22:05:07 raft 0 开始发送心跳 term 2
+2025/10/26 22:05:07 sendAppendEntries server 2 args &{2 0 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:07 sendAppendEntries server 1 args &{2 0 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:07 raft 1 收到心跳 from raft 0 for term 2, 当前term: 2 args:&{2 0 0 0 [] 0}
+2025/10/26 22:05:07 raft 0 心跳返回 for raft 1 term 2 reply:{2 true}
+2025/10/26 22:05:07 raft 0 since 2.154815684s  Sleeping for timeout 318.730805ms
+2025/10/26 22:05:07 raft 0 超时选举
+2025/10/26 22:05:07 raft 0 开始发送心跳 term 2
+2025/10/26 22:05:07 sendAppendEntries server 2 args &{2 0 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:07 sendAppendEntries server 1 args &{2 0 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:07 raft 1 收到心跳 from raft 0 for term 2, 当前term: 2 args:&{2 0 0 0 [] 0}
+2025/10/26 22:05:07 raft 0 心跳返回 for raft 1 term 2 reply:{2 true}
+2025/10/26 22:05:07 raft 0 开始发送心跳 term 2
+2025/10/26 22:05:07 sendAppendEntries server 2 args &{2 0 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:07 sendAppendEntries server 1 args &{2 0 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:07 raft 1 收到心跳 from raft 0 for term 2, 当前term: 2 args:&{2 0 0 0 [] 0}
+2025/10/26 22:05:07 raft 0 心跳返回 for raft 1 term 2 reply:{2 true}
+2025/10/26 22:05:07 raft 1 since 61.04391ms  Sleeping for timeout 381.031424ms
+2025/10/26 22:05:07 raft 0 开始发送心跳 term 2
+2025/10/26 22:05:07 sendAppendEntries server 2 args &{2 0 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:07 sendAppendEntries server 1 args &{2 0 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:07 raft 1 收到心跳 from raft 0 for term 2, 当前term: 2 args:&{2 0 0 0 [] 0}
+2025/10/26 22:05:07 raft 0 心跳返回 for raft 1 term 2 reply:{2 true}
+2025/10/26 22:05:07 raft 0 since 2.474228693s  Sleeping for timeout 318.730805ms
+2025/10/26 22:05:07 raft 0 超时选举
+2025/10/26 22:05:07 raft 0 开始发送心跳 term 2
+2025/10/26 22:05:07 sendAppendEntries server 2 args &{2 0 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:07 sendAppendEntries server 1 args &{2 0 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:07 raft 1 收到心跳 from raft 0 for term 2, 当前term: 2 args:&{2 0 0 0 [] 0}
+2025/10/26 22:05:07 raft 0 心跳返回 for raft 1 term 2 reply:{2 true}
+2025/10/26 22:05:07 raft 0 开始发送心跳 term 2
+2025/10/26 22:05:07 sendAppendEntries server 2 args &{2 0 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:07 sendAppendEntries server 1 args &{2 0 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:07 raft 1 收到心跳 from raft 0 for term 2, 当前term: 2 args:&{2 0 0 0 [] 0}
+2025/10/26 22:05:07 raft 0 心跳返回 for raft 1 term 2 reply:{2 true}
+2025/10/26 22:05:07 raft 0 开始发送心跳 term 2
+2025/10/26 22:05:07 sendAppendEntries server 2 args &{2 0 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:07 sendAppendEntries server 1 args &{2 0 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:07 raft 1 收到心跳 from raft 0 for term 2, 当前term: 2 args:&{2 0 0 0 [] 0}
+2025/10/26 22:05:07 raft 0 心跳返回 for raft 1 term 2 reply:{2 true}
+2025/10/26 22:05:07 raft 1 since 39.964711ms  Sleeping for timeout 381.031424ms
+2025/10/26 22:05:07 raft 0 since 2.793325902s  Sleeping for timeout 318.730805ms
+2025/10/26 22:05:07 raft 0 超时选举
+2025/10/26 22:05:07 raft 0 开始发送心跳 term 2
+2025/10/26 22:05:07 sendAppendEntries server 2 args &{2 0 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:07 sendAppendEntries server 1 args &{2 0 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:07 raft 1 收到心跳 from raft 0 for term 2, 当前term: 2 args:&{2 0 0 0 [] 0}
+2025/10/26 22:05:07 raft 0 心跳返回 for raft 1 term 2 reply:{2 true}
+2025/10/26 22:05:07 raft 0 开始发送心跳 term 2
+2025/10/26 22:05:07 sendAppendEntries server 1 args &{2 0 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:07 sendAppendEntries server 2 args &{2 0 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:07 raft 1 收到心跳 from raft 0 for term 2, 当前term: 2 args:&{2 0 0 0 [] 0}
+2025/10/26 22:05:07 raft 0 心跳返回 for raft 1 term 2 reply:{2 true}
+2025/10/26 22:05:08 raft 0 开始发送心跳 term 2
+2025/10/26 22:05:08 sendAppendEntries server 2 args &{2 0 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:08 sendAppendEntries server 1 args &{2 0 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:08 raft 1 收到心跳 from raft 0 for term 2, 当前term: 2 args:&{2 0 0 0 [] 0}
+2025/10/26 22:05:08 raft 0 心跳返回 for raft 1 term 2 reply:{2 true}
+2025/10/26 22:05:08 raft 0 since 3.112434509s  Sleeping for timeout 318.730805ms
+2025/10/26 22:05:08 raft 0 超时选举
+2025/10/26 22:05:08 raft 0 开始发送心跳 term 2
+2025/10/26 22:05:08 sendAppendEntries server 1 args &{2 0 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:08 sendAppendEntries server 2 args &{2 0 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:08 raft 1 收到心跳 from raft 0 for term 2, 当前term: 2 args:&{2 0 0 0 [] 0}
+2025/10/26 22:05:08 raft 0 心跳返回 for raft 1 term 2 reply:{2 true}
+2025/10/26 22:05:08 raft 1 since 18.102272ms  Sleeping for timeout 381.031424ms
+2025/10/26 22:05:08 raft 0 开始发送心跳 term 2
+2025/10/26 22:05:08 sendAppendEntries server 1 args &{2 0 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:08 sendAppendEntries server 2 args &{2 0 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:08 raft 1 收到心跳 from raft 0 for term 2, 当前term: 2 args:&{2 0 0 0 [] 0}
+2025/10/26 22:05:08 raft 0 心跳返回 for raft 1 term 2 reply:{2 true}
+2025/10/26 22:05:08 raft 0 开始发送心跳 term 2
+2025/10/26 22:05:08 sendAppendEntries server 2 args &{2 0 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:08 sendAppendEntries server 1 args &{2 0 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:08 raft 1 收到心跳 from raft 0 for term 2, 当前term: 2 args:&{2 0 0 0 [] 0}
+2025/10/26 22:05:08 raft 0 心跳返回 for raft 1 term 2 reply:{2 true}
+2025/10/26 22:05:08 raft 0 since 3.431972526s  Sleeping for timeout 318.730805ms
+2025/10/26 22:05:08 raft 0 超时选举
+2025/10/26 22:05:08 raft 0 开始发送心跳 term 2
+2025/10/26 22:05:08 sendAppendEntries server 2 args &{2 0 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:08 sendAppendEntries server 1 args &{2 0 0 0 [] 0} reply &{0 false}
+2025/10/26 22:05:08 raft 1 收到心跳 from raft 0 for term 2, 当前term: 2 args:&{2 0 0 0 [] 0}
+2025/10/26 22:05:08 raft 0 心跳返回 for raft 1 term 2 reply:{2 true}
 signal: interrupt
-FAIL	learn-6.824/src/raft	8.267s
+FAIL	learn-6.824/src/raft	4.546s

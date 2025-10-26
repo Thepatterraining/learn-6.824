@@ -234,6 +234,7 @@ func (rf *Raft) sendRequestVote(server int, args *RequestVoteArgs, reply *Reques
 }
 
 func (rf *Raft) sendAppendEntries(server int, args *AppendEntriesArgs, reply *AppendEntriesReply) bool {
+	log.Printf("sendAppendEntries server %d args %v reply %v", server, args, reply)
 	ok := rf.peers[server].Call("Raft.AppendEntries", args, reply)
 	return ok
 }
@@ -262,9 +263,9 @@ type AppendEntriesReply struct {
 // 4. Append any new entries not already in the log
 // 5. If leaderCommit > commitIndex, set commitIndex = min(leaderCommit, index of last new entry)
 func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply) {
+	log.Printf("raft %d 收到心跳 from raft %d for term %d, 当前term: %d args:%v", rf.me, args.LeaderId, args.Term, rf.currentTerm, args)
 	rf.mu.Lock()
 	defer rf.mu.Unlock()
-	log.Printf("raft %d 收到心跳 from %d for term %d, args:%v", rf.me, args.LeaderId, args.Term, args)
 	// 重置心跳时间
 	rf.lastHeartBeatTime.Store(time.Now())
 	// 1. Reply false if term < currentTerm (§5.1)
@@ -334,7 +335,7 @@ func (rf *Raft) broadcastAppendEntries() {
 		if rf.status != Leader {
 			return
 		}
-		log.Printf("raft %d 开始发送心跳", rf.me)
+		log.Printf("raft %d 开始发送心跳 term %d", rf.me, rf.currentTerm)
 		currentTerm := rf.currentTerm
 		me := rf.me
 		rf.mu.Unlock()
@@ -356,6 +357,7 @@ func (rf *Raft) broadcastAppendEntries() {
 					rf.mu.Lock()
 					//If AppendEntries RPC received from new leader: convert to follower
 					if reply.Term > rf.currentTerm {
+						log.Printf("raft %d 降级成为follower", rf.me)
 						rf.currentTerm = reply.Term
 						rf.votedFor = -1
 						rf.status = Follower
