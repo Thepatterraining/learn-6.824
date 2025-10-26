@@ -49,7 +49,7 @@ package labrpc
 //   pass svc to srv.AddService()
 //
 
-import "../labgob"
+import "learn-6.824/src/labgob"
 import "bytes"
 import "reflect"
 import "sync"
