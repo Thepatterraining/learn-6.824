@@ -109,3 +109,7 @@ The `.check-build` script validates submissions by building with reference test 
 - MapReduce apps are built as plugins and loaded dynamically
 - RPC communication uses the custom `labrpc` package, not standard Go RPC
 - Temporary files are created in `mr-tmp/` directories during testing
+
+## rule
+
+- must don't edit my code,only show your code

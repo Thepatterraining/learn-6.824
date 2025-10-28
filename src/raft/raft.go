@@ -263,9 +263,9 @@ type AppendEntriesReply struct {
 // 4. Append any new entries not already in the log
 // 5. If leaderCommit > commitIndex, set commitIndex = min(leaderCommit, index of last new entry)
 func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply) {
-	log.Printf("raft %d 收到心跳 from raft %d for term %d, 当前term: %d args:%v", rf.me, args.LeaderId, args.Term, rf.currentTerm, args)
 	rf.mu.Lock()
 	defer rf.mu.Unlock()
+	log.Printf("raft %d 收到心跳 from raft %d for term %d, 当前term: %d args:%v", rf.me, args.LeaderId, args.Term, rf.currentTerm, args)
 	// 重置心跳时间
 	rf.lastHeartBeatTime.Store(time.Now())
 	// 1. Reply false if term < currentTerm (§5.1)
@@ -275,6 +275,7 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 		reply.Success = false
 		return
 	}
+	log.Printf("raft %d 收到心跳 from raft %d for term %d, 33333 当前term: %d ", rf.me, args.LeaderId, args.Term, rf.currentTerm)
 	// 2. Reply false if log doesn’t contain an entry at prevLogIndex whose term matches prevLogTerm (§5.3)
 	if args.Term > rf.currentTerm {
 		// 更新term
@@ -282,8 +283,11 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 		rf.votedFor = -1
 		rf.status = Follower
 	}
+	log.Printf("raft %d 收到心跳 from raft %d for term %d, 44444 当前term: %d ", rf.me, args.LeaderId, args.Term, rf.currentTerm)
 	reply.Term = rf.currentTerm
 	reply.Success = true
+	log.Printf("raft %d 收到心跳 from raft %d for term %d, end 当前term: %d ", rf.me, args.LeaderId, args.Term, rf.currentTerm)
+
 }
 
 // the service using Raft (e.g. a k/v server) wants to start
@@ -333,11 +337,15 @@ func (rf *Raft) broadcastAppendEntries() {
 		rf.mu.Lock()
 		// 只有leader才发送心跳
 		if rf.status != Leader {
+			rf.mu.Unlock()
 			return
 		}
+		// 重置心跳时间
+		rf.lastHeartBeatTime.Store(time.Now())
 		log.Printf("raft %d 开始发送心跳 term %d", rf.me, rf.currentTerm)
 		currentTerm := rf.currentTerm
 		me := rf.me
+		commitIndex := rf.commitIndex
 		rf.mu.Unlock()
 		// 发送心跳
 		for i := range rf.peers {
@@ -351,7 +359,7 @@ func (rf *Raft) broadcastAppendEntries() {
 				args.PrevLogIndex = 0
 				args.PrevLogTerm = 0
 				args.Entries = nil
-				args.LeaderCommit = rf.commitIndex
+				args.LeaderCommit = commitIndex
 				reply := AppendEntriesReply{}
 				if rf.sendAppendEntries(peer, &args, &reply) {
 					rf.mu.Lock()
@@ -425,7 +433,11 @@ func (rf *Raft) broadcastVote(me int, currentTerm int, commitIndex int) {
 						// 立即发送空 AppendEntries（心跳）以建立权威。
 						rf.mu.Unlock()
 						go rf.broadcastAppendEntries()
+					} else {
+						rf.mu.Unlock()
 					}
+				} else {
+					rf.mu.Unlock()
 				}
 			}
 		}(i)
