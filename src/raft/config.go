@@ -447,6 +447,7 @@ func (cfg *config) one(cmd interface{}, expectedServers int, retry bool) int {
 			if rf != nil {
 				index1, _, ok := rf.Start(cmd)
 				if ok {
+					log.Printf("返回的索引 %d", index1)
 					index = index1
 					break
 				}

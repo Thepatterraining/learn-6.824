@@ -54,6 +54,13 @@ const (
 	Leader
 )
 
+type LogEntry struct {
+	Command interface{}
+	Term    int
+	Commit  bool
+	Index   int
+}
+
 // A Go object implementing a single Raft peer.
 // 实现单个Raft对等体的Go对象
 type Raft struct {
@@ -67,22 +74,24 @@ type Raft struct {
 	// Look at the paper's Figure 2 for a description of what
 	// state a Raft server must maintain.
 	// 需要持久化
-	currentTerm int      //当前任期
-	votedFor    int      // 投票给谁
-	log         []string // log信息
+	currentTerm int        //当前任期
+	votedFor    int        // 投票给谁
+	log         []LogEntry // log信息
 
 	// 不需要持久化
 	commitIndex int // 已提交的最大索引
 	lastApplied int // 已应用到状态机的最大索引
 
 	// leader的属性
-	nextIndex  []int // 下次要发送给每个follower的日志索引
-	matchIndex []int // 对端已复制的最大日志索引
+	nextIndex  []int // 对每个 follower，下次要发送给每个follower的日志索引
+	matchIndex []int // 对每个 follower，对端已复制的最大日志索引
 
 	// 节点状态
 	status RaftStatus
 	// 心跳时间
 	lastHeartBeatTime atomic.Value
+	// 通道
+	applyCh chan ApplyMsg
 }
 
 // return currentTerm and whether this server
@@ -244,16 +253,18 @@ type AppendEntriesArgs struct {
 	// Your data here (2A, 2B).
 	Term         int // leader’s term
 	LeaderId     int
-	PrevLogIndex int      // Leader的Log里面的上一个LogIndex
-	PrevLogTerm  int      // Leader的Log里面的上一个LogIndex的Term
-	Entries      []string // log信息
-	LeaderCommit int      // leader’s commitIndex
+	PrevLogIndex int        // Leader的Log里面的上一个LogIndex
+	PrevLogTerm  int        // Leader的Log里面的上一个LogIndex的Term
+	Entries      []LogEntry // log信息
+	LeaderCommit int        // leader’s commitIndex
 }
 
 type AppendEntriesReply struct {
 	// Your data here (2A).
-	Term    int // 接收者的 currentTerm
-	Success bool
+	Term     int // 接收者的 currentTerm
+	Success  bool
+	LogTerm  int // 用于快速恢复
+	LogIndex int // 用于快速恢复
 }
 
 // 1. Reply false if term < currentTerm (§5.1)
@@ -264,7 +275,7 @@ type AppendEntriesReply struct {
 // 5. If leaderCommit > commitIndex, set commitIndex = min(leaderCommit, index of last new entry)
 func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply) {
 	rf.mu.Lock()
-	defer rf.mu.Unlock()
+
 	log.Printf("raft %d 收到心跳 from raft %d for term %d, 当前term: %d args:%v", rf.me, args.LeaderId, args.Term, rf.currentTerm, args)
 	// 重置心跳时间
 	rf.lastHeartBeatTime.Store(time.Now())
@@ -273,9 +284,10 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 		log.Printf("raft %d 收到心跳，但是term小于当前term", rf.me)
 		reply.Term = rf.currentTerm
 		reply.Success = false
+		rf.mu.Unlock()
 		return
 	}
-	log.Printf("raft %d 收到心跳 from raft %d for term %d, 33333 当前term: %d ", rf.me, args.LeaderId, args.Term, rf.currentTerm)
+	// log.Printf("raft %d 收到心跳 from raft %d for term %d, 33333 当前term: %d ", rf.me, args.LeaderId, args.Term, rf.currentTerm)
 	// 2. Reply false if log doesn’t contain an entry at prevLogIndex whose term matches prevLogTerm (§5.3)
 	if args.Term > rf.currentTerm {
 		// 更新term
@@ -283,10 +295,49 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 		rf.votedFor = -1
 		rf.status = Follower
 	}
-	log.Printf("raft %d 收到心跳 from raft %d for term %d, 44444 当前term: %d ", rf.me, args.LeaderId, args.Term, rf.currentTerm)
+	// 3. Followers在写入Log之前，会检查本地的前一个Log条目，是否与Leader发来的有关前一条Log的信息匹配。
+	if len(rf.log) >= 2 {
+		if len(rf.log) <= args.PrevLogIndex {
+			// 代表对应的Log信息不存在
+			// 失败
+			log.Printf("raft %d 收到LogEntry，但是log不全", rf.me)
+			reply.Term = rf.currentTerm
+			reply.Success = false
+			reply.LogIndex = len(rf.log) - 1
+			reply.LogTerm = rf.log[reply.LogIndex].Term
+			rf.mu.Unlock()
+			return
+		}
+		logEntry := rf.log[args.PrevLogIndex]
+		if logEntry.Term != args.PrevLogTerm {
+			// 失败
+			log.Printf("raft %d 收到LogEntry，但是term 不对", rf.me)
+			reply.Term = rf.currentTerm
+			reply.Success = false
+			reply.LogIndex = logEntry.Index
+			reply.LogTerm = logEntry.Term
+			rf.mu.Unlock()
+			return
+		}
+	}
+	// 4. Append any new entries not already in the log 追加日志
+	if args.PrevLogIndex < len(rf.log)-1 {
+		rf.log = rf.log[:args.PrevLogIndex]
+	}
+	rf.log = append(rf.log, args.Entries...)
+	// 5. If leaderCommit > commitIndex, set commitIndex = min(leaderCommit, index of last new entry)
+	if args.LeaderCommit > rf.commitIndex {
+		log.Printf("raft %d 收到LogEntry，并且Leader已经提交， 本地log:%v", rf.me, rf.log)
+		rf.commitIndex = min(args.LeaderCommit, len(rf.log))
+		rf.mu.Unlock()
+		rf.applyLogs(rf.log[args.PrevLogIndex:])
+	} else {
+		rf.mu.Unlock()
+	}
+	// log.Printf("raft %d 收到心跳 from raft %d for term %d, 44444 当前term: %d ", rf.me, args.LeaderId, args.Term, rf.currentTerm)
 	reply.Term = rf.currentTerm
 	reply.Success = true
-	log.Printf("raft %d 收到心跳 from raft %d for term %d, end 当前term: %d ", rf.me, args.LeaderId, args.Term, rf.currentTerm)
+	// log.Printf("raft %d 收到心跳 from raft %d for term %d, end 当前term: %d ", rf.me, args.LeaderId, args.Term, rf.currentTerm)
 
 }
 
@@ -303,13 +354,126 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 // term. the third return value is true if this server believes it is
 // the leader.
 func (rf *Raft) Start(command interface{}) (int, int, bool) {
-	index := -1
-	term := -1
-	isLeader := true
+	rf.mu.Lock()
+	me := rf.me
+	isLeader := rf.status == Leader
+	term := rf.currentTerm
+	// index从1开始 这是当前command在log中的下标
+	index := len(rf.log)
+	log.Printf("raft %d 接收到日志命令 %v", me, command)
+	if !isLeader {
+		rf.mu.Unlock()
+		return -1, term, isLeader
+	}
 
 	// Your code here (2B).
-
+	// leader写入日志，未提交状态
+	logEntry := NewLogEntry(command, term, index)
+	rf.log = append(rf.log, logEntry)
+	rf.mu.Unlock()
+	// 复制日志到Follower
+	rf.logReplication(index)
 	return index, term, isLeader
+}
+
+func (rf *Raft) logReplication(index int) {
+	rf.mu.Lock()
+	// 只有leader才发送日志
+	if rf.status != Leader {
+		rf.mu.Unlock()
+		return
+	}
+	log.Printf("raft %d 开始日志复制发送 term %d", rf.me, rf.currentTerm)
+	currentTerm := rf.currentTerm
+	me := rf.me
+	commitIndex := rf.commitIndex
+	prevLogIndex := index - 1
+	prevLogTerm := 0
+	if prevLogIndex > 0 {
+		log := rf.log[prevLogIndex]
+		prevLogTerm = log.Term
+	}
+	logEntries := rf.log[index:]
+	agreeCount := int32(1)
+	majority := (len(rf.peers) + 1) / 2
+	rf.mu.Unlock()
+	// 发送心跳
+	for i := range rf.peers {
+		if i == rf.me {
+			continue
+		}
+		go rf.sendLogEntries(currentTerm, me, prevLogIndex, prevLogTerm, logEntries, commitIndex, i, agreeCount, majority)
+	}
+}
+
+func (rf *Raft) sendLogEntries(currentTerm int, me int, prevLogIndex int, prevLogTerm int, logEntries []LogEntry, commitIndex int, peer int, agreeCount int32, majority int) {
+	args := AppendEntriesArgs{}
+	args.Term = currentTerm
+	args.LeaderId = me
+	args.PrevLogIndex = prevLogIndex
+	args.PrevLogTerm = prevLogTerm
+	args.Entries = logEntries
+	args.LeaderCommit = commitIndex
+	reply := AppendEntriesReply{}
+	if rf.sendAppendEntries(peer, &args, &reply) {
+		rf.mu.Lock()
+		//If AppendEntries RPC received from new leader: convert to follower
+		if reply.Term > rf.currentTerm {
+			log.Printf("raft %d 降级成为follower", rf.me)
+			rf.currentTerm = reply.Term
+			rf.votedFor = -1
+			rf.status = Follower
+			rf.mu.Unlock()
+			return
+		}
+		// 状态检查
+		if currentTerm != rf.currentTerm || rf.status != Leader {
+			rf.mu.Unlock()
+			return
+		}
+		log.Printf("raft %d 日志复制返回 for raft %d term %d reply:%v", rf.me, peer, rf.currentTerm, reply)
+		if reply.Success {
+			atomic.AddInt32(&agreeCount, 1)
+			log.Printf("raft %d 日志复制返回成功 for raft %d term %d reply:%v, 同意数量 %d", rf.me, peer, rf.currentTerm, reply, atomic.LoadInt32(&agreeCount))
+			if atomic.LoadInt32(&agreeCount) >= int32(majority) {
+				// 多数同意，就提交
+				log.Printf("raft %d 日志复制返回成功 多数同意，提交日志给KV服务器 for raft %d term %d reply:%v", rf.me, peer, rf.currentTerm, reply)
+				rf.commitIndex++
+				rf.mu.Unlock()
+				rf.applyLogs(logEntries)
+			} else {
+				rf.mu.Unlock()
+			}
+		} else {
+			// 快速恢复日志
+			log.Printf("raft %d 日志复制返回失败，开始快速恢复 for raft %d term %d reply:%v", rf.me, peer, rf.currentTerm, reply)
+			// 回退term
+			rf.mu.Unlock()
+			rf.sendLogEntries(currentTerm, me, reply.LogIndex, reply.LogTerm, rf.log[reply.LogIndex:], commitIndex, peer, agreeCount, majority)
+		}
+	}
+}
+
+func (rf *Raft) applyLogs(logEntries []LogEntry) {
+	rf.mu.Lock()
+	rf.lastApplied++
+	rf.mu.Unlock()
+	for _, logEntry := range logEntries {
+		rf.applyCh <- ApplyMsg{
+			CommandValid: true,
+			Command:      logEntry.Command,
+			CommandIndex: logEntry.Index,
+		}
+	}
+}
+
+func NewLogEntry(command interface{}, term int, index int) LogEntry {
+	return LogEntry{
+		Command: command,
+		Term:    term,
+		Commit:  false,
+		Index:   index,
+	}
 }
 
 // the tester doesn't halt goroutines created by Raft after each test,
@@ -346,6 +510,13 @@ func (rf *Raft) broadcastAppendEntries() {
 		currentTerm := rf.currentTerm
 		me := rf.me
 		commitIndex := rf.commitIndex
+		index := len(rf.log)
+		prevLogIndex := index - 1
+		prevLogTerm := 0
+		if prevLogIndex > 0 {
+			log := rf.log[prevLogIndex]
+			prevLogTerm = log.Term
+		}
 		rf.mu.Unlock()
 		// 发送心跳
 		for i := range rf.peers {
@@ -356,8 +527,8 @@ func (rf *Raft) broadcastAppendEntries() {
 				args := AppendEntriesArgs{}
 				args.Term = currentTerm
 				args.LeaderId = me
-				args.PrevLogIndex = 0
-				args.PrevLogTerm = 0
+				args.PrevLogIndex = prevLogIndex
+				args.PrevLogTerm = prevLogTerm
 				args.Entries = nil
 				args.LeaderCommit = commitIndex
 				reply := AppendEntriesReply{}
@@ -490,7 +661,7 @@ func (rf *Raft) runElectionTimer() {
 }
 
 // 创建 Raft 节点检查日志新旧
-func makeRaftNode(peers []*labrpc.ClientEnd, me int, persister *Persister) *Raft {
+func makeRaftNode(peers []*labrpc.ClientEnd, me int, persister *Persister, applyCh chan ApplyMsg) *Raft {
 	rf := &Raft{}
 	rf.peers = peers
 	rf.persister = persister
@@ -501,6 +672,8 @@ func makeRaftNode(peers []*labrpc.ClientEnd, me int, persister *Persister) *Raft
 	rf.lastApplied = 0
 	rf.status = Follower
 	rf.lastHeartBeatTime.Store(time.Now())
+	rf.applyCh = applyCh
+	rf.log = append(rf.log, LogEntry{})
 	return rf
 }
 
@@ -517,7 +690,7 @@ func Make(peers []*labrpc.ClientEnd, me int,
 	persister *Persister, applyCh chan ApplyMsg) *Raft {
 
 	// 创建raft节点
-	rf := makeRaftNode(peers, me, persister)
+	rf := makeRaftNode(peers, me, persister, applyCh)
 	// initialize from state persisted before a crash
 	rf.readPersist(persister.ReadRaftState())
 
