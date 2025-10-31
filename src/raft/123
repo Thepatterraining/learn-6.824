@@ -1,0 +1,642 @@
+Test (2B): basic agreement ...
+2025/10/31 18:39:05 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:05 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:05 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:05 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:05 [18:39:05.061] [Node:1] [RPC_RECV] [Trace:CLIENT_1_1761907145061234000] 接收到日志命令:100 isLeader:false term:1
+2025/10/31 18:39:05 [18:39:05.062] [Node:2] [RPC_RECV] [Trace:CLIENT_2_1761907145062520000] 接收到日志命令:100 isLeader:false term:1
+2025/10/31 18:39:05 [18:39:05.062] [Node:0] [RPC_RECV] [Trace:CLIENT_0_1761907145062548000] 接收到日志命令:100 isLeader:false term:1
+2025/10/31 18:39:05 到这里了
+2025/10/31 18:39:05 [18:39:05.112] [Node:1] [RPC_RECV] [Trace:CLIENT_1_1761907145112786000] 接收到日志命令:100 isLeader:false term:6
+2025/10/31 18:39:05 [18:39:05.112] [Node:2] [RPC_RECV] [Trace:CLIENT_2_1761907145112856000] 接收到日志命令:100 isLeader:false term:6
+2025/10/31 18:39:05 [18:39:05.112] [Node:0] [RPC_RECV] [Trace:CLIENT_0_1761907145112895000] 接收到日志命令:100 isLeader:false term:6
+2025/10/31 18:39:05 到这里了
+2025/10/31 18:39:05 [18:39:05.163] [Node:1] [RPC_RECV] [Trace:CLIENT_1_1761907145163555000] 接收到日志命令:100 isLeader:false term:10
+2025/10/31 18:39:05 [18:39:05.163] [Node:2] [RPC_RECV] [Trace:CLIENT_2_1761907145163786000] 接收到日志命令:100 isLeader:false term:10
+2025/10/31 18:39:05 [18:39:05.163] [Node:0] [RPC_RECV] [Trace:CLIENT_0_1761907145163834000] 接收到日志命令:100 isLeader:false term:11
+2025/10/31 18:39:05 到这里了
+2025/10/31 18:39:05 [18:39:05.214] [Node:1] [RPC_RECV] [Trace:CLIENT_1_1761907145214127000] 接收到日志命令:100 isLeader:false term:15
+2025/10/31 18:39:05 [18:39:05.214] [Node:2] [RPC_RECV] [Trace:CLIENT_2_1761907145214241000] 接收到日志命令:100 isLeader:false term:15
+2025/10/31 18:39:05 [18:39:05.214] [Node:0] [RPC_RECV] [Trace:CLIENT_0_1761907145214305000] 接收到日志命令:100 isLeader:false term:16
+2025/10/31 18:39:05 到这里了
+2025/10/31 18:39:05 [18:39:05.265] [Node:1] [RPC_RECV] [Trace:CLIENT_1_1761907145265321000] 接收到日志命令:100 isLeader:false term:20
+2025/10/31 18:39:05 [18:39:05.265] [Node:2] [RPC_RECV] [Trace:CLIENT_2_1761907145265453000] 接收到日志命令:100 isLeader:false term:20
+2025/10/31 18:39:05 [18:39:05.265] [Node:0] [RPC_RECV] [Trace:CLIENT_0_1761907145265481000] 接收到日志命令:100 isLeader:false term:20
+2025/10/31 18:39:05 到这里了
+2025/10/31 18:39:05 [18:39:05.310] [Node:1] [TIMER_EVENT] [Trace:TIMER_1] 超时选举 since:252.216625ms threshold:228.447162ms
+2025/10/31 18:39:05 [18:39:05.314] [Node:1] [RPC_SEND] [Trace:ELEC_1_25] 发送选举请求
+2025/10/31 18:39:05 [18:39:05.315] [Node:1] [RPC_RECV] [Trace:CLIENT_1_1761907145315555000] 接收到日志命令:100 isLeader:false term:25
+2025/10/31 18:39:05 [18:39:05.315] [Node:2] [RPC_RECV] [Trace:CLIENT_2_1761907145315650000] 接收到日志命令:100 isLeader:false term:25
+2025/10/31 18:39:05 [18:39:05.315] [Node:0] [RPC_RECV] [Trace:CLIENT_0_1761907145315676000] 接收到日志命令:100 isLeader:false term:25
+2025/10/31 18:39:05 到这里了
+2025/10/31 18:39:05 [18:39:05.314] [Node:1] [RPC_SEND] [Trace:ELEC_1_25] 发送选举请求
+2025/10/31 18:39:05 [18:39:05.335] [Node:2] [RPC_RECV] [Trace:ELEC_1_25][1->2] RequestVote 接受 term:25 candidateId:1 lastLogIndex:0 lastLogTerm:0 currentTerm:27 status:CANDIDATE
+2025/10/31 18:39:05 [18:39:05.335] [Node:0] [RPC_RECV] [Trace:ELEC_1_25][1->0] RequestVote 接受 term:25 candidateId:1 lastLogIndex:0 lastLogTerm:0 currentTerm:27 status:CANDIDATE
+2025/10/31 18:39:05 [18:39:05.338] [Node:1] [INFO] [STATE_CHANGE] CANDIDATE->FOLLOWER term:27 reason:降级成follower
+2025/10/31 18:39:05 [18:39:05.338] [Node:1] [INFO] [STATE_CHANGE] FOLLOWER->FOLLOWER term:27 reason:降级成follower
+2025/10/31 18:39:05 [18:39:05.342] [Node:2] [TIMER_EVENT] [Trace:TIMER_2] 超时选举 since:283.473792ms threshold:257.619356ms
+2025/10/31 18:39:05 [18:39:05.342] [Node:2] [RPC_SEND] [Trace:ELEC_2_28] 发送选举请求
+2025/10/31 18:39:05 [18:39:05.342] [Node:2] [RPC_SEND] [Trace:ELEC_2_28] 发送选举请求
+2025/10/31 18:39:05 [18:39:05.342] [Node:0] [RPC_RECV] [Trace:ELEC_2_28][2->0] RequestVote 接受 term:28 candidateId:2 lastLogIndex:0 lastLogTerm:0 currentTerm:28 status:CANDIDATE
+2025/10/31 18:39:05 [18:39:05.342] [Node:1] [RPC_RECV] [Trace:ELEC_2_28][2->1] RequestVote 接受 term:28 candidateId:2 lastLogIndex:0 lastLogTerm:0 currentTerm:27 status:FOLLOWER
+2025/10/31 18:39:05 [18:39:05.343] [Node:0] [RPC_RECV] [Trace:ELEC_2_28][2->0] 投票信息 votedFor:0 lastLogTerm:0 lastLogIndex:0
+2025/10/31 18:39:05 [18:39:05.343] [Node:1] [INFO] [STATE_CHANGE] FOLLOWER->FOLLOWER term:27 reason:降级成follower
+2025/10/31 18:39:05 [18:39:05.343] [Node:1] [RPC_RECV] [Trace:ELEC_2_28][2->1] 投票信息 votedFor:-1 lastLogTerm:0 lastLogIndex:0
+2025/10/31 18:39:05 [18:39:05.343] [Node:0] [RPC_RECV] [Trace:ELEC_2_28][2->0] 投票失败兜底 candidate:2 term:28
+2025/10/31 18:39:05 [18:39:05.343] [Node:1] [RPC_RECV] [Trace:ELEC_2_28][2->1] 投票给 candidate:2 term:28
+2025/10/31 18:39:05 [18:39:05.343] [Node:2] [INFO] [STATE_CHANGE] CANDIDATE->LEADER term:28 reason:成为Leader
+2025/10/31 18:39:05 [18:39:05.344] [Node:2] [HEARTBEAT] [Trace:HB_2_28] 开始发送心跳广播 term:28 commitIndex:0
+2025/10/31 18:39:05 [18:39:05.346] [Node:0] [HEARTBEAT] [Trace:HB_2_28][2->0] AppendEntries 收到 term:28 leaderId:2 prevLogIndex:0 prevLogTerm:0 entries:0 leaderCommit:0 isHeartbeat:true currentTerm:28 status:CANDIDATE
+2025/10/31 18:39:05 [18:39:05.346] [Node:1] [HEARTBEAT] [Trace:HB_2_28][2->1] AppendEntries 收到 term:28 leaderId:2 prevLogIndex:0 prevLogTerm:0 entries:0 leaderCommit:0 isHeartbeat:true currentTerm:28 status:FOLLOWER
+2025/10/31 18:39:05 [18:39:05.346] [Node:1] [HEARTBEAT] [Trace:HB_2_28][2->1] 打印日志结果:[{<nil> 0 false 0}] 
+2025/10/31 18:39:05 [18:39:05.346] [Node:0] [HEARTBEAT] [Trace:HB_2_28][2->0] 打印日志结果:[{<nil> 0 false 0}] 
+2025/10/31 18:39:05 [18:39:05.346] [Node:1] [HEARTBEAT] [Trace:HB_2_28][2->1] 复制日志结果:[{<nil> 0 false 0}] 
+2025/10/31 18:39:05 [18:39:05.346] [Node:0] [HEARTBEAT] [Trace:HB_2_28][2->0] 复制日志结果:[{<nil> 0 false 0}] 
+2025/10/31 18:39:05 [18:39:05.354] [Node:2] [HEARTBEAT] [Trace:HB_2_28] 开始发送心跳广播 term:28 commitIndex:0
+2025/10/31 18:39:05 [18:39:05.355] [Node:0] [HEARTBEAT] [Trace:HB_2_28][2->0] AppendEntries 收到 term:28 leaderId:2 prevLogIndex:0 prevLogTerm:0 entries:0 leaderCommit:0 isHeartbeat:true currentTerm:29 status:CANDIDATE
+2025/10/31 18:39:05 [18:39:05.355] [Node:1] [HEARTBEAT] [Trace:HB_2_28][2->1] AppendEntries 收到 term:28 leaderId:2 prevLogIndex:0 prevLogTerm:0 entries:0 leaderCommit:0 isHeartbeat:true currentTerm:29 status:CANDIDATE
+2025/10/31 18:39:05 [18:39:05.355] [Node:0] [HEARTBEAT] [Trace:HB_2_28][2->0] Rejected: 收到心跳，但是term小于当前term term(28) < currentTerm(29)
+2025/10/31 18:39:05 [18:39:05.355] [Node:1] [HEARTBEAT] [Trace:HB_2_28][2->1] Rejected: 收到心跳，但是term小于当前term term(28) < currentTerm(29)
+2025/10/31 18:39:05 [18:39:05.355] [Node:2] [INFO] [STATE_CHANGE] LEADER->FOLLOWER term:28 reason:降级成follower
+2025/10/31 18:39:05 [18:39:05.355] [Node:2] [INFO] [STATE_CHANGE] FOLLOWER->FOLLOWER term:29 reason:降级成follower
+2025/10/31 18:39:05 [18:39:05.365] [Node:1] [RPC_RECV] [Trace:CLIENT_1_1761907145365808000] 接收到日志命令:100 isLeader:false term:30
+2025/10/31 18:39:05 [18:39:05.365] [Node:2] [RPC_RECV] [Trace:CLIENT_2_1761907145365892000] 接收到日志命令:100 isLeader:false term:29
+2025/10/31 18:39:05 [18:39:05.365] [Node:0] [RPC_RECV] [Trace:CLIENT_0_1761907145365930000] 接收到日志命令:100 isLeader:false term:30
+2025/10/31 18:39:05 到这里了
+2025/10/31 18:39:05 [18:39:05.416] [Node:1] [RPC_RECV] [Trace:CLIENT_1_1761907145416965000] 接收到日志命令:100 isLeader:false term:35
+2025/10/31 18:39:05 [18:39:05.417] [Node:2] [RPC_RECV] [Trace:CLIENT_2_1761907145417082000] 接收到日志命令:100 isLeader:false term:29
+2025/10/31 18:39:05 [18:39:05.417] [Node:0] [RPC_RECV] [Trace:CLIENT_0_1761907145417149000] 接收到日志命令:100 isLeader:false term:35
+2025/10/31 18:39:05 到这里了
+2025/10/31 18:39:05 [18:39:05.468] [Node:1] [RPC_RECV] [Trace:CLIENT_1_1761907145468039000] 接收到日志命令:100 isLeader:false term:40
+2025/10/31 18:39:05 [18:39:05.468] [Node:2] [RPC_RECV] [Trace:CLIENT_2_1761907145468139000] 接收到日志命令:100 isLeader:false term:29
+2025/10/31 18:39:05 [18:39:05.468] [Node:0] [RPC_RECV] [Trace:CLIENT_0_1761907145468627000] 接收到日志命令:100 isLeader:false term:39
+2025/10/31 18:39:05 到这里了
+2025/10/31 18:39:05 [18:39:05.519] [Node:1] [RPC_RECV] [Trace:CLIENT_1_1761907145519184000] 接收到日志命令:100 isLeader:false term:45
+2025/10/31 18:39:05 [18:39:05.519] [Node:2] [RPC_RECV] [Trace:CLIENT_2_1761907145519596000] 接收到日志命令:100 isLeader:false term:29
+2025/10/31 18:39:05 [18:39:05.519] [Node:0] [RPC_RECV] [Trace:CLIENT_0_1761907145519852000] 接收到日志命令:100 isLeader:false term:44
+2025/10/31 18:39:05 到这里了
+2025/10/31 18:39:05 [18:39:05.560] [Node:1] [TIMER_EVENT] [Trace:TIMER_1] 超时选举 since:204.728458ms threshold:204.051503ms
+2025/10/31 18:39:05 [18:39:05.560] [Node:1] [RPC_SEND] [Trace:ELEC_1_49] 发送选举请求
+2025/10/31 18:39:05 [18:39:05.561] [Node:1] [RPC_SEND] [Trace:ELEC_1_49] 发送选举请求
+2025/10/31 18:39:05 [18:39:05.563] [Node:2] [RPC_RECV] [Trace:ELEC_1_49][1->2] RequestVote 接受 term:49 candidateId:1 lastLogIndex:0 lastLogTerm:0 currentTerm:29 status:FOLLOWER
+2025/10/31 18:39:05 [18:39:05.564] [Node:2] [INFO] [STATE_CHANGE] FOLLOWER->FOLLOWER term:29 reason:降级成follower
+2025/10/31 18:39:05 [18:39:05.564] [Node:2] [RPC_RECV] [Trace:ELEC_1_49][1->2] 投票信息 votedFor:-1 lastLogTerm:0 lastLogIndex:0
+2025/10/31 18:39:05 [18:39:05.564] [Node:2] [RPC_RECV] [Trace:ELEC_1_49][1->2] 投票给 candidate:1 term:49
+2025/10/31 18:39:05 [18:39:05.565] [Node:1] [INFO] [STATE_CHANGE] CANDIDATE->LEADER term:49 reason:成为Leader
+2025/10/31 18:39:05 [18:39:05.565] [Node:1] [HEARTBEAT] [Trace:HB_1_49] 开始发送心跳广播 term:49 commitIndex:0
+2025/10/31 18:39:05 [18:39:05.566] [Node:2] [HEARTBEAT] [Trace:HB_1_49][1->2] AppendEntries 收到 term:49 leaderId:1 prevLogIndex:0 prevLogTerm:0 entries:0 leaderCommit:0 isHeartbeat:true currentTerm:49 status:FOLLOWER
+2025/10/31 18:39:05 [18:39:05.567] [Node:0] [HEARTBEAT] [Trace:HB_1_49][1->0] AppendEntries 收到 term:49 leaderId:1 prevLogIndex:0 prevLogTerm:0 entries:0 leaderCommit:0 isHeartbeat:true currentTerm:48 status:CANDIDATE
+2025/10/31 18:39:05 [18:39:05.567] [Node:2] [HEARTBEAT] [Trace:HB_1_49][1->2] 打印日志结果:[{<nil> 0 false 0}] 
+2025/10/31 18:39:05 [18:39:05.567] [Node:0] [INFO] [STATE_CHANGE] CANDIDATE->FOLLOWER term:48 reason:降级成follower
+2025/10/31 18:39:05 [18:39:05.567] [Node:2] [HEARTBEAT] [Trace:HB_1_49][1->2] 复制日志结果:[{<nil> 0 false 0}] 
+2025/10/31 18:39:05 [18:39:05.567] [Node:0] [HEARTBEAT] [Trace:HB_1_49][1->0] 打印日志结果:[{<nil> 0 false 0}] 
+2025/10/31 18:39:05 [18:39:05.567] [Node:0] [HEARTBEAT] [Trace:HB_1_49][1->0] 复制日志结果:[{<nil> 0 false 0}] 
+2025/10/31 18:39:05 [18:39:05.571] [Node:1] [RPC_RECV] [Trace:CLIENT_1_1761907145571054000] 接收到日志命令:100 isLeader:true term:49
+2025/10/31 18:39:05 [18:39:05.571] [Node:1] [LOG_REPLICA] [Trace:LOG_1_49] 开始日志复制发送 term:49 log:[{<nil> 0 false 0} {100 49 false 1}] majority:2
+2025/10/31 18:39:05 返回的索引 1
+2025/10/31 18:39:05 到这里了
+2025/10/31 18:39:05 time.Since(t1).Seconds()
+2025/10/31 18:39:05 [18:39:05.572] [Node:0] [RPC_RECV] [Trace:ELEC_1_49][1->0] RequestVote 接受 term:49 candidateId:1 lastLogIndex:0 lastLogTerm:0 currentTerm:50 status:CANDIDATE
+2025/10/31 18:39:05 [18:39:05.573] [Node:1] [INFO] [STATE_CHANGE] LEADER->FOLLOWER term:49 reason:降级成follower
+2025/10/31 18:39:05 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:05 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:05 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:05 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:05 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:05 [18:39:05.574] [Node:2] [LOG_REPLICA] [Trace:LOG_1_49][1->2] AppendEntries 收到 term:49 leaderId:1 prevLogIndex:0 prevLogTerm:0 entries:1 leaderCommit:0 isHeartbeat:false currentTerm:49 status:FOLLOWER
+2025/10/31 18:39:05 [18:39:05.574] [Node:2] [LOG_REPLICA] [Trace:LOG_1_49][1->2] 打印日志结果:[{<nil> 0 false 0}] 
+2025/10/31 18:39:05 [18:39:05.575] [Node:2] [LOG_REPLICA] [Trace:LOG_1_49][1->2] 复制日志结果:[{<nil> 0 false 0} {100 49 false 1}] 
+2025/10/31 18:39:05 [18:39:05.576] [Node:0] [LOG_REPLICA] [Trace:LOG_1_49][1->0] AppendEntries 收到 term:49 leaderId:1 prevLogIndex:0 prevLogTerm:0 entries:1 leaderCommit:0 isHeartbeat:false currentTerm:50 status:CANDIDATE
+2025/10/31 18:39:05 [18:39:05.576] [Node:0] [LOG_REPLICA] [Trace:LOG_1_49][1->0] Rejected: 收到心跳，但是term小于当前term term(49) < currentTerm(50)
+2025/10/31 18:39:05 [18:39:05.577] [Node:1] [INFO] [STATE_CHANGE] FOLLOWER->FOLLOWER term:50 reason:降级成follower
+2025/10/31 18:39:05 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:05 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:05 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:05 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:05 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:05 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:05 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:05 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:05 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:05 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:05 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:05 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:05 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:05 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:05 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:05 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:05 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:05 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:05 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:05 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:05 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:05 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:05 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:05 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:05 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:05 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:05 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:05 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:05 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:05 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:05 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:05 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:05 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:05 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:05 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:05 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:05 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:05 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:05 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:05 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:05 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:05 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:05 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:05 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:05 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:05 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:05 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:05 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:05 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:05 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:05 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:05 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:05 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:05 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:05 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:05 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:05 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:05 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:05 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:05 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:05 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:05 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:05 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:05 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:05 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:05 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:05 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:05 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:05 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:05 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:05 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:05 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:05 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:05 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:05 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:05 [18:39:05.903] [Node:0] [TIMER_EVENT] [Trace:TIMER_0] 超时选举 since:326.5905ms threshold:301.050405ms
+2025/10/31 18:39:05 [18:39:05.903] [Node:0] [RPC_SEND] [Trace:ELEC_0_81] 发送选举请求
+2025/10/31 18:39:05 [18:39:05.903] [Node:0] [RPC_SEND] [Trace:ELEC_0_81] 发送选举请求
+2025/10/31 18:39:05 [18:39:05.904] [Node:1] [RPC_RECV] [Trace:ELEC_0_81][0->1] RequestVote 接受 term:81 candidateId:0 lastLogIndex:0 lastLogTerm:0 currentTerm:50 status:FOLLOWER
+2025/10/31 18:39:05 [18:39:05.904] [Node:2] [RPC_RECV] [Trace:ELEC_0_81][0->2] RequestVote 接受 term:81 candidateId:0 lastLogIndex:0 lastLogTerm:0 currentTerm:49 status:FOLLOWER
+2025/10/31 18:39:05 [18:39:05.904] [Node:1] [INFO] [STATE_CHANGE] FOLLOWER->FOLLOWER term:50 reason:降级成follower
+2025/10/31 18:39:05 [18:39:05.904] [Node:2] [INFO] [STATE_CHANGE] FOLLOWER->FOLLOWER term:49 reason:降级成follower
+2025/10/31 18:39:05 [18:39:05.904] [Node:1] [RPC_RECV] [Trace:ELEC_0_81][0->1] 投票信息 votedFor:-1 lastLogTerm:49 lastLogIndex:1
+2025/10/31 18:39:05 [18:39:05.904] [Node:2] [RPC_RECV] [Trace:ELEC_0_81][0->2] 投票信息 votedFor:-1 lastLogTerm:49 lastLogIndex:1
+2025/10/31 18:39:05 [18:39:05.904] [Node:1] [RPC_RECV] [Trace:ELEC_0_81][0->1] 投票失败兜底 candidate:0 term:81
+2025/10/31 18:39:05 [18:39:05.904] [Node:2] [RPC_RECV] [Trace:ELEC_0_81][0->2] 投票失败兜底 candidate:0 term:81
+2025/10/31 18:39:05 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:05 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:05 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:05 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:05 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:05 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:05 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:05 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:05 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:05 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:05 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:05 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:05 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:05 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:05 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:05 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:05 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:05 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:05 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:05 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:05 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:05 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:05 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:05 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:05 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:06 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:06 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:06 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:06 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:06 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:06 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:06 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:06 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:06 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:06 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:06 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:06 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:06 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:06 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:06 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:06 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:06 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:06 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:06 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:06 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:06 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:06 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:06 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:06 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:06 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:06 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:06 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:06 [18:39:06.200] [Node:0] [TIMER_EVENT] [Trace:TIMER_0] 超时选举 since:297.414417ms threshold:261.227528ms
+2025/10/31 18:39:06 [18:39:06.201] [Node:0] [RPC_SEND] [Trace:ELEC_0_108] 发送选举请求
+2025/10/31 18:39:06 [18:39:06.201] [Node:0] [RPC_SEND] [Trace:ELEC_0_108] 发送选举请求
+2025/10/31 18:39:06 [18:39:06.201] [Node:2] [RPC_RECV] [Trace:ELEC_0_108][0->2] RequestVote 接受 term:108 candidateId:0 lastLogIndex:0 lastLogTerm:0 currentTerm:81 status:FOLLOWER
+2025/10/31 18:39:06 [18:39:06.201] [Node:1] [RPC_RECV] [Trace:ELEC_0_108][0->1] RequestVote 接受 term:108 candidateId:0 lastLogIndex:0 lastLogTerm:0 currentTerm:81 status:FOLLOWER
+2025/10/31 18:39:06 [18:39:06.201] [Node:1] [INFO] [STATE_CHANGE] FOLLOWER->FOLLOWER term:81 reason:降级成follower
+2025/10/31 18:39:06 [18:39:06.201] [Node:2] [INFO] [STATE_CHANGE] FOLLOWER->FOLLOWER term:81 reason:降级成follower
+2025/10/31 18:39:06 [18:39:06.201] [Node:1] [RPC_RECV] [Trace:ELEC_0_108][0->1] 投票信息 votedFor:-1 lastLogTerm:49 lastLogIndex:1
+2025/10/31 18:39:06 [18:39:06.201] [Node:1] [RPC_RECV] [Trace:ELEC_0_108][0->1] 投票失败兜底 candidate:0 term:108
+2025/10/31 18:39:06 [18:39:06.201] [Node:2] [RPC_RECV] [Trace:ELEC_0_108][0->2] 投票信息 votedFor:-1 lastLogTerm:49 lastLogIndex:1
+2025/10/31 18:39:06 [18:39:06.202] [Node:2] [RPC_RECV] [Trace:ELEC_0_108][0->2] 投票失败兜底 candidate:0 term:108
+2025/10/31 18:39:06 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:06 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:06 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:06 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:06 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:06 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:06 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:06 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:06 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:06 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:06 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:06 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:06 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:06 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:06 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:06 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:06 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:06 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:06 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:06 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:06 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:06 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:06 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:06 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:06 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:06 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:06 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:06 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:06 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:06 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:06 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:06 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:06 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:06 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:06 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:06 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:06 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:06 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:06 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:06 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:06 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:06 [18:39:06.493] [Node:0] [TIMER_EVENT] [Trace:TIMER_0] 超时选举 since:292.818375ms threshold:289.895506ms
+2025/10/31 18:39:06 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:06 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:06 [18:39:06.494] [Node:0] [RPC_SEND] [Trace:ELEC_0_135] 发送选举请求
+2025/10/31 18:39:06 [18:39:06.494] [Node:0] [RPC_SEND] [Trace:ELEC_0_135] 发送选举请求
+2025/10/31 18:39:06 [18:39:06.496] [Node:2] [RPC_RECV] [Trace:ELEC_0_135][0->2] RequestVote 接受 term:135 candidateId:0 lastLogIndex:0 lastLogTerm:0 currentTerm:108 status:FOLLOWER
+2025/10/31 18:39:06 [18:39:06.496] [Node:1] [RPC_RECV] [Trace:ELEC_0_135][0->1] RequestVote 接受 term:135 candidateId:0 lastLogIndex:0 lastLogTerm:0 currentTerm:108 status:FOLLOWER
+2025/10/31 18:39:06 [18:39:06.496] [Node:1] [INFO] [STATE_CHANGE] FOLLOWER->FOLLOWER term:108 reason:降级成follower
+2025/10/31 18:39:06 [18:39:06.496] [Node:2] [INFO] [STATE_CHANGE] FOLLOWER->FOLLOWER term:108 reason:降级成follower
+2025/10/31 18:39:06 [18:39:06.496] [Node:2] [RPC_RECV] [Trace:ELEC_0_135][0->2] 投票信息 votedFor:-1 lastLogTerm:49 lastLogIndex:1
+2025/10/31 18:39:06 [18:39:06.496] [Node:2] [RPC_RECV] [Trace:ELEC_0_135][0->2] 投票失败兜底 candidate:0 term:135
+2025/10/31 18:39:06 [18:39:06.496] [Node:1] [RPC_RECV] [Trace:ELEC_0_135][0->1] 投票信息 votedFor:-1 lastLogTerm:49 lastLogIndex:1
+2025/10/31 18:39:06 [18:39:06.496] [Node:1] [RPC_RECV] [Trace:ELEC_0_135][0->1] 投票失败兜底 candidate:0 term:135
+2025/10/31 18:39:06 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:06 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:06 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:06 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:06 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:06 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:06 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:06 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:06 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:06 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:06 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:06 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:06 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:06 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:06 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:06 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:06 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:06 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:06 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:06 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:06 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:06 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:06 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:06 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:06 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:06 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:06 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:06 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:06 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:06 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:06 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:06 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:06 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:06 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:06 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:06 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:06 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:06 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:06 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:06 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:06 [18:39:06.793] [Node:0] [TIMER_EVENT] [Trace:TIMER_0] 超时选举 since:299.106416ms threshold:202.676628ms
+2025/10/31 18:39:06 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:06 [18:39:06.796] [Node:0] [RPC_SEND] [Trace:ELEC_0_162] 发送选举请求
+2025/10/31 18:39:06 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:06 [18:39:06.794] [Node:0] [RPC_SEND] [Trace:ELEC_0_162] 发送选举请求
+2025/10/31 18:39:06 [18:39:06.796] [Node:1] [RPC_RECV] [Trace:ELEC_0_162][0->1] RequestVote 接受 term:162 candidateId:0 lastLogIndex:0 lastLogTerm:0 currentTerm:135 status:FOLLOWER
+2025/10/31 18:39:06 [18:39:06.796] [Node:1] [INFO] [STATE_CHANGE] FOLLOWER->FOLLOWER term:135 reason:降级成follower
+2025/10/31 18:39:06 [18:39:06.796] [Node:1] [RPC_RECV] [Trace:ELEC_0_162][0->1] 投票信息 votedFor:-1 lastLogTerm:49 lastLogIndex:1
+2025/10/31 18:39:06 [18:39:06.796] [Node:2] [RPC_RECV] [Trace:ELEC_0_162][0->2] RequestVote 接受 term:162 candidateId:0 lastLogIndex:0 lastLogTerm:0 currentTerm:135 status:FOLLOWER
+2025/10/31 18:39:06 [18:39:06.796] [Node:1] [RPC_RECV] [Trace:ELEC_0_162][0->1] 投票失败兜底 candidate:0 term:162
+2025/10/31 18:39:06 [18:39:06.797] [Node:2] [INFO] [STATE_CHANGE] FOLLOWER->FOLLOWER term:135 reason:降级成follower
+2025/10/31 18:39:06 [18:39:06.797] [Node:2] [RPC_RECV] [Trace:ELEC_0_162][0->2] 投票信息 votedFor:-1 lastLogTerm:49 lastLogIndex:1
+2025/10/31 18:39:06 [18:39:06.797] [Node:2] [RPC_RECV] [Trace:ELEC_0_162][0->2] 投票失败兜底 candidate:0 term:162
+2025/10/31 18:39:06 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:06 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:06 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:06 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:06 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:06 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:06 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:06 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:06 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:06 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:06 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:06 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:06 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:06 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:06 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:06 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:06 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:06 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:06 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:06 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:06 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:06 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:06 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:06 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:06 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:06 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:06 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:06 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:07 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:07 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:07 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:07 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:07 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:07 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:07 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:07 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:07 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:07 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:07 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:07 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:07 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:07 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:07 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:07 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:07 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:07 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:07 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:07 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:07 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:07 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:07 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:07 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:07 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:07 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:07 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:07 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:07 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:07 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:07 [18:39:07.137] [Node:0] [TIMER_EVENT] [Trace:TIMER_0] 超时选举 since:343.5255ms threshold:227.569827ms
+2025/10/31 18:39:07 [18:39:07.137] [Node:0] [RPC_SEND] [Trace:ELEC_0_193] 发送选举请求
+2025/10/31 18:39:07 [18:39:07.137] [Node:0] [RPC_SEND] [Trace:ELEC_0_193] 发送选举请求
+2025/10/31 18:39:07 [18:39:07.137] [Node:1] [RPC_RECV] [Trace:ELEC_0_193][0->1] RequestVote 接受 term:193 candidateId:0 lastLogIndex:0 lastLogTerm:0 currentTerm:162 status:FOLLOWER
+2025/10/31 18:39:07 [18:39:07.137] [Node:2] [RPC_RECV] [Trace:ELEC_0_193][0->2] RequestVote 接受 term:193 candidateId:0 lastLogIndex:0 lastLogTerm:0 currentTerm:162 status:FOLLOWER
+2025/10/31 18:39:07 [18:39:07.137] [Node:1] [INFO] [STATE_CHANGE] FOLLOWER->FOLLOWER term:162 reason:降级成follower
+2025/10/31 18:39:07 [18:39:07.137] [Node:2] [INFO] [STATE_CHANGE] FOLLOWER->FOLLOWER term:162 reason:降级成follower
+2025/10/31 18:39:07 [18:39:07.137] [Node:1] [RPC_RECV] [Trace:ELEC_0_193][0->1] 投票信息 votedFor:-1 lastLogTerm:49 lastLogIndex:1
+2025/10/31 18:39:07 [18:39:07.137] [Node:2] [RPC_RECV] [Trace:ELEC_0_193][0->2] 投票信息 votedFor:-1 lastLogTerm:49 lastLogIndex:1
+2025/10/31 18:39:07 [18:39:07.138] [Node:1] [RPC_RECV] [Trace:ELEC_0_193][0->1] 投票失败兜底 candidate:0 term:193
+2025/10/31 18:39:07 [18:39:07.138] [Node:2] [RPC_RECV] [Trace:ELEC_0_193][0->2] 投票失败兜底 candidate:0 term:193
+2025/10/31 18:39:07 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:07 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:07 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:07 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:07 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:07 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:07 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:07 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:07 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:07 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:07 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:07 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:07 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:07 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:07 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:07 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:07 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:07 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:07 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:07 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:07 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:07 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:07 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:07 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:07 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:07 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:07 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:07 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:07 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:07 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:07 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:07 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:07 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:07 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:07 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:07 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:07 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:07 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:07 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:07 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:07 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:07 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:07 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:07 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:07 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:07 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:07 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:07 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:07 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:07 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:07 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:07 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:07 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:07 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:07 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:07 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:07 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:07 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:07 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:07 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:07 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:07 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:07 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:07 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:07 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:07 [18:39:07.421] [Node:0] [TIMER_EVENT] [Trace:TIMER_0] 超时选举 since:284.005667ms threshold:257.91369ms
+2025/10/31 18:39:07 [18:39:07.422] [Node:0] [RPC_SEND] [Trace:ELEC_0_219] 发送选举请求
+2025/10/31 18:39:07 [18:39:07.422] [Node:0] [RPC_SEND] [Trace:ELEC_0_219] 发送选举请求
+2025/10/31 18:39:07 [18:39:07.424] [Node:1] [RPC_RECV] [Trace:ELEC_0_219][0->1] RequestVote 接受 term:219 candidateId:0 lastLogIndex:0 lastLogTerm:0 currentTerm:193 status:FOLLOWER
+2025/10/31 18:39:07 [18:39:07.424] [Node:2] [RPC_RECV] [Trace:ELEC_0_219][0->2] RequestVote 接受 term:219 candidateId:0 lastLogIndex:0 lastLogTerm:0 currentTerm:193 status:FOLLOWER
+2025/10/31 18:39:07 [18:39:07.424] [Node:1] [INFO] [STATE_CHANGE] FOLLOWER->FOLLOWER term:193 reason:降级成follower
+2025/10/31 18:39:07 [18:39:07.424] [Node:2] [INFO] [STATE_CHANGE] FOLLOWER->FOLLOWER term:193 reason:降级成follower
+2025/10/31 18:39:07 [18:39:07.424] [Node:1] [RPC_RECV] [Trace:ELEC_0_219][0->1] 投票信息 votedFor:-1 lastLogTerm:49 lastLogIndex:1
+2025/10/31 18:39:07 [18:39:07.424] [Node:2] [RPC_RECV] [Trace:ELEC_0_219][0->2] 投票信息 votedFor:-1 lastLogTerm:49 lastLogIndex:1
+2025/10/31 18:39:07 [18:39:07.424] [Node:1] [RPC_RECV] [Trace:ELEC_0_219][0->1] 投票失败兜底 candidate:0 term:219
+2025/10/31 18:39:07 [18:39:07.424] [Node:2] [RPC_RECV] [Trace:ELEC_0_219][0->2] 投票失败兜底 candidate:0 term:219
+2025/10/31 18:39:07 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:07 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:07 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:07 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:07 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:07 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:07 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:07 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:07 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:07 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:07 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:07 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:07 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:07 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:07 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:07 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:07 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:07 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:07 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:07 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:07 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:07 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:07 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:07 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:07 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:07 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:07 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:07 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:07 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:07 nd 0, cmd1 <nil> cmd 100
+2025/10/31 18:39:07 rfats [0xc000104000 0xc0001040e0 0xc0001041c0]
+2025/10/31 18:39:07 i 0 cmd1 <nil>, ok false
+2025/10/31 18:39:07 i 1 cmd1 <nil>, ok false
+2025/10/31 18:39:07 i 2 cmd1 <nil>, ok false
+2025/10/31 18:39:07 nd 0, cmd1 <nil> cmd 100
+--- FAIL: TestBasicAgree2B (2.54s)
+    config.go:477: one(100) failed to reach agreement
+FAIL
+exit status 1
+FAIL	learn-6.824/src/raft	3.186s

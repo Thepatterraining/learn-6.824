@@ -1,7 +1,7 @@
 package raft
 
 import (
-	"log"
+	"fmt"
 	"math/rand"
 	"sync"
 	"sync/atomic"
@@ -9,6 +9,84 @@ import (
 
 	"learn-6.824/src/labrpc"
 )
+
+// TraceContext 用于追踪请求链路
+type TraceContext struct {
+	TraceID string
+	From    int
+	To      int
+}
+
+// EventType 事件类型
+type EventType string
+
+const (
+	RPC_RECV       EventType = "RPC_RECV"
+	RPC_SEND       EventType = "RPC_SEND"
+	STATE_CHANGE   EventType = "STATE_CHANGE"
+	LOG_COMMIT     EventType = "LOG_COMMIT"
+	LOG_REPLICA    EventType = "LOG_REPLICA"
+	TIMER_EVENT    EventType = "TIMER_EVENT"
+	ELECTION_EVENT EventType = "ELECTION_EVENT"
+	HEARTBEAT      EventType = "HEARTBEAT"
+)
+
+// Logger 结构化日志记录器
+type Logger struct {
+	nodeId int
+}
+
+// NewLogger 创建新的日志记录器
+func NewLogger(nodeId int) *Logger {
+	return &Logger{nodeId: nodeId}
+}
+
+// LogWithTrace 记录带追踪信息的日志
+func (l *Logger) LogWithTrace(eventType EventType, trace TraceContext, format string, args ...interface{}) {
+	timestamp := time.Now().Format("15:04:05.000")
+
+	message := fmt.Sprintf(format, args...)
+
+	traceInfo := ""
+	if trace.TraceID != "" {
+		if trace.From >= 0 && trace.To >= 0 {
+			traceInfo = fmt.Sprintf("[Trace:%s][%d->%d]", trace.TraceID, trace.From, trace.To)
+		} else {
+			traceInfo = fmt.Sprintf("[Trace:%s]", trace.TraceID)
+		}
+	}
+
+	DPrintf("[%s] [Node:%d] [%s] %s %s",
+		timestamp, l.nodeId, eventType, traceInfo, message)
+}
+
+// LogStateChange 记录状态变化
+func (l *Logger) LogStateChange(from, to RaftStatus, term int, reason string) {
+	timestamp := time.Now().Format("15:04:05.000")
+
+	DPrintf("[%s] [Node:%d] [%s] [STATE_CHANGE] %s->%s term:%d reason:%s",
+		timestamp, l.nodeId, "INFO",
+		getStatusString(from), getStatusString(to), term, reason)
+}
+
+// getStatusString 获取状态字符串
+func getStatusString(status RaftStatus) string {
+	switch status {
+	case Follower:
+		return "FOLLOWER"
+	case Candidate:
+		return "CANDIDATE"
+	case Leader:
+		return "LEADER"
+	default:
+		return "UNKNOWN"
+	}
+}
+
+// generateTraceID 生成追踪ID
+func generateTraceID() string {
+	return fmt.Sprintf("%d%d", time.Now().UnixNano(), rand.Intn(1000))
+}
 
 //
 // this is an outline of the API that raft must expose to
@@ -70,6 +148,8 @@ type Raft struct {
 	me        int                 // this peer's index into peers[]
 	dead      int32               // set by Kill()
 
+	logger *Logger // 结构化日志记录器
+
 	// Your data here (2A, 2B, 2C).
 	// Look at the paper's Figure 2 for a description of what
 	// state a Raft server must maintain.
@@ -90,6 +170,12 @@ type Raft struct {
 	status RaftStatus
 	// 心跳时间
 	lastHeartBeatTime atomic.Value
+	// 条件变量用于心跳控制
+	heartbeatCond *sync.Cond
+	// 标记是否需要立即发送心跳
+	needHeartbeat bool
+	// 标记心跳goroutine是否应该停止
+	stopHeartbeat bool
 	// 通道
 	applyCh chan ApplyMsg
 }
@@ -146,8 +232,10 @@ type RequestVoteArgs struct {
 	// Your data here (2A, 2B).
 	Term         int
 	CandidateId  int
-	LastLogIndex int // 候选人最后一条日志的 index（用于判断日志新旧）
-	LastLogTerm  int // 候选人最后一条日志的 term。
+	LastLogIndex int    // 候选人最后一条日志的 index（用于判断日志新旧）
+	LastLogTerm  int    // 候选人最后一条日志的 term。
+	TraceID      string // 添加追踪ID
+	From         int    // 添加发送者节点ID
 }
 
 // example RequestVote RPC reply structure.
@@ -165,49 +253,61 @@ type RequestVoteReply struct {
 func (rf *Raft) RequestVote(args *RequestVoteArgs, reply *RequestVoteReply) {
 	// Your code here (2A, 2B).
 	rf.mu.Lock()
+
+	currentTerm := rf.currentTerm
+	me := rf.me
+	lastLogIndex := rf.log[len(rf.log)-1].Index
+	lastLogTerm := rf.log[len(rf.log)-1].Term
+	status := rf.status
 	defer rf.mu.Unlock()
 	// 检查是否满足条件 满足就投票
-	log.Printf("raft %d received RequestVote from %d for term %d, args:%v,", rf.me, args.CandidateId, args.Term, args)
+	// 创建追踪上下文
+	trace := TraceContext{
+		TraceID: args.TraceID,
+		From:    args.From,
+		To:      me,
+	}
+
+	rf.logger.LogWithTrace(RPC_RECV, trace,
+		"RequestVote 接受 term:%d candidateId:%d lastLogIndex:%d lastLogTerm:%d currentTerm:%d status:%s",
+		args.Term, args.CandidateId, args.LastLogIndex, args.LastLogTerm, currentTerm, getStatusString(status))
 	// 如果 RPC 的 term < currentTerm，立即回复 false（拒绝），并返回自己的 currentTerm。
-	if args.Term < rf.currentTerm {
-		reply.Term = rf.currentTerm
+	if args.Term < currentTerm {
+		reply.Term = currentTerm
 		reply.VoteGranted = false
 		return
 	}
 	// currentTerm := rf.currentTerm
-	if args.Term > rf.currentTerm {
+	if args.Term > currentTerm {
 		// 如果 RPC 包含更大的 term，要更新并退化为 follower
-		rf.currentTerm = args.Term
-		rf.votedFor = -1
-		rf.status = Follower
+		rf.becomeFollower(args.Term)
 	}
-	// // 收到相同 term，但已投给别人 拒绝投票
-	// if args.Term == rf.currentTerm && rf.votedFor != -1 {
-	// 	log.Printf("raft %d 收到相同 term，但已投给别人 拒绝投票 投票给 %d", rf.me, rf.votedFor)
-	// 	reply.VoteGranted = false
-	// 	reply.Term = rf.currentTerm
-	// 	return
-	// }
-	// log.Printf("raft %d checking vote for %d for term %d", rf.me, args.CandidateId, args.Term)
+	currentTerm = rf.currentTerm
+	votedFor := rf.votedFor
 	// 否则（term >= currentTerm）需要检查两点：
 	// 本节点尚未在该 term 投票（votedFor == -1 或已投给 candidateId）；
-	if rf.votedFor == -1 || rf.votedFor == args.CandidateId {
-		log.Printf("raft %d 检查日志新旧 for %d for term %d", rf.me, args.CandidateId, args.Term)
-		// 候选人的日志至少跟接收者的日志一样新（比较 lastLogTerm，若相同则比较 lastLogIndex）。 todo
-		// if args.LastLogTerm == rf.t && args.LastLogIndex >= rf.commitIndex {
-		log.Printf("raft %d 投票给 %d for term %d", rf.me, args.CandidateId, args.Term)
-		// 满足这两点则授予投票（voteGranted = true），并把 votedFor = candidateId（并在稳定存储上持久化）。
-		rf.votedFor = args.CandidateId
-		rf.status = Follower
-		reply.VoteGranted = true
-		reply.Term = rf.currentTerm
-		return
-		// }
+	rf.logger.LogWithTrace(RPC_RECV, trace, "投票信息 votedFor:%d lastLogTerm:%d lastLogIndex:%d", votedFor, lastLogTerm, lastLogIndex)
+	if votedFor == -1 || votedFor == args.CandidateId {
+		// 候选人的日志至少跟接收者的日志一样新（比较 lastLogTerm，若相同则比较 lastLogIndex）。
+		if args.LastLogTerm > lastLogTerm || (args.LastLogTerm == lastLogTerm && args.LastLogIndex >= lastLogIndex) {
+			// 满足这两点则授予投票（voteGranted = true），并把 votedFor = candidateId（并在稳定存储上持久化）。
+			rf.logger.LogWithTrace(RPC_RECV, trace, "投票给 candidate:%d term:%d", args.CandidateId, args.Term)
+			rf.grantVote(args.CandidateId)
+			reply.VoteGranted = true
+			reply.Term = currentTerm
+			// 重置选举定时器
+			rf.lastHeartBeatTime.Store(time.Now())
+			return
+		}
 	}
-
-	log.Printf("兜底")
-	reply.Term = rf.currentTerm
+	rf.logger.LogWithTrace(RPC_RECV, trace, "投票失败兜底 candidate:%d term:%d", args.CandidateId, args.Term)
+	reply.Term = currentTerm
 	reply.VoteGranted = false
+}
+
+func (rf *Raft) grantVote(candidateId int) {
+	rf.votedFor = candidateId
+	rf.status = Follower
 }
 
 // example code to send a RequestVote RPC to a server.
@@ -243,7 +343,6 @@ func (rf *Raft) sendRequestVote(server int, args *RequestVoteArgs, reply *Reques
 }
 
 func (rf *Raft) sendAppendEntries(server int, args *AppendEntriesArgs, reply *AppendEntriesReply) bool {
-	log.Printf("sendAppendEntries server %d args %v reply %v", server, args, reply)
 	ok := rf.peers[server].Call("Raft.AppendEntries", args, reply)
 	return ok
 }
@@ -257,6 +356,8 @@ type AppendEntriesArgs struct {
 	PrevLogTerm  int        // Leader的Log里面的上一个LogIndex的Term
 	Entries      []LogEntry // log信息
 	LeaderCommit int        // leader’s commitIndex
+	TraceID      string     // 添加追踪ID
+	From         int        // 添加发送者节点ID
 }
 
 type AppendEntriesReply struct {
@@ -265,6 +366,7 @@ type AppendEntriesReply struct {
 	Success  bool
 	LogTerm  int // 用于快速恢复
 	LogIndex int // 用于快速恢复
+	LogLen   int // 用于快速恢复
 }
 
 // 1. Reply false if term < currentTerm (§5.1)
@@ -274,70 +376,100 @@ type AppendEntriesReply struct {
 // 4. Append any new entries not already in the log
 // 5. If leaderCommit > commitIndex, set commitIndex = min(leaderCommit, index of last new entry)
 func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply) {
-	rf.mu.Lock()
-
-	log.Printf("raft %d 收到心跳 from raft %d for term %d, 当前term: %d args:%v", rf.me, args.LeaderId, args.Term, rf.currentTerm, args)
-	// 重置心跳时间
+	// 重制选举定时器
 	rf.lastHeartBeatTime.Store(time.Now())
+	rf.mu.Lock()
+	defer rf.mu.Unlock()
+	currentTerm := rf.currentTerm
+	status := rf.status
+	me := rf.me
+
+	// 创建追踪上下文
+	trace := TraceContext{
+		TraceID: args.TraceID,
+		From:    args.From,
+		To:      me,
+	}
+
+	isHeartbeat := len(args.Entries) == 0
+	eventType := HEARTBEAT
+	if !isHeartbeat {
+		eventType = LOG_REPLICA
+	}
+
+	rf.logger.LogWithTrace(eventType, trace,
+		"AppendEntries 收到 term:%d leaderId:%d prevLogIndex:%d prevLogTerm:%d entries:%d leaderCommit:%d isHeartbeat:%t currentTerm:%d status:%s",
+		args.Term, args.LeaderId, args.PrevLogIndex, args.PrevLogTerm, len(args.Entries), args.LeaderCommit, isHeartbeat, currentTerm, getStatusString(status))
+
 	// 1. Reply false if term < currentTerm (§5.1)
-	if args.Term < rf.currentTerm {
-		log.Printf("raft %d 收到心跳，但是term小于当前term", rf.me)
-		reply.Term = rf.currentTerm
+	if args.Term < currentTerm {
+		rf.logger.LogWithTrace(eventType, trace, "Rejected: 收到心跳，但是term小于当前term term(%d) < currentTerm(%d)", args.Term, currentTerm)
+		reply.Term = currentTerm
 		reply.Success = false
-		rf.mu.Unlock()
 		return
 	}
-	// log.Printf("raft %d 收到心跳 from raft %d for term %d, 33333 当前term: %d ", rf.me, args.LeaderId, args.Term, rf.currentTerm)
-	// 2. Reply false if log doesn’t contain an entry at prevLogIndex whose term matches prevLogTerm (§5.3)
-	if args.Term > rf.currentTerm {
+	if args.Term > currentTerm {
 		// 更新term
-		rf.currentTerm = args.Term
-		rf.votedFor = -1
-		rf.status = Follower
+		rf.becomeFollower(args.Term)
 	}
-	// 3. Followers在写入Log之前，会检查本地的前一个Log条目，是否与Leader发来的有关前一条Log的信息匹配。
-	if len(rf.log) >= 2 {
-		if len(rf.log) <= args.PrevLogIndex {
-			// 代表对应的Log信息不存在
-			// 失败
-			log.Printf("raft %d 收到LogEntry，但是log不全", rf.me)
-			reply.Term = rf.currentTerm
-			reply.Success = false
-			reply.LogIndex = len(rf.log) - 1
-			reply.LogTerm = rf.log[reply.LogIndex].Term
-			rf.mu.Unlock()
-			return
+	currentTerm = rf.currentTerm
+	logLen := len(rf.log)
+	comimtIndex := rf.commitIndex
+	logEntries := rf.log
+	// 2. Reply false if log doesn’t contain an entry at prevLogIndex whose term matches prevLogTerm (§5.3)
+	if logLen < args.PrevLogIndex {
+		// 不包含这个Log 返回false
+		// 代表对应的Log信息不存在
+		// 失败
+		rf.logger.LogWithTrace(eventType, trace, "Rejected: 收到LogEntry，但是log不全， prevLogIndex:%d logLen:%d", args.PrevLogIndex, logLen)
+		// log.Printf("raft %d 收到LogEntry，但是log不全， log %v", rf.me, rf.log)
+		reply.Term = currentTerm
+		reply.Success = false
+		// 这个是Follower中，对应任期号为XTerm的第一条Log条目的下标。
+		reply.LogIndex = comimtIndex
+		// 将自己的任期号放在XTerm中。如果Follower在对应位置没有Log，那么这里会返回 -1。
+		reply.LogTerm = -1
+		//如果Follower在对应位置没有Log，那么XTerm会返回-1，XLen表示空白的Log下标。
+		reply.LogLen = -1
+		return
+	}
+	rf.logger.LogWithTrace(eventType, trace, "打印日志结果:%v ", rf.log)
+	// 3. 3. 如果现有条目与新条目冲突(相同的索引但不同的条款)，删除现有的条目等 遵循它（§5.3
+	logEntry := rf.log[args.PrevLogIndex]
+	if logEntry.Term != args.PrevLogTerm {
+		// 失败
+		rf.logger.LogWithTrace(eventType, trace, "Rejected: 收到LogEntry，但是term 不对 prevLogIndex:%d logLen:%d logEntry term:%d prevlogterm:%d", args.PrevLogIndex, logLen, logEntry.Term, args.PrevLogTerm)
+		reply.Term = currentTerm
+		reply.Success = false
+		for i, log := range logEntries {
+			if log.Term == logEntry.Term {
+				reply.LogIndex = i
+				break
+			}
 		}
-		logEntry := rf.log[args.PrevLogIndex]
-		if logEntry.Term != args.PrevLogTerm {
-			// 失败
-			log.Printf("raft %d 收到LogEntry，但是term 不对", rf.me)
-			reply.Term = rf.currentTerm
-			reply.Success = false
-			reply.LogIndex = logEntry.Index
-			reply.LogTerm = logEntry.Term
-			rf.mu.Unlock()
-			return
-		}
+		reply.LogTerm = logEntry.Term
+		reply.LogLen = -1
+		// 删除现有条目
+		rf.log = rf.log[:reply.LogIndex]
+		return
 	}
 	// 4. Append any new entries not already in the log 追加日志
-	if args.PrevLogIndex < len(rf.log)-1 {
-		rf.log = rf.log[:args.PrevLogIndex]
+	if len(args.Entries) > 0 {
+		rf.log = append(rf.log, args.Entries...)
 	}
-	rf.log = append(rf.log, args.Entries...)
+	rf.logger.LogWithTrace(eventType, trace, "复制日志结果:%v ", rf.log)
 	// 5. If leaderCommit > commitIndex, set commitIndex = min(leaderCommit, index of last new entry)
-	if args.LeaderCommit > rf.commitIndex {
-		log.Printf("raft %d 收到LogEntry，并且Leader已经提交， 本地log:%v", rf.me, rf.log)
+	if args.LeaderCommit > comimtIndex {
+		oldCommitIndex := rf.commitIndex
 		rf.commitIndex = min(args.LeaderCommit, len(rf.log))
-		rf.mu.Unlock()
-		rf.applyLogs(rf.log[args.PrevLogIndex:])
-	} else {
-		rf.mu.Unlock()
+		rf.logger.LogWithTrace(LOG_COMMIT, trace, "收到LogEntry，并且Leader已经提交， 本地log %d->%d leaderCommit:%d lastApplied:%d", oldCommitIndex, rf.commitIndex, args.LeaderCommit, rf.lastApplied)
+		// 找到没有提交的
+		if rf.commitIndex > rf.lastApplied {
+			rf.applyLogs(rf.log[rf.lastApplied+1:])
+		}
 	}
-	// log.Printf("raft %d 收到心跳 from raft %d for term %d, 44444 当前term: %d ", rf.me, args.LeaderId, args.Term, rf.currentTerm)
-	reply.Term = rf.currentTerm
+	reply.Term = currentTerm
 	reply.Success = true
-	// log.Printf("raft %d 收到心跳 from raft %d for term %d, end 当前term: %d ", rf.me, args.LeaderId, args.Term, rf.currentTerm)
 
 }
 
@@ -360,53 +492,85 @@ func (rf *Raft) Start(command interface{}) (int, int, bool) {
 	term := rf.currentTerm
 	// index从1开始 这是当前command在log中的下标
 	index := len(rf.log)
-	log.Printf("raft %d 接收到日志命令 %v", me, command)
+	// 生成客户端请求追踪ID
+	clientTraceID := fmt.Sprintf("CLIENT_%d_%d", me, time.Now().UnixNano())
+	trace := TraceContext{
+		TraceID: clientTraceID,
+		From:    -1, // 客户端
+		To:      me,
+	}
+
+	rf.logger.LogWithTrace(RPC_RECV, trace, "接收到日志命令:%v isLeader:%t term:%d", command, isLeader, term)
+	rf.mu.Unlock()
 	if !isLeader {
-		rf.mu.Unlock()
 		return -1, term, isLeader
 	}
 
 	// Your code here (2B).
 	// leader写入日志，未提交状态
 	logEntry := NewLogEntry(command, term, index)
+	rf.mu.Lock()
 	rf.log = append(rf.log, logEntry)
 	rf.mu.Unlock()
 	// 复制日志到Follower
-	rf.logReplication(index)
+	rf.logReplication()
 	return index, term, isLeader
 }
 
-func (rf *Raft) logReplication(index int) {
+// 日志复制主逻辑
+// 如果last log index≥nextIndex，则发送 AppendEntries RPC，日志项从nextIndex开始
+func (rf *Raft) logReplication() {
 	rf.mu.Lock()
-	// 只有leader才发送日志
-	if rf.status != Leader {
-		rf.mu.Unlock()
-		return
-	}
-	log.Printf("raft %d 开始日志复制发送 term %d", rf.me, rf.currentTerm)
+	// // 只有leader才发送日志
+	// if rf.status != Leader {
+	// 	rf.mu.Unlock()
+	// 	return
+	// }
 	currentTerm := rf.currentTerm
 	me := rf.me
 	commitIndex := rf.commitIndex
-	prevLogIndex := index - 1
-	prevLogTerm := 0
-	if prevLogIndex > 0 {
-		log := rf.log[prevLogIndex]
-		prevLogTerm = log.Term
-	}
-	logEntries := rf.log[index:]
 	agreeCount := int32(1)
 	majority := (len(rf.peers) + 1) / 2
+	// 生成日志复制追踪ID
+	logReplicationTraceID := fmt.Sprintf("LOG_%d_%d", me, currentTerm)
+	trace := TraceContext{
+		TraceID: logReplicationTraceID,
+		From:    me,
+		To:      -1, // 广播日志复制
+	}
+
+	rf.logger.LogWithTrace(LOG_REPLICA, trace, "开始日志复制发送 term:%d log:%v majority:%d", currentTerm, rf.log, majority)
 	rf.mu.Unlock()
-	// 发送心跳
+	// 发送日志
 	for i := range rf.peers {
-		if i == rf.me {
+		if i == me {
 			continue
 		}
-		go rf.sendLogEntries(currentTerm, me, prevLogIndex, prevLogTerm, logEntries, commitIndex, i, agreeCount, majority)
+		go rf.sendLogEntries(currentTerm, me, commitIndex, i, &agreeCount, majority)
 	}
 }
 
-func (rf *Raft) sendLogEntries(currentTerm int, me int, prevLogIndex int, prevLogTerm int, logEntries []LogEntry, commitIndex int, peer int, agreeCount int32, majority int) {
+func (rf *Raft) sendLogEntries(currentTerm int, me int, commitIndex int, peer int, agreeCount *int32, majority int) {
+	rf.mu.Lock()
+	prevLogIndex := rf.nextIndex[peer] - 1
+	prevLogTerm := rf.log[prevLogIndex].Term
+	logEntries := rf.log[rf.nextIndex[peer]:]
+	// 判断follower进度
+	// 生成日志复制追踪ID
+	logReplicationTraceID := fmt.Sprintf("LOG_%d_%d", me, currentTerm)
+	trace := TraceContext{
+		TraceID: logReplicationTraceID,
+		From:    me,
+		To:      peer,
+	}
+	// log.Printf("server %d 已经同步了，不再发送，last log index %d next index %d", peer, rf.log[len(rf.log)-1].Index, rf.nextIndex[peer])
+	if rf.log[len(rf.log)-1].Index < rf.nextIndex[peer] {
+		//不发送
+		rf.logger.LogWithTrace(LOG_REPLICA, trace, "Server 已经同步了，不再发送 lastLogIndex:%d nextIndex:%d - skipping", rf.log[len(rf.log)-1].Index, rf.nextIndex[peer])
+		rf.mu.Unlock()
+		return
+	}
+	rf.mu.Unlock()
 	args := AppendEntriesArgs{}
 	args.Term = currentTerm
 	args.LeaderId = me
@@ -414,15 +578,14 @@ func (rf *Raft) sendLogEntries(currentTerm int, me int, prevLogIndex int, prevLo
 	args.PrevLogTerm = prevLogTerm
 	args.Entries = logEntries
 	args.LeaderCommit = commitIndex
+	args.TraceID = logReplicationTraceID
+	args.From = me
 	reply := AppendEntriesReply{}
 	if rf.sendAppendEntries(peer, &args, &reply) {
-		rf.mu.Lock()
 		//If AppendEntries RPC received from new leader: convert to follower
-		if reply.Term > rf.currentTerm {
-			log.Printf("raft %d 降级成为follower", rf.me)
-			rf.currentTerm = reply.Term
-			rf.votedFor = -1
-			rf.status = Follower
+		rf.mu.Lock()
+		if reply.Term > currentTerm {
+			rf.becomeFollower(reply.Term)
 			rf.mu.Unlock()
 			return
 		}
@@ -431,41 +594,90 @@ func (rf *Raft) sendLogEntries(currentTerm int, me int, prevLogIndex int, prevLo
 			rf.mu.Unlock()
 			return
 		}
-		log.Printf("raft %d 日志复制返回 for raft %d term %d reply:%v", rf.me, peer, rf.currentTerm, reply)
+		rf.mu.Unlock()
+		rf.logger.LogWithTrace(LOG_REPLICA, trace, "日志复制返回 from peer:%d term:%d success:%t", peer, currentTerm, reply.Success)
 		if reply.Success {
-			atomic.AddInt32(&agreeCount, 1)
-			log.Printf("raft %d 日志复制返回成功 for raft %d term %d reply:%v, 同意数量 %d", rf.me, peer, rf.currentTerm, reply, atomic.LoadInt32(&agreeCount))
-			if atomic.LoadInt32(&agreeCount) >= int32(majority) {
-				// 多数同意，就提交
-				log.Printf("raft %d 日志复制返回成功 多数同意，提交日志给KV服务器 for raft %d term %d reply:%v", rf.me, peer, rf.currentTerm, reply)
-				rf.commitIndex++
-				rf.mu.Unlock()
-				rf.applyLogs(logEntries)
-			} else {
-				rf.mu.Unlock()
+			atomic.AddInt32(agreeCount, 1)
+			rf.logger.LogWithTrace(LOG_REPLICA, trace, "日志复制返回成功 from peer:%d term:%d agreeCount:%d", peer, currentTerm, atomic.LoadInt32(agreeCount))
+			// 更新表示Follower已经有了这个日志
+			rf.mu.Lock()
+			rf.matchIndex[peer] = logEntries[len(logEntries)-1].Index
+			// 更新下次要同步的index: 已经同步了N，因此下次同步N+1
+			rf.nextIndex[peer] = rf.matchIndex[peer] + 1
+			rf.logger.LogWithTrace(LOG_REPLICA, trace, "更新后 server:%d matchIndex:%d nextIndex:%d", peer, rf.matchIndex[peer], rf.nextIndex[peer])
+			//If there exists an N such that
+			// N > commitIndex, a majority of matchIndex[i] ≥ N, and log[N].term == currentTerm:
+			// set commitIndex = N.
+			for N := len(rf.log); N > commitIndex; N-- {
+				count := 1 // 自己一票
+				for i, mi := range rf.matchIndex {
+					if i == rf.me {
+						continue
+					}
+					if mi >= N {
+						count++
+					}
+				}
+				// 如果多数票
+				if count >= majority && rf.log[N].Term == currentTerm {
+					// 多数同意，就提交
+					commitTrace := TraceContext{
+						TraceID: logReplicationTraceID,
+						From:    me,
+						To:      -1, // 广播提交事件
+					}
+					rf.logger.LogWithTrace(LOG_COMMIT, commitTrace, "日志复制返回成功 多数同意，提交日志给KV服务器 index:%d term:%d majorityCount:%d", N, currentTerm, count)
+					commitLog := rf.log[rf.commitIndex+1 : N+1]
+					rf.commitIndex = N
+					// 通知上层
+					if rf.commitIndex > rf.lastApplied {
+						rf.applyLogs(commitLog)
+					}
+					break
+				}
 			}
+			rf.mu.Unlock()
 		} else {
 			// 快速恢复日志
-			log.Printf("raft %d 日志复制返回失败，开始快速恢复 for raft %d term %d reply:%v", rf.me, peer, rf.currentTerm, reply)
+			rf.logger.LogWithTrace(LOG_REPLICA, trace, "日志复制返回失败，开始快速恢复 for peer:%d starting fast recovery replyLogIndex:%d", peer, reply.LogIndex)
 			// 回退term
+			rf.mu.Lock()
+			rf.nextIndex[peer] = reply.LogIndex
 			rf.mu.Unlock()
-			rf.sendLogEntries(currentTerm, me, reply.LogIndex, reply.LogTerm, rf.log[reply.LogIndex:], commitIndex, peer, agreeCount, majority)
+			rf.sendLogEntries(currentTerm, me, commitIndex, peer, agreeCount, majority)
 		}
 	}
 }
 
 func (rf *Raft) applyLogs(logEntries []LogEntry) {
-	rf.mu.Lock()
-	rf.lastApplied++
-	rf.mu.Unlock()
-	for _, logEntry := range logEntries {
+	// 检查空数组，避免 index out of range 错误
+	if len(logEntries) == 0 {
+		return
+	}
+	rf.lastApplied = logEntries[len(logEntries)-1].Index
+	// 生成日志应用追踪ID
+	applyTraceID := fmt.Sprintf("APPLY_%d_%d", rf.me, rf.lastApplied)
+	trace := TraceContext{
+		TraceID: applyTraceID,
+		From:    rf.me,
+		To:      -1, // 内部应用事件
+	}
+	rf.logger.LogWithTrace(LOG_COMMIT, trace, "Applying logs count:%d lastApplied:%d", len(logEntries), rf.lastApplied)
+	// log.Printf("raft %d lastApplied %d logEntries %v", rf.me, rf.lastApplied, logEntries)
+	for _, v := range logEntries {
 		rf.applyCh <- ApplyMsg{
 			CommandValid: true,
-			Command:      logEntry.Command,
-			CommandIndex: logEntry.Index,
+			Command:      v.Command,
+			CommandIndex: v.Index,
 		}
+		// rf.log[v.Index].Commit = true
 	}
+
 }
+
+// func (rf *Raft) runLogApply() {
+
+// }
 
 func NewLogEntry(command interface{}, term int, index int) LogEntry {
 	return LogEntry{
@@ -487,7 +699,12 @@ func NewLogEntry(command interface{}, term int, index int) LogEntry {
 // should call killed() to check whether it should stop.
 func (rf *Raft) Kill() {
 	atomic.StoreInt32(&rf.dead, 1)
-	// Your code here, if desired.
+
+	// 通知心跳goroutine停止
+	rf.mu.Lock()
+	rf.stopHeartbeat = true
+	rf.heartbeatCond.Broadcast()
+	rf.mu.Unlock()
 }
 
 func (rf *Raft) killed() bool {
@@ -495,125 +712,168 @@ func (rf *Raft) killed() bool {
 	return z == 1
 }
 
-// 心跳
-func (rf *Raft) broadcastAppendEntries() {
+// 使用条件变量的心跳函数
+func (rf *Raft) runHeartbeat() {
 	for !rf.killed() {
 		rf.mu.Lock()
-		// 只有leader才发送心跳
-		if rf.status != Leader {
+
+		// 检查是否应该停止或不再是Leader
+		if rf.status != Leader || rf.killed() {
 			rf.mu.Unlock()
 			return
 		}
-		// 重置心跳时间
+
+		// 重置心跳标志
 		rf.lastHeartBeatTime.Store(time.Now())
-		log.Printf("raft %d 开始发送心跳 term %d", rf.me, rf.currentTerm)
+
+		// 准备心跳信息
 		currentTerm := rf.currentTerm
 		me := rf.me
 		commitIndex := rf.commitIndex
-		index := len(rf.log)
-		prevLogIndex := index - 1
-		prevLogTerm := 0
-		if prevLogIndex > 0 {
-			log := rf.log[prevLogIndex]
-			prevLogTerm = log.Term
+		prevLogIndex := rf.log[len(rf.log)-1].Index
+		prevLogTerm := rf.log[len(rf.log)-1].Term
+
+		// 生成心跳追踪ID
+		heartbeatTraceID := fmt.Sprintf("HB_%d_%d", me, currentTerm)
+		trace := TraceContext{
+			TraceID: heartbeatTraceID,
+			From:    me,
+			To:      -1, // 广播心跳
 		}
+
+		rf.logger.LogWithTrace(HEARTBEAT, trace, "开始发送心跳广播 term:%d commitIndex:%d", currentTerm, commitIndex)
 		rf.mu.Unlock()
-		// 发送心跳
+
+		// 发送心跳到所有followers
 		for i := range rf.peers {
-			if i == rf.me {
+			if i == me {
 				continue
 			}
-			go func(peer int) {
-				args := AppendEntriesArgs{}
-				args.Term = currentTerm
-				args.LeaderId = me
-				args.PrevLogIndex = prevLogIndex
-				args.PrevLogTerm = prevLogTerm
-				args.Entries = nil
-				args.LeaderCommit = commitIndex
+
+			go func(peer int, prevIndex int, prevTerm int) {
+				if rf.killed() {
+					return
+				}
+				args := AppendEntriesArgs{
+					Term:         currentTerm,
+					LeaderId:     me,
+					PrevLogIndex: prevIndex,
+					PrevLogTerm:  prevTerm,
+					Entries:      nil, // 心跳不携带日志
+					LeaderCommit: commitIndex,
+					TraceID:      heartbeatTraceID,
+					From:         me,
+				}
+
 				reply := AppendEntriesReply{}
 				if rf.sendAppendEntries(peer, &args, &reply) {
+					// 检查返回的term，如果更大则降级为follower
 					rf.mu.Lock()
-					//If AppendEntries RPC received from new leader: convert to follower
-					if reply.Term > rf.currentTerm {
-						log.Printf("raft %d 降级成为follower", rf.me)
-						rf.currentTerm = reply.Term
-						rf.votedFor = -1
-						rf.status = Follower
+					if reply.Term > currentTerm {
+						rf.becomeFollower(reply.Term)
 						rf.mu.Unlock()
 						return
 					}
+
 					// 状态检查
 					if currentTerm != rf.currentTerm || rf.status != Leader {
 						rf.mu.Unlock()
 						return
 					}
-					log.Printf("raft %d 心跳返回 for raft %d term %d reply:%v", rf.me, peer, rf.currentTerm, reply)
 					rf.mu.Unlock()
 				}
-			}(i)
+			}(i, prevLogIndex, prevLogTerm)
 		}
-		time.Sleep(100 * time.Millisecond)
+		time.Sleep(10 * time.Millisecond)
 	}
 }
 
+func (rf *Raft) becomeFollower(term int) {
+	oldStatus := rf.status
+	oldTerm := rf.currentTerm
+	rf.logger.LogStateChange(oldStatus, Follower, oldTerm, "降级成follower")
+	rf.currentTerm = term
+	rf.votedFor = -1
+	rf.status = Follower
+}
+
 // 广播选举
-func (rf *Raft) broadcastVote(me int, currentTerm int, commitIndex int) {
+func (rf *Raft) broadcastVote(me int, currentTerm int, lastLogIndex int, lastLogTerm int) {
 	voted := int32(0) // 自己的1票
 	atomic.StoreInt32(&voted, 1)
 	majority := (len(rf.peers) + 1) / 2
-	log.Printf("raft %d 票数 %d 多数节点 %d", me, voted, majority)
+	// 生成选举追踪ID
+	electionTraceID := fmt.Sprintf("ELEC_%d_%d", me, currentTerm)
+
+	trace := TraceContext{
+		TraceID: electionTraceID,
+		From:    me,
+		To:      -1, // 广播
+	}
+	// log.Printf("raft %d 票数 %d 多数节点 %d", me, voted, majority)
 	for i := range rf.peers {
 		if i == me {
 			continue
 		}
 		go func(peer int) {
+			if rf.killed() {
+				return
+			}
 			args := RequestVoteArgs{}
 			args.CandidateId = me
 			args.Term = currentTerm
-			args.LastLogIndex = commitIndex
-			args.LastLogTerm = 0
+			args.LastLogIndex = lastLogIndex
+			args.LastLogTerm = lastLogTerm
+			args.TraceID = electionTraceID
+			args.From = me
 
 			reply := RequestVoteReply{}
+			rf.logger.LogWithTrace(RPC_SEND, trace, "发送选举请求")
 			if rf.sendRequestVote(peer, &args, &reply) {
 				// 处理返回值 如果获得多数票 则停止
 				rf.mu.Lock()
-				log.Printf("raft %d 处理投票返回 for term %d reply:%v", me, currentTerm, reply)
+				// log.Printf("raft %d 处理投票返回 for term %d reply:%v", me, currentTerm, reply)
 				// 如果返回的term更大，代表已经进入了下一个term选举
 				if reply.Term > currentTerm {
-					rf.currentTerm = reply.Term
-					rf.votedFor = -1
-					rf.status = Follower
+
+					rf.becomeFollower(reply.Term)
 					rf.mu.Unlock()
 					return
 				}
-				// 状态检查
-				if rf.status != Candidate || rf.currentTerm != currentTerm {
-					rf.mu.Unlock()
-					return
-				}
+				rf.mu.Unlock()
 				// If votes received from majority of servers: become leader
 				// 如果收到多数票 —— 成为 leader；立即发送空 AppendEntries（心跳）以建立权威。
 				if reply.VoteGranted {
-					log.Printf("raft %d received vote for term %d", rf.me, rf.currentTerm)
+					// log.Printf("raft %d received vote for term %d", rf.me, rf.currentTerm)
 					// 原子+1
 					atomic.AddInt32(&voted, 1)
-					log.Printf("raft %d 当前票数 %d", rf.me, atomic.LoadInt32(&voted))
-					if atomic.LoadInt32(&voted) >= int32(majority) {
-						rf.status = Leader
-						// 立即发送空 AppendEntries（心跳）以建立权威。
-						rf.mu.Unlock()
-						go rf.broadcastAppendEntries()
-					} else {
-						rf.mu.Unlock()
+					if atomic.LoadInt32(&voted) == int32(majority) {
+						rf.becomeLeader(reply.Term)
 					}
-				} else {
-					rf.mu.Unlock()
+					// log.Printf("raft %d 当前票数 %d", rf.me, atomic.LoadInt32(&voted))
 				}
 			}
 		}(i)
 	}
+}
 
+func (rf *Raft) becomeLeader(term int) {
+	rf.mu.Lock()
+	// 状态检查
+	if rf.status != Candidate || rf.currentTerm != term {
+		rf.mu.Unlock()
+		return
+	}
+	oldStatus := rf.status
+	rf.logger.LogStateChange(oldStatus, Leader, term, "成为Leader")
+	rf.status = Leader
+	// 初始化nextIndex
+	for i := range rf.peers {
+		rf.nextIndex[i] = len(rf.log)
+	}
+	rf.mu.Unlock()
+	// 启动心跳goroutine
+	go rf.runHeartbeat()
 }
 
 // • Increment currentTerm
@@ -621,23 +881,16 @@ func (rf *Raft) broadcastVote(me int, currentTerm int, commitIndex int) {
 // • Reset election timer
 // • Send RequestVote RPCs to all other servers
 func (rf *Raft) Election() {
-	rf.mu.Lock()
+
+}
+
+func (rf *Raft) becomeCandidate() {
 	if rf.status == Leader {
-		rf.mu.Unlock()
 		return
 	}
 	rf.currentTerm++
 	rf.votedFor = rf.me
 	rf.status = Candidate
-	me := rf.me
-	currentTerm := rf.currentTerm
-	commitIndex := rf.commitIndex
-	// 重置选举定时器
-	rf.lastHeartBeatTime.Store(time.Now())
-	log.Printf("raft %d 变成候选人开始选举 for term %d", rf.me, rf.currentTerm)
-	rf.mu.Unlock()
-	// 给其他节点发送请求投票 RPC
-	rf.broadcastVote(me, currentTerm, commitIndex)
 }
 
 // 选举定时器
@@ -646,17 +899,38 @@ func (rf *Raft) runElectionTimer() {
 	// 创建一个计时器
 	// 定义随机超时范围（论文推荐 150-300ms）
 	minTimeout := 200 * time.Millisecond
-	maxTimeout := 400 * time.Millisecond
-	timeout := randomTimeout(minTimeout, maxTimeout)
+	maxTimeout := 600 * time.Millisecond
+	// 生成定时器追踪ID
+	timerTraceID := fmt.Sprintf("TIMER_%d", rf.me)
+	trace := TraceContext{
+		TraceID: timerTraceID,
+		From:    -1, // 内部定时器事件
+		To:      rf.me,
+	}
 	for !rf.killed() {
+		timeout := randomTimeout(minTimeout, maxTimeout)
+		rf.mu.Lock()
 		since := time.Since(rf.lastHeartBeatTime.Load().(time.Time))
-		log.Printf("raft %d since %v  Sleeping for timeout %v", rf.me, since, timeout)
+		// log.Printf("raft %d since %v  Sleeping for timeout %v", rf.me, since, timeout)
+		if rf.status == Leader {
+			rf.mu.Unlock()
+			return
+		}
+		rf.becomeCandidate()
+		me := rf.me
+		currentTerm := rf.currentTerm
+		lastLogIndex := rf.log[len(rf.log)-1].Index
+		lastLogTerm := rf.log[len(rf.log)-1].Term
+		rf.mu.Unlock()
 		if since > timeout {
 			// 超过超时时间
-			log.Printf("raft %d 超时选举", rf.me)
-			rf.Election()
+			rf.logger.LogWithTrace(TIMER_EVENT, trace, "超时选举 since:%v threshold:%v", since, timeout)
+			// 重置选举定时器
+			rf.lastHeartBeatTime.Store(time.Now())
+			// 给其他节点发送请求投票 RPC
+			rf.broadcastVote(me, currentTerm, lastLogIndex, lastLogTerm)
 		}
-		time.Sleep(timeout)
+		time.Sleep(10 * time.Millisecond) // 从50微秒调整为10毫秒，减少CPU消耗
 	}
 }
 
@@ -674,6 +948,16 @@ func makeRaftNode(peers []*labrpc.ClientEnd, me int, persister *Persister, apply
 	rf.lastHeartBeatTime.Store(time.Now())
 	rf.applyCh = applyCh
 	rf.log = append(rf.log, LogEntry{})
+	rf.nextIndex = make([]int, len(peers))
+	rf.matchIndex = make([]int, len(peers))
+	// 初始化logger
+	rf.logger = NewLogger(me)
+
+	// 初始化条件变量
+	rf.heartbeatCond = sync.NewCond(&rf.mu)
+	rf.needHeartbeat = false
+	rf.stopHeartbeat = false
+
 	return rf
 }
 
@@ -696,7 +980,9 @@ func Make(peers []*labrpc.ClientEnd, me int,
 
 	// go channel 选举定时器
 	go rf.runElectionTimer()
-	log.Printf("raft %d started", me)
+	// 日志通知
+	// go rf.runLogApply()
+	// log.Printf("raft %d started", me)
 	return rf
 }
 
