@@ -376,10 +376,10 @@ type AppendEntriesReply struct {
 // 4. Append any new entries not already in the log
 // 5. If leaderCommit > commitIndex, set commitIndex = min(leaderCommit, index of last new entry)
 func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply) {
-	// 重制选举定时器
-	rf.lastHeartBeatTime.Store(time.Now())
 	rf.mu.Lock()
 	defer rf.mu.Unlock()
+	// 重制选举定时器
+	rf.lastHeartBeatTime.Store(time.Now())
 	currentTerm := rf.currentTerm
 	status := rf.status
 	me := rf.me
@@ -453,9 +453,25 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 		rf.log = rf.log[:reply.LogIndex]
 		return
 	}
+	// 新条目的目标 index 从 prevLogIndex+1 开始
 	// 4. Append any new entries not already in the log 追加日志
 	if len(args.Entries) > 0 {
-		rf.log = append(rf.log, args.Entries...)
+		for i, entry := range args.Entries {
+			if entry.Index < len(rf.log) {
+				if rf.log[entry.Index].Term != args.Term {
+					// 说明数据不一样 冲突
+					// 删除
+					rf.log = rf.log[:entry.Index]
+					rf.log = append(rf.log, args.Entries[i:]...)
+					break
+				}
+			} else {
+				// a = [1,2,3,4,5] b = a[2:] 表示下标2开始到结束也就是3,4,5
+				// index是真实index-1 是下标，在-1才是前一个下标
+				rf.log = append(rf.log, args.Entries[i:]...)
+				break
+			}
+		}
 	}
 	rf.logger.LogWithTrace(eventType, trace, "复制日志结果:%v ", rf.log)
 	// 5. If leaderCommit > commitIndex, set commitIndex = min(leaderCommit, index of last new entry)
@@ -511,50 +527,76 @@ func (rf *Raft) Start(command interface{}) (int, int, bool) {
 	logEntry := NewLogEntry(command, term, index)
 	rf.mu.Lock()
 	rf.log = append(rf.log, logEntry)
-	rf.mu.Unlock()
 	// 复制日志到Follower
-	rf.logReplication()
+	// rf.needHeartbeat = true
+	// rf.heartbeatCond.Signal()
+	rf.mu.Unlock()
 	return index, term, isLeader
 }
 
 // 日志复制主逻辑
 // 如果last log index≥nextIndex，则发送 AppendEntries RPC，日志项从nextIndex开始
 func (rf *Raft) logReplication() {
-	rf.mu.Lock()
-	// // 只有leader才发送日志
-	// if rf.status != Leader {
-	// 	rf.mu.Unlock()
-	// 	return
-	// }
-	currentTerm := rf.currentTerm
-	me := rf.me
-	commitIndex := rf.commitIndex
-	agreeCount := int32(1)
-	majority := (len(rf.peers) + 1) / 2
-	// 生成日志复制追踪ID
-	logReplicationTraceID := fmt.Sprintf("LOG_%d_%d", me, currentTerm)
-	trace := TraceContext{
-		TraceID: logReplicationTraceID,
-		From:    me,
-		To:      -1, // 广播日志复制
-	}
-
-	rf.logger.LogWithTrace(LOG_REPLICA, trace, "开始日志复制发送 term:%d log:%v majority:%d", currentTerm, rf.log, majority)
-	rf.mu.Unlock()
-	// 发送日志
-	for i := range rf.peers {
-		if i == me {
-			continue
+	for !rf.killed() {
+		rf.mu.Lock()
+		// 准备心跳信息
+		currentTerm := rf.currentTerm
+		me := rf.me
+		commitIndex := rf.commitIndex
+		agreeCount := int32(1)
+		// rf.logger.LogWithTrace(LOG_REPLICA, trace, "开始日志复制发送 term:%d log:%v majority:%d", currentTerm, rf.log, majority)
+		// 生成心跳追踪ID
+		heartbeatTraceID := fmt.Sprintf("HB_%d_%d", me, currentTerm)
+		trace := TraceContext{
+			TraceID: heartbeatTraceID,
+			From:    me,
+			To:      -1, // 广播心跳
 		}
-		go rf.sendLogEntries(currentTerm, me, commitIndex, i, &agreeCount, majority)
+
+		// for !rf.needHeartbeat && !rf.killed() {
+		// 	rf.logger.LogWithTrace(HEARTBEAT, trace, "等待心跳信号或日志复制信号 term:%d commitIndex:%d", currentTerm, commitIndex)
+
+		// 	rf.heartbeatCond.Wait()
+		// }
+		// rf.needHeartbeat = false
+
+		// // 只有leader才发送日志
+		if rf.status == Leader {
+			rf.logger.LogWithTrace(HEARTBEAT, trace, "开始发送心跳广播 status %s term:%d commitIndex:%d", getStatusString(rf.status), currentTerm, commitIndex)
+
+			// 重置选举定时器
+			rf.lastHeartBeatTime.Store(time.Now())
+			rf.mu.Unlock()
+			// 发送日志
+			for i := range rf.peers {
+				if i == me {
+					continue
+				}
+				go rf.sendLogEntries(currentTerm, me, commitIndex, i, &agreeCount)
+			}
+		} else {
+			rf.logger.LogWithTrace(HEARTBEAT, trace, "Follower等心跳 status %s term:%d commitIndex:%d", getStatusString(rf.status), currentTerm, commitIndex)
+
+			rf.mu.Unlock()
+		}
+		time.Sleep(10 * time.Millisecond)
 	}
 }
 
-func (rf *Raft) sendLogEntries(currentTerm int, me int, commitIndex int, peer int, agreeCount *int32, majority int) {
+func (rf *Raft) sendLogEntries(currentTerm int, me int, commitIndex int, peer int, agreeCount *int32) {
+	if rf.killed() {
+		return
+	}
 	rf.mu.Lock()
-	prevLogIndex := rf.nextIndex[peer] - 1
+	nextIdx := rf.nextIndex[peer]
+	prevLogIndex := nextIdx - 1
 	prevLogTerm := rf.log[prevLogIndex].Term
-	logEntries := rf.log[rf.nextIndex[peer]:]
+	// 防止越界
+	logEntries := make([]LogEntry, 0)
+	if nextIdx < len(rf.log) {
+		// 复制
+		logEntries = append([]LogEntry{}, rf.log[nextIdx:]...)
+	}
 	// 判断follower进度
 	// 生成日志复制追踪ID
 	logReplicationTraceID := fmt.Sprintf("LOG_%d_%d", me, currentTerm)
@@ -564,22 +606,23 @@ func (rf *Raft) sendLogEntries(currentTerm int, me int, commitIndex int, peer in
 		To:      peer,
 	}
 	// log.Printf("server %d 已经同步了，不再发送，last log index %d next index %d", peer, rf.log[len(rf.log)-1].Index, rf.nextIndex[peer])
-	if rf.log[len(rf.log)-1].Index < rf.nextIndex[peer] {
-		//不发送
-		rf.logger.LogWithTrace(LOG_REPLICA, trace, "Server 已经同步了，不再发送 lastLogIndex:%d nextIndex:%d - skipping", rf.log[len(rf.log)-1].Index, rf.nextIndex[peer])
-		rf.mu.Unlock()
-		return
-	}
+	// if rf.log[len(rf.log)-1].Index < nextIdx {
+	// 	//不发送
+	// 	rf.logger.LogWithTrace(LOG_REPLICA, trace, "Server 已经同步了，不再发送 lastLogIndex:%d nextIndex:%d - skipping", rf.log[len(rf.log)-1].Index, rf.nextIndex[peer])
+	// 	rf.mu.Unlock()
+	// 	return
+	// }
 	rf.mu.Unlock()
-	args := AppendEntriesArgs{}
-	args.Term = currentTerm
-	args.LeaderId = me
-	args.PrevLogIndex = prevLogIndex
-	args.PrevLogTerm = prevLogTerm
-	args.Entries = logEntries
-	args.LeaderCommit = commitIndex
-	args.TraceID = logReplicationTraceID
-	args.From = me
+	args := AppendEntriesArgs{
+		Term:         currentTerm,
+		LeaderId:     me,
+		PrevLogIndex: prevLogIndex,
+		PrevLogTerm:  prevLogTerm,
+		Entries:      logEntries, // 心跳不携带日志
+		LeaderCommit: commitIndex,
+		TraceID:      logReplicationTraceID,
+		From:         me,
+	}
 	reply := AppendEntriesReply{}
 	if rf.sendAppendEntries(peer, &args, &reply) {
 		//If AppendEntries RPC received from new leader: convert to follower
@@ -594,57 +637,19 @@ func (rf *Raft) sendLogEntries(currentTerm int, me int, commitIndex int, peer in
 			rf.mu.Unlock()
 			return
 		}
-		rf.mu.Unlock()
-		rf.logger.LogWithTrace(LOG_REPLICA, trace, "日志复制返回 from peer:%d term:%d success:%t", peer, currentTerm, reply.Success)
+		rf.logger.LogWithTrace(LOG_REPLICA, trace, "心跳返回 from peer:%d term:%d success:%t", peer, currentTerm, reply.Success)
 		if reply.Success {
-			atomic.AddInt32(agreeCount, 1)
-			rf.logger.LogWithTrace(LOG_REPLICA, trace, "日志复制返回成功 from peer:%d term:%d agreeCount:%d", peer, currentTerm, atomic.LoadInt32(agreeCount))
-			// 更新表示Follower已经有了这个日志
-			rf.mu.Lock()
-			rf.matchIndex[peer] = logEntries[len(logEntries)-1].Index
-			// 更新下次要同步的index: 已经同步了N，因此下次同步N+1
-			rf.nextIndex[peer] = rf.matchIndex[peer] + 1
-			rf.logger.LogWithTrace(LOG_REPLICA, trace, "更新后 server:%d matchIndex:%d nextIndex:%d", peer, rf.matchIndex[peer], rf.nextIndex[peer])
-			//If there exists an N such that
-			// N > commitIndex, a majority of matchIndex[i] ≥ N, and log[N].term == currentTerm:
-			// set commitIndex = N.
-			for N := len(rf.log); N > commitIndex; N-- {
-				count := 1 // 自己一票
-				for i, mi := range rf.matchIndex {
-					if i == rf.me {
-						continue
-					}
-					if mi >= N {
-						count++
-					}
-				}
-				// 如果多数票
-				if count >= majority && rf.log[N].Term == currentTerm {
-					// 多数同意，就提交
-					commitTrace := TraceContext{
-						TraceID: logReplicationTraceID,
-						From:    me,
-						To:      -1, // 广播提交事件
-					}
-					rf.logger.LogWithTrace(LOG_COMMIT, commitTrace, "日志复制返回成功 多数同意，提交日志给KV服务器 index:%d term:%d majorityCount:%d", N, currentTerm, count)
-					commitLog := rf.log[rf.commitIndex+1 : N+1]
-					rf.commitIndex = N
-					// 通知上层
-					if rf.commitIndex > rf.lastApplied {
-						rf.applyLogs(commitLog)
-					}
-					break
-				}
+			if len(logEntries) > 0 {
+				rf.logReplicationSuccess(agreeCount, peer, currentTerm, logEntries, commitIndex)
 			}
 			rf.mu.Unlock()
 		} else {
 			// 快速恢复日志
 			rf.logger.LogWithTrace(LOG_REPLICA, trace, "日志复制返回失败，开始快速恢复 for peer:%d starting fast recovery replyLogIndex:%d", peer, reply.LogIndex)
 			// 回退term
-			rf.mu.Lock()
 			rf.nextIndex[peer] = reply.LogIndex
 			rf.mu.Unlock()
-			rf.sendLogEntries(currentTerm, me, commitIndex, peer, agreeCount, majority)
+			rf.sendLogEntries(currentTerm, me, commitIndex, peer, agreeCount)
 		}
 	}
 }
@@ -662,7 +667,7 @@ func (rf *Raft) applyLogs(logEntries []LogEntry) {
 		From:    rf.me,
 		To:      -1, // 内部应用事件
 	}
-	rf.logger.LogWithTrace(LOG_COMMIT, trace, "Applying logs count:%d lastApplied:%d", len(logEntries), rf.lastApplied)
+	rf.logger.LogWithTrace(LOG_COMMIT, trace, "Applying logs count:%d log:%v lastApplied:%d", len(logEntries), logEntries, rf.lastApplied)
 	// log.Printf("raft %d lastApplied %d logEntries %v", rf.me, rf.lastApplied, logEntries)
 	for _, v := range logEntries {
 		rf.applyCh <- ApplyMsg{
@@ -699,12 +704,6 @@ func NewLogEntry(command interface{}, term int, index int) LogEntry {
 // should call killed() to check whether it should stop.
 func (rf *Raft) Kill() {
 	atomic.StoreInt32(&rf.dead, 1)
-
-	// 通知心跳goroutine停止
-	rf.mu.Lock()
-	rf.stopHeartbeat = true
-	rf.heartbeatCond.Broadcast()
-	rf.mu.Unlock()
 }
 
 func (rf *Raft) killed() bool {
@@ -716,75 +715,75 @@ func (rf *Raft) killed() bool {
 func (rf *Raft) runHeartbeat() {
 	for !rf.killed() {
 		rf.mu.Lock()
-
-		// 检查是否应该停止或不再是Leader
-		if rf.status != Leader || rf.killed() {
-			rf.mu.Unlock()
+		logReplicationTraceID := fmt.Sprintf("LOG_%d_%d", rf.me, rf.currentTerm)
+		trace := TraceContext{
+			TraceID: logReplicationTraceID,
+			From:    rf.me,
+			To:      -1,
+		}
+		rf.logger.LogWithTrace(LOG_REPLICA, trace, "唤醒心跳")
+		if rf.status != Leader {
+			rf.logger.LogWithTrace(LOG_REPLICA, trace, "不是Leader了，退出心跳")
 			return
 		}
-
-		// 重置心跳标志
-		rf.lastHeartBeatTime.Store(time.Now())
-
-		// 准备心跳信息
-		currentTerm := rf.currentTerm
-		me := rf.me
-		commitIndex := rf.commitIndex
-		prevLogIndex := rf.log[len(rf.log)-1].Index
-		prevLogTerm := rf.log[len(rf.log)-1].Term
-
-		// 生成心跳追踪ID
-		heartbeatTraceID := fmt.Sprintf("HB_%d_%d", me, currentTerm)
-		trace := TraceContext{
-			TraceID: heartbeatTraceID,
-			From:    me,
-			To:      -1, // 广播心跳
-		}
-
-		rf.logger.LogWithTrace(HEARTBEAT, trace, "开始发送心跳广播 term:%d commitIndex:%d", currentTerm, commitIndex)
+		rf.needHeartbeat = true
+		rf.heartbeatCond.Signal()
 		rf.mu.Unlock()
+		time.Sleep(10 * time.Millisecond)
+	}
+}
 
-		// 发送心跳到所有followers
-		for i := range rf.peers {
-			if i == me {
+func (rf *Raft) logReplicationSuccess(agreeCount *int32, peer int, currentTerm int, logEntries []LogEntry, commitIndex int) {
+	atomic.AddInt32(agreeCount, 1)
+	// 生成日志复制追踪ID
+	logReplicationTraceID := fmt.Sprintf("LOG_%d_%d", rf.me, currentTerm)
+	trace := TraceContext{
+		TraceID: logReplicationTraceID,
+		From:    rf.me,
+		To:      peer,
+	}
+	rf.logger.LogWithTrace(LOG_REPLICA, trace, "日志复制返回成功 from peer:%d term:%d agreeCount:%d log %v", peer, currentTerm, atomic.LoadInt32(agreeCount), logEntries)
+	// 更新表示Follower已经有了这个日志
+	if logEntries[len(logEntries)-1].Index <= rf.matchIndex[peer] {
+		// 已经更新过了
+		rf.logger.LogWithTrace(LOG_REPLICA, trace, "日志复制返回成功 但是已经更新过了 from peer:%d term:%d matchIndex:%d log last index:%d", peer, currentTerm, rf.matchIndex[peer], logEntries[len(logEntries)-1].Index)
+		return
+	}
+	rf.matchIndex[peer] = logEntries[len(logEntries)-1].Index
+	// 更新下次要同步的index: 已经同步了N，因此下次同步N+1
+	rf.nextIndex[peer] = rf.matchIndex[peer] + 1
+	rf.logger.LogWithTrace(LOG_REPLICA, trace, "更新后 server:%d matchIndex:%d nextIndex:%d", peer, rf.matchIndex[peer], rf.nextIndex[peer])
+	//If there exists an N such that
+	// N > commitIndex, a majority of matchIndex[i] ≥ N, and log[N].term == currentTerm:
+	// set commitIndex = N.
+	majority := (len(rf.peers) + 1) / 2
+	for N := len(rf.log); N > commitIndex; N-- {
+		count := 1 // 自己一票
+		for i, mi := range rf.matchIndex {
+			if i == rf.me {
 				continue
 			}
-
-			go func(peer int, prevIndex int, prevTerm int) {
-				if rf.killed() {
-					return
-				}
-				args := AppendEntriesArgs{
-					Term:         currentTerm,
-					LeaderId:     me,
-					PrevLogIndex: prevIndex,
-					PrevLogTerm:  prevTerm,
-					Entries:      nil, // 心跳不携带日志
-					LeaderCommit: commitIndex,
-					TraceID:      heartbeatTraceID,
-					From:         me,
-				}
-
-				reply := AppendEntriesReply{}
-				if rf.sendAppendEntries(peer, &args, &reply) {
-					// 检查返回的term，如果更大则降级为follower
-					rf.mu.Lock()
-					if reply.Term > currentTerm {
-						rf.becomeFollower(reply.Term)
-						rf.mu.Unlock()
-						return
-					}
-
-					// 状态检查
-					if currentTerm != rf.currentTerm || rf.status != Leader {
-						rf.mu.Unlock()
-						return
-					}
-					rf.mu.Unlock()
-				}
-			}(i, prevLogIndex, prevLogTerm)
+			if mi >= N {
+				count++
+			}
 		}
-		time.Sleep(10 * time.Millisecond)
+		// 如果多数票
+		if count >= majority && rf.log[N].Term == currentTerm {
+			// 多数同意，就提交
+			commitTrace := TraceContext{
+				TraceID: logReplicationTraceID,
+				From:    rf.me,
+				To:      -1, // 广播提交事件
+			}
+			rf.logger.LogWithTrace(LOG_COMMIT, commitTrace, "日志复制返回成功 多数同意，提交日志给KV服务器 index:%d term:%d majorityCount:%d", N, currentTerm, count)
+			commitLog := rf.log[rf.commitIndex+1 : N+1]
+			rf.commitIndex = N
+			// 通知上层
+			if rf.commitIndex > rf.lastApplied {
+				rf.applyLogs(commitLog)
+			}
+			break
+		}
 	}
 }
 
@@ -832,10 +831,9 @@ func (rf *Raft) broadcastVote(me int, currentTerm int, lastLogIndex int, lastLog
 			if rf.sendRequestVote(peer, &args, &reply) {
 				// 处理返回值 如果获得多数票 则停止
 				rf.mu.Lock()
-				// log.Printf("raft %d 处理投票返回 for term %d reply:%v", me, currentTerm, reply)
+				rf.logger.LogWithTrace(RPC_SEND, trace, "处理投票返回 for term %d reply:%v", currentTerm, reply)
 				// 如果返回的term更大，代表已经进入了下一个term选举
 				if reply.Term > currentTerm {
-
 					rf.becomeFollower(reply.Term)
 					rf.mu.Unlock()
 					return
@@ -869,25 +867,20 @@ func (rf *Raft) becomeLeader(term int) {
 	rf.status = Leader
 	// 初始化nextIndex
 	for i := range rf.peers {
-		rf.nextIndex[i] = len(rf.log)
+		rf.nextIndex[i] = rf.commitIndex + 1
 	}
 	rf.mu.Unlock()
 	// 启动心跳goroutine
-	go rf.runHeartbeat()
-}
-
-// • Increment currentTerm
-// • Vote for self
-// • Reset election timer
-// • Send RequestVote RPCs to all other servers
-func (rf *Raft) Election() {
-
+	// go rf.runHeartbeat()
 }
 
 func (rf *Raft) becomeCandidate() {
 	if rf.status == Leader {
 		return
 	}
+	oldStatus := rf.status
+	oldTerm := rf.currentTerm
+	rf.logger.LogStateChange(oldStatus, Follower, oldTerm, "变成Candidate")
 	rf.currentTerm++
 	rf.votedFor = rf.me
 	rf.status = Candidate
@@ -909,24 +902,24 @@ func (rf *Raft) runElectionTimer() {
 	}
 	for !rf.killed() {
 		timeout := randomTimeout(minTimeout, maxTimeout)
-		rf.mu.Lock()
 		since := time.Since(rf.lastHeartBeatTime.Load().(time.Time))
-		// log.Printf("raft %d since %v  Sleeping for timeout %v", rf.me, since, timeout)
-		if rf.status == Leader {
-			rf.mu.Unlock()
-			return
-		}
-		rf.becomeCandidate()
-		me := rf.me
-		currentTerm := rf.currentTerm
-		lastLogIndex := rf.log[len(rf.log)-1].Index
-		lastLogTerm := rf.log[len(rf.log)-1].Term
-		rf.mu.Unlock()
 		if since > timeout {
+			rf.mu.Lock()
+			// log.Printf("raft %d since %v  Sleeping for timeout %v", rf.me, since, timeout)
+			if rf.status == Leader {
+				rf.mu.Unlock()
+				return
+			}
+			rf.becomeCandidate()
+			me := rf.me
+			currentTerm := rf.currentTerm
+			lastLogIndex := rf.log[len(rf.log)-1].Index
+			lastLogTerm := rf.log[len(rf.log)-1].Term
 			// 超过超时时间
 			rf.logger.LogWithTrace(TIMER_EVENT, trace, "超时选举 since:%v threshold:%v", since, timeout)
 			// 重置选举定时器
 			rf.lastHeartBeatTime.Store(time.Now())
+			rf.mu.Unlock()
 			// 给其他节点发送请求投票 RPC
 			rf.broadcastVote(me, currentTerm, lastLogIndex, lastLogTerm)
 		}
@@ -952,11 +945,7 @@ func makeRaftNode(peers []*labrpc.ClientEnd, me int, persister *Persister, apply
 	rf.matchIndex = make([]int, len(peers))
 	// 初始化logger
 	rf.logger = NewLogger(me)
-
-	// 初始化条件变量
 	rf.heartbeatCond = sync.NewCond(&rf.mu)
-	rf.needHeartbeat = false
-	rf.stopHeartbeat = false
 
 	return rf
 }
@@ -981,7 +970,7 @@ func Make(peers []*labrpc.ClientEnd, me int,
 	// go channel 选举定时器
 	go rf.runElectionTimer()
 	// 日志通知
-	// go rf.runLogApply()
+	go rf.logReplication()
 	// log.Printf("raft %d started", me)
 	return rf
 }
