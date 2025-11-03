@@ -429,7 +429,7 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 	comimtIndex := rf.commitIndex
 	logEntries := rf.log
 	// 2. Reply false if log doesn’t contain an entry at prevLogIndex whose term matches prevLogTerm (§5.3)
-	if logLen < args.PrevLogIndex {
+	if logLen <= args.PrevLogIndex {
 		// 不包含这个Log 返回false
 		// 代表对应的Log信息不存在
 		// 失败
@@ -438,7 +438,7 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 		reply.Term = currentTerm
 		reply.Success = false
 		// 这个是Follower中，对应任期号为XTerm的第一条Log条目的下标。
-		reply.LogIndex = comimtIndex
+		reply.LogIndex = comimtIndex + 1
 		// 将自己的任期号放在XTerm中。如果Follower在对应位置没有Log，那么这里会返回 -1。
 		reply.LogTerm = -1
 		//如果Follower在对应位置没有Log，那么XTerm会返回-1，XLen表示空白的Log下标。
@@ -937,7 +937,7 @@ func (rf *Raft) runElectionTimer() {
 			// 给其他节点发送请求投票 RPC
 			rf.broadcastVote(me, currentTerm, lastLogIndex, lastLogTerm)
 		}
-		time.Sleep(50 * time.Millisecond) // 优化选举定时器检查频率，减少CPU消耗
+		time.Sleep(10 * time.Millisecond) // 优化选举定时器检查频率，减少CPU消耗
 	}
 }
 
@@ -957,6 +957,10 @@ func makeRaftNode(peers []*labrpc.ClientEnd, me int, persister *Persister, apply
 	rf.log = append(rf.log, LogEntry{})
 	rf.nextIndex = make([]int, len(peers))
 	rf.matchIndex = make([]int, len(peers))
+	for i := range rf.peers {
+		rf.nextIndex[i] = 1
+		rf.matchIndex[i] = 0
+	}
 	// 初始化logger
 	rf.logger = NewLogger(me)
 	rf.heartbeatCond = sync.NewCond(&rf.mu)
