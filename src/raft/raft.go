@@ -569,14 +569,7 @@ func (rf *Raft) logReplication() {
 			To:      -1, // 广播心跳
 		}
 
-		// for !rf.needHeartbeat && !rf.killed() {
-		// 	rf.logger.LogWithTrace(HEARTBEAT, trace, "等待心跳信号或日志复制信号 term:%d commitIndex:%d", currentTerm, commitIndex)
-
-		// 	rf.heartbeatCond.Wait()
-		// }
-		// rf.needHeartbeat = false
-
-		// // 只有leader才发送日志
+		// 只有leader才发送心跳，并且控制发送频率
 		if rf.status == Leader {
 			rf.logger.LogWithTrace(HEARTBEAT, trace, "开始发送心跳广播 status %s term:%d commitIndex:%d", getStatusString(rf.status), currentTerm, commitIndex)
 
@@ -595,7 +588,7 @@ func (rf *Raft) logReplication() {
 
 			rf.mu.Unlock()
 		}
-		time.Sleep(10 * time.Millisecond)
+		time.Sleep(100 * time.Millisecond)
 	}
 }
 
@@ -603,7 +596,15 @@ func (rf *Raft) sendLogEntries(currentTerm int, me int, commitIndex int, peer in
 	if rf.killed() {
 		return
 	}
+
 	rf.mu.Lock()
+
+	// 状态检查：只有在当前节点是leader且term一致时才发送
+	if rf.status != Leader || rf.currentTerm != currentTerm {
+		rf.mu.Unlock()
+		return
+	}
+
 	nextIdx := rf.nextIndex[peer]
 	prevLogIndex := nextIdx - 1
 	prevLogTerm := rf.log[prevLogIndex].Term
@@ -613,6 +614,7 @@ func (rf *Raft) sendLogEntries(currentTerm int, me int, commitIndex int, peer in
 		// 复制
 		logEntries = append([]LogEntry{}, rf.log[nextIdx:]...)
 	}
+
 	// 判断follower进度
 	// 生成日志复制追踪ID
 	logReplicationTraceID := fmt.Sprintf("LOG_%d_%d", me, currentTerm)
@@ -621,13 +623,7 @@ func (rf *Raft) sendLogEntries(currentTerm int, me int, commitIndex int, peer in
 		From:    me,
 		To:      peer,
 	}
-	// log.Printf("server %d 已经同步了，不再发送，last log index %d next index %d", peer, rf.log[len(rf.log)-1].Index, rf.nextIndex[peer])
-	// if rf.log[len(rf.log)-1].Index < nextIdx {
-	// 	//不发送
-	// 	rf.logger.LogWithTrace(LOG_REPLICA, trace, "Server 已经同步了，不再发送 lastLogIndex:%d nextIndex:%d - skipping", rf.log[len(rf.log)-1].Index, rf.nextIndex[peer])
-	// 	rf.mu.Unlock()
-	// 	return
-	// }
+
 	rf.mu.Unlock()
 	args := AppendEntriesArgs{
 		Term:         currentTerm,
@@ -941,7 +937,7 @@ func (rf *Raft) runElectionTimer() {
 			// 给其他节点发送请求投票 RPC
 			rf.broadcastVote(me, currentTerm, lastLogIndex, lastLogTerm)
 		}
-		time.Sleep(10 * time.Millisecond) // 从50微秒调整为10毫秒，减少CPU消耗
+		time.Sleep(50 * time.Millisecond) // 优化选举定时器检查频率，减少CPU消耗
 	}
 }
 

@@ -339,7 +339,7 @@ func (cfg *config) checkTerms() int {
 	for i := 0; i < cfg.n; i++ {
 		if cfg.connected[i] {
 			xterm, _ := cfg.rafts[i].GetState()
-			log.Printf("raft %d current term %d", i, xterm)
+			DPrintf("raft %d current term %d", i, xterm)
 			if term == -1 {
 				term = xterm
 			} else if term != xterm {
@@ -365,7 +365,7 @@ func (cfg *config) checkNoLeader() {
 // how many servers think a log entry is committed?
 func (cfg *config) nCommitted(index int) (int, interface{}) {
 	count := 0
-	log.Printf("rfats %v", cfg.rafts)
+	DPrintf("rfats %v", cfg.rafts)
 	var cmd interface{} = nil
 	for i := 0; i < len(cfg.rafts); i++ {
 		if cfg.applyErr[i] != "" {
@@ -374,7 +374,7 @@ func (cfg *config) nCommitted(index int) (int, interface{}) {
 
 		cfg.mu.Lock()
 		cmd1, ok := cfg.logs[i][index]
-		log.Printf("i %d cmd1 %v, ok %t", i, cmd1, ok)
+		DPrintf("i %d cmd1 %v, ok %t", i, cmd1, ok)
 		cfg.mu.Unlock()
 
 		if ok {
@@ -449,21 +449,21 @@ func (cfg *config) one(cmd interface{}, expectedServers int, retry bool) int {
 			if rf != nil {
 				index1, _, ok := rf.Start(cmd)
 				if ok {
-					log.Printf("返回的索引 %d", index1)
+					DPrintf("返回的索引 %d", index1)
 					index = index1
 					break
 				}
 			}
 		}
-		log.Printf("到这里了")
+		DPrintf("到这里了")
 		if index != -1 {
 			// somebody claimed to be the leader and to have
 			// submitted our command; wait a while for agreement.
 			t1 := time.Now()
-			log.Printf("time.Since(t1).Seconds()")
+			DPrintf("time.Since(t1).Seconds()")
 			for time.Since(t1).Seconds() < 2 {
 				nd, cmd1 := cfg.nCommitted(index)
-				log.Printf("nd %d, cmd1 %v cmd %v", nd, cmd1, cmd)
+				DPrintf("nd %d, cmd1 %v cmd %v", nd, cmd1, cmd)
 				if nd > 0 && nd >= expectedServers {
 					// committed
 					if cmd1 == cmd {
