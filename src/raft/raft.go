@@ -1,12 +1,14 @@
 package raft
 
 import (
+	"bytes"
 	"fmt"
 	"math/rand"
 	"sync"
 	"sync/atomic"
 	"time"
 
+	"learn-6.824/src/labgob"
 	"learn-6.824/src/labrpc"
 )
 
@@ -198,12 +200,13 @@ func (rf *Raft) GetState() (int, bool) {
 func (rf *Raft) persist() {
 	// Your code here (2C).
 	// Example:
-	// w := new(bytes.Buffer)
-	// e := labgob.NewEncoder(w)
-	// e.Encode(rf.xxx)
-	// e.Encode(rf.yyy)
-	// data := w.Bytes()
-	// rf.persister.SaveRaftState(data)
+	w := new(bytes.Buffer)
+	e := labgob.NewEncoder(w)
+	e.Encode(rf.currentTerm)
+	e.Encode(rf.votedFor)
+	e.Encode(rf.log)
+	data := w.Bytes()
+	rf.persister.SaveRaftState(data)
 }
 
 // restore previously persisted state.
@@ -213,17 +216,25 @@ func (rf *Raft) readPersist(data []byte) {
 	}
 	// Your code here (2C).
 	// Example:
-	// r := bytes.NewBuffer(data)
-	// d := labgob.NewDecoder(r)
-	// var xxx
-	// var yyy
-	// if d.Decode(&xxx) != nil ||
-	//    d.Decode(&yyy) != nil {
-	//   error...
-	// } else {
-	//   rf.xxx = xxx
-	//   rf.yyy = yyy
-	// }
+	r := bytes.NewBuffer(data)
+	d := labgob.NewDecoder(r)
+	var currentTerm int
+	var votedFor int
+	var logEntries []LogEntry
+	if d.Decode(&currentTerm) != nil ||
+		d.Decode(&votedFor) != nil ||
+		d.Decode(&logEntries) != nil {
+		// error
+		DPrintf("[ERROR] [Node:%d] Failed to read persisted state", rf.me)
+		panic("Failed to read persisted state")
+	} else {
+		rf.currentTerm = currentTerm
+		rf.votedFor = votedFor
+		rf.log = logEntries
+		rf.logger.LogWithTrace(RPC_RECV, TraceContext{From: -1, To: rf.me},
+			"恢复持久化状态 currentTerm:%d votedFor:%d logLen:%d",
+			currentTerm, votedFor, len(logEntries))
+	}
 }
 
 // example RequestVote RPC arguments structure.
@@ -308,6 +319,7 @@ func (rf *Raft) RequestVote(args *RequestVoteArgs, reply *RequestVoteReply) {
 func (rf *Raft) grantVote(candidateId int) {
 	rf.votedFor = candidateId
 	rf.status = Follower
+	rf.persist()
 }
 
 // example code to send a RequestVote RPC to a server.
@@ -451,6 +463,7 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 		reply.LogLen = -1
 		// 删除现有条目
 		rf.log = rf.log[:reply.LogIndex]
+		rf.persist()
 		return
 	}
 	// 新条目的目标 index 从 prevLogIndex+1 开始
@@ -463,12 +476,14 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 					// 删除
 					rf.log = rf.log[:entry.Index]
 					rf.log = append(rf.log, args.Entries[i:]...)
+					rf.persist()
 					break
 				}
 			} else {
 				// a = [1,2,3,4,5] b = a[2:] 表示下标2开始到结束也就是3,4,5
 				// index是真实index-1 是下标，在-1才是前一个下标
 				rf.log = append(rf.log, args.Entries[i:]...)
+				rf.persist()
 				break
 			}
 		}
@@ -527,6 +542,7 @@ func (rf *Raft) Start(command interface{}) (int, int, bool) {
 	logEntry := NewLogEntry(command, term, index)
 	rf.mu.Lock()
 	rf.log = append(rf.log, logEntry)
+	rf.persist()
 	// 复制日志到Follower
 	// rf.needHeartbeat = true
 	// rf.heartbeatCond.Signal()
@@ -794,6 +810,7 @@ func (rf *Raft) becomeFollower(term int) {
 	rf.currentTerm = term
 	rf.votedFor = -1
 	rf.status = Follower
+	rf.persist()
 }
 
 // 广播选举
@@ -869,6 +886,7 @@ func (rf *Raft) becomeLeader(term int) {
 	for i := range rf.peers {
 		rf.nextIndex[i] = rf.commitIndex + 1
 	}
+	rf.persist()
 	rf.mu.Unlock()
 	// 启动心跳goroutine
 	// go rf.runHeartbeat()
