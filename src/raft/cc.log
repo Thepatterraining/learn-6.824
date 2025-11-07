@@ -1,0 +1,167 @@
+2025/11/04 15:36:36 [15:36:36.289] [Node:0] [HEARTBEAT] [Trace:HB_0_0] Follower等心跳 status FOLLOWER term:0 commitIndex:0
+2025/11/04 15:36:36 [15:36:36.303] [Node:1] [HEARTBEAT] [Trace:HB_1_0] Follower等心跳 status FOLLOWER term:0 commitIndex:0
+2025/11/04 15:36:36 [15:36:36.304] [Node:2] [HEARTBEAT] [Trace:HB_2_0] Follower等心跳 status FOLLOWER term:0 commitIndex:0
+Test (2B): concurrent Start()s ...
+2025/11/04 15:36:36 [15:36:36.400] [Node:0] [HEARTBEAT] [Trace:HB_0_0] Follower等心跳 status FOLLOWER term:0 commitIndex:0
+2025/11/04 15:36:36 [15:36:36.404] [Node:2] [HEARTBEAT] [Trace:HB_2_0] Follower等心跳 status FOLLOWER term:0 commitIndex:0
+2025/11/04 15:36:36 [15:36:36.404] [Node:1] [HEARTBEAT] [Trace:HB_1_0] Follower等心跳 status FOLLOWER term:0 commitIndex:0
+2025/11/04 15:36:36 [15:36:36.500] [Node:0] [HEARTBEAT] [Trace:HB_0_0] Follower等心跳 status FOLLOWER term:0 commitIndex:0
+2025/11/04 15:36:36 [15:36:36.505] [Node:1] [HEARTBEAT] [Trace:HB_1_0] Follower等心跳 status FOLLOWER term:0 commitIndex:0
+2025/11/04 15:36:36 [15:36:36.505] [Node:2] [HEARTBEAT] [Trace:HB_2_0] Follower等心跳 status FOLLOWER term:0 commitIndex:0
+2025/11/04 15:36:36 [15:36:36.509] [Node:0] [INFO] [STATE_CHANGE] FOLLOWER->FOLLOWER term:0 reason:变成Candidate
+2025/11/04 15:36:36 [15:36:36.509] [Node:0] [TIMER_EVENT] [Trace:TIMER_0] 超时选举 since:223.635042ms threshold:221.833025ms
+2025/11/04 15:36:36 [15:36:36.510] [Node:0] [RPC_SEND] [Trace:ELEC_0_1] 发送选举请求
+2025/11/04 15:36:36 [15:36:36.510] [Node:0] [RPC_SEND] [Trace:ELEC_0_1] 发送选举请求
+2025/11/04 15:36:36 [15:36:36.531] [Node:1] [INFO] [STATE_CHANGE] FOLLOWER->FOLLOWER term:0 reason:变成Candidate
+2025/11/04 15:36:36 [15:36:36.532] [Node:1] [TIMER_EVENT] [Trace:TIMER_1] 超时选举 since:227.823459ms threshold:226.275876ms
+2025/11/04 15:36:36 [15:36:36.532] [Node:1] [RPC_SEND] [Trace:ELEC_1_1] 发送选举请求
+2025/11/04 15:36:36 [15:36:36.532] [Node:1] [RPC_SEND] [Trace:ELEC_1_1] 发送选举请求
+2025/11/04 15:36:36 [15:36:36.538] [Node:2] [RPC_RECV] [Trace:ELEC_1_1][1->2] RequestVote 接受 term:1 candidateId:1 lastLogIndex:0 lastLogTerm:0 currentTerm:0 status:FOLLOWER
+2025/11/04 15:36:36 [15:36:36.538] [Node:0] [RPC_RECV] [Trace:ELEC_1_1][1->0] RequestVote 接受 term:1 candidateId:1 lastLogIndex:0 lastLogTerm:0 currentTerm:1 status:CANDIDATE
+2025/11/04 15:36:36 [15:36:36.538] [Node:0] [RPC_RECV] [Trace:ELEC_1_1][1->0] 投票信息 votedFor:0 lastLogTerm:0 lastLogIndex:0
+2025/11/04 15:36:36 [15:36:36.538] [Node:0] [RPC_RECV] [Trace:ELEC_1_1][1->0] 投票失败兜底 candidate:1 term:1
+2025/11/04 15:36:36 [15:36:36.538] [Node:1] [RPC_RECV] [Trace:ELEC_0_1][0->1] RequestVote 接受 term:1 candidateId:0 lastLogIndex:0 lastLogTerm:0 currentTerm:1 status:CANDIDATE
+2025/11/04 15:36:36 [15:36:36.538] [Node:1] [RPC_RECV] [Trace:ELEC_0_1][0->1] 投票信息 votedFor:1 lastLogTerm:0 lastLogIndex:0
+2025/11/04 15:36:36 [15:36:36.538] [Node:1] [RPC_RECV] [Trace:ELEC_0_1][0->1] 投票失败兜底 candidate:0 term:1
+2025/11/04 15:36:36 [15:36:36.538] [Node:2] [INFO] [STATE_CHANGE] FOLLOWER->FOLLOWER term:0 reason:降级成follower
+2025/11/04 15:36:36 [15:36:36.540] [Node:2] [RPC_RECV] [Trace:ELEC_1_1][1->2] 投票信息 votedFor:-1 lastLogTerm:0 lastLogIndex:0
+2025/11/04 15:36:36 [15:36:36.540] [Node:2] [RPC_RECV] [Trace:ELEC_1_1][1->2] 投票给 candidate:1 term:1
+2025/11/04 15:36:36 [15:36:36.540] [Node:2] [RPC_RECV] [Trace:ELEC_0_1][0->2] RequestVote 接受 term:1 candidateId:0 lastLogIndex:0 lastLogTerm:0 currentTerm:1 status:FOLLOWER
+2025/11/04 15:36:36 [15:36:36.540] [Node:2] [RPC_RECV] [Trace:ELEC_0_1][0->2] 投票信息 votedFor:1 lastLogTerm:0 lastLogIndex:0
+2025/11/04 15:36:36 [15:36:36.540] [Node:2] [RPC_RECV] [Trace:ELEC_0_1][0->2] 投票失败兜底 candidate:0 term:1
+2025/11/04 15:36:36 [15:36:36.542] [Node:1] [RPC_SEND] [Trace:ELEC_1_1] 处理投票返回 for term 1 reply:{1 false}
+2025/11/04 15:36:36 [15:36:36.542] [Node:0] [RPC_SEND] [Trace:ELEC_0_1] 处理投票返回 for term 1 reply:{1 false}
+2025/11/04 15:36:36 [15:36:36.542] [Node:1] [RPC_SEND] [Trace:ELEC_1_1] 处理投票返回 for term 1 reply:{1 true}
+2025/11/04 15:36:36 [15:36:36.542] [Node:0] [RPC_SEND] [Trace:ELEC_0_1] 处理投票返回 for term 1 reply:{1 false}
+2025/11/04 15:36:36 [15:36:36.542] [Node:1] [INFO] [STATE_CHANGE] CANDIDATE->LEADER term:1 reason:成为Leader
+2025/11/04 15:36:36 [15:36:36.601] [Node:0] [HEARTBEAT] [Trace:HB_0_1] Follower等心跳 status CANDIDATE term:1 commitIndex:0
+2025/11/04 15:36:36 [15:36:36.606] [Node:2] [HEARTBEAT] [Trace:HB_2_1] Follower等心跳 status FOLLOWER term:1 commitIndex:0
+2025/11/04 15:36:36 [15:36:36.606] [Node:1] [HEARTBEAT] [Trace:HB_1_1] 开始发送心跳广播 status LEADER term:1 commitIndex:0
+2025/11/04 15:36:36 [15:36:36.609] [Node:0] [HEARTBEAT] [Trace:LOG_1_1][1->0] AppendEntries 收到 term:1 leaderId:1 prevLogIndex:0 prevLogTerm:0 entries:0 leaderCommit:0 isHeartbeat:true currentTerm:1 status:CANDIDATE
+2025/11/04 15:36:36 [15:36:36.609] [Node:2] [HEARTBEAT] [Trace:LOG_1_1][1->2] AppendEntries 收到 term:1 leaderId:1 prevLogIndex:0 prevLogTerm:0 entries:0 leaderCommit:0 isHeartbeat:true currentTerm:1 status:FOLLOWER
+2025/11/04 15:36:36 [15:36:36.609] [Node:0] [HEARTBEAT] [Trace:LOG_1_1][1->0] 打印日志结果:[{<nil> 0 false 0}] 
+2025/11/04 15:36:36 [15:36:36.609] [Node:2] [HEARTBEAT] [Trace:LOG_1_1][1->2] 打印日志结果:[{<nil> 0 false 0}] 
+2025/11/04 15:36:36 [15:36:36.609] [Node:0] [HEARTBEAT] [Trace:LOG_1_1][1->0] 复制日志结果:[{<nil> 0 false 0}] 
+2025/11/04 15:36:36 [15:36:36.609] [Node:2] [HEARTBEAT] [Trace:LOG_1_1][1->2] 复制日志结果:[{<nil> 0 false 0}] 
+2025/11/04 15:36:36 [15:36:36.610] [Node:1] [LOG_REPLICA] [Trace:LOG_1_1][1->2] 心跳返回 from peer:2 term:1 success:true
+2025/11/04 15:36:36 [15:36:36.610] [Node:1] [LOG_REPLICA] [Trace:LOG_1_1][1->0] 心跳返回 from peer:0 term:1 success:true
+2025/11/04 15:36:36 [15:36:36.702] [Node:0] [HEARTBEAT] [Trace:HB_0_1] Follower等心跳 status CANDIDATE term:1 commitIndex:0
+2025/11/04 15:36:36 [15:36:36.706] [Node:1] [HEARTBEAT] [Trace:HB_1_1] 开始发送心跳广播 status LEADER term:1 commitIndex:0
+2025/11/04 15:36:36 [15:36:36.706] [Node:2] [HEARTBEAT] [Trace:HB_2_1] Follower等心跳 status FOLLOWER term:1 commitIndex:0
+2025/11/04 15:36:36 [15:36:36.707] [Node:0] [HEARTBEAT] [Trace:LOG_1_1][1->0] AppendEntries 收到 term:1 leaderId:1 prevLogIndex:0 prevLogTerm:0 entries:0 leaderCommit:0 isHeartbeat:true currentTerm:1 status:CANDIDATE
+2025/11/04 15:36:36 [15:36:36.707] [Node:2] [HEARTBEAT] [Trace:LOG_1_1][1->2] AppendEntries 收到 term:1 leaderId:1 prevLogIndex:0 prevLogTerm:0 entries:0 leaderCommit:0 isHeartbeat:true currentTerm:1 status:FOLLOWER
+2025/11/04 15:36:36 [15:36:36.707] [Node:0] [HEARTBEAT] [Trace:LOG_1_1][1->0] 打印日志结果:[{<nil> 0 false 0}] 
+2025/11/04 15:36:36 [15:36:36.707] [Node:2] [HEARTBEAT] [Trace:LOG_1_1][1->2] 打印日志结果:[{<nil> 0 false 0}] 
+2025/11/04 15:36:36 [15:36:36.708] [Node:0] [HEARTBEAT] [Trace:LOG_1_1][1->0] 复制日志结果:[{<nil> 0 false 0}] 
+2025/11/04 15:36:36 [15:36:36.708] [Node:2] [HEARTBEAT] [Trace:LOG_1_1][1->2] 复制日志结果:[{<nil> 0 false 0}] 
+2025/11/04 15:36:36 [15:36:36.708] [Node:1] [LOG_REPLICA] [Trace:LOG_1_1][1->2] 心跳返回 from peer:2 term:1 success:true
+2025/11/04 15:36:36 [15:36:36.708] [Node:1] [LOG_REPLICA] [Trace:LOG_1_1][1->0] 心跳返回 from peer:0 term:1 success:true
+2025/11/04 15:36:36 [15:36:36.803] [Node:0] [HEARTBEAT] [Trace:HB_0_1] Follower等心跳 status CANDIDATE term:1 commitIndex:0
+2025/11/04 15:36:36 [15:36:36.807] [Node:2] [HEARTBEAT] [Trace:HB_2_1] Follower等心跳 status FOLLOWER term:1 commitIndex:0
+2025/11/04 15:36:36 [15:36:36.807] [Node:1] [HEARTBEAT] [Trace:HB_1_1] 开始发送心跳广播 status LEADER term:1 commitIndex:0
+2025/11/04 15:36:36 [15:36:36.810] [Node:0] [HEARTBEAT] [Trace:LOG_1_1][1->0] AppendEntries 收到 term:1 leaderId:1 prevLogIndex:0 prevLogTerm:0 entries:0 leaderCommit:0 isHeartbeat:true currentTerm:1 status:CANDIDATE
+2025/11/04 15:36:36 [15:36:36.810] [Node:2] [HEARTBEAT] [Trace:LOG_1_1][1->2] AppendEntries 收到 term:1 leaderId:1 prevLogIndex:0 prevLogTerm:0 entries:0 leaderCommit:0 isHeartbeat:true currentTerm:1 status:FOLLOWER
+2025/11/04 15:36:36 [15:36:36.810] [Node:0] [HEARTBEAT] [Trace:LOG_1_1][1->0] 打印日志结果:[{<nil> 0 false 0}] 
+2025/11/04 15:36:36 [15:36:36.811] [Node:2] [HEARTBEAT] [Trace:LOG_1_1][1->2] 打印日志结果:[{<nil> 0 false 0}] 
+2025/11/04 15:36:36 [15:36:36.811] [Node:0] [HEARTBEAT] [Trace:LOG_1_1][1->0] 复制日志结果:[{<nil> 0 false 0}] 
+2025/11/04 15:36:36 [15:36:36.811] [Node:2] [HEARTBEAT] [Trace:LOG_1_1][1->2] 复制日志结果:[{<nil> 0 false 0}] 
+2025/11/04 15:36:36 [15:36:36.812] [Node:1] [LOG_REPLICA] [Trace:LOG_1_1][1->0] 心跳返回 from peer:0 term:1 success:true
+2025/11/04 15:36:36 [15:36:36.812] [Node:1] [LOG_REPLICA] [Trace:LOG_1_1][1->2] 心跳返回 from peer:2 term:1 success:true
+2025/11/04 15:36:36 [15:36:36.856] [Node:1] [RPC_RECV] [Trace:CLIENT_1_1762241796856285000] 接收到日志命令:1 isLeader:true term:1
+2025/11/04 15:36:36 [15:36:36.858] [Node:1] [RPC_RECV] [Trace:CLIENT_1_1762241796858154000] 接收到日志命令:101 isLeader:true term:1
+2025/11/04 15:36:36 [15:36:36.858] [Node:1] [RPC_RECV] [Trace:CLIENT_1_1762241796858897000] 接收到日志命令:104 isLeader:true term:1
+2025/11/04 15:36:36 [15:36:36.859] [Node:1] [RPC_RECV] [Trace:CLIENT_1_1762241796859065000] 接收到日志命令:100 isLeader:true term:1
+2025/11/04 15:36:36 [15:36:36.859] [Node:1] [RPC_RECV] [Trace:CLIENT_1_1762241796859208000] 接收到日志命令:102 isLeader:true term:1
+2025/11/04 15:36:36 [15:36:36.859] [Node:1] [RPC_RECV] [Trace:CLIENT_1_1762241796859331000] 接收到日志命令:103 isLeader:true term:1
+2025/11/04 15:36:36 rfats [0xc0000000e0 0xc000142000 0xc0001420e0]
+2025/11/04 15:36:36 i 0 cmd1 <nil>, ok false
+2025/11/04 15:36:36 i 1 cmd1 <nil>, ok false
+2025/11/04 15:36:36 i 2 cmd1 <nil>, ok false
+2025/11/04 15:36:36 rfats [0xc0000000e0 0xc000142000 0xc0001420e0]
+2025/11/04 15:36:36 i 0 cmd1 <nil>, ok false
+2025/11/04 15:36:36 i 1 cmd1 <nil>, ok false
+2025/11/04 15:36:36 i 2 cmd1 <nil>, ok false
+2025/11/04 15:36:36 rfats [0xc0000000e0 0xc000142000 0xc0001420e0]
+2025/11/04 15:36:36 i 0 cmd1 <nil>, ok false
+2025/11/04 15:36:36 i 1 cmd1 <nil>, ok false
+2025/11/04 15:36:36 i 2 cmd1 <nil>, ok false
+2025/11/04 15:36:36 [15:36:36.905] [Node:0] [HEARTBEAT] [Trace:HB_0_1] Follower等心跳 status CANDIDATE term:1 commitIndex:0
+2025/11/04 15:36:36 [15:36:36.907] [Node:2] [HEARTBEAT] [Trace:HB_2_1] Follower等心跳 status FOLLOWER term:1 commitIndex:0
+2025/11/04 15:36:36 [15:36:36.907] [Node:1] [HEARTBEAT] [Trace:HB_1_1] 开始发送心跳广播 status LEADER term:1 commitIndex:0
+2025/11/04 15:36:36 [15:36:36.908] [Node:2] [LOG_REPLICA] [Trace:LOG_1_1][1->2] AppendEntries 收到 term:1 leaderId:1 prevLogIndex:0 prevLogTerm:0 entries:6 leaderCommit:0 isHeartbeat:false currentTerm:1 status:FOLLOWER
+2025/11/04 15:36:36 [15:36:36.908] [Node:0] [LOG_REPLICA] [Trace:LOG_1_1][1->0] AppendEntries 收到 term:1 leaderId:1 prevLogIndex:0 prevLogTerm:0 entries:6 leaderCommit:0 isHeartbeat:false currentTerm:1 status:CANDIDATE
+2025/11/04 15:36:36 [15:36:36.908] [Node:2] [LOG_REPLICA] [Trace:LOG_1_1][1->2] 打印日志结果:[{<nil> 0 false 0}] 
+2025/11/04 15:36:36 [15:36:36.908] [Node:0] [LOG_REPLICA] [Trace:LOG_1_1][1->0] 打印日志结果:[{<nil> 0 false 0}] 
+2025/11/04 15:36:36 [15:36:36.909] [Node:2] [LOG_REPLICA] [Trace:LOG_1_1][1->2] 复制日志结果:[{<nil> 0 false 0} {1 1 false 1} {101 1 false 2} {104 1 false 3} {100 1 false 4} {102 1 false 5} {103 1 false 6}] 
+2025/11/04 15:36:36 [15:36:36.909] [Node:0] [LOG_REPLICA] [Trace:LOG_1_1][1->0] 复制日志结果:[{<nil> 0 false 0} {1 1 false 1} {101 1 false 2} {104 1 false 3} {100 1 false 4} {102 1 false 5} {103 1 false 6}] 
+2025/11/04 15:36:36 [15:36:36.909] [Node:1] [LOG_REPLICA] [Trace:LOG_1_1][1->2] 心跳返回 from peer:2 term:1 success:true
+2025/11/04 15:36:36 [15:36:36.910] [Node:1] [LOG_REPLICA] [Trace:LOG_1_1][1->2] 日志复制返回成功 from peer:2 term:1 agreeCount:2 log [{1 1 false 1} {101 1 false 2} {104 1 false 3} {100 1 false 4} {102 1 false 5} {103 1 false 6}]
+2025/11/04 15:36:36 [15:36:36.910] [Node:1] [LOG_REPLICA] [Trace:LOG_1_1][1->2] 更新后 server:2 matchIndex:6 nextIndex:7
+2025/11/04 15:36:36 [15:36:36.910] [Node:1] [LOG_COMMIT] [Trace:LOG_1_1] 日志复制返回成功 多数同意，提交日志给KV服务器 index:6 term:1 majorityCount:2
+2025/11/04 15:36:36 [15:36:36.910] [Node:1] [LOG_COMMIT] [Trace:APPLY_1_6] Applying logs count:6 log:[{1 1 false 1} {101 1 false 2} {104 1 false 3} {100 1 false 4} {102 1 false 5} {103 1 false 6}] lastApplied:6
+2025/11/04 15:36:36 [15:36:36.911] [Node:1] [LOG_REPLICA] [Trace:LOG_1_1][1->0] 心跳返回 from peer:0 term:1 success:true
+2025/11/04 15:36:36 [15:36:36.911] [Node:1] [LOG_REPLICA] [Trace:LOG_1_1][1->0] 日志复制返回成功 from peer:0 term:1 agreeCount:3 log [{1 1 false 1} {101 1 false 2} {104 1 false 3} {100 1 false 4} {102 1 false 5} {103 1 false 6}]
+2025/11/04 15:36:36 [15:36:36.911] [Node:1] [LOG_REPLICA] [Trace:LOG_1_1][1->0] 更新后 server:0 matchIndex:6 nextIndex:7
+2025/11/04 15:36:36 [15:36:36.911] [Node:1] [LOG_COMMIT] [Trace:LOG_1_1] 日志复制返回成功 多数同意，提交日志给KV服务器 index:6 term:1 majorityCount:3
+2025/11/04 15:36:36 rfats [0xc0000000e0 0xc000142000 0xc0001420e0]
+2025/11/04 15:36:36 i 0 cmd1 <nil>, ok false
+2025/11/04 15:36:36 i 1 cmd1 101, ok true
+2025/11/04 15:36:36 i 2 cmd1 <nil>, ok false
+2025/11/04 15:36:37 [15:36:37.005] [Node:0] [HEARTBEAT] [Trace:HB_0_1] Follower等心跳 status CANDIDATE term:1 commitIndex:0
+2025/11/04 15:36:37 [15:36:37.007] [Node:2] [HEARTBEAT] [Trace:HB_2_1] Follower等心跳 status FOLLOWER term:1 commitIndex:0
+2025/11/04 15:36:37 [15:36:37.008] [Node:1] [HEARTBEAT] [Trace:HB_1_1] 开始发送心跳广播 status LEADER term:1 commitIndex:6
+2025/11/04 15:36:37 [15:36:37.008] [Node:0] [HEARTBEAT] [Trace:LOG_1_1][1->0] AppendEntries 收到 term:1 leaderId:1 prevLogIndex:6 prevLogTerm:1 entries:0 leaderCommit:6 isHeartbeat:true currentTerm:1 status:CANDIDATE
+2025/11/04 15:36:37 [15:36:37.008] [Node:2] [HEARTBEAT] [Trace:LOG_1_1][1->2] AppendEntries 收到 term:1 leaderId:1 prevLogIndex:6 prevLogTerm:1 entries:0 leaderCommit:6 isHeartbeat:true currentTerm:1 status:FOLLOWER
+2025/11/04 15:36:37 [15:36:37.008] [Node:0] [HEARTBEAT] [Trace:LOG_1_1][1->0] 打印日志结果:[{<nil> 0 false 0} {1 1 false 1} {101 1 false 2} {104 1 false 3} {100 1 false 4} {102 1 false 5} {103 1 false 6}] 
+2025/11/04 15:36:37 [15:36:37.009] [Node:2] [HEARTBEAT] [Trace:LOG_1_1][1->2] 打印日志结果:[{<nil> 0 false 0} {1 1 false 1} {101 1 false 2} {104 1 false 3} {100 1 false 4} {102 1 false 5} {103 1 false 6}] 
+2025/11/04 15:36:37 [15:36:37.009] [Node:0] [HEARTBEAT] [Trace:LOG_1_1][1->0] 复制日志结果:[{<nil> 0 false 0} {1 1 false 1} {101 1 false 2} {104 1 false 3} {100 1 false 4} {102 1 false 5} {103 1 false 6}] 
+2025/11/04 15:36:37 [15:36:37.009] [Node:2] [HEARTBEAT] [Trace:LOG_1_1][1->2] 复制日志结果:[{<nil> 0 false 0} {1 1 false 1} {101 1 false 2} {104 1 false 3} {100 1 false 4} {102 1 false 5} {103 1 false 6}] 
+2025/11/04 15:36:37 [15:36:37.009] [Node:0] [LOG_COMMIT] [Trace:LOG_1_1][1->0] 收到LogEntry，并且Leader已经提交， 本地log 0->6 leaderCommit:6 lastApplied:0
+2025/11/04 15:36:37 [15:36:37.009] [Node:2] [LOG_COMMIT] [Trace:LOG_1_1][1->2] 收到LogEntry，并且Leader已经提交， 本地log 0->6 leaderCommit:6 lastApplied:0
+2025/11/04 15:36:37 [15:36:37.009] [Node:0] [LOG_COMMIT] [Trace:APPLY_0_6] Applying logs count:6 log:[{1 1 false 1} {101 1 false 2} {104 1 false 3} {100 1 false 4} {102 1 false 5} {103 1 false 6}] lastApplied:6
+2025/11/04 15:36:37 [15:36:37.009] [Node:2] [LOG_COMMIT] [Trace:APPLY_2_6] Applying logs count:6 log:[{1 1 false 1} {101 1 false 2} {104 1 false 3} {100 1 false 4} {102 1 false 5} {103 1 false 6}] lastApplied:6
+2025/11/04 15:36:37 [15:36:37.009] [Node:1] [LOG_REPLICA] [Trace:LOG_1_1][1->0] 心跳返回 from peer:0 term:1 success:true
+2025/11/04 15:36:37 [15:36:37.009] [Node:1] [LOG_REPLICA] [Trace:LOG_1_1][1->2] 心跳返回 from peer:2 term:1 success:true
+2025/11/04 15:36:37 rfats [0xc0000000e0 0xc000142000 0xc0001420e0]
+2025/11/04 15:36:37 i 0 cmd1 101, ok true
+2025/11/04 15:36:37 i 1 cmd1 101, ok true
+2025/11/04 15:36:37 i 2 cmd1 101, ok true
+2025/11/04 15:36:37 rfats [0xc0000000e0 0xc000142000 0xc0001420e0]
+2025/11/04 15:36:37 i 0 cmd1 101, ok true
+2025/11/04 15:36:37 i 1 cmd1 101, ok true
+2025/11/04 15:36:37 i 2 cmd1 101, ok true
+2025/11/04 15:36:37 rfats [0xc0000000e0 0xc000142000 0xc0001420e0]
+2025/11/04 15:36:37 i 0 cmd1 104, ok true
+2025/11/04 15:36:37 i 1 cmd1 104, ok true
+2025/11/04 15:36:37 i 2 cmd1 104, ok true
+2025/11/04 15:36:37 rfats [0xc0000000e0 0xc000142000 0xc0001420e0]
+2025/11/04 15:36:37 i 0 cmd1 104, ok true
+2025/11/04 15:36:37 i 1 cmd1 104, ok true
+2025/11/04 15:36:37 i 2 cmd1 104, ok true
+2025/11/04 15:36:37 rfats [0xc0000000e0 0xc000142000 0xc0001420e0]
+2025/11/04 15:36:37 i 0 cmd1 100, ok true
+2025/11/04 15:36:37 i 1 cmd1 100, ok true
+2025/11/04 15:36:37 i 2 cmd1 100, ok true
+2025/11/04 15:36:37 rfats [0xc0000000e0 0xc000142000 0xc0001420e0]
+2025/11/04 15:36:37 i 0 cmd1 100, ok true
+2025/11/04 15:36:37 i 1 cmd1 100, ok true
+2025/11/04 15:36:37 i 2 cmd1 100, ok true
+2025/11/04 15:36:37 rfats [0xc0000000e0 0xc000142000 0xc0001420e0]
+2025/11/04 15:36:37 i 0 cmd1 102, ok true
+2025/11/04 15:36:37 i 1 cmd1 102, ok true
+2025/11/04 15:36:37 i 2 cmd1 102, ok true
+2025/11/04 15:36:37 rfats [0xc0000000e0 0xc000142000 0xc0001420e0]
+2025/11/04 15:36:37 i 0 cmd1 102, ok true
+2025/11/04 15:36:37 i 1 cmd1 102, ok true
+2025/11/04 15:36:37 i 2 cmd1 102, ok true
+2025/11/04 15:36:37 rfats [0xc0000000e0 0xc000142000 0xc0001420e0]
+2025/11/04 15:36:37 i 0 cmd1 103, ok true
+2025/11/04 15:36:37 i 1 cmd1 103, ok true
+2025/11/04 15:36:37 i 2 cmd1 103, ok true
+2025/11/04 15:36:37 rfats [0xc0000000e0 0xc000142000 0xc0001420e0]
+2025/11/04 15:36:37 i 0 cmd1 103, ok true
+2025/11/04 15:36:37 i 1 cmd1 103, ok true
+2025/11/04 15:36:37 i 2 cmd1 103, ok true
+  ... Passed --   0.7  3   14    4298    6
+PASS
+ok  	learn-6.824/src/raft	2.416s

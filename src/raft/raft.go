@@ -518,11 +518,10 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 // the leader.
 func (rf *Raft) Start(command interface{}) (int, int, bool) {
 	rf.mu.Lock()
+	defer rf.mu.Unlock()
 	me := rf.me
 	isLeader := rf.status == Leader
 	term := rf.currentTerm
-	// index从1开始 这是当前command在log中的下标
-	index := len(rf.log)
 	// 生成客户端请求追踪ID
 	clientTraceID := fmt.Sprintf("CLIENT_%d_%d", me, time.Now().UnixNano())
 	trace := TraceContext{
@@ -532,21 +531,20 @@ func (rf *Raft) Start(command interface{}) (int, int, bool) {
 	}
 
 	rf.logger.LogWithTrace(RPC_RECV, trace, "接收到日志命令:%v isLeader:%t term:%d", command, isLeader, term)
-	rf.mu.Unlock()
 	if !isLeader {
 		return -1, term, isLeader
 	}
 
+	// index从1开始 这是当前command在log中的下标
+	index := len(rf.log)
 	// Your code here (2B).
 	// leader写入日志，未提交状态
 	logEntry := NewLogEntry(command, term, index)
-	rf.mu.Lock()
 	rf.log = append(rf.log, logEntry)
 	rf.persist()
 	// 复制日志到Follower
 	// rf.needHeartbeat = true
 	// rf.heartbeatCond.Signal()
-	rf.mu.Unlock()
 	return index, term, isLeader
 }
 
@@ -590,6 +588,13 @@ func (rf *Raft) logReplication() {
 		}
 		time.Sleep(100 * time.Millisecond)
 	}
+}
+
+// [0, 1, 2]
+// last log index = 2 len = 3
+// len - 1 就是last log index
+func (rf *Raft) getLastLogIndex() int {
+	return len(rf.log) - 1
 }
 
 func (rf *Raft) sendLogEntries(currentTerm int, me int, commitIndex int, peer int, agreeCount *int32) {
@@ -880,7 +885,7 @@ func (rf *Raft) becomeLeader(term int) {
 	rf.status = Leader
 	// 初始化nextIndex
 	for i := range rf.peers {
-		rf.nextIndex[i] = rf.commitIndex + 1
+		rf.nextIndex[i] = rf.getLastLogIndex() + 1
 	}
 	rf.persist()
 	rf.mu.Unlock()
@@ -896,8 +901,8 @@ func (rf *Raft) becomeCandidate() {
 	oldTerm := rf.currentTerm
 	rf.logger.LogStateChange(oldStatus, Follower, oldTerm, "变成Candidate")
 	rf.currentTerm++
-	rf.votedFor = rf.me
 	rf.status = Candidate
+	rf.votedFor = rf.me
 }
 
 // 选举定时器
@@ -905,7 +910,7 @@ func (rf *Raft) runElectionTimer() {
 	// Sleep 随机毫秒数
 	// 创建一个计时器
 	// 定义随机超时范围（论文推荐 150-300ms）
-	minTimeout := 200 * time.Millisecond
+	minTimeout := 150 * time.Millisecond
 	maxTimeout := 600 * time.Millisecond
 	// 生成定时器追踪ID
 	timerTraceID := fmt.Sprintf("TIMER_%d", rf.me)
