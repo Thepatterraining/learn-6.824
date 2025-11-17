@@ -297,8 +297,17 @@ func (rf *Raft) RequestVote(args *RequestVoteArgs, reply *RequestVoteReply) {
 	votedFor := rf.votedFor
 	// 否则（term >= currentTerm）需要检查两点：
 	// 本节点尚未在该 term 投票（votedFor == -1 或已投给 candidateId）；
-	rf.logger.LogWithTrace(RPC_RECV, trace, "投票信息 votedFor:%d lastLogTerm:%d lastLogIndex:%d", votedFor, lastLogTerm, lastLogIndex)
+	rf.logger.LogWithTrace(RPC_RECV, trace, "投票信息 votedFor:%d lastLogTerm:%d lastLogIndex:%d commitIndex:%d", votedFor, lastLogTerm, lastLogIndex, rf.commitIndex)
 	if votedFor == -1 || votedFor == args.CandidateId {
+		// 检查候选人是否包含所有已提交的日志条目
+		// if !rf.isCandidateSafe(args.LastLogIndex, args.LastLogTerm) {
+		// 	reply.VoteGranted = false
+		// 	reply.Term = currentTerm
+		// 	rf.logger.LogWithTrace(RPC_RECV, trace, "拒绝投票：候选人未包含所有已提交日志 candidateLastLogIndex:%d candidateLastLogTerm:%d commitIndex:%d",
+		// 		args.LastLogIndex, args.LastLogTerm, rf.commitIndex)
+		// 	return
+		// }
+
 		// 候选人的日志至少跟接收者的日志一样新（比较 lastLogTerm，若相同则比较 lastLogIndex）。
 		if args.LastLogTerm > lastLogTerm || (args.LastLogTerm == lastLogTerm && args.LastLogIndex >= lastLogIndex) {
 			// 满足这两点则授予投票（voteGranted = true），并把 votedFor = candidateId（并在稳定存储上持久化）。
@@ -315,6 +324,33 @@ func (rf *Raft) RequestVote(args *RequestVoteArgs, reply *RequestVoteReply) {
 	reply.Term = currentTerm
 	reply.VoteGranted = false
 }
+
+// 检查候选人是否包含所有已提交的日志条目
+// 根据Raft论文5.4.1节的要求，候选人必须包含所有已提交的日志条目
+// func (rf *Raft) isCandidateSafe(candidateLastLogIndex int, candidateLastLogTerm int) bool {
+// 	// 基本检查：如果候选人日志太短，肯定不包含所有已提交日志
+// 	if candidateLastLogIndex < rf.commitIndex {
+// 		rf.logger.LogWithTrace(RPC_RECV, TraceContext{}, "安全检查失败：候选人日志太短 candidateLastLogIndex:%d < commitIndex:%d",
+// 			candidateLastLogIndex, rf.commitIndex)
+// 		return false
+// 	}
+
+// 	// 检查候选人是否至少和本节点一样新
+// 	// 这是Raft论文中要求的投票限制的一部分
+// 	lastLogIndex := rf.getLastLogIndex()
+// 	lastLogTerm := rf.log[lastLogIndex].Term
+
+// 	isUpToDate := candidateLastLogTerm > lastLogTerm ||
+// 		(candidateLastLogTerm == lastLogTerm && candidateLastLogIndex >= lastLogIndex)
+
+// 	if !isUpToDate {
+// 		rf.logger.LogWithTrace(RPC_RECV, TraceContext{}, "安全检查失败：候选人日志不够新 candidate(%d,%d) vs current(%d,%d)",
+// 			candidateLastLogTerm, candidateLastLogIndex, lastLogTerm, lastLogIndex)
+// 		return false
+// 	}
+
+// 	return true
+// }
 
 func (rf *Raft) grantVote(candidateId int) {
 	rf.votedFor = candidateId
@@ -427,7 +463,6 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 	currentTerm = rf.currentTerm
 	logLen := len(rf.log)
 	comimtIndex := rf.commitIndex
-	logEntries := rf.log
 	// 2. Reply false if log doesn’t contain an entry at prevLogIndex whose term matches prevLogTerm (§5.3)
 	if logLen <= args.PrevLogIndex {
 		// 不包含这个Log 返回false
@@ -450,10 +485,10 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 	logEntry := rf.log[args.PrevLogIndex]
 	if logEntry.Term != args.PrevLogTerm {
 		// 失败
-		rf.logger.LogWithTrace(eventType, trace, "Rejected: 收到LogEntry，但是term 不对 prevLogIndex:%d logLen:%d logEntry term:%d prevlogterm:%d", args.PrevLogIndex, logLen, logEntry.Term, args.PrevLogTerm)
+		// rf.logger.LogWithTrace(eventType, trace, "Rejected: 收到LogEntry，但是term 不对 prevLogIndex:%d logLen:%d logEntry term:%d prevlogterm:%d", args.PrevLogIndex, logLen, logEntry.Term, args.PrevLogTerm)
 		reply.Term = currentTerm
 		reply.Success = false
-		for i, log := range logEntries {
+		for i, log := range rf.log {
 			if log.Term == logEntry.Term {
 				reply.LogIndex = i
 				break
@@ -464,6 +499,7 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 		// 删除现有条目
 		rf.log = rf.log[:reply.LogIndex]
 		rf.persist()
+		rf.logger.LogWithTrace(eventType, trace, "Rejected: 收到LogEntry，但是term 不对 prevLogIndex:%d logLen:%d logEntry term:%d prevlogterm:%d LogIndex:%d", args.PrevLogIndex, logLen, logEntry.Term, args.PrevLogTerm, reply.LogIndex)
 		return
 	}
 	// 新条目的目标 index 从 prevLogIndex+1 开始
@@ -496,7 +532,7 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 		rf.logger.LogWithTrace(LOG_COMMIT, trace, "收到LogEntry，并且Leader已经提交， 本地log %d->%d leaderCommit:%d lastApplied:%d", oldCommitIndex, rf.commitIndex, args.LeaderCommit, rf.lastApplied)
 		// 找到没有提交的
 		if rf.commitIndex > rf.lastApplied {
-			rf.applyLogs(rf.log[rf.lastApplied+1:])
+			rf.applyLogs(rf.log[rf.lastApplied+1 : rf.commitIndex+1])
 		}
 	}
 	reply.Term = currentTerm
