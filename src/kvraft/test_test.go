@@ -1,17 +1,20 @@
 package kvraft
 
-import "../porcupine"
-import "../models"
-import "testing"
-import "strconv"
-import "time"
-import "math/rand"
-import "log"
-import "strings"
-import "sync"
-import "sync/atomic"
-import "fmt"
-import "io/ioutil"
+import (
+	"fmt"
+	"io/ioutil"
+	"log"
+	"math/rand"
+	"strconv"
+	"strings"
+	"sync"
+	"sync/atomic"
+	"testing"
+	"time"
+
+	"learn-6.824/src/models"
+	"learn-6.824/src/porcupine"
+)
 
 // The tester generously allows solutions to complete elections in one second
 // (much more than the paper's range of timeouts).
@@ -21,17 +24,20 @@ const linearizabilityCheckTimeout = 1 * time.Second
 
 // get/put/putappend that keep counts
 func Get(cfg *config, ck *Clerk, key string) string {
+	DPrintf("ckck client get key:%s, ck:%v", key, ck)
 	v := ck.Get(key)
 	cfg.op()
 	return v
 }
 
 func Put(cfg *config, ck *Clerk, key string, value string) {
+	log.Printf("test client put key:%s, value:%s", key, value)
 	ck.Put(key, value)
 	cfg.op()
 }
 
 func Append(cfg *config, ck *Clerk, key string, value string) {
+	log.Printf("test client append key:%s, value:%s, ck:%v", key, value, ck)
 	ck.Append(key, value)
 	cfg.op()
 }
@@ -206,12 +212,12 @@ func GenericTest(t *testing.T, part string, nclients int, unreliable bool, crash
 			for atomic.LoadInt32(&done_clients) == 0 {
 				if (rand.Int() % 1000) < 500 {
 					nv := "x " + strconv.Itoa(cli) + " " + strconv.Itoa(j) + " y"
-					// log.Printf("%d: client new append %v\n", cli, nv)
+					DPrintf("%d: client new append %v myck:%v\n", cli, nv, myck)
 					Append(cfg, myck, key, nv)
 					last = NextValue(last, nv)
 					j++
 				} else {
-					// log.Printf("%d: client new get %v\n", cli, key)
+					DPrintf("%d: client new get %s, myck:%v \n", cli, key, myck)
 					v := Get(cfg, myck, key)
 					if v != last {
 						log.Fatalf("get wrong value, key %v, wanted:\n%v\n, got\n%v\n", key, last, v)
@@ -258,7 +264,7 @@ func GenericTest(t *testing.T, part string, nclients int, unreliable bool, crash
 			cfg.ConnectAll()
 		}
 
-		// log.Printf("wait for clients\n")
+		log.Printf("wait for clients\n")
 		for i := 0; i < nclients; i++ {
 			// log.Printf("read from clients %d\n", i)
 			j := <-clnts[i]
@@ -266,7 +272,7 @@ func GenericTest(t *testing.T, part string, nclients int, unreliable bool, crash
 			// 	log.Printf("Warning: client %d managed to perform only %d put operations in 1 sec?\n", i, j)
 			// }
 			key := strconv.Itoa(i)
-			// log.Printf("Check %v for client %d\n", j, i)
+			DPrintf("Check %v for client %d ck:%v\n", j, i, ck)
 			v := Get(cfg, ck, key)
 			checkClntAppends(t, i, v, j)
 		}
@@ -610,12 +616,10 @@ func TestPersistPartitionUnreliableLinearizable3A(t *testing.T) {
 	GenericTestLinearizability(t, "3A", 15, 7, true, true, true, -1)
 }
 
-//
 // if one server falls behind, then rejoins, does it
 // recover by using the InstallSnapshot RPC?
 // also checks that majority discards committed log entries
 // even if minority doesn't respond.
-//
 func TestSnapshotRPC3B(t *testing.T) {
 	const nservers = 3
 	maxraftstate := 1000

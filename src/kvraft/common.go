@@ -8,6 +8,9 @@ const (
 
 type Err string
 
+const ErrNotLeader Err = "NoLeader"
+const ErrTimeout Err = "ErrTimeout"
+
 // Put or Append
 type PutAppendArgs struct {
 	Key   string
