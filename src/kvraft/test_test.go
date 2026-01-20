@@ -214,6 +214,7 @@ func GenericTest(t *testing.T, part string, nclients int, unreliable bool, crash
 					nv := "x " + strconv.Itoa(cli) + " " + strconv.Itoa(j) + " y"
 					DPrintf("%d: client new append %v myck:%v\n", cli, nv, myck)
 					Append(cfg, myck, key, nv)
+					DPrintf("%d: client new append sucess %v myck:%v\n", cli, nv, myck)
 					last = NextValue(last, nv)
 					j++
 				} else {
@@ -518,6 +519,7 @@ func TestOnePartition3A(t *testing.T) {
 	ckp2a := cfg.makeClient(p2) // connect ckp2a to p2
 	ckp2b := cfg.makeClient(p2) // connect ckp2b to p2
 
+	DPrintf("ckp1 %v", ckp1)
 	Put(cfg, ckp1, "1", "14")
 	check(cfg, t, ckp1, "1", "14")
 
@@ -535,15 +537,16 @@ func TestOnePartition3A(t *testing.T) {
 		Get(cfg, ckp2b, "1") // different clerk in p2
 		done1 <- true
 	}()
-
+	DPrintf("等待超时")
 	select {
 	case <-done0:
 		t.Fatalf("Put in minority completed")
 	case <-done1:
 		t.Fatalf("Get in minority completed")
 	case <-time.After(time.Second):
+		DPrintf("等待超时2")
 	}
-
+	DPrintf("等待超时3")
 	check(cfg, t, ckp1, "1", "14")
 	Put(cfg, ckp1, "1", "16")
 	check(cfg, t, ckp1, "1", "16")
@@ -555,9 +558,9 @@ func TestOnePartition3A(t *testing.T) {
 	cfg.ConnectAll()
 	cfg.ConnectClient(ckp2a, cfg.All())
 	cfg.ConnectClient(ckp2b, cfg.All())
-
+	DPrintf("合并分区后等待选举完成")
 	time.Sleep(electionTimeout)
-
+	DPrintf("合并分区后等待选举完成2")
 	select {
 	case <-done0:
 	case <-time.After(30 * 100 * time.Millisecond):

@@ -2,17 +2,29 @@ package kvraft
 
 import (
 	"crypto/rand"
-	"log"
+	"encoding/hex"
+	"fmt"
 	"math/big"
+	"time"
 
 	"learn-6.824/src/labrpc"
 )
+
+func GenerateUUID() string {
+	bytes := make([]byte, 16)
+	if _, err := rand.Read(bytes); err != nil {
+		panic(err)
+	}
+	return hex.EncodeToString(bytes)
+}
 
 type Clerk struct {
 	servers []*labrpc.ClientEnd
 	// You will have to modify this struct.
 	leader   int
 	isLeader bool
+	clientId string
+	opId     int64
 }
 
 func nrand() int64 {
@@ -27,6 +39,8 @@ func MakeClerk(servers []*labrpc.ClientEnd) *Clerk {
 	ck.servers = servers
 	ck.leader = 0
 	// You'll have to add code here.
+	ck.clientId = GenerateUUID()
+	ck.opId = 0
 	return ck
 }
 
@@ -42,13 +56,47 @@ func MakeClerk(servers []*labrpc.ClientEnd) *Clerk {
 // arguments. and reply must be passed as a pointer.
 func (ck *Clerk) Get(key string) string {
 	args := GetArgs{
-		Key: key,
+		Key:    key,
+		SeqNum: fmt.Sprintf("%s-%d", ck.clientId, nrand()),
 	}
-	reply := GetReply{}
-	log.Printf("server:%d kv client get key:%s", ck.leader, key)
-	ck.servers[ck.leader].Call("KVServer.Get", &args, &reply)
-	// You will have to modify this function.
-	return reply.Value
+	tries := 0
+	for {
+		reply := GetReply{}
+		DPrintf("[client:%s] server:%d kv client get key:%s", ck.clientId, ck.leader, key)
+		ok := ck.servers[ck.leader].Call("KVServer.Get", &args, &reply)
+		if !ok {
+			DPrintf("[client:%s] server:%d kv client get key network error:%t", ck.clientId, ck.leader, ok)
+			// 请求其他Server
+			ck.updateLeader()
+			time.Sleep(10 * time.Millisecond)
+			tries = 0
+			continue
+		}
+		if reply.Err == ErrTimeout {
+			// 超时，直接重试
+			DPrintf("[client:%s] server:%d kv client get key timeout:%t", ck.clientId, ck.leader, ok)
+			time.Sleep(10 * time.Millisecond)
+			tries++
+			if tries >= 3 {
+				// 超过重试次数，换leader
+				ck.updateLeader()
+				tries = 0
+			}
+			continue
+		}
+		// You will have to modify this function.
+		if reply.Err == ErrNotLeader {
+			// 请求其他Server
+			DPrintf("[client:%s] server:%d kv client get key repeat reply:%s", ck.clientId, ck.leader, reply.Err)
+			ck.updateLeader()
+			tries = 0
+			continue
+		}
+		if reply.Err == "success" {
+			return reply.Value
+		}
+	}
+	return ""
 }
 
 // shared by Put and Append.
@@ -62,22 +110,48 @@ func (ck *Clerk) Get(key string) string {
 func (ck *Clerk) PutAppend(key string, value string, op string) {
 	// You will have to modify this function.
 	args := PutAppendArgs{
-		Key:   key,
-		Value: value,
-		Op:    op,
+		Key:    key,
+		Value:  value,
+		Op:     op,
+		SeqNum: fmt.Sprintf("%s-%d", ck.clientId, nrand()),
 	}
-	for {
+	tries := 0
+	timeoutCount := 0
+	for tries < 6 {
 		reply := PutAppendReply{}
-		log.Printf("server:%d kv client putAppend key:%s, value:%s", ck.leader, key, value)
+		DPrintf("[client:%s] server:%d kv client putAppend key:%s, value:%s", ck.clientId, ck.leader, key, value)
 		ok := ck.servers[ck.leader].Call("KVServer.PutAppend", &args, &reply)
-		if ok && reply.Err == "success" {
-			return
+		if !ok {
+			// RPC失败，直接重试
+			DPrintf("[client:%s] server:%d kv client putAppend key network error:%t", ck.clientId, ck.leader, ok)
+			// 请求其他Server
+			time.Sleep(10 * time.Millisecond)
+			ck.updateLeader()
+			tries = 0
+			continue
 		}
-		if !ok || reply.Err == ErrNotLeader {
+		if reply.Err == ErrTimeout {
+			// 超时，直接重试
+			DPrintf("[client:%s] server:%d kv client putAppend key:%s,value:%s timeout:%t", ck.clientId, ck.leader, key, value, ok)
+			time.Sleep(10 * time.Millisecond)
+			timeoutCount++
+			if timeoutCount >= 3 {
+				// 超过重试次数，换leader
+				ck.updateLeader()
+				tries++
+				timeoutCount = 0
+			}
+			continue
+		}
+		if reply.Err == ErrNotLeader {
+			DPrintf("[client:%s] server:%d kv client putAppend key repeat reply:%s", ck.clientId, ck.leader, reply.Err)
 			// 请求其他Server
 			ck.updateLeader()
-			log.Printf("server:%d kv client putAppend key repeat reply:%s", ck.leader, reply.Err)
+			tries = 0
 			continue
+		}
+		if reply.Err == "success" {
+			return
 		}
 	}
 
@@ -91,6 +165,6 @@ func (ck *Clerk) Append(key string, value string) {
 }
 
 func (ck *Clerk) updateLeader() {
-	log.Printf("更新leader before:%d, after:%d", ck.leader, (ck.leader+1)%len(ck.servers))
+	DPrintf("[client:%s] 更新leader before:%d, after:%d", ck.clientId, ck.leader, (ck.leader+1)%len(ck.servers))
 	ck.leader = (ck.leader + 1) % len(ck.servers)
 }

@@ -622,7 +622,7 @@ func (rf *Raft) logReplication() {
 
 			rf.mu.Unlock()
 		}
-		time.Sleep(100 * time.Millisecond)
+		time.Sleep(50 * time.Millisecond)
 	}
 }
 
@@ -946,8 +946,8 @@ func (rf *Raft) runElectionTimer() {
 	// Sleep 随机毫秒数
 	// 创建一个计时器
 	// 定义随机超时范围（论文推荐 150-300ms）
-	minTimeout := 150 * time.Millisecond
-	maxTimeout := 600 * time.Millisecond
+	minTimeout := 100 * time.Millisecond
+	maxTimeout := 300 * time.Millisecond
 	// 生成定时器追踪ID
 	timerTraceID := fmt.Sprintf("TIMER_%d", rf.me)
 	trace := TraceContext{
