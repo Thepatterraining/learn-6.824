@@ -133,7 +133,7 @@ func (ck *Clerk) PutAppend(key string, value string, op string) {
 		if reply.Err == ErrTimeout {
 			// 超时，直接重试
 			DPrintf("[client:%s] server:%d kv client putAppend key:%s,value:%s timeout:%t", ck.clientId, ck.leader, key, value, ok)
-			time.Sleep(10 * time.Millisecond)
+			time.Sleep(1000 * time.Millisecond)
 			timeoutCount++
 			if timeoutCount >= 3 {
 				// 超过重试次数，换leader

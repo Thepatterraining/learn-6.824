@@ -1,6 +1,7 @@
 package kvraft
 
 import (
+	"bytes"
 	"log"
 	"sync"
 	"sync/atomic"
@@ -48,6 +49,7 @@ type KVServer struct {
 	seqNums     map[string]bool
 	pendingCmds map[int]Op
 	serverId    string
+	persister   *raft.Persister
 }
 
 func (kv *KVServer) Get(args *GetArgs, reply *GetReply) {
@@ -74,6 +76,7 @@ func (kv *KVServer) Get(args *GetArgs, reply *GetReply) {
 	case <-doneCh:
 		reply.Err = "success"
 		kv.mu.Lock()
+		DPrintf("[Node:%s] kv server get key:%s, data:%v", kv.serverId, args.Key, kv.data)
 		value, exists := kv.data[args.Key]
 		if !exists {
 			value = ""
@@ -157,8 +160,8 @@ func (kv *KVServer) killed() bool {
 func (kv *KVServer) listenApplyCh() {
 	for {
 		applyMsg := <-kv.applyCh
-		DPrintf("[Node:%s] kv server listenApplyCh applyMsg:%v", kv.serverId, applyMsg)
-		if applyMsg.CommandValid {
+		DPrintf("[Node:%s] kv server listenApplyCh applyMsg:%v data:%v", kv.serverId, applyMsg, kv.data)
+		if !applyMsg.IsSnapshot && applyMsg.CommandValid {
 			op := applyMsg.Command.(Op)
 			kv.mu.Lock()
 			// 幂等行检查
@@ -213,6 +216,15 @@ func (kv *KVServer) listenApplyCh() {
 				}
 			}
 			kv.mu.Unlock()
+		} else if applyMsg.IsSnapshot {
+			kv.mu.Lock()
+			data := applyMsg.Snapshot
+			kv.data = make(map[string]string)
+			for k, v := range data {
+				kv.data[k] = v
+			}
+			DPrintf("[Node:%s] kv server listenApplyCh load snapshot data:%v", kv.serverId, kv.data)
+			kv.mu.Unlock()
 		}
 	}
 }
@@ -256,13 +268,32 @@ func (kv *KVServer) opEquals(op1, op2 Op) bool {
 func (kv *KVServer) put(key, value string) {
 	// Implementation for Put operation
 	kv.data[key] = value
-	DPrintf("[Node:%s] kv server put success key:%s value:%s", kv.serverId, key, value)
+	DPrintf("[Node:%s] kv server put success key:%s value:%s data:%v", kv.serverId, key, value, kv.data)
 }
 
 func (kv *KVServer) append(key, value string) {
 	// Implementation for Append operation
 	kv.data[key] = kv.data[key] + value
-	DPrintf("[Node:%s] kv server append success key:%s value:%s", kv.serverId, key, value)
+	DPrintf("[Node:%s] kv server append success key:%s value:%s data:%v", kv.serverId, key, value, kv.data)
+}
+
+func (kv *KVServer) generateSnapshotter() {
+	for {
+		term, isLeader := kv.rf.GetState()
+		DPrintf("[Node:%s] kv server generateSnapshotter raft state size: %d, maxraftstate: %d", kv.serverId, kv.persister.RaftStateSize(), kv.maxraftstate)
+		if isLeader && kv.persister.RaftStateSize() > kv.maxraftstate && kv.maxraftstate != -1 {
+			// 触发快照存储
+			kv.mu.Lock()
+			data := make(map[string]string)
+			for k, v := range kv.data {
+				data[k] = v
+			}
+			kv.mu.Unlock()
+			DPrintf("[Node:%s] kv server generateSnapshotter start data:%v", kv.serverId, data)
+			kv.rf.CreateSnapshot(data, kv.rf.GetApplied(), term)
+		}
+		time.Sleep(100 * time.Millisecond)
+	}
 }
 
 // servers[] contains the ports of the set of
@@ -290,6 +321,10 @@ func StartKVServer(servers []*labrpc.ClientEnd, me int, persister *raft.Persiste
 	// You may need initialization code here.
 
 	kv.applyCh = make(chan raft.ApplyMsg)
+	// 如果有快照，从快照恢复数据
+	if persister.SnapshotSize() > 0 {
+		kv.restoreSnapshot(persister.ReadSnapshot())
+	}
 	kv.rf = raft.Make(servers, me, persister, kv.applyCh)
 	kv.rfSem = make(chan struct{})
 	kv.pendingOps = make(map[int]chan struct{})
@@ -297,7 +332,35 @@ func StartKVServer(servers []*labrpc.ClientEnd, me int, persister *raft.Persiste
 	kv.seqNums = make(map[string]bool)
 	kv.pendingCmds = make(map[int]Op)
 	kv.serverId = GenerateUUID()
-	// You may need initialization code here.
+	kv.persister = persister
 	go kv.listenApplyCh()
+	go kv.generateSnapshotter()
 	return kv
+}
+
+func (kv *KVServer) restoreSnapshot(snapshot []byte) {
+	// Example:
+	if snapshot == nil || len(snapshot) < 1 {
+		return
+	}
+	r := bytes.NewBuffer(snapshot)
+	d := labgob.NewDecoder(r)
+	var lastIncludedIndex int
+	var lastIncludedTerm int
+	var snapshotData map[string]string
+	if d.Decode(&lastIncludedIndex) != nil ||
+		d.Decode(&lastIncludedTerm) != nil ||
+		d.Decode(&snapshotData) != nil {
+		// error
+		panic("kv server Failed to read persisted snapshot")
+	} else {
+		data := make(map[string]string)
+		for k, v := range snapshotData {
+			data[k] = v
+		}
+		kv.data = data
+		DPrintf("[Node:%s] kv server restoreSnapshot lastIncludedTerm:%d lastIncludedIndex:%d snapshotData:%v", kv.serverId, lastIncludedTerm, lastIncludedIndex, snapshotData)
+		DPrintf("[Node:%s] kv server restoreSnapshot InstallSnapshot 通知上层KV server data:%v", kv.serverId, snapshotData)
+		// Reset state machine using snapshot contents (and load snapshot’s cluster configuration)
+	}
 }
