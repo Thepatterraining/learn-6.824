@@ -148,6 +148,7 @@ type Snapshot struct {
 	LastIncludedIndex int
 	LastIncludedTerm  int
 	Data              map[string]string
+	SeqNums           map[int64]int64
 }
 
 // A Go object implementing a single Raft peer.
@@ -212,12 +213,13 @@ func (rf *Raft) GetApplied() int {
 	return rf.lastApplied - rf.lastSnapshotIndex
 }
 
-func (rf *Raft) CreateSnapshot(kvData map[string]string, lastIncludedIndex int, lastIncludedTerm int) {
+func (rf *Raft) CreateSnapshot(kvData map[string]string, lastIncludedIndex int, lastIncludedTerm int, seqNums map[int64]int64) {
 	rf.mu.Lock()
 	snapshot := Snapshot{
 		LastIncludedIndex: lastIncludedIndex,
 		LastIncludedTerm:  lastIncludedTerm,
 		Data:              kvData,
+		SeqNums:           seqNums,
 	}
 	DPrintf("[Node:%d] CreateSnapshot snapshot:%v 开始", rf.me, snapshot)
 	// if rf.lastSnapshot.LastIncludedIndex >= lastIncludedIndex {
@@ -255,9 +257,8 @@ func (rf *Raft) CreateSnapshot(kvData map[string]string, lastIncludedIndex int, 
 func (rf *Raft) saveSnapshot(snapshot Snapshot, discardAll bool, lastSnapshotIndex int) {
 	// 丢弃早期的日志
 	rf.mu.Lock()
-	DPrintf("[Node:%d] saveSnapshot snapshot lastApplied:%d rf lastSnapshotIndex:%d,lastSnapshotIndex:%d  log :%v ", rf.me, snapshot.LastIncludedIndex, rf.lastSnapshotIndex, lastSnapshotIndex, rf.log)
+	DPrintf("[Node:%d] saveSnapshot snapshot lastApplied:%d rf lastSnapshotIndex:%d,lastSnapshotIndex:%d log :%v ", rf.me, snapshot.LastIncludedIndex, rf.lastSnapshotIndex, lastSnapshotIndex, rf.log)
 	newLog := make([]LogEntry, 0)
-	newLog = append(newLog, rf.log[0])
 	if !discardAll {
 		// lastLogIndex := rf.getLastLogIndex()
 		// index := 1
@@ -271,14 +272,26 @@ func (rf *Raft) saveSnapshot(snapshot Snapshot, discardAll bool, lastSnapshotInd
 		// 	newLog = append(newLog, logEntry)
 		// 	index++
 		// }
-		newLog = append(newLog, rf.log[snapshot.LastIncludedIndex+1:]...)
+		startIndex := rf.getLogStartIndex(snapshot.LastIncludedIndex + rf.lastSnapshotIndex + 1)
+		if startIndex <= len(rf.log) {
+			newLog = append(newLog, NewLogEntry(rf.log[0].Command, rf.log[startIndex-1].Term, 0))
+			newLog = append(newLog, rf.log[startIndex:]...)
+		}
+		// newLog = append(newLog, rf.log[snapshot.LastIncludedIndex+1:]...)
+	} else {
+		newLog = append(newLog, rf.log[0])
 	}
 	rf.log = newLog
 	rf.lastSnapshot = snapshot
+	// 直接设置为快照的绝对索引，或者传入的lastSnapshotIndex参数
+	// rf.lastSnapshotIndex = snapshot.LastIncludedIndex
+	// if lastSnapshotIndex > rf.lastSnapshotIndex {
+	// 	rf.lastSnapshotIndex = lastSnapshotIndex
+	// }
 	rf.lastSnapshotIndex = max(rf.lastSnapshotIndex+snapshot.LastIncludedIndex, lastSnapshotIndex)
 	// rf.commitIndex = 0
 	rf.lastApplied = rf.lastSnapshotIndex
-	DPrintf("[Node:%d] saveSnapshot lastApplied:%d 丢弃后log :%v ", rf.me, rf.lastApplied, rf.log)
+	DPrintf("[Node:%d] saveSnapshot rf.lastSnapshotIndex:%d 丢弃后log :%v ", rf.me, rf.lastSnapshotIndex, rf.log)
 	// 修改 nextIndex 和 matchIndex
 	// for i := range rf.peers {
 	// 	rf.nextIndex[i] = rf.nextIndex[i] - snapshot.LastIncludedIndex
@@ -302,6 +315,8 @@ func (rf *Raft) saveSnapshot(snapshot Snapshot, discardAll bool, lastSnapshotInd
 	e.Encode(snapshot.LastIncludedIndex)
 	e.Encode(snapshot.LastIncludedTerm)
 	e.Encode(snapshot.Data)
+	e.Encode(snapshot.SeqNums)
+	e.Encode(rf.lastSnapshotIndex)
 	data := w.Bytes()
 
 	w1 := new(bytes.Buffer)
@@ -321,9 +336,13 @@ func (rf *Raft) restoreSnapshot(data []byte) {
 	var lastIncludedIndex int
 	var lastIncludedTerm int
 	var snapshotData map[string]string
+	var seqNums map[int64]int64
+	var lastSnapshotIndex int
 	if d.Decode(&lastIncludedIndex) != nil ||
 		d.Decode(&lastIncludedTerm) != nil ||
-		d.Decode(&snapshotData) != nil {
+		d.Decode(&snapshotData) != nil ||
+		d.Decode(&seqNums) != nil ||
+		d.Decode(&lastSnapshotIndex) != nil {
 		// error
 		DPrintf("[ERROR] [Node:%d] Failed to read persisted snapshot", rf.me)
 		panic("Failed to read persisted snapshot")
@@ -331,10 +350,11 @@ func (rf *Raft) restoreSnapshot(data []byte) {
 		rf.lastSnapshot.LastIncludedTerm = lastIncludedTerm
 		rf.lastSnapshot.LastIncludedIndex = lastIncludedIndex
 		rf.lastSnapshot.Data = snapshotData
-		rf.lastSnapshotIndex = lastIncludedIndex
+		rf.lastSnapshot.SeqNums = seqNums
+		rf.lastSnapshotIndex = lastSnapshotIndex
 		rf.logger.LogWithTrace(RPC_RECV, TraceContext{From: -1, To: rf.me},
 			"从快照恢复持久化状态 lastIncludedTerm:%d lastIncludedIndex:%d snapshotData:%v",
-			lastIncludedTerm, lastIncludedIndex, snapshotData)
+			lastIncludedTerm, lastSnapshotIndex, snapshotData)
 	}
 }
 
@@ -411,7 +431,11 @@ func (rf *Raft) InstallSnapshot(args *InstallSnapshotArgs, reply *InstallSnapsho
 	// Reply immediately if term < currentTerm
 	// 如果 RPC 的 term < currentTerm，立即回复 false（拒绝），并返回自己的 currentTerm。
 	if args.Term < rf.currentTerm {
+		rf.logger.LogWithTrace(RPC_RECV, trace,
+			"InstallSnapshot args.Term:%d rf.currentTerm:%d",
+			args.Term, rf.currentTerm)
 		reply.Term = rf.currentTerm
+		rf.mu.Unlock()
 		return
 	}
 
@@ -428,8 +452,9 @@ func (rf *Raft) InstallSnapshot(args *InstallSnapshotArgs, reply *InstallSnapsho
 			tempLog = append(rf.log, LogEntry{}) // 添加哨兵节点
 			rf.log = append(tempLog, rf.log[rf.getLogStartIndex(rf.getLastLogIndex()):]...)
 		} else {
-			rf.log = make([]LogEntry, 0)
-			rf.log = append(rf.log, LogEntry{}) // 添加哨兵节点
+			tempLog := make([]LogEntry, 0)
+			tempLog = append(tempLog, NewLogEntry(rf.log[0].Command, args.Snapshot.LastIncludedTerm, 0)) // 添加哨兵节点
+			rf.log = tempLog
 		}
 		rf.logger.LogWithTrace(RPC_RECV, trace,
 			"InstallSnapshot 通知上层KV server data:%v",
@@ -730,12 +755,16 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 	// 新条目的目标 index 从 prevLogIndex+1 开始
 	// 4. Append any new entries not already in the log 追加日志
 	if len(args.Entries) > 0 {
+		rf.logger.LogWithTrace(eventType, trace, "args logEntrys:%v", args.Entries)
 		for i, entry := range args.Entries {
+			rf.logger.LogWithTrace(eventType, trace, "entry.Index:%d rf.getNextIndex():%d", entry.Index, rf.getNextIndex())
 			if entry.Index < rf.getNextIndex() {
-				if rf.log[rf.getLogStartIndex(entry.Index)].Term != args.Term {
+				startIndex := rf.getLogStartIndex(entry.Index)
+				rf.logger.LogWithTrace(eventType, trace, "startIndex:%d rf.log[startIndex].Term:%d args.Term:%d", entry.Index, rf.log[startIndex].Term, args.Term)
+				if rf.log[startIndex].Term != args.Term {
 					// 说明数据不一样 冲突
 					// 删除
-					rf.log = rf.log[:rf.getLogStartIndex(entry.Index)]
+					rf.log = rf.log[:startIndex]
 					rf.log = append(rf.log, args.Entries[i:]...)
 					rf.persist()
 					break
@@ -877,26 +906,44 @@ func (rf *Raft) sendLogEntries(currentTerm int, me int, commitIndex int, peer in
 		return
 	}
 
-	rf.mu.Lock()
+	// 生成日志复制追踪ID
+	logReplicationTraceID := fmt.Sprintf("LOG_%d_%d", me, currentTerm)
+	trace := TraceContext{
+		TraceID: logReplicationTraceID,
+		From:    me,
+		To:      peer,
+	}
 
+	rf.mu.Lock()
+	DPrintf("nextIndex:%v", rf.nextIndex)
+	nextIdx := rf.nextIndex[peer]
+	prevLogIndex := nextIdx - 1
+	if prevLogIndex < rf.lastSnapshotIndex {
+		// 假设 nil 1 2 3 4 5 6 7,快照了12345,nextIdx=4 prevLogIndex=3，说明这个Follower数据老旧，需要同步快照
+		// 像Follower同步快照
+		rf.logger.LogWithTrace(LOG_REPLICA, trace, "日志复快速恢复快照 for peer:%d starting prevLogIndex:%d lastSnapshotIndex:%d", peer, prevLogIndex, rf.lastSnapshotIndex)
+		args := InstallSnapshotArgs{
+			Snapshot:          rf.lastSnapshot,
+			Term:              currentTerm,
+			LeaderId:          me,
+			LastSnapshotIndex: rf.lastSnapshotIndex,
+		}
+		snapshotReply := InstallSnapshotReply{}
+		ok := rf.sendInstallSnapshot(peer, &args, &snapshotReply)
+		if ok {
+			DPrintf("[Node:%d] 发送快照到 Node:%d 成功", me, peer)
+			if snapshotReply.Term > currentTerm {
+				rf.becomeFollower(snapshotReply.Term)
+			}
+			prevLogIndex = rf.lastSnapshotIndex
+		}
+	}
 	// 状态检查：只有在当前节点是leader且term一致时才发送
 	if rf.status != Leader || rf.currentTerm != currentTerm {
 		rf.mu.Unlock()
 		return
 	}
-
-	DPrintf("nextIndex:%v", rf.nextIndex)
-	nextIdx := rf.nextIndex[peer]
-	prevLogIndex := nextIdx - 1
-	index := prevLogIndex
-	if rf.lastSnapshotIndex > 0 {
-		// 快照了，需要特殊处理
-		index = prevLogIndex - rf.lastSnapshotIndex
-		if index <= 0 {
-			index = 0
-		}
-	}
-	prevLogTerm := rf.log[index].Term
+	prevLogTerm := rf.log[rf.getLogStartIndex(prevLogIndex)].Term
 	// 防止越界
 	logEntries := make([]LogEntry, 0)
 	if nextIdx < rf.getNextIndex() {
@@ -905,13 +952,6 @@ func (rf *Raft) sendLogEntries(currentTerm int, me int, commitIndex int, peer in
 	}
 
 	// 判断follower进度
-	// 生成日志复制追踪ID
-	logReplicationTraceID := fmt.Sprintf("LOG_%d_%d", me, currentTerm)
-	trace := TraceContext{
-		TraceID: logReplicationTraceID,
-		From:    me,
-		To:      peer,
-	}
 
 	rf.mu.Unlock()
 	args := AppendEntriesArgs{
@@ -947,30 +987,30 @@ func (rf *Raft) sendLogEntries(currentTerm int, me int, commitIndex int, peer in
 		} else {
 			// 快速恢复日志
 			rf.logger.LogWithTrace(LOG_REPLICA, trace, "日志复制返回失败，开始快速恢复 for peer:%d starting fast recovery replyLogIndex:%d log start index:%d", peer, reply.LogIndex, rf.log[1].Index)
-			if reply.LogIndex < rf.log[1].Index {
-				// 这里可能落后了很多，所以判断需要把快照发过去进行恢复
-				rf.logger.LogWithTrace(LOG_REPLICA, trace, "日志复快速恢复快照 for peer:%d starting fast recovery replyLogIndex:%d log start index:%d", peer, reply.LogIndex, rf.log[1].Index)
-				args := InstallSnapshotArgs{
-					Snapshot:          rf.lastSnapshot,
-					Term:              currentTerm,
-					LeaderId:          me,
-					LastSnapshotIndex: rf.lastSnapshotIndex,
-				}
-				rf.mu.Unlock()
-				// 像Follower同步快照
-				snapshotReply := InstallSnapshotReply{}
-				ok := rf.sendInstallSnapshot(peer, &args, &snapshotReply)
-				if ok {
-					DPrintf("[Node:%d] 发送快照到 Node:%d 成功", me, peer)
-					if snapshotReply.Term > currentTerm {
-						rf.becomeFollower(snapshotReply.Term)
-					}
-				}
-			} else {
-				// 回退term
-				rf.nextIndex[peer] = reply.LogIndex
-				rf.mu.Unlock()
-			}
+			// if reply.LogIndex < rf.log[1].Index {
+			// 	// 这里可能落后了很多，所以判断需要把快照发过去进行恢复
+			// 	rf.logger.LogWithTrace(LOG_REPLICA, trace, "日志复快速恢复快照 for peer:%d starting fast recovery replyLogIndex:%d log start index:%d", peer, reply.LogIndex, rf.log[1].Index)
+			// 	args := InstallSnapshotArgs{
+			// 		Snapshot:          rf.lastSnapshot,
+			// 		Term:              currentTerm,
+			// 		LeaderId:          me,
+			// 		LastSnapshotIndex: rf.lastSnapshotIndex,
+			// 	}
+			// 	rf.mu.Unlock()
+			// 	// 像Follower同步快照
+			// 	snapshotReply := InstallSnapshotReply{}
+			// 	ok := rf.sendInstallSnapshot(peer, &args, &snapshotReply)
+			// 	if ok {
+			// 		DPrintf("[Node:%d] 发送快照到 Node:%d 成功", me, peer)
+			// 		if snapshotReply.Term > currentTerm {
+			// 			rf.becomeFollower(snapshotReply.Term)
+			// 		}
+			// 	}
+			// } else {
+			// 回退term
+			rf.nextIndex[peer] = reply.LogIndex
+			rf.mu.Unlock()
+			// }
 			// newCommitIndex := rf.commitIndex
 			rf.sendLogEntries(currentTerm, me, commitIndex, peer, agreeCount)
 		}
@@ -1061,7 +1101,8 @@ func (rf *Raft) logReplicationSuccess(agreeCount *int32, peer int, currentTerm i
 	// N > commitIndex, a majority of matchIndex[i] ≥ N, and log[N].term == currentTerm:
 	// set commitIndex = N.
 	majority := (len(rf.peers) + 1) / 2
-	for N := rf.getNextIndex(); N > commitIndex; N-- {
+	// lastLogIdx := rf.log[rf.getLastLogIndex()].Index
+	for N := rf.getNextIndex() - 1; N > commitIndex; N-- {
 		count := 1 // 自己一票
 		for i, mi := range rf.matchIndex {
 			if i == rf.me {
@@ -1132,7 +1173,7 @@ func (rf *Raft) broadcastVote(me int, currentTerm int, lastLogIndex int, lastLog
 			args.From = me
 
 			reply := RequestVoteReply{}
-			rf.logger.LogWithTrace(RPC_SEND, trace, "发送选举请求")
+			rf.logger.LogWithTrace(RPC_SEND, trace, "发送选举请求 peer:%d for term %d", peer, currentTerm)
 			if rf.sendRequestVote(peer, &args, &reply) {
 				// 处理返回值 如果获得多数票 则停止
 				rf.mu.Lock()
@@ -1172,7 +1213,7 @@ func (rf *Raft) becomeLeader(term int) {
 	rf.status = Leader
 	// 初始化nextIndex
 	for i := range rf.peers {
-		rf.nextIndex[i] = rf.getLastLogIndex() + 1
+		rf.nextIndex[i] = rf.getLastLogIndex() + 1 + rf.lastSnapshotIndex
 	}
 	rf.persist()
 	rf.mu.Unlock()
@@ -1197,7 +1238,7 @@ func (rf *Raft) runElectionTimer() {
 	// Sleep 随机毫秒数
 	// 创建一个计时器
 	// 定义随机超时范围（论文推荐 150-300ms）
-	minTimeout := 100 * time.Millisecond
+	minTimeout := 150 * time.Millisecond
 	maxTimeout := 300 * time.Millisecond
 	// 生成定时器追踪ID
 	timerTraceID := fmt.Sprintf("TIMER_%d", rf.me)

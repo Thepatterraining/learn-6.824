@@ -25,10 +25,11 @@ type Op struct {
 	// Your definitions here.
 	// Field names must start with capital letters,
 	// otherwise RPC will break.
-	Key    string
-	Value  string
-	Option string
-	SeqNum string
+	Key      string
+	Value    string
+	Option   string
+	SeqNum   int64
+	ClientId int64
 }
 
 type KVServer struct {
@@ -46,25 +47,26 @@ type KVServer struct {
 	rfSem       chan struct{}
 	pendingOps  map[int]chan struct{}
 	getOps      map[int]chan struct{}
-	seqNums     map[string]bool
+	seqNums     map[int64]int64
 	pendingCmds map[int]Op
-	serverId    string
+	serverId    int64
 	persister   *raft.Persister
 }
 
 func (kv *KVServer) Get(args *GetArgs, reply *GetReply) {
 	// Your code here.
 	command := Op{
-		Key:    args.Key,
-		Value:  "",
-		Option: "Get",
-		SeqNum: args.SeqNum,
+		Key:      args.Key,
+		Value:    "",
+		Option:   "Get",
+		SeqNum:   args.SeqNum,
+		ClientId: args.ClientId,
 	}
-	DPrintf("[Node:%s] kv server Get key:%s", kv.serverId, args.Key)
+	DPrintf("[Node:%d] kv server Get key:%s", kv.serverId, args.Key)
 	index, _, isLeader := kv.rf.Start(command)
 	if !isLeader {
 		reply.Err = ErrNotLeader
-		DPrintf("[Node:%s] kv server Get repley:%s", kv.serverId, reply.Err)
+		DPrintf("[Node:%d] kv server Get repley:%s", kv.serverId, reply.Err)
 		return
 	}
 	kv.mu.Lock()
@@ -76,17 +78,17 @@ func (kv *KVServer) Get(args *GetArgs, reply *GetReply) {
 	case <-doneCh:
 		reply.Err = "success"
 		kv.mu.Lock()
-		DPrintf("[Node:%s] kv server get key:%s, data:%v", kv.serverId, args.Key, kv.data)
+		DPrintf("[Node:%d] kv server get key:%s, data:%v", kv.serverId, args.Key, kv.data)
 		value, exists := kv.data[args.Key]
 		if !exists {
 			value = ""
 		}
 		reply.Value = value
-		DPrintf("[Node:%s] kv server get key:%s, value:%s", kv.serverId, args.Key, value)
+		DPrintf("[Node:%d] kv server get key:%s, value:%s", kv.serverId, args.Key, value)
 		kv.mu.Unlock()
 	case <-time.After(1000 * time.Millisecond):
 		reply.Err = ErrTimeout
-		DPrintf("[Node:%s] kv server get key:%s, timeout", kv.serverId, args.Key)
+		DPrintf("[Node:%d] kv server get key:%s, timeout", kv.serverId, args.Key)
 	}
 	kv.mu.Lock()
 	delete(kv.getOps, index)
@@ -98,25 +100,26 @@ func (kv *KVServer) PutAppend(args *PutAppendArgs, reply *PutAppendReply) {
 	// Your code here.
 	// 检查SeqNum是否已存在
 	kv.mu.Lock()
-	_, exists := kv.seqNums[args.SeqNum]
+	seqNum, exists := kv.seqNums[args.ClientId]
 	kv.mu.Unlock()
-	if exists {
+	if exists && args.SeqNum <= seqNum {
 		// 重复操作，直接返回成功
 		reply.Err = "success"
-		DPrintf("[Node:%s] kv server putAppend op:%s, key:%s, value:%s 重复操作", kv.serverId, args.Op, args.Key, args.Value)
+		DPrintf("[Node:%d] kv server putAppend op:%s, key:%s, value:%s 重复操作", kv.serverId, args.Op, args.Key, args.Value)
 		return
 	}
 	command := Op{
-		Key:    args.Key,
-		Value:  args.Value,
-		Option: args.Op,
-		SeqNum: args.SeqNum,
+		Key:      args.Key,
+		Value:    args.Value,
+		Option:   args.Op,
+		SeqNum:   args.SeqNum,
+		ClientId: args.ClientId,
 	}
-	DPrintf("[Node:%s] kv server putAppend op:%s, key:%s, value:%s", kv.serverId, args.Op, args.Key, args.Value)
+	DPrintf("[Node:%d] kv server putAppend op:%s, key:%s, value:%s", kv.serverId, args.Op, args.Key, args.Value)
 	index, _, isLeader := kv.rf.Start(command)
 	if !isLeader {
 		reply.Err = ErrNotLeader
-		DPrintf("[Node:%s] kv server putAppend repley:%s", kv.serverId, reply.Err)
+		DPrintf("[Node:%d] kv server putAppend repley:%s", kv.serverId, reply.Err)
 		return
 	}
 	kv.mu.Lock()
@@ -128,10 +131,10 @@ func (kv *KVServer) PutAppend(args *PutAppendArgs, reply *PutAppendReply) {
 	select {
 	case <-doneCh:
 		reply.Err = "success"
-		DPrintf("[Node:%s] kv server putAppend repley: success op:%s, key:%s, value:%s", kv.serverId, args.Op, args.Key, args.Value)
+		DPrintf("[Node:%d] kv server putAppend repley: success op:%s, key:%s, value:%s", kv.serverId, args.Op, args.Key, args.Value)
 	case <-time.After(1000 * time.Millisecond):
 		reply.Err = ErrTimeout
-		DPrintf("[Node:%s] kv server putAppend timeout:%s op:%s, key:%s, value:%s", kv.serverId, reply.Err, args.Op, args.Key, args.Value)
+		DPrintf("[Node:%d] kv server putAppend timeout:%s op:%s, key:%s, value:%s", kv.serverId, reply.Err, args.Op, args.Key, args.Value)
 	}
 	kv.mu.Lock()
 	delete(kv.pendingOps, index)
@@ -160,15 +163,28 @@ func (kv *KVServer) killed() bool {
 func (kv *KVServer) listenApplyCh() {
 	for {
 		applyMsg := <-kv.applyCh
-		DPrintf("[Node:%s] kv server listenApplyCh applyMsg:%v data:%v", kv.serverId, applyMsg, kv.data)
+		// DPrintf("[Node:%s] kv server listenApplyCh applyMsg:%v data:%v", kv.serverId, applyMsg, kv.data)
 		if !applyMsg.IsSnapshot && applyMsg.CommandValid {
-			op := applyMsg.Command.(Op)
+			// 防止nil Command被传递到上层 - 检查Command是否为nil
+			if applyMsg.Command == nil {
+				DPrintf("[Node:%d] kv server listenApplyCh received nil command at index:%d, skipping",
+					kv.serverId, applyMsg.CommandIndex)
+				continue
+			}
+
+			// 使用安全的类型断言
+			op, ok := applyMsg.Command.(Op)
+			if !ok {
+				DPrintf("[Node:%d] kv server listenApplyCh command type assertion failed at index:%d, skipping",
+					kv.serverId, applyMsg.CommandIndex)
+				continue
+			}
 			kv.mu.Lock()
 			// 幂等行检查
+			seqNum, exists := kv.seqNums[op.ClientId]
 			if op.Option != "Get" {
-				_, exists := kv.seqNums[op.SeqNum]
-				if exists {
-					DPrintf("[Node:%s] kv server listenApplyCh op:%s, key:%s, value:%s 重复操作", kv.serverId, op.Option, op.Key, op.Value)
+				if exists && op.SeqNum <= seqNum {
+					DPrintf("[Node:%d] kv server listenApplyCh op:%s, key:%s, value:%s 重复操作", kv.serverId, op.Option, op.Key, op.Value)
 					// 通知返回成功
 					doneCh, exists := kv.pendingOps[applyMsg.CommandIndex]
 					if exists {
@@ -179,7 +195,10 @@ func (kv *KVServer) listenApplyCh() {
 					continue
 				}
 			}
-			kv.seqNums[op.SeqNum] = true
+			if !exists || op.SeqNum > seqNum {
+				// 更新最新的SeqNum
+				kv.seqNums[op.ClientId] = op.SeqNum
+			}
 			switch op.Option {
 			case "Put":
 				kv.put(op.Key, op.Value)
@@ -223,7 +242,7 @@ func (kv *KVServer) listenApplyCh() {
 			for k, v := range data {
 				kv.data[k] = v
 			}
-			DPrintf("[Node:%s] kv server listenApplyCh load snapshot data:%v", kv.serverId, kv.data)
+			DPrintf("[Node:%d] kv server listenApplyCh load snapshot data:%v", kv.serverId, kv.data)
 			kv.mu.Unlock()
 		}
 	}
@@ -268,19 +287,19 @@ func (kv *KVServer) opEquals(op1, op2 Op) bool {
 func (kv *KVServer) put(key, value string) {
 	// Implementation for Put operation
 	kv.data[key] = value
-	DPrintf("[Node:%s] kv server put success key:%s value:%s data:%v", kv.serverId, key, value, kv.data)
+	DPrintf("[Node:%d] kv server put success key:%s value:%s data:%v", kv.serverId, key, value, kv.data)
 }
 
 func (kv *KVServer) append(key, value string) {
 	// Implementation for Append operation
 	kv.data[key] = kv.data[key] + value
-	DPrintf("[Node:%s] kv server append success key:%s value:%s data:%v", kv.serverId, key, value, kv.data)
+	DPrintf("[Node:%d] kv server append success key:%s value:%s data:%v", kv.serverId, key, value, kv.data)
 }
 
 func (kv *KVServer) generateSnapshotter() {
 	for {
 		term, isLeader := kv.rf.GetState()
-		DPrintf("[Node:%s] kv server generateSnapshotter raft state size: %d, maxraftstate: %d", kv.serverId, kv.persister.RaftStateSize(), kv.maxraftstate)
+		DPrintf("[Node:%d] kv server generateSnapshotter raft state size: %d, maxraftstate: %d", kv.serverId, kv.persister.RaftStateSize(), kv.maxraftstate)
 		if isLeader && kv.persister.RaftStateSize() > kv.maxraftstate && kv.maxraftstate != -1 {
 			// 触发快照存储
 			kv.mu.Lock()
@@ -288,9 +307,13 @@ func (kv *KVServer) generateSnapshotter() {
 			for k, v := range kv.data {
 				data[k] = v
 			}
+			seqNums := make(map[int64]int64)
+			for k, v := range kv.seqNums {
+				seqNums[k] = v
+			}
 			kv.mu.Unlock()
-			DPrintf("[Node:%s] kv server generateSnapshotter start data:%v", kv.serverId, data)
-			kv.rf.CreateSnapshot(data, kv.rf.GetApplied(), term)
+			DPrintf("[Node:%d] kv server generateSnapshotter start data:%v", kv.serverId, data)
+			kv.rf.CreateSnapshot(data, kv.rf.GetApplied(), term, seqNums)
 		}
 		time.Sleep(100 * time.Millisecond)
 	}
@@ -329,9 +352,9 @@ func StartKVServer(servers []*labrpc.ClientEnd, me int, persister *raft.Persiste
 	kv.rfSem = make(chan struct{})
 	kv.pendingOps = make(map[int]chan struct{})
 	kv.getOps = make(map[int]chan struct{})
-	kv.seqNums = make(map[string]bool)
+	kv.seqNums = make(map[int64]int64)
 	kv.pendingCmds = make(map[int]Op)
-	kv.serverId = GenerateUUID()
+	kv.serverId = nrand()
 	kv.persister = persister
 	go kv.listenApplyCh()
 	go kv.generateSnapshotter()
@@ -348,9 +371,11 @@ func (kv *KVServer) restoreSnapshot(snapshot []byte) {
 	var lastIncludedIndex int
 	var lastIncludedTerm int
 	var snapshotData map[string]string
+	var seqNums map[int64]int64
 	if d.Decode(&lastIncludedIndex) != nil ||
 		d.Decode(&lastIncludedTerm) != nil ||
-		d.Decode(&snapshotData) != nil {
+		d.Decode(&snapshotData) != nil ||
+		d.Decode(&seqNums) != nil {
 		// error
 		panic("kv server Failed to read persisted snapshot")
 	} else {
@@ -359,8 +384,9 @@ func (kv *KVServer) restoreSnapshot(snapshot []byte) {
 			data[k] = v
 		}
 		kv.data = data
-		DPrintf("[Node:%s] kv server restoreSnapshot lastIncludedTerm:%d lastIncludedIndex:%d snapshotData:%v", kv.serverId, lastIncludedTerm, lastIncludedIndex, snapshotData)
-		DPrintf("[Node:%s] kv server restoreSnapshot InstallSnapshot 通知上层KV server data:%v", kv.serverId, snapshotData)
+		kv.seqNums = seqNums
+		DPrintf("[Node:%d] kv server restoreSnapshot lastIncludedTerm:%d lastIncludedIndex:%d snapshotData:%v", kv.serverId, lastIncludedTerm, lastIncludedIndex, snapshotData)
+		DPrintf("[Node:%d] kv server restoreSnapshot InstallSnapshot 通知上层KV server data:%v", kv.serverId, snapshotData)
 		// Reset state machine using snapshot contents (and load snapshot’s cluster configuration)
 	}
 }

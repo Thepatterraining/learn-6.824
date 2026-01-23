@@ -2,28 +2,19 @@ package kvraft
 
 import (
 	"crypto/rand"
-	"encoding/hex"
-	"fmt"
 	"math/big"
+	"sync/atomic"
 	"time"
 
 	"learn-6.824/src/labrpc"
 )
-
-func GenerateUUID() string {
-	bytes := make([]byte, 16)
-	if _, err := rand.Read(bytes); err != nil {
-		panic(err)
-	}
-	return hex.EncodeToString(bytes)
-}
 
 type Clerk struct {
 	servers []*labrpc.ClientEnd
 	// You will have to modify this struct.
 	leader   int
 	isLeader bool
-	clientId string
+	clientId int64
 	opId     int64
 }
 
@@ -39,7 +30,7 @@ func MakeClerk(servers []*labrpc.ClientEnd) *Clerk {
 	ck.servers = servers
 	ck.leader = 0
 	// You'll have to add code here.
-	ck.clientId = GenerateUUID()
+	ck.clientId = nrand()
 	ck.opId = 0
 	return ck
 }
@@ -55,17 +46,19 @@ func MakeClerk(servers []*labrpc.ClientEnd) *Clerk {
 // must match the declared types of the RPC handler function's
 // arguments. and reply must be passed as a pointer.
 func (ck *Clerk) Get(key string) string {
+	atomic.AddInt64(&ck.opId, 1)
 	args := GetArgs{
-		Key:    key,
-		SeqNum: fmt.Sprintf("%s-%d", ck.clientId, nrand()),
+		Key:      key,
+		SeqNum:   atomic.LoadInt64(&ck.opId),
+		ClientId: ck.clientId,
 	}
 	tries := 0
 	for {
 		reply := GetReply{}
-		DPrintf("[client:%s] server:%d kv client get key:%s", ck.clientId, ck.leader, key)
+		DPrintf("[client:%d] server:%d kv client get key:%s", ck.clientId, ck.leader, key)
 		ok := ck.servers[ck.leader].Call("KVServer.Get", &args, &reply)
 		if !ok {
-			DPrintf("[client:%s] server:%d kv client get key network error:%t", ck.clientId, ck.leader, ok)
+			DPrintf("[client:%d] server:%d kv client get key network error:%t", ck.clientId, ck.leader, ok)
 			// 请求其他Server
 			ck.updateLeader()
 			time.Sleep(10 * time.Millisecond)
@@ -74,7 +67,7 @@ func (ck *Clerk) Get(key string) string {
 		}
 		if reply.Err == ErrTimeout {
 			// 超时，直接重试
-			DPrintf("[client:%s] server:%d kv client get key timeout:%t", ck.clientId, ck.leader, ok)
+			DPrintf("[client:%d] server:%d kv client get key timeout:%t", ck.clientId, ck.leader, ok)
 			time.Sleep(10 * time.Millisecond)
 			tries++
 			if tries >= 3 {
@@ -87,7 +80,7 @@ func (ck *Clerk) Get(key string) string {
 		// You will have to modify this function.
 		if reply.Err == ErrNotLeader {
 			// 请求其他Server
-			DPrintf("[client:%s] server:%d kv client get key repeat reply:%s", ck.clientId, ck.leader, reply.Err)
+			DPrintf("[client:%d] server:%d kv client get key repeat reply:%s", ck.clientId, ck.leader, reply.Err)
 			ck.updateLeader()
 			tries = 0
 			continue
@@ -109,21 +102,23 @@ func (ck *Clerk) Get(key string) string {
 // arguments. and reply must be passed as a pointer.
 func (ck *Clerk) PutAppend(key string, value string, op string) {
 	// You will have to modify this function.
+	atomic.AddInt64(&ck.opId, 1)
 	args := PutAppendArgs{
-		Key:    key,
-		Value:  value,
-		Op:     op,
-		SeqNum: fmt.Sprintf("%s-%d", ck.clientId, nrand()),
+		Key:      key,
+		Value:    value,
+		Op:       op,
+		SeqNum:   atomic.LoadInt64(&ck.opId),
+		ClientId: ck.clientId,
 	}
 	tries := 0
 	timeoutCount := 0
 	for tries < 6 {
 		reply := PutAppendReply{}
-		DPrintf("[client:%s] server:%d kv client putAppend key:%s, value:%s", ck.clientId, ck.leader, key, value)
+		DPrintf("[client:%d] server:%d kv client putAppend key:%s, value:%s", ck.clientId, ck.leader, key, value)
 		ok := ck.servers[ck.leader].Call("KVServer.PutAppend", &args, &reply)
 		if !ok {
 			// RPC失败，直接重试
-			DPrintf("[client:%s] server:%d kv client putAppend key network error:%t", ck.clientId, ck.leader, ok)
+			DPrintf("[client:%d] server:%d kv client putAppend key network error:%t", ck.clientId, ck.leader, ok)
 			// 请求其他Server
 			time.Sleep(10 * time.Millisecond)
 			ck.updateLeader()
@@ -132,7 +127,7 @@ func (ck *Clerk) PutAppend(key string, value string, op string) {
 		}
 		if reply.Err == ErrTimeout {
 			// 超时，直接重试
-			DPrintf("[client:%s] server:%d kv client putAppend key:%s,value:%s timeout:%t", ck.clientId, ck.leader, key, value, ok)
+			DPrintf("[client:%d] server:%d kv client putAppend key:%s,value:%s timeout:%t", ck.clientId, ck.leader, key, value, ok)
 			time.Sleep(1000 * time.Millisecond)
 			timeoutCount++
 			if timeoutCount >= 3 {
@@ -144,7 +139,7 @@ func (ck *Clerk) PutAppend(key string, value string, op string) {
 			continue
 		}
 		if reply.Err == ErrNotLeader {
-			DPrintf("[client:%s] server:%d kv client putAppend key repeat reply:%s", ck.clientId, ck.leader, reply.Err)
+			DPrintf("[client:%d] server:%d kv client putAppend key repeat reply:%s", ck.clientId, ck.leader, reply.Err)
 			// 请求其他Server
 			ck.updateLeader()
 			tries = 0
@@ -165,6 +160,6 @@ func (ck *Clerk) Append(key string, value string) {
 }
 
 func (ck *Clerk) updateLeader() {
-	DPrintf("[client:%s] 更新leader before:%d, after:%d", ck.clientId, ck.leader, (ck.leader+1)%len(ck.servers))
+	DPrintf("[client:%d] 更新leader before:%d, after:%d", ck.clientId, ck.leader, (ck.leader+1)%len(ck.servers))
 	ck.leader = (ck.leader + 1) % len(ck.servers)
 }
