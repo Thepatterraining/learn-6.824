@@ -12,7 +12,7 @@ import (
 	"learn-6.824/src/raft"
 )
 
-const Debug = 1
+const Debug = 0
 
 func DPrintf(format string, a ...interface{}) (n int, err error) {
 	if Debug > 0 {
@@ -245,12 +245,23 @@ func (kv *KVServer) listenApplyCh() {
 			// 	continue
 			// }
 			kv.mu.Lock()
+			// 恢复快照数据
 			data := applyMsg.Snapshot
 			kv.data = make(map[string]string)
 			for k, v := range data {
 				kv.data[k] = v
 			}
-			DPrintf("[Node:%d] kv server listenApplyCh load snapshot data:%v", kv.serverId, kv.data)
+			// 恢复seqNums，这对幂等性检测至关重要
+			// 不要创建新的map，直接替换现有map以避免并发问题
+			tempSeqNums := applyMsg.SeqNums
+			for k, v := range tempSeqNums {
+				kv.seqNums[k] = v
+			}
+
+			// 注意：快照恢复时不清理pending操作
+			// pending操作会通过正常的幂等性检查自然处理
+			// 清理操作可能导致channel被错误关闭，造成duplicate element错误
+			DPrintf("[Node:%d] kv server listenApplyCh load snapshot data:%v seqNums:%v", kv.serverId, kv.data, kv.seqNums)
 			kv.mu.Unlock()
 		}
 	}
@@ -392,9 +403,13 @@ func (kv *KVServer) restoreSnapshot(snapshot []byte) {
 			data[k] = v
 		}
 		kv.data = data
-		kv.seqNums = seqNums
+		seqNum := make(map[int64]int64)
+		for k, v := range seqNums {
+			seqNum[k] = v
+		}
+		kv.seqNums = seqNum
 		DPrintf("[Node:%d] kv server restoreSnapshot lastIncludedTerm:%d lastIncludedIndex:%d snapshotData:%v", kv.serverId, lastIncludedTerm, lastIncludedIndex, snapshotData)
-		DPrintf("[Node:%d] kv server restoreSnapshot InstallSnapshot 通知上层KV server data:%v", kv.serverId, snapshotData)
+		// DPrintf("[Node:%d] kv server restoreSnapshot InstallSnapshot 通知上层KV server data:%v", kv.serverId, snapshotData)
 		// Reset state machine using snapshot contents (and load snapshot’s cluster configuration)
 	}
 }

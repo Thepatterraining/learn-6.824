@@ -31,13 +31,13 @@ func Get(cfg *config, ck *Clerk, key string) string {
 }
 
 func Put(cfg *config, ck *Clerk, key string, value string) {
-	log.Printf("test client put key:%s, value:%s", key, value)
+	DPrintf("test client put key:%s, value:%s", key, value)
 	ck.Put(key, value)
 	cfg.op()
 }
 
 func Append(cfg *config, ck *Clerk, key string, value string) {
-	log.Printf("test client append key:%s, value:%s, ck:%v", key, value, ck)
+	DPrintf("test client append key:%s, value:%s, ck:%v", key, value, ck)
 	ck.Append(key, value)
 	cfg.op()
 }
@@ -265,7 +265,7 @@ func GenericTest(t *testing.T, part string, nclients int, unreliable bool, crash
 			cfg.ConnectAll()
 		}
 
-		log.Printf("wait for clients\n")
+		DPrintf("wait for clients\n")
 		for i := 0; i < nclients; i++ {
 			// log.Printf("read from clients %d\n", i)
 			j := <-clnts[i]

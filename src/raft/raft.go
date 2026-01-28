@@ -126,6 +126,7 @@ type ApplyMsg struct {
 	CommandIndex int
 	Snapshot     map[string]string
 	IsSnapshot   bool
+	SeqNums      map[int64]int64 // 快照包含的seqNums，用于幂等性检测
 }
 
 type RaftStatus int
@@ -247,10 +248,12 @@ func (rf *Raft) CreateSnapshot(kvData map[string]string, lastIncludedIndex int, 
 		reply := InstallSnapshotReply{}
 		ok := rf.sendInstallSnapshot(i, &args, &reply)
 		if ok {
+			rf.mu.Lock()
 			DPrintf("[Node:%d] 发送快照到 Node:%d 成功", rf.me, i)
 			if reply.Term > rf.currentTerm {
 				rf.becomeFollower(reply.Term)
 			}
+			rf.mu.Unlock()
 		}
 	}
 }
@@ -462,13 +465,14 @@ func (rf *Raft) InstallSnapshot(args *InstallSnapshotArgs, reply *InstallSnapsho
 		// }
 		rf.mu.Unlock()
 		rf.logger.LogWithTrace(RPC_RECV, trace,
-			"InstallSnapshot 通知上层KV server data:%v",
-			args.Snapshot.Data)
-		// Reset state machine using snapshot contents (and load snapshot’s cluster configuration)
+			"InstallSnapshot 通知上层KV server data:%v seqNums:%v",
+			args.Snapshot.Data, args.Snapshot.SeqNums)
+		// Reset state machine using snapshot contents (and load snapshot's cluster configuration)
 		rf.applyCh <- ApplyMsg{
 			Snapshot:     args.Snapshot.Data,
 			IsSnapshot:   true,
 			CommandIndex: args.Snapshot.LastIncludedIndex,
+			SeqNums:      args.Snapshot.SeqNums, // 包含seqNums以恢复幂等性状态
 		}
 		discardAll = true
 	} else {
