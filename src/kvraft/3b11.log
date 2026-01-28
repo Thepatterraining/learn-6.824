@@ -1,0 +1,112 @@
+2026/01/27 20:34:45 [Node:3017501193301214021] kv server putAppend op:Put, key:3, value:
+2026/01/27 20:34:45 [Node:3017501193301214021] kv server putAppend repley:NoLeader
+2026/01/27 20:34:45 [Node:3017501193301214021] kv server putAppend op:Put, key:0, value:
+2026/01/27 20:34:45 [Node:3017501193301214021] kv server putAppend repley:NoLeader
+2026/01/27 20:34:45 [Node:3017501193301214021] kv server putAppend op:Put, key:2, value:
+2026/01/27 20:34:45 [Node:3017501193301214021] kv server putAppend repley:NoLeader
+2026/01/27 20:34:45 [Node:3017501193301214021] kv server putAppend op:Put, key:4, value:
+2026/01/27 20:34:45 [Node:3017501193301214021] kv server putAppend repley:NoLeader
+2026/01/27 20:34:45 [Node:3017501193301214021] kv server putAppend op:Put, key:3, value:
+2026/01/27 20:34:45 [Node:3017501193301214021] kv server putAppend repley:NoLeader
+2026/01/27 20:34:45 [Node:3017501193301214021] kv server putAppend op:Put, key:1, value:
+2026/01/27 20:34:45 [Node:3017501193301214021] kv server putAppend repley:NoLeader
+2026/01/27 20:34:45 [Node:3017501193301214021] kv server putAppend op:Put, key:0, value:
+2026/01/27 20:34:45 [Node:3017501193301214021] kv server putAppend repley:NoLeader
+2026/01/27 20:34:45 [Node:3017501193301214021] kv server putAppend op:Put, key:4, value:
+2026/01/27 20:34:45 [Node:3017501193301214021] kv server putAppend repley:NoLeader
+2026/01/27 20:34:45 [Node:3017501193301214021] kv server putAppend op:Put, key:3, value:
+2026/01/27 20:34:45 [Node:3017501193301214021] kv server putAppend repley:NoLeader
+2026/01/27 20:34:45 [Node:3017501193301214021] kv server putAppend op:Put, key:2, value:
+2026/01/27 20:34:45 [Node:3017501193301214021] kv server putAppend repley:NoLeader
+2026/01/27 20:34:45 [Node:3017501193301214021] kv server putAppend op:Put, key:0, value:
+2026/01/27 20:34:45 [Node:3017501193301214021] kv server putAppend repley:NoLeader
+2026/01/27 20:34:45 [Node:3017501193301214021] kv server putAppend op:Put, key:4, value:
+2026/01/27 20:34:45 [Node:3017501193301214021] kv server putAppend repley:NoLeader
+2026/01/27 20:34:45 [Node:3017501193301214021] kv server putAppend op:Put, key:1, value:
+2026/01/27 20:34:45 [Node:3017501193301214021] kv server putAppend repley:NoLeader
+2026/01/27 20:34:45 [Node:3017501193301214021] kv server putAppend op:Put, key:3, value:
+2026/01/27 20:34:45 [Node:3017501193301214021] kv server putAppend repley:NoLeader
+2026/01/27 20:34:45 [Node:3017501193301214021] kv server putAppend op:Append, key:4, value:x 4 0 y
+2026/01/27 20:34:45 [Node:3017501193301214021] kv server putAppend repley:NoLeader
+2026/01/27 20:34:45 [Node:3017501193301214021] kv server putAppend op:Put, key:1, value:
+2026/01/27 20:34:45 [Node:3017501193301214021] kv server putAppend repley:NoLeader
+2026/01/27 20:34:45 [Node:3017501193301214021] kv server putAppend op:Put, key:1, value: 重复操作
+2026/01/27 20:34:46 [Node:3017501193301214021] kv server putAppend op:Append, key:0, value:x 0 2 y 重复操作
+2026/01/27 20:34:46 [Node:3017501193301214021] kv server putAppend op:Append, key:3, value:x 3 3 y 重复操作
+2026/01/27 20:34:46 [Node:3017501193301214021] kv server putAppend op:Append, key:0, value:x 0 3 y
+2026/01/27 20:34:46 [Node:3017501193301214021] kv server putAppend repley:NoLeader
+2026/01/27 20:34:46 [Node:3017501193301214021] kv server putAppend op:Append, key:3, value:x 3 4 y
+2026/01/27 20:34:46 [Node:3017501193301214021] kv server putAppend repley:NoLeader
+2026/01/27 20:34:46 [Node:3017501193301214021] kv server putAppend op:Append, key:0, value:x 0 3 y
+2026/01/27 20:34:46 [Node:3017501193301214021] kv server putAppend repley:NoLeader
+2026/01/27 20:34:46 [Node:3017501193301214021] kv server putAppend op:Append, key:2, value:x 2 3 y
+2026/01/27 20:34:46 [Node:3017501193301214021] kv server putAppend repley:NoLeader
+2026/01/27 20:34:46 [Node:3017501193301214021] kv server putAppend op:Append, key:1, value:x 1 4 y
+2026/01/27 20:34:46 [Node:3017501193301214021] kv server putAppend repley:NoLeader
+2026/01/27 20:34:46 [Node:3017501193301214021] kv server putAppend op:Append, key:3, value:x 3 8 y
+2026/01/27 20:34:46 [Node:3017501193301214021] kv server putAppend repley:NoLeader
+2026/01/27 20:34:46 [Node:3017501193301214021] kv server putAppend op:Append, key:2, value:x 2 7 y
+2026/01/27 20:34:46 [Node:3017501193301214021] kv server putAppend repley:NoLeader
+2026/01/27 20:34:46 [Node:3017501193301214021] kv server putAppend op:Append, key:1, value:x 1 6 y
+2026/01/27 20:34:46 [Node:3017501193301214021] kv server putAppend repley:NoLeader
+2026/01/27 20:34:46 [Node:3017501193301214021] kv server putAppend op:Append, key:3, value:x 3 9 y
+2026/01/27 20:34:46 [Node:3017501193301214021] kv server putAppend repley:NoLeader
+2026/01/27 20:34:47 [Node:3017501193301214021] kv server putAppend op:Append, key:0, value:x 0 9 y
+2026/01/27 20:34:47 [Node:3017501193301214021] kv server putAppend repley:NoLeader
+2026/01/27 20:34:47 [Node:3017501193301214021] kv server putAppend op:Append, key:0, value:x 0 10 y
+2026/01/27 20:34:47 [Node:3017501193301214021] kv server putAppend repley:NoLeader
+2026/01/27 20:34:47 [Node:3017501193301214021] kv server putAppend op:Append, key:2, value:x 2 14 y
+2026/01/27 20:34:47 [Node:3017501193301214021] kv server putAppend repley:NoLeader
+2026/01/27 20:34:47 [Node:3017501193301214021] kv server putAppend op:Append, key:2, value:x 2 15 y
+2026/01/27 20:34:47 [Node:3017501193301214021] kv server putAppend repley:NoLeader
+2026/01/27 20:34:47 [Node:3017501193301214021] kv server putAppend op:Append, key:2, value:x 2 15 y
+2026/01/27 20:34:47 [Node:3017501193301214021] kv server putAppend repley:NoLeader
+2026/01/27 20:34:47 [Node:3017501193301214021] kv server putAppend op:Append, key:1, value:x 1 13 y
+2026/01/27 20:34:47 [Node:3017501193301214021] kv server putAppend repley:NoLeader
+2026/01/27 20:34:48 [Node:3017501193301214021] kv server putAppend op:Append, key:4, value:x 4 14 y 重复操作
+2026/01/27 20:34:48 [Node:3017501193301214021] kv server putAppend op:Append, key:4, value:x 4 15 y
+2026/01/27 20:34:48 [Node:3017501193301214021] kv server putAppend repley:NoLeader
+2026/01/27 20:34:48 [Node:3017501193301214021] kv server putAppend op:Append, key:4, value:x 4 15 y 重复操作
+2026/01/27 20:34:48 [Node:3017501193301214021] kv server putAppend op:Append, key:1, value:x 1 17 y
+2026/01/27 20:34:48 [Node:3017501193301214021] kv server putAppend repley:NoLeader
+2026/01/27 20:34:48 [Node:3017501193301214021] kv server putAppend op:Append, key:3, value:x 3 16 y
+2026/01/27 20:34:48 [Node:3017501193301214021] kv server putAppend repley:NoLeader
+2026/01/27 20:34:48 [Node:3017501193301214021] kv server putAppend op:Append, key:1, value:x 1 17 y 重复操作
+2026/01/27 20:34:48 [Node:3017501193301214021] kv server putAppend op:Append, key:1, value:x 1 18 y
+2026/01/27 20:34:48 [Node:3017501193301214021] kv server putAppend repley:NoLeader
+2026/01/27 20:34:48 [Node:3017501193301214021] kv server putAppend op:Append, key:0, value:x 0 17 y
+2026/01/27 20:34:48 [Node:3017501193301214021] kv server putAppend repley:NoLeader
+2026/01/27 20:34:48 [Node:3017501193301214021] kv server putAppend op:Append, key:1, value:x 1 21 y
+2026/01/27 20:34:48 [Node:3017501193301214021] kv server putAppend repley:NoLeader
+2026/01/27 20:34:48 [Node:3017501193301214021] kv server putAppend op:Append, key:1, value:x 1 22 y
+2026/01/27 20:34:48 [Node:3017501193301214021] kv server putAppend repley:NoLeader
+2026/01/27 20:34:48 [Node:3017501193301214021] kv server putAppend op:Append, key:1, value:x 1 22 y
+2026/01/27 20:34:48 [Node:3017501193301214021] kv server putAppend repley:NoLeader
+2026/01/27 20:34:49 [Node:3017501193301214021] kv server putAppend op:Append, key:2, value:x 2 20 y
+2026/01/27 20:34:49 [Node:3017501193301214021] kv server putAppend repley:NoLeader
+2026/01/27 20:34:49 [Node:3017501193301214021] kv server putAppend op:Append, key:4, value:x 4 20 y
+2026/01/27 20:34:49 [Node:3017501193301214021] kv server putAppend repley:NoLeader
+2026/01/27 20:34:49 [Node:3017501193301214021] kv server putAppend op:Append, key:4, value:x 4 20 y
+2026/01/27 20:34:49 [Node:3017501193301214021] kv server putAppend repley:NoLeader
+2026/01/27 20:34:49 [Node:3017501193301214021] kv server putAppend op:Append, key:2, value:x 2 24 y 重复操作
+2026/01/27 20:34:49 [Node:3017501193301214021] kv server putAppend op:Append, key:3, value:x 3 26 y 重复操作
+2026/01/27 20:34:49 [Node:3017501193301214021] kv server putAppend op:Append, key:3, value:x 3 27 y
+2026/01/27 20:34:49 [Node:3017501193301214021] kv server putAppend repley:NoLeader
+2026/01/27 20:34:49 [Node:3017501193301214021] kv server putAppend op:Append, key:4, value:x 4 23 y
+2026/01/27 20:34:49 [Node:3017501193301214021] kv server putAppend repley:NoLeader
+2026/01/27 20:34:50 [Node:3017501193301214021] kv server putAppend op:Append, key:4, value:x 4 23 y
+2026/01/27 20:34:50 [Node:3017501193301214021] kv server putAppend repley:NoLeader
+2026/01/27 20:34:50 [Node:3017501193301214021] kv server putAppend op:Append, key:4, value:x 4 23 y
+2026/01/27 20:34:50 [Node:3017501193301214021] kv server putAppend repley:NoLeader
+2026/01/27 20:34:50 [Node:3017501193301214021] kv server putAppend op:Append, key:4, value:x 4 23 y
+2026/01/27 20:34:50 [Node:3017501193301214021] kv server putAppend repley:NoLeader
+2026/01/27 20:34:50 [Node:3017501193301214021] kv server putAppend op:Append, key:4, value:x 4 23 y
+2026/01/27 20:34:50 [Node:3017501193301214021] kv server putAppend repley:NoLeader
+2026/01/27 20:34:50 [Node:3017501193301214021] kv server putAppend op:Append, key:4, value:x 4 23 y
+2026/01/27 20:34:50 [Node:3017501193301214021] kv server putAppend repley:NoLeader
+2026/01/27 20:34:50 [Node:3017501193301214021] kv server putAppend op:Append, key:4, value:x 4 23 y
+2026/01/27 20:34:50 [Node:3017501193301214021] kv server putAppend repley:NoLeader
+2026/01/27 20:34:50 [Node:3017501193301214021] kv server putAppend op:Append, key:4, value:x 4 23 y
+2026/01/27 20:34:50 [Node:3017501193301214021] kv server putAppend repley:NoLeader
+2026/01/27 20:34:51 [Node:3017501193301214021] kv server putAppend op:Append, key:3, value:x 3 27 y
+2026/01/27 20:34:51 [Node:3017501193301214021] kv server putAppend repley: success op:Append, key:3, value:x 3 27 y

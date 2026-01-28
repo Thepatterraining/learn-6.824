@@ -236,6 +236,14 @@ func (kv *KVServer) listenApplyCh() {
 			}
 			kv.mu.Unlock()
 		} else if applyMsg.IsSnapshot {
+			// 检查 snapshot 是否比当前状态更新
+			// 注意：这里需要 KVServer 跟踪 lastApplied
+			// if applyMsg.CommandIndex <= kv.lastAppliedIndex {
+			// 	DPrintf("[Node:%d] kv server 忽略过时的snapshot lastIncludedIndex:%d <= lastApplied:%d",
+			// 		kv.serverId, applyMsg.CommandIndex, kv.lastAppliedIndex)
+			// 	kv.mu.Unlock()
+			// 	continue
+			// }
 			kv.mu.Lock()
 			data := applyMsg.Snapshot
 			kv.data = make(map[string]string)
