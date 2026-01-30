@@ -44,13 +44,14 @@ type KVServer struct {
 	// Your definitions here.
 	data map[string]string
 
-	rfSem       chan struct{}
-	pendingOps  map[int]chan struct{}
-	getOps      map[int]chan struct{}
-	seqNums     map[int64]int64
-	pendingCmds map[int]Op
-	serverId    int64
-	persister   *raft.Persister
+	rfSem          chan struct{}
+	pendingOps     map[int]chan struct{}
+	getOps         map[int]chan struct{}
+	seqNums        map[int64]int64
+	appliedSeqNums map[int64]int64
+	pendingCmds    map[int]Op
+	serverId       int64
+	persister      *raft.Persister
 }
 
 func (kv *KVServer) Get(args *GetArgs, reply *GetReply) {
@@ -197,6 +198,7 @@ func (kv *KVServer) listenApplyCh() {
 			}
 			if !exists || op.SeqNum > seqNum {
 				// 更新最新的SeqNum
+				DPrintf("[Node:%d] kv server listenApplyCh op:%s, key:%s, value:%s clientid:%d, 更新seqNum:%d", kv.serverId, op.Option, op.Key, op.Value, op.ClientId, op.SeqNum)
 				kv.seqNums[op.ClientId] = op.SeqNum
 			}
 			switch op.Option {
@@ -372,6 +374,7 @@ func StartKVServer(servers []*labrpc.ClientEnd, me int, persister *raft.Persiste
 	kv.pendingOps = make(map[int]chan struct{})
 	kv.getOps = make(map[int]chan struct{})
 	kv.seqNums = make(map[int64]int64)
+	kv.appliedSeqNums = make(map[int64]int64)
 	kv.pendingCmds = make(map[int]Op)
 	kv.serverId = nrand()
 	kv.persister = persister
