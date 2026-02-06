@@ -269,34 +269,6 @@ func (kv *KVServer) listenApplyCh() {
 	}
 }
 
-// 辅助方法：通知等待者并验证命令
-// func (kv *KVServer) notifyWaiters(index int, appliedOp Op, isDuplicate bool) {
-// 	// 检查Get操作
-// 	if getCh, exists := kv.getOps[index]; exists {
-// 		originalCmd := kv.getCmds[index]
-// 		// 验证命令是否匹配
-// 		if kv.opEquals(originalCmd, appliedOp) {
-// 			getCh <- OpResult{Success: true, Value: kv.data[appliedOp.Key]}
-// 		} else {
-// 			getCh <- OpResult{Success: false}
-// 		}
-// 		delete(kv.getOps, index)
-// 		delete(kv.getCmds, index)
-// 	}
-
-// 	// 检查Put/Append操作
-// 	// 通知返回成功
-// 	doneCh, exists := kv.pendingOps[index]
-// 	if exists {
-// 		originalCmd := kv.pendingCmds[index]
-// 		// 验证命令是否匹配
-// 		if kv.opEquals(originalCmd, appliedOp) {
-// 			close(doneCh)
-// 			delete(kv.pendingOps, index)
-// 		}
-// 	}
-// }
-
 // 辅助方法：比较两个Op是否相等
 func (kv *KVServer) opEquals(op1, op2 Op) bool {
 	return op1.Key == op2.Key &&

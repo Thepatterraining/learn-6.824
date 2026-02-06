@@ -1,5 +1,7 @@
 package shardmaster
 
+import "log"
+
 //
 // Master shard server: assigns shards to replication groups.
 //
@@ -70,4 +72,13 @@ type QueryReply struct {
 	WrongLeader bool
 	Err         Err
 	Config      Config
+}
+
+const Debug = 0
+
+func DPrintf(format string, a ...interface{}) (n int, err error) {
+	if Debug > 0 {
+		log.Printf(format, a...)
+	}
+	return
 }
