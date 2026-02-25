@@ -12,6 +12,15 @@ import (
 	"learn-6.824/src/labrpc"
 )
 
+type ShardKVStatus string
+
+const (
+	Normal       ShardKVStatus = "NORMAL"        // 属于本组的分片，正常读写
+	MigrationOut ShardKVStatus = "MIGRATION_OUT" // 之前属于我，现在要迁移出去的分片，禁止读写
+	MigrationIn  ShardKVStatus = "MIGRATION_IN"  // 之前不属于，现在要迁移进来的分片，禁止读写
+	Invalid      ShardKVStatus = "INVALID"       // 不属于本组的分片
+)
+
 // TraceContext 用于追踪请求链路
 type TraceContext struct {
 	TraceID string
@@ -121,12 +130,15 @@ func generateTraceID() string {
 // snapshots) on the applyCh; at that point you can add fields to
 // ApplyMsg, but set CommandValid to false for these other uses.
 type ApplyMsg struct {
-	CommandValid bool
-	Command      interface{}
-	CommandIndex int
-	Snapshot     map[string]string
-	IsSnapshot   bool
-	SeqNums      map[int64]int64 // 快照包含的seqNums，用于幂等性检测
+	CommandValid  bool
+	Command       interface{}
+	CommandIndex  int
+	Snapshot      map[string]string
+	IsSnapshot    bool
+	SeqNums       map[int64]int64 // 快照包含的seqNums，用于幂等性检测
+	Shard2Data    map[int]map[string]string
+	Shard2SeqNums map[int]map[int64]int64
+	Shard2Status  map[int]ShardKVStatus
 }
 
 type RaftStatus int
@@ -150,6 +162,9 @@ type Snapshot struct {
 	LastIncludedTerm  int
 	Data              map[string]string
 	SeqNums           map[int64]int64
+	Shard2Data        map[int]map[string]string
+	Shard2SeqNums     map[int]map[int64]int64
+	Shard2Status      map[int]ShardKVStatus
 }
 
 // A Go object implementing a single Raft peer.
@@ -214,6 +229,49 @@ func (rf *Raft) GetApplied() int {
 		return rf.lastSnapshot.LastIncludedIndex
 	}
 	return rf.lastApplied
+}
+
+func (rf *Raft) CreateShardSnapshot(kvData map[int]map[string]string, lastIncludedIndex int, lastIncludedTerm int, seqNums map[int]map[int64]int64, shard2Status map[int]ShardKVStatus) {
+	rf.mu.Lock()
+	snapshot := Snapshot{
+		LastIncludedIndex: lastIncludedIndex,
+		LastIncludedTerm:  rf.log[rf.getLogStartIndex(lastIncludedIndex)].Term,
+		Shard2Data:        kvData,
+		Shard2SeqNums:     seqNums,
+		Shard2Status:      shard2Status,
+	}
+	DPrintf("[Node:%d] CreateSnapshot snapshot 上一个index:%d snapshot:%v 开始", rf.me, rf.lastSnapshot.LastIncludedIndex, snapshot)
+	// if rf.lastSnapshot.LastIncludedIndex >= lastIncludedIndex {
+	// 	DPrintf("[Node:%d] CreateSnapshot snapshot 重复:%v 成功", rf.me, snapshot)
+	// 	rf.mu.Unlock()
+	// 	return
+	// }
+	rf.mu.Unlock()
+	rf.saveSnapshot(snapshot, false, 0)
+
+	rf.mu.Lock()
+	args := InstallSnapshotArgs{
+		Snapshot: snapshot,
+		Term:     rf.currentTerm,
+		LeaderId: rf.me,
+	}
+	rf.mu.Unlock()
+	// 像所有Follower同步快照
+	for i := range rf.peers {
+		if i == rf.me {
+			continue
+		}
+		reply := InstallSnapshotReply{}
+		ok := rf.sendInstallSnapshot(i, &args, &reply)
+		if ok {
+			rf.mu.Lock()
+			DPrintf("[Node:%d] 发送快照到 Node:%d 成功", rf.me, i)
+			if reply.Term > rf.currentTerm {
+				rf.becomeFollower(reply.Term)
+			}
+			rf.mu.Unlock()
+		}
+	}
 }
 
 func (rf *Raft) CreateSnapshot(kvData map[string]string, lastIncludedIndex int, lastIncludedTerm int, seqNums map[int64]int64) {
@@ -318,6 +376,9 @@ func (rf *Raft) saveSnapshot(snapshot Snapshot, discardAll bool, lastSnapshotInd
 	e.Encode(snapshot.LastIncludedTerm)
 	e.Encode(snapshot.Data)
 	e.Encode(snapshot.SeqNums)
+	e.Encode(snapshot.Shard2Data)
+	e.Encode(snapshot.Shard2SeqNums)
+	e.Encode(snapshot.Shard2Status)
 	data := w.Bytes()
 
 	w1 := new(bytes.Buffer)
@@ -338,10 +399,16 @@ func (rf *Raft) restoreSnapshot(data []byte) {
 	var lastIncludedTerm int
 	var snapshotData map[string]string
 	var seqNums map[int64]int64
+	var shard2Data map[int]map[string]string
+	var shard2SeqNums map[int]map[int64]int64
+	var shard2Status map[int]ShardKVStatus
 	if d.Decode(&lastIncludedIndex) != nil ||
 		d.Decode(&lastIncludedTerm) != nil ||
 		d.Decode(&snapshotData) != nil ||
-		d.Decode(&seqNums) != nil {
+		d.Decode(&seqNums) != nil ||
+		d.Decode(&shard2Data) != nil ||
+		d.Decode(&shard2SeqNums) != nil ||
+		d.Decode(&shard2Status) != nil {
 		// error
 		DPrintf("[ERROR] [Node:%d] Failed to read persisted snapshot", rf.me)
 		panic("Failed to read persisted snapshot")
@@ -350,9 +417,12 @@ func (rf *Raft) restoreSnapshot(data []byte) {
 		rf.lastSnapshot.LastIncludedIndex = lastIncludedIndex
 		rf.lastSnapshot.Data = snapshotData
 		rf.lastSnapshot.SeqNums = seqNums
+		rf.lastSnapshot.Shard2Data = shard2Data
+		rf.lastSnapshot.Shard2SeqNums = shard2SeqNums
+		rf.lastSnapshot.Shard2Status = shard2Status
 		rf.logger.LogWithTrace(RPC_RECV, TraceContext{From: -1, To: rf.me},
-			"从快照恢复持久化状态 lastIncludedTerm:%d lastIncludedIndex:%d snapshotData:%v",
-			lastIncludedTerm, lastIncludedIndex, snapshotData)
+			"从快照恢复持久化状态 lastIncludedTerm:%d lastIncludedIndex:%d snapshotData:%v shard2Status:%v",
+			lastIncludedTerm, lastIncludedIndex, snapshotData, shard2Status)
 	}
 }
 
@@ -418,8 +488,6 @@ type InstallSnapshotReply struct {
 
 func (rf *Raft) InstallSnapshot(args *InstallSnapshotArgs, reply *InstallSnapshotReply) {
 	rf.mu.Lock()
-	// 重制选举定时器
-	rf.lastHeartBeatTime.Store(time.Now())
 	trace := TraceContext{
 		TraceID: "",
 		From:    0,
@@ -436,6 +504,8 @@ func (rf *Raft) InstallSnapshot(args *InstallSnapshotArgs, reply *InstallSnapsho
 		rf.mu.Unlock()
 		return
 	}
+	// 重制选举定时器
+	rf.lastHeartBeatTime.Store(time.Now())
 
 	// If existing log entry has same index and term as snapshot’s last included entry, retain log entries following it and reply
 	discardAll := false
@@ -469,10 +539,14 @@ func (rf *Raft) InstallSnapshot(args *InstallSnapshotArgs, reply *InstallSnapsho
 			args.Snapshot.Data, args.Snapshot.SeqNums)
 		// Reset state machine using snapshot contents (and load snapshot's cluster configuration)
 		rf.applyCh <- ApplyMsg{
-			Snapshot:     args.Snapshot.Data,
-			IsSnapshot:   true,
-			CommandIndex: args.Snapshot.LastIncludedIndex,
-			SeqNums:      args.Snapshot.SeqNums, // 包含seqNums以恢复幂等性状态
+			Snapshot:      args.Snapshot.Data,
+			IsSnapshot:    true,
+			CommandIndex:  args.Snapshot.LastIncludedIndex,
+			SeqNums:       args.Snapshot.SeqNums, // 包含seqNums以恢复幂等性状态
+			CommandValid:  false,
+			Shard2Data:    args.Snapshot.Shard2Data,
+			Shard2SeqNums: args.Snapshot.Shard2SeqNums,
+			Shard2Status:  args.Snapshot.Shard2Status,
 		}
 		discardAll = true
 	} else {
@@ -687,8 +761,6 @@ type AppendEntriesReply struct {
 func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply) {
 	rf.mu.Lock()
 	defer rf.mu.Unlock()
-	// 重制选举定时器
-	rf.lastHeartBeatTime.Store(time.Now())
 	currentTerm := rf.currentTerm
 	status := rf.status
 	me := rf.me
@@ -717,6 +789,8 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 		reply.Success = false
 		return
 	}
+	// 重制选举定时器
+	rf.lastHeartBeatTime.Store(time.Now())
 	if args.Term > currentTerm {
 		// 更新term
 		rf.becomeFollower(args.Term)
@@ -734,7 +808,7 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 		reply.Term = currentTerm
 		reply.Success = false
 		// 这个是Follower中，对应任期号为XTerm的第一条Log条目的下标。
-		reply.LogIndex = comimtIndex + 1
+		reply.LogIndex = logLen
 		// 将自己的任期号放在XTerm中。如果Follower在对应位置没有Log，那么这里会返回 -1。
 		reply.LogTerm = -1
 		//如果Follower在对应位置没有Log，那么XTerm会返回-1，XLen表示空白的Log下标。
@@ -742,7 +816,6 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 		return
 	}
 	rf.logger.LogWithTrace(eventType, trace, "打印日志结果:%v ", rf.log)
-	// 3. 3. 如果现有条目与新条目冲突(相同的索引但不同的条款)，删除现有的条目等 遵循它（§5.3
 	logEntry := rf.log[rf.getLogStartIndex(args.PrevLogIndex)]
 	if logEntry.Term != args.PrevLogTerm {
 		// 失败
@@ -750,20 +823,19 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 		reply.Term = currentTerm
 		reply.Success = false
 		reply.LogIndex = 0
+		reply.LogTerm = logEntry.Term
 		for i, log := range rf.log {
 			if log.Term == logEntry.Term {
 				reply.LogIndex = i
 				break
 			}
 		}
-		reply.LogTerm = logEntry.Term
 		reply.LogLen = -1
-		// 删除现有条目
-		// rf.log = rf.log[:reply.LogIndex]
 		rf.persist()
 		rf.logger.LogWithTrace(eventType, trace, "Rejected: 收到LogEntry，但是term 不对 prevLogIndex:%d logLen:%d logEntry term:%d prevlogterm:%d LogIndex:%d", args.PrevLogIndex, logLen, logEntry.Term, args.PrevLogTerm, reply.LogIndex)
 		return
 	}
+	// 3. 如果现有条目与新条目冲突(相同的索引但不同的条款)，删除现有的条目等 遵循它（§5.3
 	// 新条目的目标 index 从 prevLogIndex+1 开始
 	// 4. Append any new entries not already in the log 追加日志
 	if len(args.Entries) > 0 {
@@ -772,8 +844,8 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 			rf.logger.LogWithTrace(eventType, trace, "entry.Index:%d rf.getNextIndex():%d", entry.Index, rf.getNextIndex())
 			if entry.Index < rf.getNextIndex() {
 				startIndex := rf.getLogStartIndex(entry.Index)
-				rf.logger.LogWithTrace(eventType, trace, "startIndex:%d rf.log[startIndex].Term:%d args.Term:%d", entry.Index, rf.log[startIndex].Term, args.Term)
-				if rf.log[startIndex].Term != args.Term {
+				rf.logger.LogWithTrace(eventType, trace, "startIndex:%d rf.log[startIndex].Term:%d entry.Term:%d", entry.Index, rf.log[startIndex].Term, entry.Term)
+				if rf.log[startIndex].Term != entry.Term {
 					// 说明数据不一样 冲突
 					// 删除
 					rf.log = rf.log[:startIndex]
@@ -794,7 +866,7 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 	// 5. If leaderCommit > commitIndex, set commitIndex = min(leaderCommit, index of last new entry)
 	if args.LeaderCommit > comimtIndex {
 		oldCommitIndex := rf.commitIndex
-		rf.commitIndex = min(args.LeaderCommit, rf.getNextIndex())
+		rf.commitIndex = min(args.LeaderCommit, rf.getNextIndex()-1)
 		rf.logger.LogWithTrace(LOG_COMMIT, trace, "收到LogEntry，并且Leader已经提交， 本地log %d->%d leaderCommit:%d lastApplied:%d", oldCommitIndex, rf.commitIndex, args.LeaderCommit, rf.lastApplied)
 		// 找到没有提交的
 		if rf.commitIndex > rf.lastApplied {
@@ -1001,7 +1073,7 @@ func (rf *Raft) sendLogEntries(currentTerm int, me int, commitIndex int, peer in
 		rf.logger.LogWithTrace(LOG_REPLICA, trace, "心跳返回 from peer:%d term:%d success:%t", peer, currentTerm, reply.Success)
 		if reply.Success {
 			if len(logEntries) > 0 {
-				rf.logReplicationSuccess(agreeCount, peer, currentTerm, logEntries, commitIndex)
+				rf.logReplicationSuccess(agreeCount, peer, currentTerm, logEntries, commitIndex, prevLogIndex)
 			}
 			rf.mu.Unlock()
 		} else {
@@ -1074,7 +1146,7 @@ func (rf *Raft) killed() bool {
 	return z == 1
 }
 
-func (rf *Raft) logReplicationSuccess(agreeCount *int32, peer int, currentTerm int, logEntries []LogEntry, commitIndex int) {
+func (rf *Raft) logReplicationSuccess(agreeCount *int32, peer int, currentTerm int, logEntries []LogEntry, commitIndex int, prevLogIndex int) {
 	atomic.AddInt32(agreeCount, 1)
 	// 生成日志复制追踪ID
 	logReplicationTraceID := fmt.Sprintf("LOG_%d_%d", rf.me, currentTerm)
@@ -1092,7 +1164,8 @@ func (rf *Raft) logReplicationSuccess(agreeCount *int32, peer int, currentTerm i
 		return
 	}
 	// rf.matchIndex[peer] = rf.getLastLogIndex()
-	rf.matchIndex[peer] = logEntries[lastIndex].Index
+	// rf.matchIndex[peer] = logEntries[lastIndex].Index
+	rf.matchIndex[peer] = prevLogIndex + len(logEntries)
 	// 更新下次要同步的index: 已经同步了N，因此下次同步N+1
 	rf.nextIndex[peer] = rf.matchIndex[peer] + 1
 	rf.logger.LogWithTrace(LOG_REPLICA, trace, "更新后 server:%d matchIndex:%d nextIndex:%d", peer, rf.matchIndex[peer], rf.nextIndex[peer])
@@ -1183,6 +1256,11 @@ func (rf *Raft) broadcastVote(me int, currentTerm int, lastLogIndex int, lastLog
 					rf.mu.Unlock()
 					return
 				}
+				// 状态检查
+				if currentTerm != rf.currentTerm {
+					rf.mu.Unlock()
+					return
+				}
 				rf.mu.Unlock()
 				// If votes received from majority of servers: become leader
 				// 如果收到多数票 —— 成为 leader；立即发送空 AppendEntries（心跳）以建立权威。
@@ -1212,7 +1290,9 @@ func (rf *Raft) becomeLeader(term int) {
 	rf.status = Leader
 	// 初始化nextIndex
 	for i := range rf.peers {
-		rf.nextIndex[i] = rf.getLastLogIndex() + 1 + rf.lastSnapshot.LastIncludedIndex
+		// rf.nextIndex[i] = rf.getLastLogIndex() + 1 + rf.lastSnapshot.LastIncludedIndex
+		rf.nextIndex[i] = rf.getNextIndex()
+		rf.matchIndex[i] = 0
 	}
 	rf.persist()
 	rf.mu.Unlock()
@@ -1230,6 +1310,7 @@ func (rf *Raft) becomeCandidate() {
 	rf.currentTerm++
 	rf.status = Candidate
 	rf.votedFor = rf.me
+	rf.persist()
 }
 
 // 选举定时器
@@ -1249,11 +1330,19 @@ func (rf *Raft) runElectionTimer() {
 	for !rf.killed() {
 		timeout := randomTimeout(minTimeout, maxTimeout)
 		since := time.Since(rf.lastHeartBeatTime.Load().(time.Time))
+		// rf.mu.Lock()
+		// status := rf.status
+		// rf.mu.Unlock()
+		// if status == Leader {
+		// 	time.Sleep(10 * time.Millisecond) // 优化选举定时器检查频率，减少CPU消耗
+		// 	continue
+		// }
 		if since > timeout {
 			rf.mu.Lock()
 			// log.Printf("raft %d since %v  Sleeping for timeout %v", rf.me, since, timeout)
 			if rf.status == Leader {
 				rf.mu.Unlock()
+				time.Sleep(10 * time.Millisecond) // 优化选举定时器检查频率，减少CPU消耗
 				return
 			}
 			rf.becomeCandidate()

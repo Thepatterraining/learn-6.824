@@ -332,9 +332,9 @@ func StartKVServer(servers []*labrpc.ClientEnd, me int, persister *raft.Persiste
 	kv := new(KVServer)
 	kv.me = me
 	kv.maxraftstate = maxraftstate
-	kv.data = make(map[string]string)
 
 	// You may need initialization code here.
+	kv.data = make(map[string]string)
 
 	kv.applyCh = make(chan raft.ApplyMsg)
 	// 如果有快照，从快照恢复数据

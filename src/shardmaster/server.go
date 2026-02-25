@@ -20,18 +20,20 @@ type ShardMaster struct {
 	// Your data here.
 
 	configs       []Config // indexed by config num
-	nextConfigNum int32
+	nextConfigNum int
 	pendingOps    map[int]chan struct{}
 	pendingCmds   map[int]Op
+	dead          int32 // set by Kill()
 }
 
 type Op struct {
 	// Your data here.
-	Servers map[int][]string
-	Option  string
-	SeqNum  int32
-	Shards  [NShards]int
-	Gids    []int
+	Servers   map[int][]string
+	Option    string
+	SeqNum    int64
+	Shards    [NShards]int
+	Gids      []int
+	ConfigNum int
 }
 
 func loadBalance(config *Config) {
@@ -58,14 +60,10 @@ func loadBalance(config *Config) {
 
 func (sm *ShardMaster) Join(args *JoinArgs, reply *JoinReply) {
 	// Your code here.
-	sm.mu.Lock()
-	seqNum := atomic.LoadInt32(&sm.nextConfigNum)
-	atomic.AddInt32(&sm.nextConfigNum, 1)
-	sm.mu.Unlock()
 	command := Op{
 		Servers: args.Servers,
 		Option:  "join",
-		SeqNum:  seqNum,
+		SeqNum:  args.SeqNum,
 	}
 	ok := sm.RequestRaft(command)
 	if !ok {
@@ -82,6 +80,8 @@ func (sm *ShardMaster) executeJoin(command Op) {
 	servers := make(map[int][]string)
 	sm.mu.Lock()
 	config := sm.getLastConfig()
+	seqNum := sm.nextConfigNum
+	sm.nextConfigNum++
 	sm.mu.Unlock()
 	for gid := range config.Groups {
 		// 复制已有的组
@@ -95,7 +95,7 @@ func (sm *ShardMaster) executeJoin(command Op) {
 	DPrintf("join 新组：%v", servers)
 
 	newConfig := Config{
-		Num:    int(command.SeqNum),
+		Num:    seqNum,
 		Shards: [NShards]int{},
 		Groups: servers,
 	}
@@ -140,7 +140,7 @@ func (sm *ShardMaster) RequestRaft(command Op) bool {
 }
 
 func (sm *ShardMaster) listenApplyCh() {
-	for {
+	for !sm.killed() {
 		applyMsg := <-sm.applyCh
 		DPrintf("[Node:%d] shardmaster server listenApplyCh applyMsg:%v data:%v", sm.me, applyMsg, sm.configs)
 		if !applyMsg.IsSnapshot && applyMsg.CommandValid {
@@ -200,12 +200,9 @@ func (sm *ShardMaster) listenApplyCh() {
 				doneCh, exists := sm.pendingOps[applyMsg.CommandIndex]
 				DPrintf("[Node:%d] shardmaster server listen query: exists:%v", sm.me, exists)
 				if exists {
-					originalCmd := sm.pendingCmds[applyMsg.CommandIndex]
 					// 验证命令是否匹配
-					if sm.opEquals(originalCmd, op) {
-						close(doneCh)
-						delete(sm.pendingOps, applyMsg.CommandIndex)
-					}
+					close(doneCh)
+					delete(sm.pendingOps, applyMsg.CommandIndex)
 				}
 				sm.mu.Unlock()
 			case "leave":
@@ -253,6 +250,8 @@ func (sm *ShardMaster) executeLeave(command Op) {
 	newGroups := make(map[int][]string)
 	sm.mu.Lock()
 	config := sm.getLastConfig()
+	seqNum := sm.nextConfigNum
+	sm.nextConfigNum++
 	sm.mu.Unlock()
 	for gid := range config.Groups {
 		gids = append(gids, gid)
@@ -266,7 +265,7 @@ func (sm *ShardMaster) executeLeave(command Op) {
 	}
 
 	newConfig := Config{
-		Num:    int(command.SeqNum),
+		Num:    int(seqNum),
 		Shards: [NShards]int{},
 		Groups: newGroups,
 	}
@@ -284,13 +283,9 @@ func (sm *ShardMaster) Leave(args *LeaveArgs, reply *LeaveReply) {
 	// Your code here.
 	// 取出最新的gids
 	DPrintf("[Node:%d] shardmaster server leave param:%v", sm.me, args.GIDs)
-	sm.mu.Lock()
-	seqNum := atomic.LoadInt32(&sm.nextConfigNum)
-	atomic.AddInt32(&sm.nextConfigNum, 1)
-	sm.mu.Unlock()
 	command := Op{
 		Option: "leave",
-		SeqNum: seqNum,
+		SeqNum: args.SeqNum,
 		Gids:   args.GIDs,
 	}
 	ok := sm.RequestRaft(command)
@@ -305,12 +300,15 @@ func (sm *ShardMaster) Leave(args *LeaveArgs, reply *LeaveReply) {
 }
 
 func (sm *ShardMaster) executeMove(command Op) {
+	sm.mu.Lock()
+	seqNum := sm.nextConfigNum
+	sm.nextConfigNum++
+	sm.mu.Unlock()
 	newConfig := Config{
-		Num:    int(command.SeqNum),
+		Num:    int(seqNum),
 		Shards: command.Shards,
 		Groups: command.Servers,
 	}
-	atomic.AddInt32(&sm.nextConfigNum, 1)
 
 	// 添加新配置
 	sm.mu.Lock()
@@ -337,7 +335,7 @@ func (sm *ShardMaster) Move(args *MoveArgs, reply *MoveReply) {
 
 	command := Op{
 		Option:  "move",
-		SeqNum:  atomic.LoadInt32(&sm.nextConfigNum),
+		SeqNum:  args.SeqNum,
 		Shards:  newShards,
 		Servers: newGroups,
 	}
@@ -355,23 +353,26 @@ func (sm *ShardMaster) Move(args *MoveArgs, reply *MoveReply) {
 func (sm *ShardMaster) Query(args *QueryArgs, reply *QueryReply) {
 	// Your code here.
 	DPrintf("[Node:%d] shardmaster server query param:%d", sm.me, args.Num)
+	sm.mu.Lock()
 	maxNum := len(sm.configs)
+	nextConfigNum := sm.nextConfigNum
+	sm.mu.Unlock()
 	command := Op{
-		Option: "query",
-		SeqNum: int32(args.Num),
+		Option:    "query",
+		ConfigNum: args.Num,
 	}
 	ok := sm.RequestRaft(command)
 	if !ok {
 		reply.WrongLeader = true
 		return
 	}
-	DPrintf("[Node:%d] shardmaster server query maxNum:%d, current max num:%d", sm.me, maxNum, atomic.LoadInt32(&sm.nextConfigNum))
+	DPrintf("[Node:%d] shardmaster server query maxNum:%d, current max num:%d", sm.me, maxNum, nextConfigNum)
 	if args.Num == -1 || args.Num >= maxNum {
 		// 返回最新配置
 		sm.mu.Lock()
 		reply.Config = sm.getLastConfig()
-		sm.mu.Unlock()
 		DPrintf("当前所有配置:%v 返回最新配置:%v", sm.configs, reply.Config)
+		sm.mu.Unlock()
 		reply.WrongLeader = false
 		reply.Err = OK
 		return
@@ -398,6 +399,13 @@ func (sm *ShardMaster) getLastConfig() Config {
 func (sm *ShardMaster) Kill() {
 	sm.rf.Kill()
 	// Your code here, if desired.
+	// Your code here, if desired.
+	atomic.StoreInt32(&sm.dead, 1)
+}
+
+func (sm *ShardMaster) killed() bool {
+	z := atomic.LoadInt32(&sm.dead)
+	return z == 1
 }
 
 // needed by shardkv tester
@@ -421,7 +429,7 @@ func StartServer(servers []*labrpc.ClientEnd, me int, persister *raft.Persister)
 	sm.rf = raft.Make(servers, me, persister, sm.applyCh)
 
 	// Your code here.
-	atomic.StoreInt32(&sm.nextConfigNum, 1)
+	sm.nextConfigNum = 1
 	sm.pendingOps = make(map[int]chan struct{})
 	sm.pendingCmds = make(map[int]Op)
 

@@ -1,0 +1,1271 @@
+2026/02/13 10:19:07 [Node:0] shardmaster server raft op:join, servers:map[100:[server-100-0 server-100-1 server-100-2]]
+2026/02/13 10:19:07 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:07 [Node:1] shardmaster server raft op:join, servers:map[100:[server-100-0 server-100-1 server-100-2]]
+2026/02/13 10:19:07 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:07 [Node:2] shardmaster server raft op:join, servers:map[100:[server-100-0 server-100-1 server-100-2]]
+2026/02/13 10:19:07 [Node:2] shardmaster server raft not leader
+2026/02/13 10:19:07 [Node:0] shardmaster server raft op:join, servers:map[100:[server-100-0 server-100-1 server-100-2]]
+2026/02/13 10:19:07 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:07 [Node:1] shardmaster server raft op:join, servers:map[100:[server-100-0 server-100-1 server-100-2]]
+2026/02/13 10:19:07 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:07 [Node:2] shardmaster server raft op:join, servers:map[100:[server-100-0 server-100-1 server-100-2]]
+2026/02/13 10:19:07 [Node:2] shardmaster server raft not leader
+2026/02/13 10:19:07 [Node:0] shardmaster server raft op:join, servers:map[100:[server-100-0 server-100-1 server-100-2]]
+2026/02/13 10:19:07 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:07 [Node:1] shardmaster server raft op:join, servers:map[100:[server-100-0 server-100-1 server-100-2]]
+2026/02/13 10:19:07 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:07 [Node:2] shardmaster server raft op:join, servers:map[100:[server-100-0 server-100-1 server-100-2]]
+2026/02/13 10:19:07 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[100:[server-100-0 server-100-1 server-100-2]] join 3 [0 0 0 0 0 0 0 0 0 0] []} 1 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]}]
+2026/02/13 10:19:07 [Node:2] shardmaster server execute join new config:{3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}
+2026/02/13 10:19:07 [Node:2] shardmaster server execute join 所有配置:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:07 [Node:2] shardmaster server raft repley: success op:join, servers:map[100:[server-100-0 server-100-1 server-100-2]]
+2026/02/13 10:19:07 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[100:[server-100-0 server-100-1 server-100-2]] join 3 [0 0 0 0 0 0 0 0 0 0] []} 1 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]}]
+2026/02/13 10:19:07 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[100:[server-100-0 server-100-1 server-100-2]] join 3 [0 0 0 0 0 0 0 0 0 0] []} 1 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]}]
+2026/02/13 10:19:07 [Node:0] shardmaster server execute join new config:{3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}
+2026/02/13 10:19:07 [Node:1] shardmaster server execute join new config:{3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}
+2026/02/13 10:19:07 [Node:0] shardmaster server execute join 所有配置:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:07 [Node:1] shardmaster server execute join 所有配置:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:07 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:07 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:07 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:07 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:07 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:07 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:07 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:07 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:07 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:07 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:07 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:07 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:07 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:07 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:07 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:07 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:07 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:07 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:07 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:07 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:07 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:07 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:07 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:07 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:07 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 2 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:07 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:07 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:07 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 3 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:07 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:07 [Node:2] shardmaster server query maxNum:2, current max num:4
+2026/02/13 10:19:07 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:07 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 4 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:07 [Node:2] shardmaster server query maxNum:2, current max num:4
+2026/02/13 10:19:07 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:07 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:07 [Node:2] shardmaster server query maxNum:2, current max num:4
+2026/02/13 10:19:07 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:07 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:07 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:07 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:07 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:07 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:07 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:07 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:07 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 2 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:07 [Node:0] shardmaster server listen query: exists:false
+2026/02/13 10:19:07 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 3 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:07 [Node:0] shardmaster server listen query: exists:false
+2026/02/13 10:19:07 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 2 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:07 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 4 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:07 [Node:0] shardmaster server listen query: exists:false
+2026/02/13 10:19:07 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:07 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 3 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:07 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:07 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 4 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:07 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:07 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 5 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:07 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:07 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:07 [Node:2] shardmaster server query maxNum:2, current max num:4
+2026/02/13 10:19:07 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 5 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:07 [Node:0] shardmaster server listen query: exists:false
+2026/02/13 10:19:07 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:07 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:07 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:07 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 5 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:07 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:07 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:07 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:07 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:07 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:07 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:07 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:07 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:07 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:07 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:07 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:07 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:07 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:07 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:07 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:07 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:07 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:07 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:07 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:07 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:07 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:07 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:07 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 6 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:07 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:07 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 7 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:07 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:07 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:07 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 8 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:07 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:07 [Node:2] shardmaster server query maxNum:2, current max num:4
+2026/02/13 10:19:07 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:07 [Node:2] shardmaster server query maxNum:2, current max num:4
+2026/02/13 10:19:07 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:07 [Node:2] shardmaster server query maxNum:2, current max num:4
+2026/02/13 10:19:07 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 6 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:07 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:07 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 6 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:07 [Node:0] shardmaster server listen query: exists:false
+2026/02/13 10:19:07 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 7 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:07 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:07 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 7 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:07 [Node:0] shardmaster server listen query: exists:false
+2026/02/13 10:19:07 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 8 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:07 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:07 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 8 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:07 [Node:0] shardmaster server listen query: exists:false
+2026/02/13 10:19:07 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:07 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:07 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:07 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:07 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:07 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:07 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:07 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:07 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:07 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:07 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:07 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:07 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:07 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:07 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:07 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:07 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:07 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:07 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:07 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:07 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:07 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:07 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:07 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:07 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 9 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:07 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:07 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:07 [Node:2] shardmaster server query maxNum:2, current max num:4
+2026/02/13 10:19:07 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 10 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:07 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:07 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:07 [Node:2] shardmaster server query maxNum:2, current max num:4
+2026/02/13 10:19:07 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 11 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:07 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:07 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:07 [Node:2] shardmaster server query maxNum:2, current max num:4
+2026/02/13 10:19:07 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 9 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:07 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 9 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:07 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:07 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 10 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:07 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:07 [Node:0] shardmaster server listen query: exists:false
+2026/02/13 10:19:07 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 10 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:07 [Node:0] shardmaster server listen query: exists:false
+2026/02/13 10:19:07 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 11 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:07 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:07 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 11 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:07 [Node:0] shardmaster server listen query: exists:false
+2026/02/13 10:19:08 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:08 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:08 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:08 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:08 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:08 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:08 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:08 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:08 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:08 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:08 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:08 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:08 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:08 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:08 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:08 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:08 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:08 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:08 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:08 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:08 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:08 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:08 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:08 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:08 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 12 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:08 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:08 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 13 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:08 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:08 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:08 [Node:2] shardmaster server query maxNum:2, current max num:4
+2026/02/13 10:19:08 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:08 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 14 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:08 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:08 [Node:2] shardmaster server query maxNum:2, current max num:4
+2026/02/13 10:19:08 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:08 [Node:2] shardmaster server query maxNum:2, current max num:4
+2026/02/13 10:19:08 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 12 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:08 [Node:0] shardmaster server listen query: exists:false
+2026/02/13 10:19:08 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 13 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:08 [Node:0] shardmaster server listen query: exists:false
+2026/02/13 10:19:08 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 12 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:08 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 14 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:08 [Node:0] shardmaster server listen query: exists:false
+2026/02/13 10:19:08 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:08 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 13 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:08 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:08 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 14 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:08 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:08 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:08 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:08 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:08 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:08 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:08 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:08 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:08 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:08 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:08 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:08 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:08 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:08 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:08 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:08 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:08 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:08 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:08 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:08 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:08 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:08 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:08 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:08 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:08 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:08 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 15 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:08 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:08 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 16 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:08 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:08 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:08 [Node:2] shardmaster server query maxNum:2, current max num:4
+2026/02/13 10:19:08 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 17 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:08 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:08 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:08 [Node:2] shardmaster server query maxNum:2, current max num:4
+2026/02/13 10:19:08 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:08 [Node:2] shardmaster server query maxNum:2, current max num:4
+2026/02/13 10:19:08 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 15 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:08 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:08 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 15 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:08 [Node:0] shardmaster server listen query: exists:false
+2026/02/13 10:19:08 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 16 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:08 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:08 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 16 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:08 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 17 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:08 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:08 [Node:0] shardmaster server listen query: exists:false
+2026/02/13 10:19:08 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 17 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:08 [Node:0] shardmaster server listen query: exists:false
+2026/02/13 10:19:08 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:08 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:08 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:08 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:08 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:08 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:08 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:08 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:08 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:08 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:08 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:08 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:08 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:08 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:08 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:08 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:08 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:08 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:08 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:08 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:08 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:08 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:08 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:08 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:08 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 18 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:08 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:08 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:08 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 19 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:08 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:08 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:08 [Node:2] shardmaster server query maxNum:2, current max num:4
+2026/02/13 10:19:08 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 20 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:08 [Node:2] shardmaster server query maxNum:2, current max num:4
+2026/02/13 10:19:08 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:08 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:08 [Node:2] shardmaster server query maxNum:2, current max num:4
+2026/02/13 10:19:08 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 18 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:08 [Node:0] shardmaster server listen query: exists:false
+2026/02/13 10:19:08 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 19 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:08 [Node:0] shardmaster server listen query: exists:false
+2026/02/13 10:19:08 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 20 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:08 [Node:0] shardmaster server listen query: exists:false
+2026/02/13 10:19:08 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 18 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:08 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:08 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 19 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:08 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:08 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 20 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:08 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:08 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:08 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:08 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:08 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:08 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:08 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:08 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:08 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:08 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:08 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:08 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:08 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:08 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:08 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:08 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:08 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:08 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:08 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:08 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:08 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:08 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:08 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:08 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:08 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:08 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 21 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:08 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:08 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 22 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:08 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:08 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:08 [Node:2] shardmaster server query maxNum:2, current max num:4
+2026/02/13 10:19:08 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:08 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 23 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:08 [Node:2] shardmaster server query maxNum:2, current max num:4
+2026/02/13 10:19:08 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:08 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:08 [Node:2] shardmaster server query maxNum:2, current max num:4
+2026/02/13 10:19:08 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 21 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:08 [Node:0] shardmaster server listen query: exists:false
+2026/02/13 10:19:08 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 22 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:08 [Node:0] shardmaster server listen query: exists:false
+2026/02/13 10:19:08 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 21 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:08 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 23 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:08 [Node:0] shardmaster server listen query: exists:false
+2026/02/13 10:19:08 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:08 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 22 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:08 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:08 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 23 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:08 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:08 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:08 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:08 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:08 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:08 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:08 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:08 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:08 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:08 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:08 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:08 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:08 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:08 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:08 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:08 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:08 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:08 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:08 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:08 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:08 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:08 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:08 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:08 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:08 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:08 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 24 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:08 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:08 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:08 [Node:2] shardmaster server query maxNum:2, current max num:4
+2026/02/13 10:19:08 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 25 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:08 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:08 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:08 [Node:2] shardmaster server query maxNum:2, current max num:4
+2026/02/13 10:19:08 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 26 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:08 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:08 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:08 [Node:2] shardmaster server query maxNum:2, current max num:4
+2026/02/13 10:19:08 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 24 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:08 [Node:0] shardmaster server listen query: exists:false
+2026/02/13 10:19:08 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 25 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:08 [Node:0] shardmaster server listen query: exists:false
+2026/02/13 10:19:08 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 26 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:08 [Node:0] shardmaster server listen query: exists:false
+2026/02/13 10:19:08 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 24 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:08 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:08 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 25 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:08 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:08 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 26 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:08 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:08 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:08 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:08 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:08 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:08 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:08 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:08 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:08 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:08 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:08 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:08 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:08 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:08 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:08 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:08 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:08 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:08 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:08 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:08 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:08 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:08 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:08 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:08 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:08 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:08 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 27 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:08 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:08 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 28 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:08 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:08 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:08 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:08 [Node:2] shardmaster server query maxNum:2, current max num:4
+2026/02/13 10:19:08 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 29 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:08 [Node:2] shardmaster server query maxNum:2, current max num:4
+2026/02/13 10:19:08 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:08 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:08 [Node:2] shardmaster server query maxNum:2, current max num:4
+2026/02/13 10:19:08 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 27 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:08 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:08 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 27 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:08 [Node:0] shardmaster server listen query: exists:false
+2026/02/13 10:19:08 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 28 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:08 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:08 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 28 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:08 [Node:0] shardmaster server listen query: exists:false
+2026/02/13 10:19:08 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 29 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:08 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:08 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 29 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:08 [Node:0] shardmaster server listen query: exists:false
+2026/02/13 10:19:08 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:08 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:08 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:08 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:08 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:08 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:08 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:08 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:08 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:08 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:08 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:08 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:08 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:08 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:08 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:08 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:08 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:08 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:08 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:08 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:08 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:08 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:08 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:08 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:09 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 30 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:09 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:09 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:09 [Node:2] shardmaster server query maxNum:2, current max num:4
+2026/02/13 10:19:09 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 31 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:09 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:09 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 32 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:09 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:09 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:09 [Node:2] shardmaster server query maxNum:2, current max num:4
+2026/02/13 10:19:09 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:09 [Node:2] shardmaster server query maxNum:2, current max num:4
+2026/02/13 10:19:09 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 30 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:09 [Node:0] shardmaster server listen query: exists:false
+2026/02/13 10:19:09 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 30 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:09 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 31 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:09 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:09 [Node:0] shardmaster server listen query: exists:false
+2026/02/13 10:19:09 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 31 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:09 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 32 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:09 [Node:0] shardmaster server listen query: exists:false
+2026/02/13 10:19:09 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:09 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 32 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:09 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:09 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:09 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:09 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:09 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:09 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:09 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:09 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:09 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:09 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:09 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:09 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:09 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:09 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:09 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:09 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:09 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:09 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:09 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:09 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:09 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:09 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:09 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:09 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:09 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:09 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 33 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:09 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:09 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 34 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:09 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:09 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:09 [Node:2] shardmaster server query maxNum:2, current max num:4
+2026/02/13 10:19:09 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 35 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:09 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:09 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:09 [Node:2] shardmaster server query maxNum:2, current max num:4
+2026/02/13 10:19:09 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:09 [Node:2] shardmaster server query maxNum:2, current max num:4
+2026/02/13 10:19:09 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 33 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:09 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 33 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:09 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:09 [Node:0] shardmaster server listen query: exists:false
+2026/02/13 10:19:09 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 34 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:09 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:09 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 34 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:09 [Node:0] shardmaster server listen query: exists:false
+2026/02/13 10:19:09 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 35 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:09 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:09 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 35 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:09 [Node:0] shardmaster server listen query: exists:false
+2026/02/13 10:19:09 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:09 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:09 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:09 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:09 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:09 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:09 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:09 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:09 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:09 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:09 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:09 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:09 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:09 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:09 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:09 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:09 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:09 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:09 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:09 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:09 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:09 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:09 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:09 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:09 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 36 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:09 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:09 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 37 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:09 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:09 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:09 [Node:2] shardmaster server query maxNum:2, current max num:4
+2026/02/13 10:19:09 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 38 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:09 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:09 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:09 [Node:2] shardmaster server query maxNum:2, current max num:4
+2026/02/13 10:19:09 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:09 [Node:2] shardmaster server query maxNum:2, current max num:4
+2026/02/13 10:19:09 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 36 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:09 [Node:0] shardmaster server listen query: exists:false
+2026/02/13 10:19:09 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 37 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:09 [Node:0] shardmaster server listen query: exists:false
+2026/02/13 10:19:09 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 36 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:09 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 38 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:09 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:09 [Node:0] shardmaster server listen query: exists:false
+2026/02/13 10:19:09 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 37 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:09 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:09 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 38 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:09 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:09 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:09 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:09 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:09 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:09 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:09 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:09 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:09 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:09 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:09 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:09 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:09 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:09 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:09 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:09 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:09 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:09 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:09 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:09 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:09 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:09 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:09 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:09 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:09 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:09 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 39 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:09 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:09 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:09 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 40 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:09 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:09 [Node:2] shardmaster server query maxNum:2, current max num:4
+2026/02/13 10:19:09 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:09 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 41 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:09 [Node:2] shardmaster server query maxNum:2, current max num:4
+2026/02/13 10:19:09 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:09 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:09 [Node:2] shardmaster server query maxNum:2, current max num:4
+2026/02/13 10:19:09 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 39 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:09 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:09 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 40 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:09 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:09 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 41 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:09 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:09 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 39 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:09 [Node:0] shardmaster server listen query: exists:false
+2026/02/13 10:19:09 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 40 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:09 [Node:0] shardmaster server listen query: exists:false
+2026/02/13 10:19:09 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 41 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:09 [Node:0] shardmaster server listen query: exists:false
+2026/02/13 10:19:09 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:09 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:09 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:09 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:09 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:09 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:09 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:09 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:09 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:09 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:09 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:09 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:09 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:09 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:09 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:09 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:09 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:09 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:09 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:09 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:09 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:09 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:09 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:09 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:09 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 42 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:09 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:09 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 43 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:09 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:09 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:09 [Node:2] shardmaster server query maxNum:2, current max num:4
+2026/02/13 10:19:09 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 44 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:09 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:09 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:09 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:09 [Node:2] shardmaster server query maxNum:2, current max num:4
+2026/02/13 10:19:09 [Node:2] shardmaster server query maxNum:2, current max num:4
+2026/02/13 10:19:09 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 42 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:09 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:09 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 43 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:09 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 42 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:09 [Node:0] shardmaster server listen query: exists:false
+2026/02/13 10:19:09 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:09 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 43 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:09 [Node:0] shardmaster server listen query: exists:false
+2026/02/13 10:19:09 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 44 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:09 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:09 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 44 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:09 [Node:0] shardmaster server listen query: exists:false
+2026/02/13 10:19:09 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:09 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:09 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:09 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:09 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:09 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:09 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:09 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:09 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:09 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:09 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:09 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:09 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:09 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:09 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:09 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:09 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:09 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:09 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:09 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:09 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:09 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:09 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:09 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:09 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 45 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:09 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:09 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:09 [Node:2] shardmaster server query maxNum:2, current max num:4
+2026/02/13 10:19:09 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 46 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:09 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:09 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:09 [Node:2] shardmaster server query maxNum:2, current max num:4
+2026/02/13 10:19:09 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 47 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:09 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:09 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:09 [Node:2] shardmaster server query maxNum:2, current max num:4
+2026/02/13 10:19:09 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 45 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:09 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:09 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 46 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:09 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:09 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 47 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:09 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:09 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 45 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:09 [Node:0] shardmaster server listen query: exists:false
+2026/02/13 10:19:09 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 46 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:09 [Node:0] shardmaster server listen query: exists:false
+2026/02/13 10:19:09 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 47 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:09 [Node:0] shardmaster server listen query: exists:false
+2026/02/13 10:19:09 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:09 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:09 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:09 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:09 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:09 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:09 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:09 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:09 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:09 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:09 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:09 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:09 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:09 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:09 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:09 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:09 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:09 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:09 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:09 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:09 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:09 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:09 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:09 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:09 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 48 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:09 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:09 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:09 [Node:2] shardmaster server query maxNum:2, current max num:4
+2026/02/13 10:19:09 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 49 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:09 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:09 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:09 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 50 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:09 [Node:2] shardmaster server query maxNum:2, current max num:4
+2026/02/13 10:19:09 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:09 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:09 [Node:2] shardmaster server query maxNum:2, current max num:4
+2026/02/13 10:19:09 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 48 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:09 [Node:0] shardmaster server listen query: exists:false
+2026/02/13 10:19:09 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 49 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:09 [Node:0] shardmaster server listen query: exists:false
+2026/02/13 10:19:09 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 50 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:09 [Node:0] shardmaster server listen query: exists:false
+2026/02/13 10:19:09 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 48 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:09 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:09 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 49 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:09 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:09 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 50 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:09 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:10 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:10 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:10 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:10 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:10 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:10 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:10 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:10 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:10 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:10 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:10 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:10 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:10 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:10 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:10 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:10 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:10 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:10 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:10 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:10 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:10 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:10 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:10 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:10 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:10 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 51 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:10 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:10 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:10 [Node:2] shardmaster server query maxNum:2, current max num:4
+2026/02/13 10:19:10 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 52 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:10 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:10 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:10 [Node:2] shardmaster server query maxNum:2, current max num:4
+2026/02/13 10:19:10 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 53 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:10 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:10 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:10 [Node:2] shardmaster server query maxNum:2, current max num:4
+2026/02/13 10:19:10 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 51 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:10 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:10 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 52 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:10 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:10 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 53 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:10 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:10 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 51 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:10 [Node:0] shardmaster server listen query: exists:false
+2026/02/13 10:19:10 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 52 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:10 [Node:0] shardmaster server listen query: exists:false
+2026/02/13 10:19:10 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 53 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:10 [Node:0] shardmaster server listen query: exists:false
+2026/02/13 10:19:10 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:10 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:10 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:10 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:10 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:10 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:10 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:10 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:10 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:10 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:10 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:10 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:10 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:10 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:10 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:10 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:10 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:10 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:10 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:10 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:10 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:10 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:10 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:10 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:10 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 54 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:10 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:10 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:10 [Node:2] shardmaster server query maxNum:2, current max num:4
+2026/02/13 10:19:10 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 55 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:10 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:10 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:10 [Node:2] shardmaster server query maxNum:2, current max num:4
+2026/02/13 10:19:10 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 56 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:10 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:10 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:10 [Node:2] shardmaster server query maxNum:2, current max num:4
+2026/02/13 10:19:10 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 54 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:10 [Node:0] shardmaster server listen query: exists:false
+2026/02/13 10:19:10 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 55 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:10 [Node:0] shardmaster server listen query: exists:false
+2026/02/13 10:19:10 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 54 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:10 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:10 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 56 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:10 [Node:0] shardmaster server listen query: exists:false
+2026/02/13 10:19:10 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 55 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:10 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:10 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 56 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:10 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:10 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:10 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:10 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:10 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:10 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:10 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:10 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:10 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:10 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:10 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:10 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:10 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:10 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:10 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:10 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:10 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:10 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:10 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:10 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:10 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:10 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:10 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:10 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:10 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:10 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 57 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:10 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:10 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 58 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:10 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:10 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:10 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:10 [Node:2] shardmaster server query maxNum:2, current max num:4
+2026/02/13 10:19:10 [Node:2] shardmaster server query maxNum:2, current max num:4
+2026/02/13 10:19:10 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 59 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:10 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:10 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:10 [Node:2] shardmaster server query maxNum:2, current max num:4
+2026/02/13 10:19:10 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 57 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:10 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:10 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 58 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:10 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:10 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 59 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:10 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:10 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 57 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:10 [Node:0] shardmaster server listen query: exists:false
+2026/02/13 10:19:10 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 58 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:10 [Node:0] shardmaster server listen query: exists:false
+2026/02/13 10:19:10 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 59 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:10 [Node:0] shardmaster server listen query: exists:false
+2026/02/13 10:19:10 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:10 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:10 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:10 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:10 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:10 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:10 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:10 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:10 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:10 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:10 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:10 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:10 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:10 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:10 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:10 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:10 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:10 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:10 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:10 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:10 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:10 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:10 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:10 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:10 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 60 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:10 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:10 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 61 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:10 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:10 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:10 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:10 [Node:2] shardmaster server query maxNum:2, current max num:4
+2026/02/13 10:19:10 [Node:2] shardmaster server query maxNum:2, current max num:4
+2026/02/13 10:19:10 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 62 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:10 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:10 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:10 [Node:2] shardmaster server query maxNum:2, current max num:4
+2026/02/13 10:19:10 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 60 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:10 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:10 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 60 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:10 [Node:0] shardmaster server listen query: exists:false
+2026/02/13 10:19:10 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 61 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:10 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:10 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 61 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:10 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 62 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:10 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:10 [Node:0] shardmaster server listen query: exists:false
+2026/02/13 10:19:10 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 62 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:10 [Node:0] shardmaster server listen query: exists:false
+2026/02/13 10:19:10 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:10 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:10 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:10 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:10 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:10 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:10 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:10 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:10 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:10 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:10 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:10 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:10 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:10 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:10 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:10 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:10 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:10 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:10 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:10 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:10 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:10 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:10 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:10 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:10 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 63 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:10 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:10 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:10 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 64 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:10 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:10 [Node:2] shardmaster server query maxNum:2, current max num:4
+2026/02/13 10:19:10 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 65 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:10 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:10 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:10 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:10 [Node:2] shardmaster server query maxNum:2, current max num:4
+2026/02/13 10:19:10 [Node:2] shardmaster server query maxNum:2, current max num:4
+2026/02/13 10:19:10 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 63 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:10 [Node:0] shardmaster server listen query: exists:false
+2026/02/13 10:19:10 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 63 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:10 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:10 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 64 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:10 [Node:0] shardmaster server listen query: exists:false
+2026/02/13 10:19:10 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 64 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:10 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:10 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 65 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:10 [Node:0] shardmaster server listen query: exists:false
+2026/02/13 10:19:10 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 65 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:10 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:10 [Node:0] shardmaster server raft op:join, servers:map[101:[server-101-0 server-101-1 server-101-2]]
+2026/02/13 10:19:10 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:10 [Node:1] shardmaster server raft op:join, servers:map[101:[server-101-0 server-101-1 server-101-2]]
+2026/02/13 10:19:10 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:10 [Node:2] shardmaster server raft op:join, servers:map[101:[server-101-0 server-101-1 server-101-2]]
+2026/02/13 10:19:10 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:10 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:10 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:10 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:10 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:10 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:10 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[101:[server-101-0 server-101-1 server-101-2]] join 4 [0 0 0 0 0 0 0 0 0 0] []} 66 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:10 [Node:2] shardmaster server execute join new config:{4 [100 101 100 101 100 101 100 101 100 101] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2]]}
+2026/02/13 10:19:10 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:10 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:10 [Node:2] shardmaster server execute join 所有配置:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]} {4 [100 101 100 101 100 101 100 101 100 101] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2]]}]
+2026/02/13 10:19:10 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:10 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:10 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:10 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:10 [Node:2] shardmaster server raft repley: success op:join, servers:map[101:[server-101-0 server-101-1 server-101-2]]
+2026/02/13 10:19:10 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:10 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:10 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:10 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:10 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:10 [Node:0] shardmaster server raft op:join, servers:map[102:[server-102-0 server-102-1 server-102-2]]
+2026/02/13 10:19:10 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:10 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:10 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:10 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:10 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:10 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:10 [Node:1] shardmaster server raft op:join, servers:map[102:[server-102-0 server-102-1 server-102-2]]
+2026/02/13 10:19:10 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:10 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:10 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:10 [Node:2] shardmaster server raft op:join, servers:map[102:[server-102-0 server-102-1 server-102-2]]
+2026/02/13 10:19:10 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[101:[server-101-0 server-101-1 server-101-2]] join 4 [0 0 0 0 0 0 0 0 0 0] []} 66 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:10 [Node:1] shardmaster server execute join new config:{4 [100 101 100 101 100 101 100 101 100 101] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2]]}
+2026/02/13 10:19:10 [Node:1] shardmaster server execute join 所有配置:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]} {4 [100 101 100 101 100 101 100 101 100 101] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2]]}]
+2026/02/13 10:19:10 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[101:[server-101-0 server-101-1 server-101-2]] join 4 [0 0 0 0 0 0 0 0 0 0] []} 66 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}]
+2026/02/13 10:19:10 [Node:0] shardmaster server execute join new config:{4 [100 101 100 101 100 101 100 101 100 101] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2]]}
+2026/02/13 10:19:10 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 67 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]} {4 [100 101 100 101 100 101 100 101 100 101] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2]]}]
+2026/02/13 10:19:10 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:10 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:10 [Node:2] shardmaster server query maxNum:3, current max num:6
+2026/02/13 10:19:10 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 68 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]} {4 [100 101 100 101 100 101 100 101 100 101] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2]]}]
+2026/02/13 10:19:10 [Node:0] shardmaster server execute join 所有配置:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]} {4 [100 101 100 101 100 101 100 101 100 101] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2]]}]
+2026/02/13 10:19:10 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:10 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:10 [Node:2] shardmaster server query maxNum:3, current max num:6
+2026/02/13 10:19:10 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 69 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]} {4 [100 101 100 101 100 101 100 101 100 101] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2]]}]
+2026/02/13 10:19:10 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:10 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:10 [Node:2] shardmaster server query maxNum:3, current max num:6
+2026/02/13 10:19:10 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[102:[server-102-0 server-102-1 server-102-2]] join 5 [0 0 0 0 0 0 0 0 0 0] []} 70 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]} {4 [100 101 100 101 100 101 100 101 100 101] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2]]}]
+2026/02/13 10:19:10 [Node:2] shardmaster server execute join new config:{5 [100 101 102 100 101 102 100 101 102 100] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2] 102:[server-102-0 server-102-1 server-102-2]]}
+2026/02/13 10:19:10 [Node:2] shardmaster server execute join 所有配置:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]} {4 [100 101 100 101 100 101 100 101 100 101] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2]]} {5 [100 101 102 100 101 102 100 101 102 100] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2] 102:[server-102-0 server-102-1 server-102-2]]}]
+2026/02/13 10:19:10 [Node:2] shardmaster server raft repley: success op:join, servers:map[102:[server-102-0 server-102-1 server-102-2]]
+2026/02/13 10:19:10 [Node:0] shardmaster server leave param:[100]
+2026/02/13 10:19:10 [Node:0] shardmaster server raft op:leave, servers:map[]
+2026/02/13 10:19:10 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:10 [Node:1] shardmaster server leave param:[100]
+2026/02/13 10:19:10 [Node:1] shardmaster server raft op:leave, servers:map[]
+2026/02/13 10:19:10 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:10 [Node:2] shardmaster server leave param:[100]
+2026/02/13 10:19:10 [Node:2] shardmaster server raft op:leave, servers:map[]
+2026/02/13 10:19:10 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 67 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]} {4 [100 101 100 101 100 101 100 101 100 101] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2]]}]
+2026/02/13 10:19:10 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:10 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 68 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]} {4 [100 101 100 101 100 101 100 101 100 101] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2]]}]
+2026/02/13 10:19:10 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:10 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 69 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]} {4 [100 101 100 101 100 101 100 101 100 101] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2]]}]
+2026/02/13 10:19:10 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:10 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[102:[server-102-0 server-102-1 server-102-2]] join 5 [0 0 0 0 0 0 0 0 0 0] []} 70 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]} {4 [100 101 100 101 100 101 100 101 100 101] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2]]}]
+2026/02/13 10:19:10 [Node:1] shardmaster server execute join new config:{5 [100 101 102 100 101 102 100 101 102 100] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2] 102:[server-102-0 server-102-1 server-102-2]]}
+2026/02/13 10:19:10 [Node:1] shardmaster server execute join 所有配置:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]} {4 [100 101 100 101 100 101 100 101 100 101] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2]]} {5 [100 101 102 100 101 102 100 101 102 100] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2] 102:[server-102-0 server-102-1 server-102-2]]}]
+2026/02/13 10:19:10 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] leave 6 [0 0 0 0 0 0 0 0 0 0] [100]} 71 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]} {4 [100 101 100 101 100 101 100 101 100 101] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2]]} {5 [100 101 102 100 101 102 100 101 102 100] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2] 102:[server-102-0 server-102-1 server-102-2]]}]
+2026/02/13 10:19:10 [Node:2] shardmaster server execute leave new config:{6 [101 102 101 102 101 102 101 102 101 102] map[101:[server-101-0 server-101-1 server-101-2] 102:[server-102-0 server-102-1 server-102-2]]}
+2026/02/13 10:19:10 [Node:2] shardmaster server execute leave 所有配置:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]} {4 [100 101 100 101 100 101 100 101 100 101] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2]]} {5 [100 101 102 100 101 102 100 101 102 100] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2] 102:[server-102-0 server-102-1 server-102-2]]} {6 [101 102 101 102 101 102 101 102 101 102] map[101:[server-101-0 server-101-1 server-101-2] 102:[server-102-0 server-102-1 server-102-2]]}]
+2026/02/13 10:19:10 [Node:2] shardmaster server raft repley: success op:leave, servers:map[]
+2026/02/13 10:19:10 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 67 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]} {4 [100 101 100 101 100 101 100 101 100 101] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2]]}]
+2026/02/13 10:19:10 [Node:0] shardmaster server listen query: exists:false
+2026/02/13 10:19:10 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 68 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]} {4 [100 101 100 101 100 101 100 101 100 101] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2]]}]
+2026/02/13 10:19:10 [Node:0] shardmaster server listen query: exists:false
+2026/02/13 10:19:10 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 69 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]} {4 [100 101 100 101 100 101 100 101 100 101] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2]]}]
+2026/02/13 10:19:10 [Node:0] shardmaster server listen query: exists:false
+2026/02/13 10:19:10 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[102:[server-102-0 server-102-1 server-102-2]] join 5 [0 0 0 0 0 0 0 0 0 0] []} 70 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]} {4 [100 101 100 101 100 101 100 101 100 101] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2]]}]
+2026/02/13 10:19:10 [Node:0] shardmaster server execute join new config:{5 [100 101 102 100 101 102 100 101 102 100] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2] 102:[server-102-0 server-102-1 server-102-2]]}
+2026/02/13 10:19:10 [Node:0] shardmaster server execute join 所有配置:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]} {4 [100 101 100 101 100 101 100 101 100 101] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2]]} {5 [100 101 102 100 101 102 100 101 102 100] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2] 102:[server-102-0 server-102-1 server-102-2]]}]
+2026/02/13 10:19:10 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] leave 6 [0 0 0 0 0 0 0 0 0 0] [100]} 71 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]} {4 [100 101 100 101 100 101 100 101 100 101] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2]]} {5 [100 101 102 100 101 102 100 101 102 100] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2] 102:[server-102-0 server-102-1 server-102-2]]}]
+2026/02/13 10:19:10 [Node:0] shardmaster server execute leave new config:{6 [101 102 101 102 101 102 101 102 101 102] map[101:[server-101-0 server-101-1 server-101-2] 102:[server-102-0 server-102-1 server-102-2]]}
+2026/02/13 10:19:10 [Node:0] shardmaster server execute leave 所有配置:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]} {4 [100 101 100 101 100 101 100 101 100 101] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2]]} {5 [100 101 102 100 101 102 100 101 102 100] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2] 102:[server-102-0 server-102-1 server-102-2]]} {6 [101 102 101 102 101 102 101 102 101 102] map[101:[server-101-0 server-101-1 server-101-2] 102:[server-102-0 server-102-1 server-102-2]]}]
+2026/02/13 10:19:10 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] leave 6 [0 0 0 0 0 0 0 0 0 0] [100]} 71 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]} {4 [100 101 100 101 100 101 100 101 100 101] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2]]} {5 [100 101 102 100 101 102 100 101 102 100] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2] 102:[server-102-0 server-102-1 server-102-2]]}]
+2026/02/13 10:19:10 [Node:1] shardmaster server execute leave new config:{6 [101 102 101 102 101 102 101 102 101 102] map[101:[server-101-0 server-101-1 server-101-2] 102:[server-102-0 server-102-1 server-102-2]]}
+2026/02/13 10:19:10 [Node:1] shardmaster server execute leave 所有配置:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]} {4 [100 101 100 101 100 101 100 101 100 101] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2]]} {5 [100 101 102 100 101 102 100 101 102 100] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2] 102:[server-102-0 server-102-1 server-102-2]]} {6 [101 102 101 102 101 102 101 102 101 102] map[101:[server-101-0 server-101-1 server-101-2] 102:[server-102-0 server-102-1 server-102-2]]}]
+2026/02/13 10:19:10 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:10 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:10 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:10 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:10 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:10 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:10 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:10 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:10 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:10 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:10 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:10 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:10 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:10 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:10 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:10 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:10 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:10 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:10 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:10 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:10 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:10 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:10 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:10 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:10 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 72 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]} {4 [100 101 100 101 100 101 100 101 100 101] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2]]} {5 [100 101 102 100 101 102 100 101 102 100] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2] 102:[server-102-0 server-102-1 server-102-2]]} {6 [101 102 101 102 101 102 101 102 101 102] map[101:[server-101-0 server-101-1 server-101-2] 102:[server-102-0 server-102-1 server-102-2]]}]
+2026/02/13 10:19:10 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:10 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:10 [Node:2] shardmaster server query maxNum:5, current max num:7
+2026/02/13 10:19:10 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 73 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]} {4 [100 101 100 101 100 101 100 101 100 101] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2]]} {5 [100 101 102 100 101 102 100 101 102 100] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2] 102:[server-102-0 server-102-1 server-102-2]]} {6 [101 102 101 102 101 102 101 102 101 102] map[101:[server-101-0 server-101-1 server-101-2] 102:[server-102-0 server-102-1 server-102-2]]}]
+2026/02/13 10:19:10 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:10 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:10 [Node:2] shardmaster server query maxNum:5, current max num:7
+2026/02/13 10:19:10 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 74 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]} {4 [100 101 100 101 100 101 100 101 100 101] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2]]} {5 [100 101 102 100 101 102 100 101 102 100] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2] 102:[server-102-0 server-102-1 server-102-2]]} {6 [101 102 101 102 101 102 101 102 101 102] map[101:[server-101-0 server-101-1 server-101-2] 102:[server-102-0 server-102-1 server-102-2]]}]
+2026/02/13 10:19:10 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:10 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:10 [Node:2] shardmaster server query maxNum:5, current max num:7
+2026/02/13 10:19:11 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:11 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:11 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:11 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:11 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:11 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:11 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:11 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:11 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 72 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]} {4 [100 101 100 101 100 101 100 101 100 101] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2]]} {5 [100 101 102 100 101 102 100 101 102 100] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2] 102:[server-102-0 server-102-1 server-102-2]]} {6 [101 102 101 102 101 102 101 102 101 102] map[101:[server-101-0 server-101-1 server-101-2] 102:[server-102-0 server-102-1 server-102-2]]}]
+2026/02/13 10:19:11 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:11 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 72 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]} {4 [100 101 100 101 100 101 100 101 100 101] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2]]} {5 [100 101 102 100 101 102 100 101 102 100] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2] 102:[server-102-0 server-102-1 server-102-2]]} {6 [101 102 101 102 101 102 101 102 101 102] map[101:[server-101-0 server-101-1 server-101-2] 102:[server-102-0 server-102-1 server-102-2]]}]
+2026/02/13 10:19:11 [Node:0] shardmaster server listen query: exists:false
+2026/02/13 10:19:11 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 73 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]} {4 [100 101 100 101 100 101 100 101 100 101] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2]]} {5 [100 101 102 100 101 102 100 101 102 100] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2] 102:[server-102-0 server-102-1 server-102-2]]} {6 [101 102 101 102 101 102 101 102 101 102] map[101:[server-101-0 server-101-1 server-101-2] 102:[server-102-0 server-102-1 server-102-2]]}]
+2026/02/13 10:19:11 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:11 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 73 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]} {4 [100 101 100 101 100 101 100 101 100 101] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2]]} {5 [100 101 102 100 101 102 100 101 102 100] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2] 102:[server-102-0 server-102-1 server-102-2]]} {6 [101 102 101 102 101 102 101 102 101 102] map[101:[server-101-0 server-101-1 server-101-2] 102:[server-102-0 server-102-1 server-102-2]]}]
+2026/02/13 10:19:11 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 74 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]} {4 [100 101 100 101 100 101 100 101 100 101] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2]]} {5 [100 101 102 100 101 102 100 101 102 100] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2] 102:[server-102-0 server-102-1 server-102-2]]} {6 [101 102 101 102 101 102 101 102 101 102] map[101:[server-101-0 server-101-1 server-101-2] 102:[server-102-0 server-102-1 server-102-2]]}]
+2026/02/13 10:19:11 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:11 [Node:0] shardmaster server listen query: exists:false
+2026/02/13 10:19:11 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 74 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]} {4 [100 101 100 101 100 101 100 101 100 101] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2]]} {5 [100 101 102 100 101 102 100 101 102 100] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2] 102:[server-102-0 server-102-1 server-102-2]]} {6 [101 102 101 102 101 102 101 102 101 102] map[101:[server-101-0 server-101-1 server-101-2] 102:[server-102-0 server-102-1 server-102-2]]}]
+2026/02/13 10:19:11 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 75 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]} {4 [100 101 100 101 100 101 100 101 100 101] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2]]} {5 [100 101 102 100 101 102 100 101 102 100] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2] 102:[server-102-0 server-102-1 server-102-2]]} {6 [101 102 101 102 101 102 101 102 101 102] map[101:[server-101-0 server-101-1 server-101-2] 102:[server-102-0 server-102-1 server-102-2]]}]
+2026/02/13 10:19:11 [Node:0] shardmaster server listen query: exists:false
+2026/02/13 10:19:11 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:11 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:11 [Node:2] shardmaster server query maxNum:5, current max num:7
+2026/02/13 10:19:11 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 75 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]} {4 [100 101 100 101 100 101 100 101 100 101] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2]]} {5 [100 101 102 100 101 102 100 101 102 100] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2] 102:[server-102-0 server-102-1 server-102-2]]} {6 [101 102 101 102 101 102 101 102 101 102] map[101:[server-101-0 server-101-1 server-101-2] 102:[server-102-0 server-102-1 server-102-2]]}]
+2026/02/13 10:19:11 [Node:0] shardmaster server listen query: exists:false
+2026/02/13 10:19:11 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 75 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]} {4 [100 101 100 101 100 101 100 101 100 101] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2]]} {5 [100 101 102 100 101 102 100 101 102 100] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2] 102:[server-102-0 server-102-1 server-102-2]]} {6 [101 102 101 102 101 102 101 102 101 102] map[101:[server-101-0 server-101-1 server-101-2] 102:[server-102-0 server-102-1 server-102-2]]}]
+2026/02/13 10:19:11 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:11 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:11 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:11 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:11 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:11 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:11 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:11 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:11 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:11 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:11 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:11 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:11 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:11 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:11 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:11 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:11 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:11 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:11 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:11 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:11 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:11 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:11 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:11 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:11 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:11 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 76 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]} {4 [100 101 100 101 100 101 100 101 100 101] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2]]} {5 [100 101 102 100 101 102 100 101 102 100] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2] 102:[server-102-0 server-102-1 server-102-2]]} {6 [101 102 101 102 101 102 101 102 101 102] map[101:[server-101-0 server-101-1 server-101-2] 102:[server-102-0 server-102-1 server-102-2]]}]
+2026/02/13 10:19:11 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:11 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:11 [Node:2] shardmaster server query maxNum:5, current max num:7
+2026/02/13 10:19:11 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 77 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]} {4 [100 101 100 101 100 101 100 101 100 101] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2]]} {5 [100 101 102 100 101 102 100 101 102 100] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2] 102:[server-102-0 server-102-1 server-102-2]]} {6 [101 102 101 102 101 102 101 102 101 102] map[101:[server-101-0 server-101-1 server-101-2] 102:[server-102-0 server-102-1 server-102-2]]}]
+2026/02/13 10:19:11 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:11 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 78 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]} {4 [100 101 100 101 100 101 100 101 100 101] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2]]} {5 [100 101 102 100 101 102 100 101 102 100] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2] 102:[server-102-0 server-102-1 server-102-2]]} {6 [101 102 101 102 101 102 101 102 101 102] map[101:[server-101-0 server-101-1 server-101-2] 102:[server-102-0 server-102-1 server-102-2]]}]
+2026/02/13 10:19:11 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:11 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:11 [Node:2] shardmaster server query maxNum:5, current max num:7
+2026/02/13 10:19:11 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:11 [Node:2] shardmaster server query maxNum:5, current max num:7
+2026/02/13 10:19:11 [Node:0] shardmaster server query param:-1
+2026/02/13 10:19:11 [Node:0] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:11 [Node:0] shardmaster server raft not leader
+2026/02/13 10:19:11 [Node:1] shardmaster server query param:-1
+2026/02/13 10:19:11 [Node:1] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:11 [Node:1] shardmaster server raft not leader
+2026/02/13 10:19:11 [Node:2] shardmaster server query param:-1
+2026/02/13 10:19:11 [Node:2] shardmaster server raft op:query, servers:map[]
+2026/02/13 10:19:11 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 76 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]} {4 [100 101 100 101 100 101 100 101 100 101] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2]]} {5 [100 101 102 100 101 102 100 101 102 100] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2] 102:[server-102-0 server-102-1 server-102-2]]} {6 [101 102 101 102 101 102 101 102 101 102] map[101:[server-101-0 server-101-1 server-101-2] 102:[server-102-0 server-102-1 server-102-2]]}]
+2026/02/13 10:19:11 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:11 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 77 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]} {4 [100 101 100 101 100 101 100 101 100 101] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2]]} {5 [100 101 102 100 101 102 100 101 102 100] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2] 102:[server-102-0 server-102-1 server-102-2]]} {6 [101 102 101 102 101 102 101 102 101 102] map[101:[server-101-0 server-101-1 server-101-2] 102:[server-102-0 server-102-1 server-102-2]]}]
+2026/02/13 10:19:11 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:11 [Node:1] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 78 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]} {4 [100 101 100 101 100 101 100 101 100 101] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2]]} {5 [100 101 102 100 101 102 100 101 102 100] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2] 102:[server-102-0 server-102-1 server-102-2]]} {6 [101 102 101 102 101 102 101 102 101 102] map[101:[server-101-0 server-101-1 server-101-2] 102:[server-102-0 server-102-1 server-102-2]]}]
+2026/02/13 10:19:11 [Node:1] shardmaster server listen query: exists:false
+2026/02/13 10:19:11 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 76 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]} {4 [100 101 100 101 100 101 100 101 100 101] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2]]} {5 [100 101 102 100 101 102 100 101 102 100] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2] 102:[server-102-0 server-102-1 server-102-2]]} {6 [101 102 101 102 101 102 101 102 101 102] map[101:[server-101-0 server-101-1 server-101-2] 102:[server-102-0 server-102-1 server-102-2]]}]
+2026/02/13 10:19:11 [Node:0] shardmaster server listen query: exists:false
+2026/02/13 10:19:11 [Node:2] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 79 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]} {4 [100 101 100 101 100 101 100 101 100 101] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2]]} {5 [100 101 102 100 101 102 100 101 102 100] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2] 102:[server-102-0 server-102-1 server-102-2]]} {6 [101 102 101 102 101 102 101 102 101 102] map[101:[server-101-0 server-101-1 server-101-2] 102:[server-102-0 server-102-1 server-102-2]]}]
+2026/02/13 10:19:11 [Node:2] shardmaster server listen query: exists:true
+2026/02/13 10:19:11 [Node:2] shardmaster server raft repley: success op:query, servers:map[]
+2026/02/13 10:19:11 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 77 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]} {4 [100 101 100 101 100 101 100 101 100 101] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2]]} {5 [100 101 102 100 101 102 100 101 102 100] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2] 102:[server-102-0 server-102-1 server-102-2]]} {6 [101 102 101 102 101 102 101 102 101 102] map[101:[server-101-0 server-101-1 server-101-2] 102:[server-102-0 server-102-1 server-102-2]]}]
+2026/02/13 10:19:11 [Node:0] shardmaster server listen query: exists:false
+2026/02/13 10:19:11 [Node:2] shardmaster server query maxNum:5, current max num:7
+2026/02/13 10:19:11 [Node:0] shardmaster server listenApplyCh applyMsg:{true {map[] query -1 [0 0 0 0 0 0 0 0 0 0] []} 78 map[] false map[]} data:[{0 [0 0 0 0 0 0 0 0 0 0] map[]} {3 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]} {4 [100 101 100 101 100 101 100 101 100 101] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2]]} {5 [100 101 102 100 101 102 100 101 102 100] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2] 102:[server-102-0 server-102-1 server-102-2]]} {6 [101 102 101 102 101 102 101 102 101 102] map[101:[server-101-0 server-101-1 server-101-2] 102:[server-102-0 server-102-1 server-102-2]]}]
+2026/02/13 10:19:11 [Node:0] shardmaster server listen query: exists:false
