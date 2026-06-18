@@ -1,0 +1,207 @@
+2026/02/25 15:05:48 [Node:2 GID:102] shardkv server start...
+2026/02/25 15:05:48 [Node:2 GID:102 isLeader:false] shardkv server listenConfigChange 不是leader或者有等待迁移的数据
+2026/02/25 15:05:48 [Node:2 GID:102 isLeader:false] shardkv server generateSnapshotter raft state size: 0, maxraftstate: 1000
+2026/02/25 15:05:48 [Node:2 GID:102 isLeader:false] shardkv server listenConfigChange 不是leader或者有等待迁移的数据
+2026/02/25 15:05:48 [Node:2 GID:102 isLeader:false] shardkv server generateSnapshotter raft state size: 0, maxraftstate: 1000
+2026/02/25 15:05:49 [Node:2 GID:102 isLeader:false] shardkv server listenConfigChange 不是leader或者有等待迁移的数据
+2026/02/25 15:05:49 [Node:2 GID:102 isLeader:false] shardkv server generateSnapshotter raft state size: 93, maxraftstate: 1000
+2026/02/25 15:05:49 [Node:2 GID:102 isLeader:false] shardkv server listenConfigChange 不是leader或者有等待迁移的数据
+2026/02/25 15:05:49 [Node:2 GID:102 isLeader:false] shardkv server generateSnapshotter raft state size: 93, maxraftstate: 1000
+2026/02/25 15:05:49 [Node:2 GID:102 isLeader:false] shardkv server listenConfigChange 不是leader或者有等待迁移的数据
+2026/02/25 15:05:49 [Node:2 GID:102 isLeader:false] shardkv server listenApplyCh applyMsg:{true {  CHANGE_CONFIG 0 1 0 {1 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]} map[] 0} 1 map[] false map[] map[] map[] map[] 0}
+2026/02/25 15:05:49 [Node:2 GID:102 isLeader:false] kv server listenApplyCh op:CHANGE_CONFIG, key:, value: clientid:0, 更新seqNum:1
+2026/02/25 15:05:49 [Node:2 GID:102 isLeader:false] shardkv server listenApplyCh apply config num:1
+2026/02/25 15:05:49 [Node:2 GID:102 isLeader:false] shardkv server executeConfigChange new config num:1, old config num:0
+2026/02/25 15:05:49 [Node:2 GID:102 isLeader:false] shardkv server executeConfigChange migrate shard:0 from 0 to 100, keyList:map[] shard status:INVALID
+2026/02/25 15:05:49 [Node:2 GID:102 isLeader:false] shardkv server executeConfigChange migrate shard:1 from 0 to 100, keyList:map[] shard status:INVALID
+2026/02/25 15:05:49 [Node:2 GID:102 isLeader:false] shardkv server executeConfigChange migrate shard:2 from 0 to 100, keyList:map[] shard status:INVALID
+2026/02/25 15:05:49 [Node:2 GID:102 isLeader:false] shardkv server executeConfigChange migrate shard:3 from 0 to 100, keyList:map[] shard status:INVALID
+2026/02/25 15:05:49 [Node:2 GID:102 isLeader:false] shardkv server executeConfigChange migrate shard:4 from 0 to 100, keyList:map[] shard status:INVALID
+2026/02/25 15:05:49 [Node:2 GID:102 isLeader:false] shardkv server executeConfigChange migrate shard:5 from 0 to 100, keyList:map[] shard status:INVALID
+2026/02/25 15:05:49 [Node:2 GID:102 isLeader:false] shardkv server executeConfigChange migrate shard:6 from 0 to 100, keyList:map[] shard status:INVALID
+2026/02/25 15:05:49 [Node:2 GID:102 isLeader:false] shardkv server executeConfigChange migrate shard:7 from 0 to 100, keyList:map[] shard status:INVALID
+2026/02/25 15:05:49 [Node:2 GID:102 isLeader:false] shardkv server executeConfigChange migrate shard:8 from 0 to 100, keyList:map[] shard status:INVALID
+2026/02/25 15:05:49 [Node:2 GID:102 isLeader:false] shardkv server generateSnapshotter raft state size: 613, maxraftstate: 1000
+2026/02/25 15:05:49 [Node:2 GID:102 isLeader:false] shardkv server executeConfigChange migrate shard:9 from 0 to 100, keyList:map[] shard status:INVALID
+2026/02/25 15:05:49 [Node:2 GID:102 isLeader:false] shardkv server executeConfigChange migrate gid2keyList:map[]
+2026/02/25 15:05:49 [Node:2 GID:102 isLeader:false] shardkv server executeConfigChange 更新负责的分片:map[0:0xc0001a7580 1:0xc0001a75c0 2:0xc0001a7600 3:0xc0001a7640 4:0xc0001a7680 5:0xc0001a76c0 6:0xc0001a7700 7:0xc0001a7740 8:0xc0001a7780 9:0xc0001a77c0]
+2026/02/25 15:05:49 [Node:2 GID:102 isLeader:false] shardkv server listenConfigChange 不是leader或者有等待迁移的数据
+2026/02/25 15:05:49 [Node:2 GID:102 isLeader:false] shardkv server generateSnapshotter raft state size: 613, maxraftstate: 1000
+2026/02/25 15:05:49 [Node:2 GID:102 isLeader:false] shardkv server listenConfigChange 不是leader或者有等待迁移的数据
+2026/02/25 15:05:49 [Node:2 GID:102 isLeader:false] shardkv server generateSnapshotter raft state size: 613, maxraftstate: 1000
+2026/02/25 15:05:49 [Node:2 GID:102 isLeader:false] shardkv server listenConfigChange 不是leader或者有等待迁移的数据
+2026/02/25 15:05:49 [Node:2 GID:102 isLeader:false] shardkv server generateSnapshotter raft state size: 613, maxraftstate: 1000
+2026/02/25 15:05:49 [Node:2 GID:102 isLeader:false] shardkv server listenConfigChange 不是leader或者有等待迁移的数据
+2026/02/25 15:05:49 [Node:2 GID:102 isLeader:false] shardkv server generateSnapshotter raft state size: 613, maxraftstate: 1000
+2026/02/25 15:05:49 [Node:2 GID:102 isLeader:false] shardkv server listenConfigChange 不是leader或者有等待迁移的数据
+2026/02/25 15:05:49 [Node:2 GID:102 isLeader:false] shardkv server listenConfigChange 不是leader或者有等待迁移的数据
+2026/02/25 15:05:49 [Node:2 GID:102 isLeader:false] shardkv server generateSnapshotter raft state size: 613, maxraftstate: 1000
+2026/02/25 15:05:49 [Node:2 GID:102 isLeader:false] shardkv server listenConfigChange 不是leader或者有等待迁移的数据
+2026/02/25 15:05:49 [Node:2 GID:102 isLeader:false] shardkv server generateSnapshotter raft state size: 613, maxraftstate: 1000
+2026/02/25 15:05:49 [Node:2 GID:102 isLeader:false] shardkv server listenConfigChange 不是leader或者有等待迁移的数据
+2026/02/25 15:05:49 [Node:2 GID:102 isLeader:false] shardkv server generateSnapshotter raft state size: 613, maxraftstate: 1000
+2026/02/25 15:05:50 [Node:2 GID:102 isLeader:false] shardkv server listenConfigChange 不是leader或者有等待迁移的数据
+2026/02/25 15:05:50 [Node:2 GID:102 isLeader:false] shardkv server generateSnapshotter raft state size: 613, maxraftstate: 1000
+2026/02/25 15:05:50 [Node:2 GID:102 isLeader:false] shardkv server listenConfigChange 不是leader或者有等待迁移的数据
+2026/02/25 15:05:50 [Node:2 GID:102 isLeader:false] shardkv server generateSnapshotter raft state size: 613, maxraftstate: 1000
+2026/02/25 15:05:50 [Node:2 GID:102 isLeader:false] shardkv server listenConfigChange 不是leader或者有等待迁移的数据
+2026/02/25 15:05:50 [Node:2 GID:102 isLeader:false] shardkv server generateSnapshotter raft state size: 613, maxraftstate: 1000
+2026/02/25 15:05:50 [Node:2 GID:102 isLeader:false] shardkv server listenConfigChange 不是leader或者有等待迁移的数据
+2026/02/25 15:05:50 [Node:2 GID:102 isLeader:false] shardkv server generateSnapshotter raft state size: 613, maxraftstate: 1000
+2026/02/25 15:05:50 [Node:2 GID:102 isLeader:false] shardkv server listenConfigChange 不是leader或者有等待迁移的数据
+2026/02/25 15:05:54 [Node:2 GID:102 isLeader:false] shardkv server listenConfigChange 不是leader或者有等待迁移的数据
+2026/02/25 15:05:54 [Node:2 GID:102 isLeader:false] shardkv server generateSnapshotter raft state size: 613, maxraftstate: 1000
+2026/02/25 15:05:54 [Node:2 GID:102 isLeader:false] shardkv server listenConfigChange 不是leader或者有等待迁移的数据
+2026/02/25 15:05:54 [Node:2 GID:102 isLeader:true] shardkv server generateSnapshotter raft state size: 613, maxraftstate: 1000
+2026/02/25 15:05:54 [Node:2 GID:102 isLeader:true] shardkv server generateSnapshotter raft state size: 613, maxraftstate: 1000
+2026/02/25 15:05:54 [Node:2 GID:102 isLeader:true] shardkv server generateSnapshotter raft state size: 613, maxraftstate: 1000
+2026/02/25 15:05:54 [Node:2 GID:102 isLeader:true] shardkv server generateSnapshotter raft state size: 613, maxraftstate: 1000
+2026/02/25 15:05:54 [Node:2 GID:102 isLeader:true] shardkv server generateSnapshotter raft state size: 613, maxraftstate: 1000
+2026/02/25 15:05:54 [Node:2 GID:102 isLeader:true] shardkv server generateSnapshotter raft state size: 613, maxraftstate: 1000
+2026/02/25 15:05:54 [Node:2 GID:102 isLeader:true] shardkv server generateSnapshotter raft state size: 613, maxraftstate: 1000
+2026/02/25 15:05:55 [Node:2 GID:102 isLeader:true] shardkv server generateSnapshotter raft state size: 613, maxraftstate: 1000
+2026/02/25 15:05:55 [Node:2 GID:102 isLeader:true] shardkv server generateSnapshotter raft state size: 613, maxraftstate: 1000
+2026/02/25 15:05:55 [Node:2 GID:102 isLeader:true] shardkv server generateSnapshotter raft state size: 613, maxraftstate: 1000
+2026/02/25 15:05:55 [Node:2 GID:102 isLeader:true] shardkv server generateSnapshotter raft state size: 613, maxraftstate: 1000
+2026/02/25 15:05:55 [Node:2 GID:102 isLeader:true] shardkv server generateSnapshotter raft state size: 613, maxraftstate: 1000
+2026/02/25 15:05:55 [Node:2 GID:102 isLeader:true] shardkv server generateSnapshotter raft state size: 613, maxraftstate: 1000
+2026/02/25 15:05:55 [Node:2 GID:102 isLeader:true] shardkv server generateSnapshotter raft state size: 613, maxraftstate: 1000
+2026/02/25 15:05:55 [Node:2 GID:102 isLeader:true] shardkv server generateSnapshotter raft state size: 613, maxraftstate: 1000
+2026/02/25 15:05:55 [Node:2 GID:102 isLeader:true] shardkv server generateSnapshotter raft state size: 613, maxraftstate: 1000
+2026/02/25 15:05:55 [Node:2 GID:102 isLeader:true] shardkv server generateSnapshotter raft state size: 613, maxraftstate: 1000
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server generateSnapshotter raft state size: 613, maxraftstate: 1000
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server generateSnapshotter raft state size: 613, maxraftstate: 1000
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server generateSnapshotter raft state size: 613, maxraftstate: 1000
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server generateSnapshotter raft state size: 613, maxraftstate: 1000
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server listenConfigChange new config num:2, old config num:1 args:&{2 0}
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server diffConfig old config num:1, new config num:2, old config:{1 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}, new config:{2 [100 101 100 101 100 101 100 101 100 101] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2]]}
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server generateSnapshotter raft state size: 782, maxraftstate: 1000
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server listenApplyCh applyMsg:{true {  CHANGE_CONFIG 0 2 0 {2 [100 101 100 101 100 101 100 101 100 101] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2]]} map[] 0} 2 map[] false map[] map[] map[] map[] 0}
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] kv server listenApplyCh op:CHANGE_CONFIG, key:, value: clientid:0, 更新seqNum:2
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server listenApplyCh apply config num:2
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange new config num:2, old config num:1
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange migrate shard:0 from 100 to 100, keyList:map[] shard status:INVALID
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange migrate shard:1 from 100 to 101, keyList:map[] shard status:INVALID
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange migrate shard:2 from 100 to 100, keyList:map[] shard status:INVALID
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange migrate shard:3 from 100 to 101, keyList:map[] shard status:INVALID
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange migrate shard:4 from 100 to 100, keyList:map[] shard status:INVALID
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange migrate shard:5 from 100 to 101, keyList:map[] shard status:INVALID
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange migrate shard:6 from 100 to 100, keyList:map[] shard status:INVALID
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange migrate shard:7 from 100 to 101, keyList:map[] shard status:INVALID
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange migrate shard:8 from 100 to 100, keyList:map[] shard status:INVALID
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange migrate shard:9 from 100 to 101, keyList:map[] shard status:INVALID
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange migrate gid2keyList:map[]
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange 更新负责的分片:map[0:0xc0001a7580 1:0xc0001a75c0 2:0xc0001a7600 3:0xc0001a7640 4:0xc0001a7680 5:0xc0001a76c0 6:0xc0001a7700 7:0xc0001a7740 8:0xc0001a7780 9:0xc0001a77c0]
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server generateSnapshotter raft state size: 949, maxraftstate: 1000
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server listenApplyCh applyMsg:{true {  CHANGE_CONFIG 0 2 0 {2 [100 101 100 101 100 101 100 101 100 101] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2]]} map[] 0} 3 map[] false map[] map[] map[] map[] 0}
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server listenApplyCh apply config num:2
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange new config num:2, old config num:2
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange migrate shard:0 from 100 to 100, keyList:map[] shard status:INVALID
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange migrate shard:1 from 101 to 101, keyList:map[] shard status:INVALID
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange migrate shard:2 from 100 to 100, keyList:map[] shard status:INVALID
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange migrate shard:3 from 101 to 101, keyList:map[] shard status:INVALID
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange migrate shard:4 from 100 to 100, keyList:map[] shard status:INVALID
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange migrate shard:5 from 101 to 101, keyList:map[] shard status:INVALID
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange migrate shard:6 from 100 to 100, keyList:map[] shard status:INVALID
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange migrate shard:7 from 101 to 101, keyList:map[] shard status:INVALID
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange migrate shard:8 from 100 to 100, keyList:map[] shard status:INVALID
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange migrate shard:9 from 101 to 101, keyList:map[] shard status:INVALID
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange migrate gid2keyList:map[]
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange 更新负责的分片:map[0:0xc0001a7580 1:0xc0001a75c0 2:0xc0001a7600 3:0xc0001a7640 4:0xc0001a7680 5:0xc0001a76c0 6:0xc0001a7700 7:0xc0001a7740 8:0xc0001a7780 9:0xc0001a77c0]
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server listenConfigChange new config num:3, old config num:2 args:&{3 0}
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server diffConfig old config num:2, new config num:3, old config:{2 [100 101 100 101 100 101 100 101 100 101] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2]]}, new config:{3 [100 101 102 100 101 102 100 101 102 100] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2] 102:[server-102-0 server-102-1 server-102-2]]}
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server listenApplyCh applyMsg:{true {  CHANGE_CONFIG 0 3 0 {3 [100 101 102 100 101 102 100 101 102 100] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2] 102:[server-102-0 server-102-1 server-102-2]]} map[] 0} 4 map[] false map[] map[] map[] map[] 0}
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] kv server listenApplyCh op:CHANGE_CONFIG, key:, value: clientid:0, 更新seqNum:3
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server listenApplyCh apply config num:3
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange new config num:3, old config num:2
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange migrate shard:0 from 100 to 100, keyList:map[] shard status:INVALID
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange migrate shard:1 from 101 to 101, keyList:map[] shard status:INVALID
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange migrate shard:2 from 100 to 102, keyList:map[] shard status:MIGRATION_IN
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange migrate shard:3 from 101 to 100, keyList:map[] shard status:INVALID
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange migrate shard:4 from 100 to 101, keyList:map[] shard status:INVALID
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange migrate shard:5 from 101 to 102, keyList:map[] shard status:MIGRATION_IN
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange migrate shard:6 from 100 to 100, keyList:map[] shard status:INVALID
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange migrate shard:7 from 101 to 101, keyList:map[] shard status:INVALID
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange migrate shard:8 from 100 to 102, keyList:map[] shard status:MIGRATION_IN
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange migrate shard:9 from 101 to 100, keyList:map[] shard status:INVALID
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange migrate gid2keyList:map[]
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange 更新负责的分片:map[0:0xc0001a7580 1:0xc0001a75c0 2:0xc0001a7600 3:0xc0001a7640 4:0xc0001a7680 5:0xc0001a76c0 6:0xc0001a7700 7:0xc0001a7740 8:0xc0001a7780 9:0xc0001a77c0]
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server generateSnapshotter raft state size: 1158, maxraftstate: 1000
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server generateSnapshotter start data:map[0:map[] 1:map[] 2:map[] 3:map[] 4:map[] 5:map[] 6:map[] 7:map[] 8:map[] 9:map[]]
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server listenConfigChange 不是leader或者有等待迁移的数据
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server listenApplyCh applyMsg:{true {  MIGRATION_IN 0 0 0 {0 [0 0 0 0 0 0 0 0 0 0] map[]} map[2:{map[4:z7kps8_810KFxaDzmeMx] map[1122044247503074315:35]} 8:{map[0:YvJLnbqEHsw96n8L4Iiqkuqk4kR6HXoLuBjaqSz-] map[1122044247503074315:62]}] 3} 5 map[] false map[] map[] map[] map[] 0}
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server listenApplyCh apply migration data:map[2:{map[4:z7kps8_810KFxaDzmeMx] map[1122044247503074315:35]} 8:{map[0:YvJLnbqEHsw96n8L4Iiqkuqk4kR6HXoLuBjaqSz-] map[1122044247503074315:62]}]
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange migrate shard:2 status:NORMAL
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange migrate shard:8 status:NORMAL
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server listenApplyCh applyMsg:{true {  CHANGE_CONFIG 0 3 0 {3 [100 101 102 100 101 102 100 101 102 100] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2] 102:[server-102-0 server-102-1 server-102-2]]} map[] 0} 6 map[] false map[] map[] map[] map[] 0}
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server listenApplyCh apply config num:3
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange new config num:3, old config num:3
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange migrate shard:0 from 100 to 100, keyList:map[] shard status:INVALID
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange migrate shard:1 from 101 to 101, keyList:map[] shard status:INVALID
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange migrate shard:2 from 102 to 102, keyList:map[] shard status:NORMAL
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange migrate shard:3 from 100 to 100, keyList:map[] shard status:INVALID
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange migrate shard:4 from 101 to 101, keyList:map[] shard status:INVALID
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange migrate shard:5 from 102 to 102, keyList:map[] shard status:NORMAL
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange migrate shard:6 from 100 to 100, keyList:map[] shard status:INVALID
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange migrate shard:7 from 101 to 101, keyList:map[] shard status:INVALID
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange migrate shard:8 from 102 to 102, keyList:map[] shard status:NORMAL
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange migrate shard:9 from 100 to 100, keyList:map[] shard status:INVALID
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange migrate gid2keyList:map[]
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange 更新负责的分片:map[0:0xc0001a7580 1:0xc0001a75c0 2:0xc0001a7600 3:0xc0001a7640 4:0xc0001a7680 5:0xc0001a76c0 6:0xc0001a7700 7:0xc0001a7740 8:0xc0001a7780 9:0xc0001a77c0]
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server listenApplyCh applyMsg:{true {  MIGRATION_IN 0 0 0 {0 [0 0 0 0 0 0 0 0 0 0] map[]} map[5:{map[7:H7MNgSmhotn7bzMK5vJY] map[1122044247503074315:38]}] 3} 7 map[] false map[] map[] map[] map[] 0}
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server listenApplyCh apply migration data:map[5:{map[7:H7MNgSmhotn7bzMK5vJY] map[1122044247503074315:38]}]
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange migrate shard:5 status:NORMAL
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server generateSnapshotter raft state size: 978, maxraftstate: 1000
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server listenConfigChange new config num:4, old config num:3 args:&{4 0}
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server diffConfig old config num:3, new config num:4, old config:{3 [100 101 102 100 101 102 100 101 102 100] map[100:[server-100-0 server-100-1 server-100-2] 101:[server-101-0 server-101-1 server-101-2] 102:[server-102-0 server-102-1 server-102-2]]}, new config:{4 [101 102 101 102 101 102 101 102 101 102] map[101:[server-101-0 server-101-1 server-101-2] 102:[server-102-0 server-102-1 server-102-2]]}
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server checkGroup key:1, shard:9 shards:map[0:true 1:true 2:true 3:true 4:true 5:true 6:true 7:true 8:true 9:true]
+2026/02/25 15:05:56 [Node:2 GID:102] shardkv server get key:1, check param failed Err:ErrWrongGroup
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server listenApplyCh applyMsg:{true {  CHANGE_CONFIG 0 4 0 {4 [101 102 101 102 101 102 101 102 101 102] map[101:[server-101-0 server-101-1 server-101-2] 102:[server-102-0 server-102-1 server-102-2]]} map[] 0} 8 map[] false map[] map[] map[] map[] 0}
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] kv server listenApplyCh op:CHANGE_CONFIG, key:, value: clientid:0, 更新seqNum:4
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server listenApplyCh apply config num:4
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange new config num:4, old config num:3
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange migrate shard:0 from 100 to 101, keyList:map[] shard status:INVALID
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange migrate shard:1 from 101 to 102, keyList:map[] shard status:MIGRATION_IN
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange migrate shard:2 from 102 to 101, keyList:map[2:{map[4:z7kps8_810KFxaDzmeMx] map[1122044247503074315:35]}] shard status:MIGRATION_OUT
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange migrate shard:3 from 100 to 102, keyList:map[101:map[2:{map[4:z7kps8_810KFxaDzmeMx] map[1122044247503074315:35]}]] shard status:MIGRATION_IN
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange migrate shard:4 from 101 to 101, keyList:map[2:{map[4:z7kps8_810KFxaDzmeMx] map[1122044247503074315:35]}] shard status:INVALID
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange migrate shard:5 from 102 to 102, keyList:map[101:map[2:{map[4:z7kps8_810KFxaDzmeMx] map[1122044247503074315:35]}]] shard status:NORMAL
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange migrate shard:6 from 100 to 101, keyList:map[2:{map[4:z7kps8_810KFxaDzmeMx] map[1122044247503074315:35]}] shard status:INVALID
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange migrate shard:7 from 101 to 102, keyList:map[101:map[2:{map[4:z7kps8_810KFxaDzmeMx] map[1122044247503074315:35]}]] shard status:MIGRATION_IN
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange migrate shard:8 from 102 to 101, keyList:map[2:{map[4:z7kps8_810KFxaDzmeMx] map[1122044247503074315:35]} 8:{map[0:YvJLnbqEHsw96n8L4Iiqkuqk4kR6HXoLuBjaqSz-] map[1122044247503074315:62]}] shard status:MIGRATION_OUT
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange migrate shard:9 from 100 to 102, keyList:map[101:map[2:{map[4:z7kps8_810KFxaDzmeMx] map[1122044247503074315:35]} 8:{map[0:YvJLnbqEHsw96n8L4Iiqkuqk4kR6HXoLuBjaqSz-] map[1122044247503074315:62]}]] shard status:MIGRATION_IN
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange migrate gid2keyList:map[101:map[2:{map[4:z7kps8_810KFxaDzmeMx] map[1122044247503074315:35]} 8:{map[0:YvJLnbqEHsw96n8L4Iiqkuqk4kR6HXoLuBjaqSz-] map[1122044247503074315:62]}]]
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange 更新负责的分片:map[0:0xc0001a7580 1:0xc0001a75c0 2:0xc0001a7600 3:0xc0001a7640 4:0xc0001a7680 5:0xc0001a76c0 6:0xc0001a7700 7:0xc0001a7740 8:0xc0001a7780 9:0xc0001a77c0]
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server listenApplyCh applyMsg:{true {  CHANGE_CONFIG 0 4 0 {4 [101 102 101 102 101 102 101 102 101 102] map[101:[server-101-0 server-101-1 server-101-2] 102:[server-102-0 server-102-1 server-102-2]]} map[] 0} 9 map[] false map[] map[] map[] map[] 0}
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server listenApplyCh apply config num:4
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange new config num:4, old config num:4
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange migrate shard:0 from 101 to 101, keyList:map[] shard status:INVALID
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange migrate shard:1 from 102 to 102, keyList:map[] shard status:NORMAL
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange migrate shard:2 from 101 to 101, keyList:map[] shard status:INVALID
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange migrate shard:3 from 102 to 102, keyList:map[] shard status:NORMAL
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange migrate shard:4 from 101 to 101, keyList:map[] shard status:INVALID
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange migrate shard:5 from 102 to 102, keyList:map[] shard status:NORMAL
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange migrate shard:6 from 101 to 101, keyList:map[] shard status:INVALID
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange migrate shard:7 from 102 to 102, keyList:map[] shard status:NORMAL
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange migrate shard:8 from 101 to 101, keyList:map[] shard status:INVALID
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange migrate shard:9 from 102 to 102, keyList:map[] shard status:NORMAL
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange migrate gid2keyList:map[]
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv client migration data:map[] to server:&{uBaliPe8JI6UhnmjHJ3G 0xc000024310 0xc000024380}, shard:0, gid:101 server:server-101-0
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange 更新负责的分片:map[0:0xc0001a7580 1:0xc0001a75c0 2:0xc0001a7600 3:0xc0001a7640 4:0xc0001a7680 5:0xc0001a76c0 6:0xc0001a7700 7:0xc0001a7740 8:0xc0001a7780 9:0xc0001a77c0]
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv client migration data:map[] to server:&{BjUBEiT7MgnBifZFtbKH 0xc000024310 0xc000024380}, shard:0, gid:101 server:server-101-1
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv client migration data:map[] to server:&{lzCr-0OArwLMF6gqJyh3 0xc000024310 0xc000024380}, shard:0, gid:101 server:server-101-2
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server generateSnapshotter raft state size: 1216, maxraftstate: 1000
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server generateSnapshotter start data:map[0:map[] 1:map[] 2:map[4:z7kps8_810KFxaDzmeMx] 3:map[] 4:map[] 5:map[] 6:map[] 7:map[] 8:map[0:YvJLnbqEHsw96n8L4Iiqkuqk4kR6HXoLuBjaqSz-] 9:map[]]
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv client migration data:map[] to server:&{lzCr-0OArwLMF6gqJyh3 0xc000024310 0xc000024380}, shard:0, gid:101 server:server-101-2 succeess
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server listenApplyCh applyMsg:{true {  MIGRATION_IN 0 0 0 {0 [0 0 0 0 0 0 0 0 0 0] map[]} map[3:{map[5:Dy5j7MVpWK-UMe65IVR9] map[1122044247503074315:36]} 9:{map[1:JtcBlHzeYmjd_DWeBprR 10:NWKsa03s27IhNhyLzsTq 11:yaRFBUxo_owf0OfzPY2e 12:eKK9g08LowYf_6XKY8m7 13:-udXCPRLGA9gL0Mw3Iyk 14:zquigWDaFOhyzXFHNQB9 15:i7LBeeb1ZWWxHWCxZm4I 16:3LHYGQlHKCksO9z5vNHV 17:u0FHjyHnIOQbe7cF0M0W 18:VQpJo4pO1xJCVnbOmbWy 19:kqxmqmrACXJMVp79fmgu] map[1122044247503074315:50]}] 4} 10 map[] false map[] map[] map[] map[] 0}
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server listenApplyCh apply migration data:map[3:{map[5:Dy5j7MVpWK-UMe65IVR9] map[1122044247503074315:36]} 9:{map[1:JtcBlHzeYmjd_DWeBprR 10:NWKsa03s27IhNhyLzsTq 11:yaRFBUxo_owf0OfzPY2e 12:eKK9g08LowYf_6XKY8m7 13:-udXCPRLGA9gL0Mw3Iyk 14:zquigWDaFOhyzXFHNQB9 15:i7LBeeb1ZWWxHWCxZm4I 16:3LHYGQlHKCksO9z5vNHV 17:u0FHjyHnIOQbe7cF0M0W 18:VQpJo4pO1xJCVnbOmbWy 19:kqxmqmrACXJMVp79fmgu] map[1122044247503074315:50]}]
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange migrate shard:9 status:NORMAL
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server executeConfigChange migrate shard:3 status:NORMAL
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server checkGroup key:1, shard:9 shards:map[0:true 1:true 2:true 3:true 4:true 5:true 6:true 7:true 8:true 9:true]
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server raft command:{1  GET 9 63 1122044247503074315 {0 [0 0 0 0 0 0 0 0 0 0] map[]} map[] 0}
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server listenApplyCh applyMsg:{true {1  GET 9 63 1122044247503074315 {0 [0 0 0 0 0 0 0 0 0 0] map[]} map[] 0} 11 map[] false map[] map[] map[] map[] 0}
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] kv server listenApplyCh op:GET, key:1, value: clientid:1122044247503074315, 更新seqNum:63
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server raft repley: success op:GET, key:1 value:
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server get key:1, data:map[]
+2026/02/25 15:05:56 [Node:2 GID:102] shardkv server get key:1, check param failed Err:ErrNoKey
+2026/02/25 15:05:56 [Node:2 GID:102 isLeader:true] shardkv server generateSnapshotter raft state size: 955, maxraftstate: 1000

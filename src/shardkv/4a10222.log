@@ -1,0 +1,661 @@
+2026/02/25 14:15:40 [client:2653790804159685378] shardkv client putappend key:0 value:BsgTn6sw_nVUvLZn7iAB op:PUT to server:&{TPNkKT6kFn_rCTPabrct 0xc000024310 0xc000024380}, shard:8, gid:100 servers:server-100-0
+2026/02/25 14:15:41 [client:2653790804159685378] shardkv client putappend key:1 value:BMp9wUAUV_qKdSMAm7g_ op:PUT to server:&{p08JyuPyYzTSyUwwHCKD 0xc000024310 0xc000024380}, shard:9, gid:100 servers:server-100-0
+2026/02/25 14:15:41 [client:2653790804159685378] shardkv client putappend key:2 value:MdfKsh6niqZkXcWbHtNt op:PUT to server:&{rPRxki0rI5GNhC97NCYR 0xc000024310 0xc000024380}, shard:0, gid:100 servers:server-100-0
+2026/02/25 14:15:41 [client:2653790804159685378] shardkv client putappend key:3 value:W94F_9XTmWgsUlEMx4kl op:PUT to server:&{VKtFaw5Z9wWQoz2Axie7 0xc000024310 0xc000024380}, shard:1, gid:100 servers:server-100-0
+2026/02/25 14:15:41 [client:2653790804159685378] shardkv client putappend key:4 value:WJQsI_wsytliKQ8FVpnm op:PUT to server:&{-IdATRTdofCDYgKxvgx1 0xc000024310 0xc000024380}, shard:2, gid:100 servers:server-100-0
+2026/02/25 14:15:41 [client:2653790804159685378] shardkv client putappend key:5 value:u5g3EJe2QJ-Tj8JUGrOk op:PUT to server:&{oL6Urt1NHvfmZSTs3KUz 0xc000024310 0xc000024380}, shard:3, gid:100 servers:server-100-0
+2026/02/25 14:15:41 [client:2653790804159685378] shardkv client putappend key:6 value:69p2GtHxYC3mXgIsQyLI op:PUT to server:&{Dcl0VJdPFPJavrinYzwl 0xc000024310 0xc000024380}, shard:4, gid:100 servers:server-100-0
+2026/02/25 14:15:41 [client:2653790804159685378] shardkv client putappend key:7 value:a4FmW5yYW8k221y-JszT op:PUT to server:&{JiIfWruNJB-TEm8HympX 0xc000024310 0xc000024380}, shard:5, gid:100 servers:server-100-0
+2026/02/25 14:15:41 [client:2653790804159685378] shardkv client putappend key:8 value:ykP9yHtUX8NG_wgQ9apQ op:PUT to server:&{VTkVUWVKrhTYFFxfNxax 0xc000024310 0xc000024380}, shard:6, gid:100 servers:server-100-0
+2026/02/25 14:15:41 [client:2653790804159685378] shardkv client putappend key:9 value:MQuzifviBHwDYHXx42cz op:PUT to server:&{lDIqIwn4l69NUsU6VT1V 0xc000024310 0xc000024380}, shard:7, gid:100 servers:server-100-0
+2026/02/25 14:15:41 [client:2653790804159685378] shardkv client get key:0 to server:&{6BvyeAU06Ke_qc7l_CoG 0xc000024310 0xc000024380}, shard:8, gid:100 servers:server-100-0 config:{1 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}
+2026/02/25 14:15:41 [client:2653790804159685378] shardkv client get key:1 to server:&{U2eebm5I8SL-F3j7hsHU 0xc000024310 0xc000024380}, shard:9, gid:100 servers:server-100-0 config:{1 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}
+2026/02/25 14:15:41 [client:2653790804159685378] shardkv client get key:2 to server:&{yRr02e8oZQfzy3RYFw-2 0xc000024310 0xc000024380}, shard:0, gid:100 servers:server-100-0 config:{1 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}
+2026/02/25 14:15:41 [client:2653790804159685378] shardkv client get key:3 to server:&{R6qtAiqSH64KMfMDJdp- 0xc000024310 0xc000024380}, shard:1, gid:100 servers:server-100-0 config:{1 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}
+2026/02/25 14:15:41 [client:2653790804159685378] shardkv client get key:4 to server:&{AuXLRAU21ZKfJg0Pvjd- 0xc000024310 0xc000024380}, shard:2, gid:100 servers:server-100-0 config:{1 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}
+2026/02/25 14:15:41 [client:2653790804159685378] shardkv client get key:5 to server:&{p6gk8hW2KtWjWnbX5Gji 0xc000024310 0xc000024380}, shard:3, gid:100 servers:server-100-0 config:{1 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}
+2026/02/25 14:15:41 [client:2653790804159685378] shardkv client get key:6 to server:&{vI7Qotop1O90DPYlPJC7 0xc000024310 0xc000024380}, shard:4, gid:100 servers:server-100-0 config:{1 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}
+2026/02/25 14:15:41 [client:2653790804159685378] shardkv client get key:7 to server:&{sdGGmWIPB4lX2MckdAHW 0xc000024310 0xc000024380}, shard:5, gid:100 servers:server-100-0 config:{1 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}
+2026/02/25 14:15:41 [client:2653790804159685378] shardkv client get key:8 to server:&{9_1QPMfLlNijEU6hEfi- 0xc000024310 0xc000024380}, shard:6, gid:100 servers:server-100-0 config:{1 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}
+2026/02/25 14:15:41 [client:2653790804159685378] shardkv client get key:9 to server:&{Qj3SqxUOlJ9k7wXVZKc0 0xc000024310 0xc000024380}, shard:7, gid:100 servers:server-100-0 config:{1 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}
+2026/02/25 14:15:42 [client:2653790804159685378] shardkv client get key:0 to server:&{enJLZurj-iIIZEAZcNDB 0xc000024310 0xc000024380}, shard:8, gid:100 servers:server-100-0 config:{1 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}
+2026/02/25 14:15:42 [client:2653790804159685378] server:0 shardkv client get key call failed
+2026/02/25 14:15:42 [client:2653790804159685378] shardkv client get key:0 to server:&{H0tSOxATxoXLT8PVnStz 0xc000024310 0xc000024380}, shard:8, gid:100 servers:server-100-1 config:{1 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}
+2026/02/25 14:15:42 [client:2653790804159685378] shardkv client putappend key:0 value:Wd4RTU-JtQ4d9iw9xGEk op:APPEND to server:&{JhvfeZ8j7Jbw8jE2DyM- 0xc000024310 0xc000024380}, shard:8, gid:100 servers:server-100-1
+2026/02/25 14:15:42 [client:2653790804159685378] shardkv client get key:1 to server:&{BWc4l3jShvxhrVOrzqvd 0xc000024310 0xc000024380}, shard:9, gid:100 servers:server-100-0 config:{1 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}
+2026/02/25 14:15:42 [client:2653790804159685378] server:0 shardkv client get key call failed
+2026/02/25 14:15:42 [client:2653790804159685378] shardkv client get key:1 to server:&{yUjxNwAxejJLLJI7ltSc 0xc000024310 0xc000024380}, shard:9, gid:100 servers:server-100-1 config:{1 [100 100 100 100 100 100 100 100 100 100] map[100:[server-100-0 server-100-1 server-100-2]]}
+2026/02/25 14:15:42 [Node:1 GID:100 isLeader:true] shardkv client migration data:map[] to server:&{J-EeQSlp9s6b8NQYpX6O 0xc000024310 0xc000024380}, shard:0, gid:101 server:server-101-0
+2026/02/25 14:15:42 [Node:1 GID:100 isLeader:true] shardkv client migration data:map[] to server:&{PD6lbwALtHGVeFjibPyb 0xc000024310 0xc000024380}, shard:0, gid:101 server:server-101-1
+2026/02/25 14:15:42 [Node:1 GID:100 isLeader:true] shardkv client migration data:map[] to server:&{RNfKPV_OnyyjyqM8yERc 0xc000024310 0xc000024380}, shard:0, gid:102 server:server-102-0
+2026/02/25 14:15:42 [Node:1 GID:100 isLeader:true] shardkv client migration data:map[] to server:&{6Q3f0uDDEGkGifYxpMlb 0xc000024310 0xc000024380}, shard:0, gid:101 server:server-101-0
+2026/02/25 14:15:42 [Node:1 GID:100 isLeader:true] shardkv client migration data:map[] to server:&{PD6lbwALtHGVeFjibPyb 0xc000024310 0xc000024380}, shard:0, gid:101 server:server-101-1 succeess
+2026/02/25 14:15:42 [client:2653790804159685378] shardkv client get key:1 to server:&{pV9CYm1aTPn6kft0fP4h 0xc000024310 0xc000024380}, shard:9, gid:102 servers:server-102-1 config:{5 [102 102 102 102 102 102 102 102 102 102] map[102:[server-102-0 server-102-1 server-102-2]]}
+2026/02/25 14:15:42 [client:2653790804159685378] server:1 shardkv client get key repeat reply:ErrWrongLeader
+2026/02/25 14:15:42 [client:2653790804159685378] shardkv client get key:1 to server:&{Asc6KOrdYrx6ybRjk3l8 0xc000024310 0xc000024380}, shard:9, gid:102 servers:server-102-2 config:{5 [102 102 102 102 102 102 102 102 102 102] map[102:[server-102-0 server-102-1 server-102-2]]}
+2026/02/25 14:15:42 [Node:1 GID:100 isLeader:true] shardkv client migration data:map[] to server:&{FDaMyuh1mS3OOo1I68Ci 0xc000024310 0xc000024380}, shard:0, gid:101 server:server-101-1
+2026/02/25 14:15:42 [Node:1 GID:100 isLeader:true] shardkv client migration data:map[] to server:&{keXgSgBaWNy8IpsLCdA6 0xc000024310 0xc000024380}, shard:0, gid:102 server:server-102-1
+2026/02/25 14:15:42 [Node:1 GID:100 isLeader:true] shardkv client migration data:map[] to server:&{8yQ1271iYOFNadKUExuS 0xc000024310 0xc000024380}, shard:0, gid:102 server:server-102-2
+2026/02/25 14:15:42 [Node:1 GID:100 isLeader:true] shardkv client migration data:map[] to server:&{dfRe63rDkFMFN0Qu0471 0xc000024310 0xc000024380}, shard:0, gid:101 server:server-101-0
+2026/02/25 14:15:42 [Node:1 GID:100 isLeader:true] shardkv client migration data:map[] to server:&{8yQ1271iYOFNadKUExuS 0xc000024310 0xc000024380}, shard:0, gid:102 server:server-102-2 succeess
+2026/02/25 14:15:42 [Node:1 GID:100 isLeader:true] shardkv client migration data:map[] to server:&{GBNpnHCUmDJoCcpLS-Vk 0xc000024310 0xc000024380}, shard:0, gid:101 server:server-101-1
+2026/02/25 14:15:42 [Node:1 GID:100 isLeader:true] shardkv client migration data:map[] to server:&{u-pomCDS04hB19N47m9R 0xc000024310 0xc000024380}, shard:0, gid:101 server:server-101-0
+2026/02/25 14:15:42 [Node:1 GID:101 isLeader:true] shardkv client migration data:map[] to server:&{Bqci0jhToDHPKfbdO1l0 0xc000024310 0xc000024380}, shard:0, gid:100 server:server-100-0
+2026/02/25 14:15:42 [Node:1 GID:101 isLeader:true] shardkv client migration data:map[] to server:&{pE0KDg55InwNZ5Gm2yEA 0xc000024310 0xc000024380}, shard:0, gid:102 server:server-102-0
+2026/02/25 14:15:42 [Node:1 GID:101 isLeader:true] shardkv client migration data:map[] to server:&{0W1U0T8lvLh-X8RUtsO6 0xc000024310 0xc000024380}, shard:0, gid:100 server:server-100-1
+2026/02/25 14:15:42 [Node:1 GID:101 isLeader:true] shardkv client migration data:map[] to server:&{0W1U0T8lvLh-X8RUtsO6 0xc000024310 0xc000024380}, shard:0, gid:100 server:server-100-1 succeess
+2026/02/25 14:15:42 [client:2653790804159685378] shardkv client get key:1 to server:&{tt_w1Bje375_0gnZmgsH 0xc000024310 0xc000024380}, shard:9, gid:102 servers:server-102-2 config:{5 [102 102 102 102 102 102 102 102 102 102] map[102:[server-102-0 server-102-1 server-102-2]]}
+2026/02/25 14:15:42 [Node:1 GID:100 isLeader:true] shardkv client migration data:map[] to server:&{m4oqu9lt99Hd3_JgDc9U 0xc000024310 0xc000024380}, shard:0, gid:101 server:server-101-1
+2026/02/25 14:15:42 [Node:1 GID:101 isLeader:true] shardkv client migration data:map[] to server:&{A0BK7hnIWAIXy2LpiCZ4 0xc000024310 0xc000024380}, shard:0, gid:102 server:server-102-1
+2026/02/25 14:15:42 [Node:1 GID:101 isLeader:true] shardkv client migration data:map[] to server:&{zmc7VWqNnOEo1r5G7U5n 0xc000024310 0xc000024380}, shard:0, gid:102 server:server-102-2
+2026/02/25 14:15:42 [Node:1 GID:100 isLeader:true] shardkv client migration data:map[] to server:&{m4oqu9lt99Hd3_JgDc9U 0xc000024310 0xc000024380}, shard:0, gid:101 server:server-101-1 succeess
+2026/02/25 14:15:42 [Node:1 GID:101 isLeader:true] shardkv client migration data:map[] to server:&{zmc7VWqNnOEo1r5G7U5n 0xc000024310 0xc000024380}, shard:0, gid:102 server:server-102-2 succeess
+2026/02/25 14:15:42 [Node:1 GID:100 isLeader:true] shardkv client migration data:map[] to server:&{le7S77XxusoyXrO2cQAx 0xc000024310 0xc000024380}, shard:0, gid:102 server:server-102-0
+2026/02/25 14:15:42 [Node:1 GID:100 isLeader:true] shardkv client migration data:map[] to server:&{1gVniuozr-iB4AUrvnKQ 0xc000024310 0xc000024380}, shard:0, gid:102 server:server-102-1
+2026/02/25 14:15:42 [Node:1 GID:100 isLeader:true] shardkv client migration data:map[] to server:&{DY-l3TyasuLg59zjEZrp 0xc000024310 0xc000024380}, shard:0, gid:102 server:server-102-2
+2026/02/25 14:15:42 [Node:1 GID:100 isLeader:true] shardkv client migration data:map[] to server:&{jeHjNJNlww0Q_rSOGZRM 0xc000024310 0xc000024380}, shard:0, gid:102 server:server-102-0
+2026/02/25 14:15:42 [Node:1 GID:100 isLeader:true] shardkv client migration data:map[] to server:&{T8a7sGV56wvqjSa3jEzX 0xc000024310 0xc000024380}, shard:0, gid:102 server:server-102-1
+2026/02/25 14:15:42 [Node:1 GID:100 isLeader:true] shardkv client migration data:map[] to server:&{pjCnp5GPlBCKN3MdWpQl 0xc000024310 0xc000024380}, shard:0, gid:102 server:server-102-2
+2026/02/25 14:15:42 [Node:1 GID:100 isLeader:true] shardkv client migration data:map[] to server:&{t2bA5MQcCtV1g1Ekiiz2 0xc000024310 0xc000024380}, shard:0, gid:102 server:server-102-0
+2026/02/25 14:15:42 [Node:1 GID:100 isLeader:true] shardkv client migration data:map[] to server:&{RxKJh7WxUW8cNM4LMIPJ 0xc000024310 0xc000024380}, shard:0, gid:102 server:server-102-1
+2026/02/25 14:15:42 [Node:1 GID:100 isLeader:true] shardkv client migration data:map[] to server:&{t--DOJS7a1sH5jKk73fW 0xc000024310 0xc000024380}, shard:0, gid:102 server:server-102-2
+2026/02/25 14:15:42 [Node:1 GID:100 isLeader:true] shardkv client migration data:map[] to server:&{6U-7Jsa7SCrnxJRgMKem 0xc000024310 0xc000024380}, shard:0, gid:102 server:server-102-0
+2026/02/25 14:15:42 [Node:1 GID:101 isLeader:true] shardkv client migration data:map[] to server:&{8R34WXYnu-wHzTJQyJAs 0xc000024310 0xc000024380}, shard:0, gid:100 server:server-100-0
+2026/02/25 14:15:42 [Node:1 GID:101 isLeader:true] shardkv client migration data:map[] to server:&{Y7lt1mHtYguoMqhM5lQo 0xc000024310 0xc000024380}, shard:0, gid:102 server:server-102-0
+2026/02/25 14:15:42 [client:2653790804159685378] shardkv client get key:1 to server:&{KuTwrLAuexoUBMojr-bZ 0xc000024310 0xc000024380}, shard:9, gid:102 servers:server-102-2 config:{5 [102 102 102 102 102 102 102 102 102 102] map[102:[server-102-0 server-102-1 server-102-2]]}
+2026/02/25 14:15:42 [Node:1 GID:101 isLeader:true] shardkv client migration data:map[] to server:&{-Nq9ODjhK2K3fhsJ6J1v 0xc000024310 0xc000024380}, shard:0, gid:100 server:server-100-1
+2026/02/25 14:15:42 [Node:1 GID:101 isLeader:true] shardkv client migration data:map[] to server:&{-Nq9ODjhK2K3fhsJ6J1v 0xc000024310 0xc000024380}, shard:0, gid:100 server:server-100-1 succeess
+2026/02/25 14:15:42 [Node:2 GID:102 isLeader:true] shardkv client migration data:map[] to server:&{SRdEnSKN1gDPN5ppgXkN 0xc000024310 0xc000024380}, shard:0, gid:100 server:server-100-0
+2026/02/25 14:15:42 [Node:1 GID:100 isLeader:true] shardkv client migration data:map[] to server:&{e_a0y4fDjbk2RSCXGYfI 0xc000024310 0xc000024380}, shard:0, gid:102 server:server-102-1
+2026/02/25 14:15:42 [Node:1 GID:101 isLeader:true] shardkv client migration data:map[] to server:&{DBUR18Sxn0D21y8ZEJsM 0xc000024310 0xc000024380}, shard:0, gid:102 server:server-102-1
+2026/02/25 14:15:42 [Node:1 GID:100 isLeader:true] shardkv client migration data:map[] to server:&{OKA6oI5sbAvtzAO-q0E- 0xc000024310 0xc000024380}, shard:0, gid:102 server:server-102-2
+2026/02/25 14:15:42 [Node:1 GID:101 isLeader:true] shardkv client migration data:map[] to server:&{otApzHz_e5cl7aA_iekY 0xc000024310 0xc000024380}, shard:0, gid:102 server:server-102-2
+2026/02/25 14:15:42 [Node:1 GID:100 isLeader:true] shardkv client migration data:map[] to server:&{OKA6oI5sbAvtzAO-q0E- 0xc000024310 0xc000024380}, shard:0, gid:102 server:server-102-2 succeess
+2026/02/25 14:15:42 [Node:1 GID:101 isLeader:true] shardkv client migration data:map[] to server:&{otApzHz_e5cl7aA_iekY 0xc000024310 0xc000024380}, shard:0, gid:102 server:server-102-2 succeess
+2026/02/25 14:15:42 [Node:2 GID:102 isLeader:true] shardkv client migration data:map[] to server:&{MiFgy_6I3YwCB0TmaMxw 0xc000024310 0xc000024380}, shard:0, gid:100 server:server-100-1
+2026/02/25 14:15:43 [Node:2 GID:102 isLeader:true] shardkv client migration data:map[] to server:&{MiFgy_6I3YwCB0TmaMxw 0xc000024310 0xc000024380}, shard:0, gid:100 server:server-100-1 succeess
+2026/02/25 14:15:43 [client:2653790804159685378] shardkv client get key:1 to server:&{ic9GQmOm1jQwjiK5nk3Q 0xc000024310 0xc000024380}, shard:9, gid:102 servers:server-102-2 config:{5 [102 102 102 102 102 102 102 102 102 102] map[102:[server-102-0 server-102-1 server-102-2]]}
+2026/02/25 14:15:43 [client:2653790804159685378] shardkv client putappend key:1 value:AjwzMdbTY5_XqYtUR0FZ op:APPEND to server:&{TmibixOtsF_gbdUd3nRI 0xc000024310 0xc000024380}, shard:9, gid:102 servers:server-102-2
+2026/02/25 14:15:43 [client:2653790804159685378] shardkv client get key:2 to server:&{8Exlao_yYngUGL0yBNbM 0xc000024310 0xc000024380}, shard:0, gid:102 servers:server-102-0 config:{5 [102 102 102 102 102 102 102 102 102 102] map[102:[server-102-0 server-102-1 server-102-2]]}
+2026/02/25 14:15:43 [Node:1 GID:100 isLeader:true] shardkv client migration data:map[] to server:&{k0WgGlVu0bMrrcPuRdIR 0xc000024310 0xc000024380}, shard:0, gid:102 server:server-102-0
+2026/02/25 14:15:43 [client:2653790804159685378] server:0 shardkv client get key call failed
+2026/02/25 14:15:43 [client:2653790804159685378] shardkv client get key:2 to server:&{jBbjxnpCQLhdtnVthUm4 0xc000024310 0xc000024380}, shard:0, gid:102 servers:server-102-1 config:{5 [102 102 102 102 102 102 102 102 102 102] map[102:[server-102-0 server-102-1 server-102-2]]}
+2026/02/25 14:15:43 [client:2653790804159685378] server:1 shardkv client get key repeat reply:ErrWrongLeader
+2026/02/25 14:15:43 [client:2653790804159685378] shardkv client get key:2 to server:&{H9dURvvNcfeOatarThJ3 0xc000024310 0xc000024380}, shard:0, gid:102 servers:server-102-2 config:{5 [102 102 102 102 102 102 102 102 102 102] map[102:[server-102-0 server-102-1 server-102-2]]}
+2026/02/25 14:15:43 [Node:1 GID:100 isLeader:true] shardkv client migration data:map[] to server:&{eLd0rJerEADVIUAvNWWO 0xc000024310 0xc000024380}, shard:0, gid:102 server:server-102-1
+2026/02/25 14:15:43 [Node:1 GID:100 isLeader:true] shardkv client migration data:map[] to server:&{abIWAB52_8dpObRPGni2 0xc000024310 0xc000024380}, shard:0, gid:102 server:server-102-2
+2026/02/25 14:15:43 [Node:1 GID:100 isLeader:true] shardkv client migration data:map[] to server:&{abIWAB52_8dpObRPGni2 0xc000024310 0xc000024380}, shard:0, gid:102 server:server-102-2 succeess
+2026/02/25 14:15:43 [client:2653790804159685378] shardkv client get key:2 to server:&{WomgtxHStm-vxqu_1XGo 0xc000024310 0xc000024380}, shard:0, gid:102 servers:server-102-2 config:{5 [102 102 102 102 102 102 102 102 102 102] map[102:[server-102-0 server-102-1 server-102-2]]}
+2026/02/25 14:15:43 [client:2653790804159685378] shardkv client putappend key:2 value:8i_2_vbNHsZJxZR4Mr2l op:APPEND to server:&{akaaU9zzvnmFRryabZfJ 0xc000024310 0xc000024380}, shard:0, gid:102 servers:server-102-2
+2026/02/25 14:15:43 [client:2653790804159685378] shardkv client get key:3 to server:&{GrStimCYocT_BUbKGgP_ 0xc000024310 0xc000024380}, shard:1, gid:102 servers:server-102-0 config:{5 [102 102 102 102 102 102 102 102 102 102] map[102:[server-102-0 server-102-1 server-102-2]]}
+2026/02/25 14:15:43 [client:2653790804159685378] server:0 shardkv client get key call failed
+2026/02/25 14:15:43 [client:2653790804159685378] shardkv client get key:3 to server:&{O25peyXv9hCZXo8oZtrO 0xc000024310 0xc000024380}, shard:1, gid:102 servers:server-102-1 config:{5 [102 102 102 102 102 102 102 102 102 102] map[102:[server-102-0 server-102-1 server-102-2]]}
+2026/02/25 14:15:43 [client:2653790804159685378] server:1 shardkv client get key repeat reply:ErrWrongLeader
+2026/02/25 14:15:43 [client:2653790804159685378] shardkv client get key:3 to server:&{YHLpFH66St4NjUIa4jzp 0xc000024310 0xc000024380}, shard:1, gid:102 servers:server-102-2 config:{5 [102 102 102 102 102 102 102 102 102 102] map[102:[server-102-0 server-102-1 server-102-2]]}
+2026/02/25 14:15:43 [client:2653790804159685378] shardkv client putappend key:3 value:rjGxJOoSP9a6v-xFCfsJ op:APPEND to server:&{kDt7jCIQwClZ0A64O5kV 0xc000024310 0xc000024380}, shard:1, gid:102 servers:server-102-2
+2026/02/25 14:15:43 [client:2653790804159685378] shardkv client get key:4 to server:&{Qk3Vl8J0PQ8sqrp4A7Dl 0xc000024310 0xc000024380}, shard:2, gid:102 servers:server-102-0 config:{5 [102 102 102 102 102 102 102 102 102 102] map[102:[server-102-0 server-102-1 server-102-2]]}
+2026/02/25 14:15:43 [client:2653790804159685378] server:0 shardkv client get key call failed
+2026/02/25 14:15:43 [client:2653790804159685378] shardkv client get key:4 to server:&{YeCb4BDz7FxJ557688Tc 0xc000024310 0xc000024380}, shard:2, gid:102 servers:server-102-1 config:{5 [102 102 102 102 102 102 102 102 102 102] map[102:[server-102-0 server-102-1 server-102-2]]}
+2026/02/25 14:15:43 [client:2653790804159685378] server:1 shardkv client get key repeat reply:ErrWrongLeader
+2026/02/25 14:15:43 [client:2653790804159685378] shardkv client get key:4 to server:&{dD6MbGhNuemktQ5IjAkC 0xc000024310 0xc000024380}, shard:2, gid:102 servers:server-102-2 config:{5 [102 102 102 102 102 102 102 102 102 102] map[102:[server-102-0 server-102-1 server-102-2]]}
+2026/02/25 14:15:43 [client:2653790804159685378] shardkv client putappend key:4 value:p7f6Us8CenWHw-PwZSey op:APPEND to server:&{obnOW_s5AklGt9GHMyBo 0xc000024310 0xc000024380}, shard:2, gid:102 servers:server-102-2
+2026/02/25 14:15:43 [client:2653790804159685378] shardkv client get key:5 to server:&{1tiXBRwOR3PPvnzqXAqR 0xc000024310 0xc000024380}, shard:3, gid:102 servers:server-102-0 config:{5 [102 102 102 102 102 102 102 102 102 102] map[102:[server-102-0 server-102-1 server-102-2]]}
+2026/02/25 14:15:43 [client:2653790804159685378] server:0 shardkv client get key call failed
+2026/02/25 14:15:43 [client:2653790804159685378] shardkv client get key:5 to server:&{bHo2JW79_HFZXQG-qoaL 0xc000024310 0xc000024380}, shard:3, gid:102 servers:server-102-1 config:{5 [102 102 102 102 102 102 102 102 102 102] map[102:[server-102-0 server-102-1 server-102-2]]}
+2026/02/25 14:15:43 [client:2653790804159685378] server:1 shardkv client get key repeat reply:ErrWrongLeader
+2026/02/25 14:15:43 [client:2653790804159685378] shardkv client get key:5 to server:&{SstUbtOkQ7MLE1-zpDYI 0xc000024310 0xc000024380}, shard:3, gid:102 servers:server-102-2 config:{5 [102 102 102 102 102 102 102 102 102 102] map[102:[server-102-0 server-102-1 server-102-2]]}
+2026/02/25 14:15:43 [client:2653790804159685378] shardkv client putappend key:5 value:fJwCDCYYFk5BvcLAGsDN op:APPEND to server:&{gX4oCl9wCAyLJUvYIK0- 0xc000024310 0xc000024380}, shard:3, gid:102 servers:server-102-2
+2026/02/25 14:15:43 [client:2653790804159685378] shardkv client get key:6 to server:&{8bfsMm5ksS3c0WSDTzxK 0xc000024310 0xc000024380}, shard:4, gid:102 servers:server-102-0 config:{5 [102 102 102 102 102 102 102 102 102 102] map[102:[server-102-0 server-102-1 server-102-2]]}
+2026/02/25 14:15:43 [client:2653790804159685378] server:0 shardkv client get key call failed
+2026/02/25 14:15:43 [client:2653790804159685378] shardkv client get key:6 to server:&{xf3KPDQmHUOvXU8mE4qR 0xc000024310 0xc000024380}, shard:4, gid:102 servers:server-102-1 config:{5 [102 102 102 102 102 102 102 102 102 102] map[102:[server-102-0 server-102-1 server-102-2]]}
+2026/02/25 14:15:43 [client:2653790804159685378] server:1 shardkv client get key repeat reply:ErrWrongLeader
+2026/02/25 14:15:43 [client:2653790804159685378] shardkv client get key:6 to server:&{BcVI6QPfeNpCRnYP3uCf 0xc000024310 0xc000024380}, shard:4, gid:102 servers:server-102-2 config:{5 [102 102 102 102 102 102 102 102 102 102] map[102:[server-102-0 server-102-1 server-102-2]]}
+2026/02/25 14:15:43 [client:2653790804159685378] shardkv client putappend key:6 value:C8wfAqFkLBp7Fy-PhEFS op:APPEND to server:&{NEoI5morGLkuFJKBqTMl 0xc000024310 0xc000024380}, shard:4, gid:102 servers:server-102-2
+2026/02/25 14:15:43 [client:2653790804159685378] shardkv client get key:7 to server:&{X38erJ55K55bFF4HLOA1 0xc000024310 0xc000024380}, shard:5, gid:102 servers:server-102-0 config:{5 [102 102 102 102 102 102 102 102 102 102] map[102:[server-102-0 server-102-1 server-102-2]]}
+2026/02/25 14:15:43 [client:2653790804159685378] server:0 shardkv client get key call failed
+2026/02/25 14:15:43 [client:2653790804159685378] shardkv client get key:7 to server:&{sH4fVu4Ssk3kP_C8hSRd 0xc000024310 0xc000024380}, shard:5, gid:102 servers:server-102-1 config:{5 [102 102 102 102 102 102 102 102 102 102] map[102:[server-102-0 server-102-1 server-102-2]]}
+2026/02/25 14:15:43 [client:2653790804159685378] server:1 shardkv client get key repeat reply:ErrWrongLeader
+2026/02/25 14:15:43 [client:2653790804159685378] shardkv client get key:7 to server:&{5juudRKjGyISgqQzHLYG 0xc000024310 0xc000024380}, shard:5, gid:102 servers:server-102-2 config:{5 [102 102 102 102 102 102 102 102 102 102] map[102:[server-102-0 server-102-1 server-102-2]]}
+2026/02/25 14:15:44 [client:2653790804159685378] shardkv client putappend key:7 value:wX7-D_QD1AfZH4t0V3dw op:APPEND to server:&{eZr2W0jQJx2ceR2cB6R7 0xc000024310 0xc000024380}, shard:5, gid:102 servers:server-102-2
+2026/02/25 14:15:44 [client:2653790804159685378] shardkv client get key:8 to server:&{m2IsHaUrG92rQslnPbJG 0xc000024310 0xc000024380}, shard:6, gid:102 servers:server-102-0 config:{5 [102 102 102 102 102 102 102 102 102 102] map[102:[server-102-0 server-102-1 server-102-2]]}
+2026/02/25 14:15:44 [client:2653790804159685378] server:0 shardkv client get key call failed
+2026/02/25 14:15:44 [client:2653790804159685378] shardkv client get key:8 to server:&{p5wIlqBhvxf_ZQYYxR9H 0xc000024310 0xc000024380}, shard:6, gid:102 servers:server-102-1 config:{5 [102 102 102 102 102 102 102 102 102 102] map[102:[server-102-0 server-102-1 server-102-2]]}
+2026/02/25 14:15:44 [client:2653790804159685378] server:1 shardkv client get key repeat reply:ErrWrongLeader
+2026/02/25 14:15:44 [client:2653790804159685378] shardkv client get key:8 to server:&{KfCdBN_sqE1paNEMYERN 0xc000024310 0xc000024380}, shard:6, gid:102 servers:server-102-2 config:{5 [102 102 102 102 102 102 102 102 102 102] map[102:[server-102-0 server-102-1 server-102-2]]}
+2026/02/25 14:15:44 [client:2653790804159685378] shardkv client putappend key:8 value:Ry6d0pe17va5Yau6I3G9 op:APPEND to server:&{mIUsnLQ8ArvzVisN7arH 0xc000024310 0xc000024380}, shard:6, gid:102 servers:server-102-2
+2026/02/25 14:15:44 [client:2653790804159685378] shardkv client get key:9 to server:&{TwqOsd2Vq_6IqvuqCnX- 0xc000024310 0xc000024380}, shard:7, gid:102 servers:server-102-0 config:{5 [102 102 102 102 102 102 102 102 102 102] map[102:[server-102-0 server-102-1 server-102-2]]}
+2026/02/25 14:15:44 [client:2653790804159685378] server:0 shardkv client get key call failed
+2026/02/25 14:15:44 [client:2653790804159685378] shardkv client get key:9 to server:&{kVYetclfDMMIigNCwvxi 0xc000024310 0xc000024380}, shard:7, gid:102 servers:server-102-1 config:{5 [102 102 102 102 102 102 102 102 102 102] map[102:[server-102-0 server-102-1 server-102-2]]}
+2026/02/25 14:15:44 [client:2653790804159685378] server:1 shardkv client get key repeat reply:ErrWrongLeader
+2026/02/25 14:15:44 [client:2653790804159685378] shardkv client get key:9 to server:&{h7EGoajwpbz8Appcjpp0 0xc000024310 0xc000024380}, shard:7, gid:102 servers:server-102-2 config:{5 [102 102 102 102 102 102 102 102 102 102] map[102:[server-102-0 server-102-1 server-102-2]]}
+2026/02/25 14:15:44 [client:2653790804159685378] shardkv client putappend key:9 value:U9nG6MAgxLjHIhLE0eJU op:APPEND to server:&{bPYTGHXn5ZswxR8ePHY5 0xc000024310 0xc000024380}, shard:7, gid:102 servers:server-102-2
+2026/02/25 14:15:44 [client:2653790804159685378] shardkv client get key:0 to server:&{xKFAuXfE7-lL8fX4W9Nb 0xc000024310 0xc000024380}, shard:8, gid:102 servers:server-102-1 config:{5 [102 102 102 102 102 102 102 102 102 102] map[102:[server-102-0 server-102-1 server-102-2]]}
+2026/02/25 14:15:44 [client:2653790804159685378] server:1 shardkv client get key repeat reply:ErrWrongLeader
+2026/02/25 14:15:44 [client:2653790804159685378] shardkv client get key:0 to server:&{bkBCoRbxylYgimGFkUTL 0xc000024310 0xc000024380}, shard:8, gid:102 servers:server-102-2 config:{5 [102 102 102 102 102 102 102 102 102 102] map[102:[server-102-0 server-102-1 server-102-2]]}
+2026/02/25 14:15:44 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{wm0daPkpdmYowb754exV 0xc000024310 0xc000024380}, shard:8, gid:102 servers:server-102-2
+2026/02/25 14:15:44 [Node:2 GID:102 isLeader:true] shardkv client migration data:map[] to server:&{zu6DqDuS5-0WwDcrChpP 0xc000024310 0xc000024380}, shard:0, gid:101 server:server-101-0
+2026/02/25 14:15:44 [Node:2 GID:102 isLeader:true] shardkv client migration data:map[] to server:&{MQwyK7lm4JuuQIwYdyqG 0xc000024310 0xc000024380}, shard:0, gid:101 server:server-101-1
+2026/02/25 14:15:44 [Node:2 GID:102 isLeader:true] shardkv client migration data:map[] to server:&{MQwyK7lm4JuuQIwYdyqG 0xc000024310 0xc000024380}, shard:0, gid:101 server:server-101-1 succeess
+2026/02/25 14:15:44 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{cIVTVOW8IgwkUE3tckcc 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-2
+2026/02/25 14:15:44 [client:2653790804159685378] server:2 shardkv client putappend key repeat reply:ErrWrongLeader
+2026/02/25 14:15:44 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{LcxhSmvasaDKwzT3xIFI 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:44 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:44 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{NPDeF7lYDCCUOi5FgaQN 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:44 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:44 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{84ypdrlDSOvyZmbpugr4 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:44 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:45 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{s9tlslK7QrOzRJKsA6xn 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:45 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:45 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{YgjuiQk8I1vXYdBC6tSM 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:45 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:45 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{C2g1BLazaLboStmF84q2 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:45 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:45 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{HF-WU7Nr1G816FPChxVK 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:45 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:45 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{L-TEF7t0U9HNui-BLtMQ 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:45 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:45 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{pWMFiy8-YAcjaW-0bRbI 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:45 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:46 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{KgHizeqSBo2lhrxUKGQQ 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:46 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:46 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{Rqf0qDgNAI3eKJYZY4oK 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:46 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:46 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{oqr9OgGTaolRkezkXq9- 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:46 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:46 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{OVV2liC3mTbRKxn5aBnn 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:46 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:46 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{5fLgjfdtPCjKuAMdBVcj 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:46 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:47 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{YMSoSMP0_BfpiN7ozhuS 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:47 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:47 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{ykn8s7fm-2CU-juKYK1- 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:47 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:47 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{71ZM5VdWTu4CnDqwcqMt 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:47 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:47 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{VQ97NEmyXe6aGMEGlDxx 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:47 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:47 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{8VLMipeUNlmZI3mBZBXV 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:47 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:47 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{YB1uefwvczTTg7IqMT6z 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:47 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:48 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{p3sLhREGrwZgcd34Lt5b 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:48 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:48 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{6JmKHH2I_iD5yEAdzPun 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:48 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:48 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{ExdrKOzEydDTmzxEVCD_ 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:48 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:48 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{0_mOemp2PRIENaS582dk 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:48 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:48 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{Kwv1I41BZOGhass_NlFx 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:48 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:49 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{geBCBpinvsNBLOEgM1FT 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:49 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:49 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{6kSPonOYCtxCujbTvjwP 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:49 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:49 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{ekG_YTAhpyJft_4OkX8H 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:49 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:49 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{o44vQcUKQBBOO9vGkIBy 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:49 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:49 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{Kf2nnVscmbvG_cRywZwZ 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:49 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:49 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{CJm2VMgC2xZMNh27WQh9 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:49 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:50 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{XgEQ21YrBHkrOHDAiePw 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:50 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:50 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{s_40Wc9uvA4ZNGkoQZ3y 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:50 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:50 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{vx-v5ZzlyAvqbeZt6X75 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:50 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:50 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{KQ1fvELXa3XiZ7rbCATu 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:50 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:50 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{btviBzU8v0aSkYb0XiJ8 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:50 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:51 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{2J5EvLoDXO3T5ItwJWH- 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:51 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:51 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{PubHFqqolldZLfKFRQvx 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:51 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:51 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{pJOzu_cdhW--Y6CuX-ag 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:51 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:51 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{MytdO8nDNWqpMQW9jAdq 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:51 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:51 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{MdK0HDtURZIJSlG2xz49 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:51 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:51 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{Y_asMcFI_mbO6uP902wc 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:51 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:52 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{8njRj9kT4_ilE0rICjYc 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:52 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:52 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{BMvvn9_Ss-qgsNA6Cyw2 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:52 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:52 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{pIf5zvUwqbNWzKZfn8uI 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:52 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:52 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{WHMbuqEB3ZBq736CbJAe 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:52 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:52 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{nvXAdyV4Z-YZ3FGUxbg8 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:52 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:52 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{77vzgcjLb6E79Le3gooE 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:52 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:53 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{YERWTOWV7EVgq8pp8adJ 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:53 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:53 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{aIKRod2q8_1uC0tq1jMn 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:53 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:53 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{CY-WiFHBVPgKV82KPmwN 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:53 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:53 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{hZ0wM-WNDYxD6IMRhYsD 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:53 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:53 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{skzD8UO9xdZMVUh1XAFY 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:53 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:54 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{72Gl7r6NUjo35NiuaZNm 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:54 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:54 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{EJbs3gV79eiG5bSF9lzP 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:54 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:54 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{aCCKRK2VutjoKj3VgL6O 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:54 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:54 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{2Ff9S-mqM58WxEkIYomI 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:54 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:54 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{Bc2BT_A0MjGtDOJ2ui94 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:54 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:55 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{ozsL6fWjLTkqSnZwpuPb 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:55 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:55 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{lVh8bbxv10nx-5pTC5HZ 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:55 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:55 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{yEVaoisJv8xr9N8dHXJm 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:55 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:55 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{bSy28obY4I9PqYdCPKHF 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:55 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:55 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{tm884PKKy4NTYgwmdEBW 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:55 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:56 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{DKN5ebvBOBnzTwvgUK1B 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:56 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:56 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{fGGuDHWOkat1wpOrmYtv 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:56 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:56 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{JjLuYVoJJh9aqGhjsItG 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:56 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:56 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{wtbuKUtWY0n853uiHLPE 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:56 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:56 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{0vx50VK0ZYJJqZE5gTKb 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:56 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:56 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{chiaY69XVnzKuLTVaI2J 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:56 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:57 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{cQ2RzkEzJWxOOpQxc-g- 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:57 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:57 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{SlIQ9I8aSmz5UZ8gZ2tz 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:57 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:57 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{hVEU9SMb7DfW3XCvoHaz 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:57 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:57 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{wodz_WlYRitNnqwJ0GgB 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:57 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:57 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{OVqeKWHzCoohIo-XXxkZ 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:57 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:58 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{UAQtcKRlRmhRdYNCzJgl 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:58 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:58 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{OYWNypvUpW2ouwrzQxpe 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:58 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:58 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{BaCSSxCpocGln7c4dn28 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:58 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:58 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{BMZWVjhv6xShJ4B5VqgW 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:58 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:58 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{jiIu7I7FdadEWrZZKe7s 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:58 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:59 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{EJIxr1XCmHh_2dEA3EiO 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:59 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:59 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{kKDSLoh17v27UvBWgqih 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:59 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:59 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{YY7aCOEPLPpb1kPS2f7v 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:59 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:59 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{bjfP8CCCYsqmup2D1IOl 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:59 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:59 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{s0bIUtm3m2OhJod34ek5 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:59 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:15:59 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{xPSbtX_SpWOyCTb6Q3i9 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:15:59 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:00 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{kGM1u6UzGsz12Ojtv8yV 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:00 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:00 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{KY1i_FI6hQ5Hb-eC-qMr 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:00 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:00 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{O5WCLxHCBHr2Ui4xkZnK 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:00 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:00 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{MM9XM8TJV-AdbZUNz5ko 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:00 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:00 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{gulqNlcMoaInukNZuoyI 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:00 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:01 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{C_bJzI_QLAtp02do0OTV 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:01 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:01 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{kM_s6kZgucbtx7hQri3B 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:01 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:01 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{zHKBqQnXmz1ZM-3kytNU 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:01 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:01 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{WR4voi4oBIm0DEsZULva 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:01 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:01 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{jP20ckKHwlC7cU8yobmk 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:01 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:01 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{qxtL7M1_56eRozpI4c_V 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:02 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:02 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{lzzV_zyXAmBAaxKb4B6O 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:02 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:02 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{cc54fc1KwWz6viKt6zDu 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:02 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:02 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{rpXy0u0rxWFUik-F4-ic 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:02 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:02 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{sp32zc8kzjeDmtEURBkz 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:02 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:02 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{aYyqOmSvDV9ZXBlxULj0 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:02 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:03 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{V-iZ6yzBDlo8NclvogEE 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:03 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:03 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{LyR1UwjOMCkj56-JkPki 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:03 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:03 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{JYUfNDFCogWEe9Fd1HGK 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:03 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:03 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{XrBohu-KYwDuzhhuA5vW 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:03 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:03 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{HC-cPgJUWvulurcBWnP0 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:03 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:04 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{WQpacA7Z7ZT_aBepCtpo 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:04 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:04 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{7fTVtCQOv9Jh4Ox277lo 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:04 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:04 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{wXEHE9gdWaSI5POtVG4F 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:04 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:04 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{f2mAU1CwhWVjZ6tvpOBB 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:04 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:05 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{i8Dts11zjkt6WywFoceu 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:05 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:05 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{6rRQW_PW7mJ9zpBhMQxq 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:05 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:05 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{foH99dmrER_DwuOFAq8K 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:05 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:05 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{xuQKDwh9Wuf3XBiwXGXz 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:05 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:05 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{QekUzSuAjW5j0-4v0OcT 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:05 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:05 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{qoBra8IRyj3zVFHK1NRu 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:06 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:06 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{cFURWNbQE8XRcnrJIMF5 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:06 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:06 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{mapqmiDixatku9HeUkMJ 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:06 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:06 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{nvi23nZTjHTExE4xp1Bh 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:06 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:06 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{YOgO2PGo-PpfIpnRwGOo 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:06 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:06 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{YPEuVDcEjmFsV_buhHyM 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:06 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:07 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{VpIg8frqopEP_s9dLtaG 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:07 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:07 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{saMiAeONlzC2mMuZiDVX 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:07 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:07 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{H7NsPEElwcx0ngwIzkvN 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:07 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:07 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{JH9OwXwH9Z8EtuxNdFE0 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:07 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:07 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{hREc2K_j9ObI4LrEMN8S 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:07 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:08 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{Cly1tjZKuvnEwLjS7W9G 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:08 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:08 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{aNbsuJ76yn7qLRtQ-clm 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:08 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:08 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{HFJs6sdfeqY2RLAIHB9c 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:08 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:08 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{ccwrEJfLlxYoLanmLnuU 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:08 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:08 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{Q23MCB6uqnwttouyLp4F 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:08 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:09 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{PXcwsZ8-YIrK6LP4bIGt 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:09 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:09 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{rvCORlMt4JDohtxPLXbi 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:09 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:09 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{75_C31K0PsUJtfsLBpqN 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:09 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:09 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{G1rZafqtZ7EcVPTxa_Li 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:09 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:09 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{pHmce6SulbDdFt2ETAjy 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:09 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:09 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{Z_ZLiTYIU71eu6S97bwq 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:09 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:10 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{RiUrRBJuJ3JkoSeZ05G3 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:10 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:10 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{SSnENN4amTwnVGeujb3v 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:10 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:10 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{gvtYrOW1E1pXVO737kyI 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:10 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:10 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{70u_qGE98BONhc5y7Hqn 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:10 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:10 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{5yLaTDfTVvRkDudJ2FmY 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:10 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:11 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{6meMNBOIPLEJNPFG_4_Z 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:11 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:11 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{CyJbwCshqBfc3drjgqPr 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:11 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:11 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{RbF1_Dkm8Y3n5NUx5Jco 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:11 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:11 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{POqEzle3yrdjPd3IA9IE 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:11 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:11 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{XHQLFpQV_4wbkwvCgUpK 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:12 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:12 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{thxCV37itDGzI-OSgHT- 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:12 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:12 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{rl70TuXB-hkmXdFO5L1E 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:12 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:12 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{PUObVUuIzvvHYbOCr_N8 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:12 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:12 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{i0hc9GTwIrdnDRwUdaP5 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:12 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:12 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{aKZbMp4Vh9vA4N4L6hER 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:13 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:13 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{Qwus_8QPWSf5nuDi_Y3p 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:13 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:13 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{UUr3Xqq_3GStAs3IJr3R 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:13 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:13 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{uM00nyJpqrKLjgqnX6Cy 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:13 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:13 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{j00hj_qMSXCat1vvpc9T 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:13 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:13 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{Ar2FDx5Y7D5E7KsrXmLu 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:13 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:14 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{6_jLWJ01X223U_SRICAb 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:14 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:14 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{oUVIi0QChfo_Za6wY2JV 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:14 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:14 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{qlre-MOSGsg2dfcnoCR6 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:14 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:14 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{eOc4_FOImZ_-JhjA9dRI 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:14 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:15 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{bwmxnC6bsV-kvjorypIX 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:15 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:15 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{RJzGU1I7APJWLToF3cDU 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:15 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:15 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{VnZWGODlXRM3ND69xeOk 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:15 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:15 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{HUlLx8yWNqC8pUKg5Dhg 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:15 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:15 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{BYPJpVCA4bQw765j9KfX 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:15 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:15 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{89aZiM_M8wYKAZsCWIrX 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:16 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:16 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{VDkFFl15x7w-FgNyU0gt 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:16 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:16 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{5AAOCCnLkT4ZBL4gT4zb 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:16 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:16 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{f30JIt-0AZXcj6CRrmTt 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:16 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:16 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{fFby6aHfL7ijqHtrO9JE 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:16 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:17 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{NGCVCNhcEwytpOnEUydc 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:17 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:17 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{U8CHd8-CnlKSRomMQUIa 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:17 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:17 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{M7T9BU8E5qvdDLAClQqw 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:17 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:17 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{-w3Ez3UOEeLhrcFKyge3 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:17 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:18 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{-82WCp8Lx8CasqYe3GNW 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:18 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:18 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{Fr-NjtajyY7rtqkUHOdT 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:18 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:18 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{apgLWvjYcd8api96ctKC 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:18 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:18 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{xs0dPZVynsEFgwzhXKId 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:18 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:19 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{o0eURyfhfZUAggONM9o3 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:19 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:19 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{gSq-k8uN5F05AHvlgK4U 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:19 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:19 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{xTPeYKv9siDt6HENcQ-y 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:19 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:19 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{rcqx7xzjutleRPKI2F6E 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:19 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:20 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{BCyZ-_w8zejElooZMjUI 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:20 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:20 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{MkGNCc-kbqmb0VnD63eF 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:20 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:20 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{9nnVxoNQiTRF1A-zQXWs 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:20 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:20 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{S7k6Brt1vYJsep1w3n5J 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:20 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:20 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{Q6Yg4jZKQyLDhHJ9Hmtv 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:20 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:21 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{h5amEAQtQ8MGD3OY6r6l 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:21 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:21 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{iaGgkK1-WACmeSUC0fqJ 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:21 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:21 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{7tkVXtwMBJkD3Nm6qoIY 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:21 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:21 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{p84UQFtNR_r2b_R2i66H 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:21 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:21 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{y8tBnk5wZ_xvb6gldGTe 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:22 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:22 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{Eb4SKIdqbRZFi4CCXSXf 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:22 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:22 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{aMSUREYH0UXpozE8OPtb 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:22 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:22 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{e09xXNEjt8lNpuc3joIq 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:22 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:22 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{YJEFWX1Uj0L0bF7pJ-d4 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:23 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:23 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{XxDyf1YXKmTSz5R1Z9Ig 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:23 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:23 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{UrQVfarWtQMyqztmxf3C 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:23 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:23 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{JzJom1JSiWkd3k5f4pu2 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:23 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:23 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{QEZwM-Pr3ZK2w0hml6KA 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:24 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:24 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{1aW5fvxOjEqRqxvnkLO4 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:24 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:24 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{tGTMnn2oZUMNncEVqmzX 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:24 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:24 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{8q6lOofESTG5vVT0nTzy 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:24 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:24 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{Mp5-nTnVRCHsOt7T0kCa 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:24 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:25 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{5WIgGfMxhIEhR5poj3hE 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:25 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:25 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{c3fWewgG4Odl0VQoY3v8 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:25 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:25 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{mjfHH_gGGYNuKxrflVoI 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:25 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:25 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{PSEftMCAFOXD_XCTs6if 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:25 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:25 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{aivbdyGO4uFB0iXNSDFa 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:25 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:26 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{uyKUrh-ZrwgRickPHMpe 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:26 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:26 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{BZ1Qh6VPmsVkwC5ZIKgl 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:26 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:26 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{F35Q5Pi8u4yflOpZMXV6 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:26 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:26 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{paGFIb2jr3-uurKeHdsA 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:26 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:27 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{4iDSS_gxIhYuXse9aB0H 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:27 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:27 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{y504jVxLxppJ3ikGjwv7 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:27 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:27 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{PrmZvq6ZvKpm8o3pr-Do 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:27 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:27 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{1K1c262Ue2Z5RlxJQFNI 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:27 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:27 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{VNWvCAlWJNc1UwcnPAmN 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:27 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:28 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{kLV-4U_G2VFBMl3g_yYv 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:28 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:28 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{oaHuQk1BH5yRQXdp7mhp 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:28 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:28 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{xeuwBKmV9oTQky4X0mVm 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:28 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:28 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{QKF2t0bEjeUiUDo7lhJt 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:28 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:29 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{Xf2usle4Zb-OYlIYnsR1 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:29 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:29 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{rBY7z1Ra9xxyXSfc20qa 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:29 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:29 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{ch_96ejiegEYkHtvy-hR 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:29 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:29 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{AU4hSpVIEO4FEEl5h17l 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:29 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:30 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{ye8tv-3Y0ipjzgOc9vHG 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:30 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:30 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{dwwPZiJ-3TypFeksc8oy 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:30 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:30 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{UT56FAYYRspirft3obQd 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:30 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:30 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{HRvycgG-ndcDaqKdxWCw 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:30 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:31 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{ToI4SJbxNL2H0uOxS5pB 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:31 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:31 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{9y8Dyhq4bSTbnAxyPgwp 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:31 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:31 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{VgdMRYL2HNfa_AkcvIHQ 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:31 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:31 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{HRIEhiavDv3p0hVY1QBL 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:31 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:32 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{LAqtacYGXYPKGjERsfs7 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:32 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:32 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{OvXD267SRE2aEUunduj1 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:32 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:32 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{6myc0SV_pm7sFWhbpZ81 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:32 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:32 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{QOoa7-blA3tmzW62pMus 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:32 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:33 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{pd7Hpd5x7e7RtbWdo9bs 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:33 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:33 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{ATt8T7wqVg9_3PNlBm6a 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:33 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:33 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{AufXclmc6G9XsbG0AaaZ 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:33 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:33 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{3vkuJaSJD5YzuGa3y41U 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:33 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:34 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{-veHQkvELoKw07wtzGFn 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:34 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:34 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{941NSD1M_TH3XLAh9Gm- 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:34 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:34 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{Cai__wONbwTN81yBM_QM 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:34 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:34 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{V-gxzsSAkm2oKhCnfO-3 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:34 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:34 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{T7bXLqItPQpCnvrR0R5J 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:35 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:35 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{irNVVED2OKeonwn4aauH 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:35 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:35 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{TVXS5AmSwrC6ZNi3LBse 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:35 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:35 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{mI1MkUKD3S_4V5QTeUXC 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:35 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:35 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{yXHu5JL-JIihA1VDPjLZ 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:35 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:36 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{HRPPPF8DJMWpHIJLTLav 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:36 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:36 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{y-YVg8z-mCOhfCjoZTA4 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:36 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:36 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{QHQPVXRIhCThEfMFwyaI 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:37 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:37 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{lNdkO3O0RFkEgNGCT_wJ 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:37 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:37 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{VdL9ePGXqqnQOqlVkfBP 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:37 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:37 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{d9bctq3d3AQryI_lj9m7 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:37 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:37 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{3e7jiDpRByz_lMhAkJBJ 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:37 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:38 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{BlpgoojlIY1ewA3-dyN0 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0
+2026/02/25 14:16:38 [client:2653790804159685378] server:0 shardkv client putappend key call failed
+2026/02/25 14:16:38 [client:2653790804159685378] shardkv client putappend key:0 value:_i1yYkAUQKwnPtouMFmQ op:APPEND to server:&{lddwqdYn1yGpgrDsHFKI 0xc000024310 0xc000024380}, shard:8, gid:101 servers:server-101-0

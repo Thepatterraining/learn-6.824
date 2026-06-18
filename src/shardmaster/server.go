@@ -353,10 +353,6 @@ func (sm *ShardMaster) Move(args *MoveArgs, reply *MoveReply) {
 func (sm *ShardMaster) Query(args *QueryArgs, reply *QueryReply) {
 	// Your code here.
 	DPrintf("[Node:%d] shardmaster server query param:%d", sm.me, args.Num)
-	sm.mu.Lock()
-	maxNum := len(sm.configs)
-	nextConfigNum := sm.nextConfigNum
-	sm.mu.Unlock()
 	command := Op{
 		Option:    "query",
 		ConfigNum: args.Num,
@@ -366,6 +362,10 @@ func (sm *ShardMaster) Query(args *QueryArgs, reply *QueryReply) {
 		reply.WrongLeader = true
 		return
 	}
+	sm.mu.Lock()
+	maxNum := len(sm.configs)
+	nextConfigNum := sm.nextConfigNum
+	sm.mu.Unlock()
 	DPrintf("[Node:%d] shardmaster server query maxNum:%d, current max num:%d", sm.me, maxNum, nextConfigNum)
 	if args.Num == -1 || args.Num >= maxNum {
 		// 返回最新配置

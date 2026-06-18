@@ -80,12 +80,13 @@ func (ck *Clerk) Get(key string) string {
 	}
 
 	for {
+
 		shard := key2shard(key)
 		gid := ck.config.Shards[shard]
 		if servers, ok := ck.config.Groups[gid]; ok {
 			// try each server for the shard.
-			// for si := 0; si < len(servers); si++ {
-			for {
+			for si := 0; si < len(servers); si++ {
+				// for {
 				leader, leaderExists := ck.shard2Leader[shard]
 				if !leaderExists {
 					leader = 0
@@ -93,7 +94,7 @@ func (ck *Clerk) Get(key string) string {
 				}
 				srv := ck.make_end(servers[leader])
 				var reply GetReply
-				DPrintf("[client] shardkv client get key:%s to server:%v, shard:%d, gid:%d servers:%s", key, srv, shard, gid, servers[leader])
+				DPrintf("[client:%d] shardkv client get key:%s to server:%v, shard:%d, gid:%d servers:%s config:%v", ck.clientId, key, srv, shard, gid, servers[leader], ck.config)
 				ok := srv.Call("ShardKV.Get", &args, &reply)
 				if ok && (reply.Err == OK || reply.Err == ErrNoKey) {
 					return reply.Value
@@ -101,7 +102,7 @@ func (ck *Clerk) Get(key string) string {
 				if ok && (reply.Err == ErrWrongLeader) {
 					// 这个不是Leader 换下一个server
 					// 请求其他Server
-					DPrintf("[client:%d] server:%d kv client get key repeat reply:%s", ck.clientId, leader, reply.Err)
+					DPrintf("[client:%d] server:%d shardkv client get key repeat reply:%s", ck.clientId, leader, reply.Err)
 					ck.updateLeader(shard)
 					continue
 				}
@@ -118,6 +119,11 @@ func (ck *Clerk) Get(key string) string {
 					break
 				}
 				// ... not ok, or ErrWrongLeader
+				if !ok {
+					DPrintf("[client:%d] server:%d shardkv client get key call failed", ck.clientId, leader)
+					ck.updateLeader(shard)
+					continue
+				}
 			}
 		}
 		time.Sleep(100 * time.Millisecond)
@@ -147,8 +153,8 @@ func (ck *Clerk) PutAppend(key string, value string, op Option) {
 		shard := key2shard(key)
 		gid := ck.config.Shards[shard]
 		if servers, ok := ck.config.Groups[gid]; ok {
-			// for si := 0; si < len(servers); si++ {
-			for {
+			for si := 0; si < len(servers); si++ {
+				// for {
 				leader, leaderExists := ck.shard2Leader[shard]
 				if !leaderExists {
 					leader = 0
@@ -156,14 +162,14 @@ func (ck *Clerk) PutAppend(key string, value string, op Option) {
 				}
 				srv := ck.make_end(servers[leader])
 				var reply PutAppendReply
-				DPrintf("[client] shardkv client putappend key:%s value:%s op:%s to server:%v, shard:%d, gid:%d servers:%s", key, value, op, srv, shard, gid, servers[leader])
+				DPrintf("[client:%d] shardkv client putappend key:%s value:%s op:%s to server:%v, shard:%d, gid:%d servers:%s", ck.clientId, key, value, op, srv, shard, gid, servers[leader])
 				ok := srv.Call("ShardKV.PutAppend", &args, &reply)
 				if ok && reply.Err == OK {
 					return
 				}
 				if ok && (reply.Err == ErrWrongLeader) {
 					// 这个不是Leader 换下一个server
-					DPrintf("[client:%d] server:%d kv client get key repeat reply:%s", ck.clientId, leader, reply.Err)
+					DPrintf("[client:%d] server:%d shardkv client putappend key repeat reply:%s", ck.clientId, leader, reply.Err)
 					ck.updateLeader(shard)
 					continue
 				}
@@ -176,6 +182,11 @@ func (ck *Clerk) PutAppend(key string, value string, op Option) {
 					break
 				}
 				// ... not ok, or ErrWrongLeader
+				if !ok {
+					DPrintf("[client:%d] server:%d shardkv client putappend key call failed", ck.clientId, leader)
+					ck.updateLeader(shard)
+					continue
+				}
 			}
 		}
 		time.Sleep(100 * time.Millisecond)
@@ -192,6 +203,6 @@ func (ck *Clerk) Append(key string, value string) {
 }
 
 func (ck *Clerk) updateLeader(shard int) {
-	DPrintf("[client:%d] 更新leader before:%d, after:%d", ck.clientId, ck.shard2Leader[shard], (ck.shard2Leader[shard]+1)%len(ck.config.Groups[ck.config.Shards[shard]]))
+	DPrintf("[client:%d] shardkv client 更新leader before:%d, after:%d", ck.clientId, ck.shard2Leader[shard], (ck.shard2Leader[shard]+1)%len(ck.config.Groups[ck.config.Shards[shard]]))
 	ck.shard2Leader[shard] = (ck.shard2Leader[shard] + 1) % len(ck.config.Groups[ck.config.Shards[shard]])
 }

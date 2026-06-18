@@ -139,6 +139,7 @@ type ApplyMsg struct {
 	Shard2Data    map[int]map[string]string
 	Shard2SeqNums map[int]map[int64]int64
 	Shard2Status  map[int]ShardKVStatus
+	ConfigNum     int
 }
 
 type RaftStatus int
@@ -165,6 +166,7 @@ type Snapshot struct {
 	Shard2Data        map[int]map[string]string
 	Shard2SeqNums     map[int]map[int64]int64
 	Shard2Status      map[int]ShardKVStatus
+	ConfigNum         int
 }
 
 // A Go object implementing a single Raft peer.
@@ -229,6 +231,44 @@ func (rf *Raft) GetApplied() int {
 		return rf.lastSnapshot.LastIncludedIndex
 	}
 	return rf.lastApplied
+}
+
+func (rf *Raft) CreateShardSnapshot2(snapshot Snapshot, lastIncludedIndex int) {
+	rf.mu.Lock()
+	snapshot.LastIncludedIndex = lastIncludedIndex
+	snapshot.LastIncludedTerm = rf.log[rf.getLogStartIndex(lastIncludedIndex)].Term
+	DPrintf("[Node:%d] CreateSnapshot snapshot 上一个index:%d snapshot:%v 开始", rf.me, rf.lastSnapshot.LastIncludedIndex, snapshot)
+	// if rf.lastSnapshot.LastIncludedIndex >= lastIncludedIndex {
+	// 	DPrintf("[Node:%d] CreateSnapshot snapshot 重复:%v 成功", rf.me, snapshot)
+	// 	rf.mu.Unlock()
+	// 	return
+	// }
+	rf.mu.Unlock()
+	rf.saveSnapshot(snapshot, false, 0)
+
+	rf.mu.Lock()
+	args := InstallSnapshotArgs{
+		Snapshot: snapshot,
+		Term:     rf.currentTerm,
+		LeaderId: rf.me,
+	}
+	rf.mu.Unlock()
+	// 像所有Follower同步快照
+	for i := range rf.peers {
+		if i == rf.me {
+			continue
+		}
+		reply := InstallSnapshotReply{}
+		ok := rf.sendInstallSnapshot(i, &args, &reply)
+		if ok {
+			rf.mu.Lock()
+			DPrintf("[Node:%d] 发送快照到 Node:%d 成功", rf.me, i)
+			if reply.Term > rf.currentTerm {
+				rf.becomeFollower(reply.Term)
+			}
+			rf.mu.Unlock()
+		}
+	}
 }
 
 func (rf *Raft) CreateShardSnapshot(kvData map[int]map[string]string, lastIncludedIndex int, lastIncludedTerm int, seqNums map[int]map[int64]int64, shard2Status map[int]ShardKVStatus) {
@@ -379,6 +419,7 @@ func (rf *Raft) saveSnapshot(snapshot Snapshot, discardAll bool, lastSnapshotInd
 	e.Encode(snapshot.Shard2Data)
 	e.Encode(snapshot.Shard2SeqNums)
 	e.Encode(snapshot.Shard2Status)
+	e.Encode(snapshot.ConfigNum)
 	data := w.Bytes()
 
 	w1 := new(bytes.Buffer)
@@ -402,13 +443,15 @@ func (rf *Raft) restoreSnapshot(data []byte) {
 	var shard2Data map[int]map[string]string
 	var shard2SeqNums map[int]map[int64]int64
 	var shard2Status map[int]ShardKVStatus
+	var configNum int
 	if d.Decode(&lastIncludedIndex) != nil ||
 		d.Decode(&lastIncludedTerm) != nil ||
 		d.Decode(&snapshotData) != nil ||
 		d.Decode(&seqNums) != nil ||
 		d.Decode(&shard2Data) != nil ||
 		d.Decode(&shard2SeqNums) != nil ||
-		d.Decode(&shard2Status) != nil {
+		d.Decode(&shard2Status) != nil ||
+		d.Decode(&configNum) != nil {
 		// error
 		DPrintf("[ERROR] [Node:%d] Failed to read persisted snapshot", rf.me)
 		panic("Failed to read persisted snapshot")
@@ -420,9 +463,10 @@ func (rf *Raft) restoreSnapshot(data []byte) {
 		rf.lastSnapshot.Shard2Data = shard2Data
 		rf.lastSnapshot.Shard2SeqNums = shard2SeqNums
 		rf.lastSnapshot.Shard2Status = shard2Status
+		rf.lastSnapshot.ConfigNum = configNum
 		rf.logger.LogWithTrace(RPC_RECV, TraceContext{From: -1, To: rf.me},
-			"从快照恢复持久化状态 lastIncludedTerm:%d lastIncludedIndex:%d snapshotData:%v shard2Status:%v",
-			lastIncludedTerm, lastIncludedIndex, snapshotData, shard2Status)
+			"从快照恢复持久化状态 lastIncludedTerm:%d lastIncludedIndex:%d snapshotData:%v shard2Status:%v configNum:%d",
+			lastIncludedTerm, lastIncludedIndex, snapshotData, shard2Status, configNum)
 	}
 }
 
@@ -547,6 +591,7 @@ func (rf *Raft) InstallSnapshot(args *InstallSnapshotArgs, reply *InstallSnapsho
 			Shard2Data:    args.Snapshot.Shard2Data,
 			Shard2SeqNums: args.Snapshot.Shard2SeqNums,
 			Shard2Status:  args.Snapshot.Shard2Status,
+			ConfigNum:     args.Snapshot.ConfigNum,
 		}
 		discardAll = true
 	} else {
